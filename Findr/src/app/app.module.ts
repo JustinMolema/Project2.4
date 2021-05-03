@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginModule } from './login/login.module';
+import { SignupModule } from './signup/signup.module';
 
 
 @NgModule({
@@ -20,6 +21,8 @@ import { LoginModule } from './login/login.module';
             registrationStrategy: 'registerWhenStable:30000',
         }),
         LoginModule,
+        SignupModule,
+
     ],
     providers: [],
     bootstrap: [AppComponent],
