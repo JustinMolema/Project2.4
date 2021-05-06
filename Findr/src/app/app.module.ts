@@ -7,6 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
+import { NavbarModule } from './navbar/navbar.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SignupModule } from './signup/signup.module';
         }),
         LoginModule,
         SignupModule,
+        NavbarModule
 
     ],
     providers: [],
