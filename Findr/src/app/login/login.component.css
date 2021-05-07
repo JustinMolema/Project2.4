@@ -81,8 +81,16 @@ a {
     background: #17fe9e;
 }
 
+.login-button:active{
+    background-color: #12c278;
+}
+
 .signup:hover {
-    background: #e52518;
+    background: #ff1100;
+}
+
+.signup:active{
+    background-color: rgb(204, 14, 0);
 }
 
 .signup{

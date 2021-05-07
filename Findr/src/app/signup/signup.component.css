@@ -78,6 +78,10 @@ a {
     background: #e52518;
 }
 
+.signup:active{
+    background-color: rgb(204, 14, 0);
+}
+
 .alreadyHaveAnAccount {
     font-weight: bold;
     color: #468aba;

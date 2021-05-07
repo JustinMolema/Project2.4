@@ -11,6 +11,15 @@
     box-sizing: border-box;
 }
 
+.gradient-background:hover{
+    animation: rotate-logo 2s ease-in forwards infinite  alternate;
+}
+
+@keyframes rotate-logo{
+    100%{
+        transform: scale(1) rotate(360deg);
+    }    
+}
 .sidebar{
     background-color: #1f1f23;
     height: 100%;

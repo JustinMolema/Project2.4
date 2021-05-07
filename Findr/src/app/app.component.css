@@ -1,11 +1,31 @@
 .spacer {
     flex: 2;
 }
-
+ a {
+     text-decoration: none;
+     color: white;
+     display: flex;
+     vertical-align: center;
+ }
+ 
+ .findr{
+    vertical-align: center;
+ }
+ 
 .image {
     color: white;
     cursor: pointer;
-    /* TODO load main menu.*/
+}
+
+
+a .image:hover{
+    animation: rotate-logo 2s ease-in forwards infinite  alternate;
+}
+
+@keyframes rotate-logo{
+    100%{
+        transform: scale(1) rotate(360deg);
+    }    
 }
 
 .toolbar {
