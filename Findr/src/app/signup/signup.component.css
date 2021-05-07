@@ -1,3 +1,44 @@
+.gradient-background {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.login {
+    background: white;
+    height: 700px;
+    width: 425px;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    padding-top: 1%;
+    box-shadow: 2px 2px 2px 2px black;
+    margin-top: 5%;
+}
+
+.username{
+    padding-left: 5px;
+    border: 2px solid green;
+    height: 6%;
+    width: 75%;
+    margin-top: 5%;
+    box-sizing: border-box;
+}
+
+.password{
+    padding-left: 5px;
+    border: 2px solid green;
+    height: 6%;
+    width: 75%;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
 .email{
     padding-left: 5px;
     border: 2px solid green;
