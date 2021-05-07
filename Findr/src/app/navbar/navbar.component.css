@@ -1,23 +1,41 @@
-#navbar{
-    background: url(..\..\assets\sidebarbackground.png);
-    outline-color: gray;
-    outline: auto;
+.navbar{
+    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(49, 49, 49));
+    border-radius: 10px;
+    border: inset 5px rgb(0, 255, 34);
     margin-left: 20px;
     max-width: 300px;
     padding-bottom: 10%;
+    color: linear-gradient(to right, rgb(255, 255, 255), rgb(0,0,0));
+    
 }
 
-#navbarbutton{
-    background-color: aquamarine;
-    font-family: 'Calibri', 'sans-serif';
-    outline: auto;
-    outline-color: darkcyan;
+.navbarbutton{
+    background-image: radial-gradient(rgb(49, 49, 49), rgb(0, 0, 0));
+    border-radius: 10px;
+    border: inset 1px rgb(0, 255, 34);
     text-align: center;
     max-width: 300px;
     min-width: 100px;
     max-height: 100px;
     min-height: 50px;
+    
+    margin-left: 10px;
+    margin-right: 10px;
 }
-#navbarbutton:hover{
-  background-color: aqua;
+
+.navbarbutton:hover{
+  background-image: radial-gradient(rgb(95, 95, 95) 10%, rgb(45, 45, 45) 100%);
+  animation: nvb-button-Animation 2s ease-in-out infinite backwards;
+}
+
+@keyframes nvb-button-Animation{
+  0%{
+    filter: brightness(100%)
+  }
+  70%{
+    filter: brightness(150%)
+  }
+  100%{
+    filter: brightness(100%)
+  }
 }
