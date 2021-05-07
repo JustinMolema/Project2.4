@@ -7,7 +7,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
-
+import { PasswordforgottenModule } from './passwordforgotten/passwordforgotten.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,7 +22,7 @@ import { SignupModule } from './signup/signup.module';
         }),
         LoginModule,
         SignupModule,
-
+        PasswordforgottenModule
     ],
     providers: [],
     bootstrap: [AppComponent],

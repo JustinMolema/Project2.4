@@ -3,15 +3,3 @@ html, body {
     padding: 0;
 }
 
-.mainbody{
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-image: url("https://cdn.discordapp.com/attachments/689448146358894665/838768166816579634/photo-1579546929662-711aa81148cf.png"); 
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
- } 
-
-
