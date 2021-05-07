@@ -9,6 +9,8 @@ import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
 import { PasswordforgottenModule } from './passwordforgotten/passwordforgotten.module';
 import { GamemenuModule } from './gamemenu/gamemenu.module';
+import { NavbarModule } from './navbar/navbar.module';
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,7 +26,9 @@ import { GamemenuModule } from './gamemenu/gamemenu.module';
         LoginModule,
         SignupModule,
         PasswordforgottenModule,
-        GamemenuModule
+        GamemenuModule,
+        NavbarModule
+
     ],
     providers: [],
     bootstrap: [AppComponent],
