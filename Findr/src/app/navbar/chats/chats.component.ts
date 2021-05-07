@@ -1,16 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NavitemService} from '../../nav-item.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.css']
 })
-export class ChatsComponent implements OnInit {
+export class ChatsComponent implements OnInit, NavitemService {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    console.log("????????????");
+    console.log('????????????');
   }
+
+  onClick($event: any): Observable<any> {
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+    return undefined;
+  }
+
 
 }

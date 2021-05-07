@@ -10,11 +10,14 @@
 #navbarbutton{
     background-color: aquamarine;
     font-family: 'Calibri', 'sans-serif';
-    outline: auto;    
+    outline: auto;
     outline-color: darkcyan;
     text-align: center;
     max-width: 300px;
     min-width: 100px;
     max-height: 100px;
     min-height: 50px;
+}
+#navbarbutton:hover{
+  background-color: aqua;
 }
