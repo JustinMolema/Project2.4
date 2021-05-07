@@ -1,0 +1,24 @@
+.box{
+    background-image: url(https://www.rtlnieuws.nl/sites/default/files/styles/liggend_hoge_resolutie/public/content/images/2019/05/02/rocket-league-zephyr-crate.jpg?itok=b_af0AEk);
+    background-position: center center;
+    background-size: cover;
+    height: 150px;
+    width: 150px;
+    border: 1px solid white;
+    border-radius:  25px;
+    text-decoration: none;
+    
+}
+
+.game-name{
+    text-decoration: none;
+    color: white;
+    width: 150px;
+    text-align: center!important;
+}
+
+.game {
+    background: red;
+    text-decoration: none;
+    margin-right: 175px;
+}

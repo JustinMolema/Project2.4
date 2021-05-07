@@ -12,6 +12,7 @@
 .signup-form {
     background: white;
     height: 700px;
+    min-height: 600px;
     width: 425px;
     display: flex;
     flex-direction: column;
@@ -20,22 +21,21 @@
     padding-top: 1%;
     box-shadow: 2px 2px 2px 2px black;
     margin-top: 5%;
-    overflow: auto;
 }
 
 .username{
     padding-left: 5px;
     border: 2px solid green;
-    height: 6%;
+    height: 40px;
     width: 75%;
-    margin-top: 5%;
+    margin-top: 1%;
     box-sizing: border-box;
 }
 
 .password{
     padding-left: 5px;
     border: 2px solid green;
-    height: 6%;
+    height: 40px;
     width: 75%;
     margin-top: 10px;
     box-sizing: border-box;
@@ -48,7 +48,7 @@ a {
 .email{
     padding-left: 5px;
     border: 2px solid green;
-    height: 6%;
+    height: 40px;
     width: 75%;
     margin-top: 10px;
     box-sizing: border-box;
@@ -60,6 +60,7 @@ a {
     width: 75%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 5%;
 }
 
 
@@ -91,6 +92,7 @@ a {
 
 .account{
     font-size: 18px;
+    margin-bottom: 5%;
 }
 
 @media (max-width: 450px){
@@ -114,7 +116,6 @@ a {
 @media (max-height: 650px) {
     .signup-form {
         margin-top: 2vh;
-        height: 100%;
     }
 
     .account {
@@ -125,7 +126,6 @@ a {
 @media (max-height: 620px) {
     .signup-form {
         margin-top: 0%;
-        height: 100%;
     }
 }
 

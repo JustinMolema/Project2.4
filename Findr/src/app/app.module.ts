@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { LoginModule } from './login/login.module';
 import { SignupModule } from './signup/signup.module';
 import { PasswordforgottenModule } from './passwordforgotten/passwordforgotten.module';
+import { GamemenuModule } from './gamemenu/gamemenu.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { PasswordforgottenModule } from './passwordforgotten/passwordforgotten.m
         }),
         LoginModule,
         SignupModule,
-        PasswordforgottenModule
+        PasswordforgottenModule,
+        GamemenuModule
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -1,36 +1,33 @@
-.main {
-    background: red;
-    height: 100vh;
-    width: 100vw;
-    margin:0;
-    padding:0;
-    display: flex;
-}
-.background {
-    position: absolute;
-    right: 0;
-    left: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .spacer {
     flex: 2;
 }
 
+.image {
+    color: white;
+    cursor: pointer;
+    /* TODO load main menu.*/
+}
+
 .toolbar {
     position: absolute;
+    padding-left: 20px;
     top: 0;
     left: 0;
     right: 0;
     height: 60px;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(90deg, #fe1777, #b518e5);
+    background-image: linear-gradient(90deg, #1f1f23, #121212 75%);
     color: white;
     font-weight: 600;
 }
+
+.toolbar2 {
+    height: 60px;
+    color: white;
+    background-image: linear-gradient(90deg, #1f1f23, #121212 75%);
+}
+
 
 .toolbar img {
     margin: 0 16px;
@@ -48,13 +45,14 @@
 
 .toolbar #twitter-logo:hover, .toolbar #youtube-logo:hover {
     opacity: 0.8;
+    
 }
 
 .tablink {
     background-color: #555;
     bottom: 0;
     color: white;
-    border: 2px solid black;
+    border: 2px solid rgb(94, 82, 82);
     outline: none;
     cursor: pointer;
     padding: 10px 16px;
@@ -67,11 +65,5 @@
 }
 
 .tablink:hover {
-    background-color: rgba(255, 165, 0, 0.2); ;
-}
-
-/* Clear floats after the columns */
-
-.content {
-    margin-top: 1700px;
+    background-color: rgb(94, 82, 82, 0.5);
 }

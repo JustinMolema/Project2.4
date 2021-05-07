@@ -1,0 +1,35 @@
+.gradient-background {
+    background-color: #121212;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+    display: flex;
+    justify-content: left;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.sidebar{
+    background-color: #1f1f23;
+    height: 100%;
+    width: 24rem;
+    color: white;
+    display:flex;
+    flex-direction: column;
+    box-sizing: border-box;
+} 
+
+.game-tab {
+    width: 100%;
+    color: white;
+    padding-left: 150px;
+    padding-top: 150px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Jaap {
+    height: 100%;
+}
