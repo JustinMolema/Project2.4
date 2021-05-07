@@ -1,7 +1,7 @@
 .navbar{
     background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(49, 49, 49));
     border-radius: 10px;
-    border: inset 5px rgb(0, 255, 34);
+    border: inset 5px rgb(73, 73, 73);
     margin-left: 20px;
     max-width: 300px;
     padding-bottom: 10%;
@@ -10,9 +10,9 @@
 }
 
 .navbarbutton{
-    background-image: radial-gradient(rgb(49, 49, 49), rgb(0, 0, 0));
+    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(49, 49, 49));
     border-radius: 10px;
-    border: inset 1px rgb(0, 255, 34);
+    border: inset 1px rgb(73, 73, 73);
     text-align: center;
     max-width: 300px;
     min-width: 100px;
@@ -24,7 +24,7 @@
 }
 
 .navbarbutton:hover{
-  background-image: radial-gradient(rgb(95, 95, 95) 10%, rgb(45, 45, 45) 100%);
+  background-image: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%);
   animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
