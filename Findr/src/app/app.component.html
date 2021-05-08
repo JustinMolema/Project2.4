@@ -1,17 +1,12 @@
 <app-navbar></app-navbar>
-<!-- <app-gamemenu></app-gamemenu> -->
+<router-outlet></router-outlet>
 
-<app-admin></app-admin>
-<!-- <app-login></app-login> -->
- <!-- <app-signup></app-signup> -->
- <!-- <app-passwordforgotten></app-passwordforgotten> -->
 <div class="toolbar" role="banner">
     <a href="index.html"><img class="image" width="40" alt="Angular Logo" src="../../assets/Logo-white.svg"/></a>
     <span class="findr">Findr</span>
     <div class="spacer"></div>
-    <button class="tablink" id="defaultOpen">Login</button>
-    <button class="tablink" id="defaultOpen">Logout</button>
-    <button class="tablink" id="defaultOpen">Support</button>
-    <button class="tablink" id="defaultOpen">Legal</button>
+    <button class="tablink" id="defaultOpen" routerLink="login">Login</button>
+    <button class="tablink" id="defaultOpen" routerLink="signup">sign up</button>
+    <button class="tablink" id="defaultOpen" routerLink="admin">admin</button>
 </div>
 
