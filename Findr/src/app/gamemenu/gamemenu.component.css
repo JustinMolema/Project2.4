@@ -1,8 +1,8 @@
 .game-tab {
     width: 100%;
     color: white;
-    padding-left: 150px;
-    padding-top: 150px;
+    padding-left: 100px;
+    padding-top: 100px;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
