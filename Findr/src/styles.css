@@ -30,7 +30,7 @@ body{
     padding-top: 60px;
     padding-left: 300px;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     box-sizing: border-box;
 }
 

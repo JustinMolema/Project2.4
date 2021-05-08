@@ -1,0 +1,66 @@
+.admin-tab {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.center {
+    text-align: center;
+    color: white;
+    border: 3px solid green;
+  }
+
+.reported-users-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 10%;
+    color: white;
+    border: 1px solid rgb(155, 163, 155);
+    border-radius: 10px;
+    background-color: rgb(53, 49, 49, 0.5);
+}
+
+.reported-users-container {
+    color: white;
+    background-color: rgb(53, 49, 49, 0.5);
+    height: 20%;
+    width: 50%;
+    margin-top: 10px;
+    border: 1px solid rgb(155, 163, 155);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.view-support-tickets-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 10%;
+    color: white;
+    margin-top: 50px;
+    border: 1px solid rgb(155, 163, 155);
+    border-radius: 10px;
+    background-color: rgb(53, 49, 49, 0.5);
+}
+
+.support-ticket-container {
+    color: white;
+    background-color: rgb(53, 49, 49, 0.5);
+    height: 20%;
+    width: 50%;
+    margin-top: 10px;
+    border: 1px solid rgb(155, 163, 155);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
