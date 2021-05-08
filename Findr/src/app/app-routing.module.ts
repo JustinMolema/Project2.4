@@ -6,6 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { GamemenuComponent } from './gamemenu/gamemenu.component';
 import { AdminComponent } from './admin/admin.component';
 import { PasswordforgottenComponent } from './passwordforgotten/passwordforgotten.component';
+import { ChatmenuComponent } from './chatmenu/chatmenu.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'games', component: GamemenuComponent},
     { path: 'admin', component: AdminComponent },
     {path: 'forgot-password', component: PasswordforgottenComponent}
+    { path: 'chats', component: ChatmenuComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,8 @@
+.chat-tab {
+    width: 100%;
+    color: white;
+    padding-left: 100px;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
