@@ -1,0 +1,27 @@
+.support-ticket-view{
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+button{
+    color: white;
+    background-color: rgb(53, 49, 49, 0.1);
+    border-radius: 7px;
+    height: 35px;
+}
+
+button:hover{
+    background-color: rgb(53, 49, 49, 1);
+}
+
+button:active{
+    background-color: rgb(53, 49, 49, 0.1);
+}
+
+.status-view {
+    margin-left: 75px;
+}
+.close-ticket-view{
+    margin-left: 50px;
+}

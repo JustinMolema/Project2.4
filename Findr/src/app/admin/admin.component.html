@@ -5,12 +5,16 @@
         </div>
         <div class="reported-users-container">
             <app-reporteduser></app-reporteduser>         
+            <app-reporteduser></app-reporteduser>         
+            <app-reporteduser></app-reporteduser>          
+            <app-reporteduser></app-reporteduser>                    
         </div>
         <div class="view-support-tickets-text">
             View support tickets
          </div>
          <div class="support-ticket-container">
-            <app-supportticket></app-supportticket>  
+             Status
+            <app-supportticket *ngFor="let ticket of tickets"  [tag] = ticket.tag [status] = ticket.status></app-supportticket>  
          </div>
     </div>
 </div>

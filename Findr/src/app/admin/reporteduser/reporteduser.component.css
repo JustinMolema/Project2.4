@@ -1,0 +1,39 @@
+.report-user-view {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button{
+    color: white;
+    background-color: rgb(53, 49, 49, 0.1);
+    border-radius: 7px;
+    height: 35px;
+}
+
+button:hover{
+    background-color: rgb(53, 49, 49, 1);
+}
+
+button:active{
+    background-color: rgb(53, 49, 49, 0.1);
+}
+
+.log-view{
+    margin-left: 50px;
+}
+
+.offense-view{
+    margin-left: 10px;
+}
+
+.ban-view{
+    margin-left: 10px;
+}
+
+.warning-view{
+    margin-left: 10px;
+}
+
+.dismiss-view{
+    margin-left: 10px;
+}
