@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import {RouterModule} from "@angular/router";
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar.component';
 import { FriendsComponent } from './friends/friends.component';
@@ -15,7 +16,8 @@ import { ListeditemsComponent } from './listeditems/listeditems.component';
     ListeditemsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,

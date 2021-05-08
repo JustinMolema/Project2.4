@@ -2,12 +2,12 @@
     <div class="login">
         <div class="image"></div>
         <img src="../../assets/Logo.svg" width="175" height="175" >
-        <input class="username" type="text" placeholder="Username"/>
-        <input class="password" type="password" placeholder="Password"/>
+        <input class="username" type="text" placeholder="Username" #username/>
+        <input class="password" type="password" placeholder="Password" #password/>
         <a class="forgot" href="http://www.hanze.nl" target="_blank">Forgot password</a>
 
         <div class="loginbuttons">
-            <button class="login-button">Login</button>
+            <button class="login-button" (click)="test(username.value, password.value)">Login</button>
             <button class="signup"> Sign up</button>
         </div>
     </div>

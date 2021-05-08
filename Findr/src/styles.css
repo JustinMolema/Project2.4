@@ -19,9 +19,8 @@ body{
     box-sizing: border-box;
 }
 
-
 ::-webkit-scrollbar {
-    width: 12.5px;
+    width: 10px;
 }
 
 /* Track */
@@ -34,7 +33,7 @@ body{
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(18, 18, 18, 0.7);
+    background: rgba(128, 128, 128, 0.5);
     border-radius: 10px;
 }
 

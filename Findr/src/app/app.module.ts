@@ -11,7 +11,7 @@ import { PasswordforgottenModule } from './passwordforgotten/passwordforgotten.m
 import { GamemenuModule } from './gamemenu/gamemenu.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { AdminModule } from './admin/admin.module';
-
+import { Routes, RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,6 +30,7 @@ import { AdminModule } from './admin/admin.module';
         GamemenuModule,
         NavbarModule,
         AdminModule,
+
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-games',
@@ -15,5 +15,7 @@ export class GamesComponent implements OnInit {
   onClick():void{
     console.log("Games clicked")
   }
+
+
 
 }
