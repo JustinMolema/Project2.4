@@ -63,6 +63,9 @@ a {
     margin-bottom: 5%;
 }
 
+img{
+    cursor: pointer;
+}
 
 .signup{
     background-color: #18d8e5;

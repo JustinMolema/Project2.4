@@ -1,7 +1,7 @@
 <div class="gradient-background">
     <div class="signup-form">
         <div class="image"></div>
-        <img src="../../assets/Logo.svg" width="175" height="175" >
+        <img src="../../assets/Logo.svg" width="175" height="175" routerLink="/login" >
         <h2>Welcome {{ name}}!</h2>
         
         <input class="username" [(ngModel)]= "name" type="text" placeholder="Username"/>
@@ -14,7 +14,7 @@
         </div>
         <div class="account" >
             Already have an account?
-        <a class="alreadyHaveAnAccount" href="http://www.hanze.nl" target="_blank">Sign in</a>
+        <a class="alreadyHaveAnAccount" routerLink="/login">Sign in</a>
         </div>
     </div>
 </div>

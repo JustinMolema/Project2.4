@@ -21,7 +21,6 @@ export class SupportticketComponent implements OnInit {
         return this._tag;
     }
 
-
     @Input()
     set status(status:String){
         this._status = status;

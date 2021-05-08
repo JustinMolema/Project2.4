@@ -1,14 +1,14 @@
 <div class="gradient-background">
     <div class="login">
-        <div class="image"></div>
-        <img src="../../assets/Logo.svg" width="175" height="175" >
-        <input class="username" type="text" placeholder="Username" #username/>
-        <input class="password" type="password" placeholder="Password" #password/>
-        <a class="forgot" href="http://www.hanze.nl" target="_blank">Forgot password</a>
+        <div class="image" routerLink="/login"></div>
+        <img src="../../assets/Logo.svg" width="175" height="175"/>
+        <input [(ngModel)]= "username" class="username" type="text" placeholder="Username"/>
+        <input [(ngModel)]= "password" class="password" type="password" placeholder="Password"/>
+        <a class="forgot"  routerLink="/forgot-password">Forgot password</a>
 
         <div class="loginbuttons">
-            <button class="login-button" (click)="test(username.value, password.value)">Login</button>
-            <button class="signup"> Sign up</button>
+            <button class="login-button" (click)="login()">Login</button>
+            <button class="signup" routerLink="/signup"> Sign up</button>
         </div>
     </div>
 </div>
