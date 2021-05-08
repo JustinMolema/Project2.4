@@ -10,9 +10,9 @@
     text-align: center;
     color: white;
     border: 3px solid green;
-  }
+}
 
-.reported-users-text{
+.reported-users-text {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,7 +27,7 @@
 .reported-users-container {
     color: white;
     background-color: rgb(53, 49, 49, 0.5);
-    height: 20%;
+    height: 30%;
     width: 50%;
     margin-top: 10px;
     border: 1px solid rgb(155, 163, 155);
@@ -37,7 +37,7 @@
     overflow: auto;
 }
 
-.view-support-tickets-text{
+.view-support-tickets-text {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,14 +53,15 @@
 .support-ticket-container {
     color: white;
     background-color: rgb(53, 49, 49, 0.5);
-    height: 20%;
+    height: 30%;
     width: 50%;
     margin-top: 10px;
     padding-top: 10px;
     border: 1px solid rgb(155, 163, 155);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    text-align: center;
     overflow: auto;
     box-sizing: border-box;
 }

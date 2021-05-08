@@ -15,7 +15,7 @@
 
 .navbarbutton{
     cursor: pointer;
-    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(49, 49, 49));
+    background-color: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(49, 49, 49));
     border-radius: 10px;
     border: inset 1px rgb(73, 73, 73);
     text-align: center;
@@ -30,7 +30,7 @@
 }
 
 .navbarbutton:hover{
-  background-image: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%);
+  background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%);
   animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 

@@ -23,3 +23,4 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+1

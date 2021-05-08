@@ -1,5 +1,10 @@
 <div class="support-ticket-view">
-    <a class="tag-view">{{tag}}</a>  
+    <a class="tag-view">
+        <p class="tag">{{tag}}</p>
+    </a>  
     <a class="status-view">{{status}}</a>
-    <button class="close-ticket-view" (click)=closeTicket()>Close Ticket</button>
+    <div class="close-ticket-view">
+        <button class="view-ticket" (click)=closeTicket()>View Ticket</button>
+        <button class="close-ticket" (click)=closeTicket()>Close Ticket</button>
+    </div>
 </div>

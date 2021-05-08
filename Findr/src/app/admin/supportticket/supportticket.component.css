@@ -1,16 +1,15 @@
 .support-ticket-view{
-    background: red;
     width: 100%;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
 }
-
 
 button{
     color: white;
     background-color: rgb(53, 49, 49, 0.1);
     border-radius: 7px;
     height: 35px;
+    margin-right: 10px;
 }
 
 button:hover{
@@ -21,12 +20,27 @@ button:active{
     background-color: rgb(53, 49, 49, 0.1);
 }
 
-.tag {
-
+.tag-view {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 1;
 }
 .status-view {
-    margin-left: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 .close-ticket-view{
-    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+p {
+    margin-left: 30%;
 }

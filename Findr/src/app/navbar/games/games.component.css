@@ -1,0 +1,33 @@
+button {
+    border-radius: 10px;
+}
+
+.navbarbutton{
+    cursor: pointer;
+    min-width: 250px;
+    min-height: 100px;
+    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(49, 49, 49));
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px; 
+    color: white;
+    border: inset 1px rgb(73, 73, 73);
+}
+
+.navbarbutton:hover{
+     background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); 
+     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+  }
+  
+  @keyframes nvb-button-Animation{
+    0%{
+      filter: brightness(100%)
+    }
+    70%{
+      filter: brightness(150%)
+    }
+    100%{
+      filter: brightness(100%);
+    }
+  }
