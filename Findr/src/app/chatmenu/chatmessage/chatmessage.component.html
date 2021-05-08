@@ -1,0 +1,11 @@
+<!-- <img class="pfp" url="https://cdn.discordapp.com/emojis/839834472970846258.png?v=1"> -->
+<p class="username">B1gD1CkWijmar69</p>
+<div [ngClass]="(received == false)? 'message' : 'receivedmessage'">
+    <div class="pfp">
+        
+    </div>
+    <div  [ngClass]="(received == false) ? 'messagebox' : 'receivedmessagebox'">
+        <p class="message-text">{{ message }}</p>
+        
+    </div>
+</div>

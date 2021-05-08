@@ -12,6 +12,7 @@ import { GamemenuModule } from './gamemenu/gamemenu.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { AdminModule } from './admin/admin.module';
 import { Routes, RouterModule } from '@angular/router';
+import { ChatmenuModule } from './chatmenu/chatmenu.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { Routes, RouterModule } from '@angular/router';
         GamemenuModule,
         NavbarModule,
         AdminModule,
+        ChatmenuModule
 
     ],
     providers: [],

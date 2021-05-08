@@ -1,0 +1,92 @@
+.pfp{
+    min-height: 100px;
+    min-width: 100px;
+    max-height: 100px;
+    max-width: 100px;
+    background: url(https://cdn.discordapp.com/emojis/839834472970846258.png?v=1);
+    
+
+    border-color: rgb(255, 255, 255);
+    border-radius: 50px;
+    border-width: 0.1px;
+    border-style: solid;
+    animation: you-spin-me-right-round 1s infinite;
+}
+.messagebox{
+    
+    min-height: 100px;
+    min-width: 1000px;
+    max-height: 100px;
+    max-width: 1000px;
+    border-radius: 15px;
+    margin-left: 20px;
+    background-color: rgba(255, 255, 255, 0.007);
+    padding-left: 10px;
+    display: flex;
+    
+}
+
+.message{
+    min-height: 100px;
+    min-width: 1000px;
+    max-height: 100px;
+    max-width: 150px;
+    align-items: center;
+    display: flex;
+}
+
+.receivedmessagebox{
+    
+    min-height: 100px;
+    min-width: 1000px;
+    max-height: 100px;
+    max-width: 1000px;
+    border-radius: 15px;
+    margin-left: 20px;
+    background-color: rgba(255, 255, 255, 0.007);
+    padding-left: 100px;
+    display: flex;
+    transform: scalex(-1);
+}
+
+.receivedmessage{
+    min-height: 100px;
+    min-width: 1000px;
+    max-height: 100px;
+    max-width: 150px;
+    
+    margin-left: 1000px;
+    align-items: center;
+    display: flex;
+    transform: scalex(-1);
+}
+
+@keyframes mirror-message{
+    0%{
+        transform: scalex(1);
+    }    
+    100%{
+        transform: scalex(-1);
+    }    
+}
+
+@keyframes you-spin-me-right-round{
+    
+    100%{
+        transform:rotate(720deg);
+    }    
+}
+
+
+.message-text{
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.username{
+    padding-top: 50px;
+    margin-left: 120px;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+}

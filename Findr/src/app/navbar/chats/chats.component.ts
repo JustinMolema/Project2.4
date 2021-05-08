@@ -16,10 +16,12 @@ export class ChatsComponent implements OnInit, NavitemService {
     console.log('????????????');
   }
 
-  onClick($event: any): Observable<any> {
+  /*onClick($event: any): Observable<any> {
     console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
     return undefined;
+  }*/
+
+  onClick():void{
+    console.log("chats clicked")
   }
-
-
 }
