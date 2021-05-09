@@ -37,3 +37,8 @@ body{
     border-radius: 10px;
 }
 
+/* @media (max-width: 800px){
+	.content{
+		padding-left: 110px;
+	}
+} */

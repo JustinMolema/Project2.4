@@ -4,8 +4,8 @@ button {
 
 .navbarbutton{
     cursor: pointer;
-    min-width: 250px;
-    min-height: 100px;
+	width: 250px;
+    height: 100px;
     background: linear-gradient(to bottom right, #1f1f23, #353538);
     margin-top: 10px;
     margin-left: 10px;
@@ -20,6 +20,22 @@ button {
      background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); 
      animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
   }
+
+  
+@media (max-width: 800px){
+	.navbarbutton {
+		animation: collapse-navbar 1s forwards;
+		width: 80px;
+		max-width: 80px;
+		min-width: 80px;
+		height: 80px;
+		margin-left: 10px;
+		margin-right: 10px;
+		background:  url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
+		background-size:contain;
+		color: rgba(0,0,0,0);
+	}
+}
   
   @keyframes nvb-button-Animation{
     0%{

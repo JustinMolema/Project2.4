@@ -1,7 +1,7 @@
 .navbar{
+    animation: decollapse-navbar 5s forwards;
     position: fixed;
     padding-top: 60px;
-    /* background-color: #1f1f23; */
     background: linear-gradient(to right, #1f1f23, #353538);
     border: 5px solid #1f1f23;
     border-radius: 10px;
@@ -12,4 +12,18 @@
     flex-direction: column;
     box-sizing: border-box;
     overflow: auto;
-} 
+    
+}
+
+@media (max-width: 800px){
+	.navbar {
+		/*animation: collapse-navbar 1s forwards;*/
+        width: 110px;
+	}
+}
+
+@keyframes collapse-navbar{
+    100%{
+        width: 110px;
+    }
+}
