@@ -8,7 +8,6 @@ import { AdminComponent } from './admin/admin.component';
 import { PasswordforgottenComponent } from './passwordforgotten/passwordforgotten.component';
 import { ChatmenuComponent } from './chatmenu/chatmenu.component';
 import {FriendsmenuComponent} from "./friendsmenu/friendsmenu.component";
-import {BlockedusersComponent} from "./friendsmenu/blockedusers/blockedusers.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,7 +16,6 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   { path: 'chats', component: ChatmenuComponent },
   {path: "friends", component: FriendsmenuComponent},
-  {path: "blockedUsers", component: BlockedusersComponent},
   {path: 'forgot-password', component: PasswordforgottenComponent}
 ];
 
