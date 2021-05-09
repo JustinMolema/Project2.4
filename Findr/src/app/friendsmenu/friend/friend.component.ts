@@ -7,32 +7,33 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FriendComponent implements OnInit {
 
-  public _friend:String;
+  public _friend: String;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   @Input()
-  set friend(friend:String){
+  set friend(friend: String) {
     this._friend = friend;
   }
 
-  get friend(){
+  get friend() {
     return this._friend;
   }
 
-  startChat(){
-    console.log("start chat!")
+  startChat() {
+    console.log("start chat")
   }
 
-  deleteFriend(){
-    console.log("delete friend >:(")
+  deleteFriend() {
+    console.log("delete friend")
   }
 
-  blockFriend(){
-    console.log("block friend:(")
+  blockFriend() {
+    console.log("block friend")
   }
 
 }

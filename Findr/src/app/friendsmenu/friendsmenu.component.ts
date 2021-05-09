@@ -6,9 +6,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./friendsmenu.component.css']
 })
 export class FriendsmenuComponent implements OnInit {
-  friends = ["henk", "jan", "jeff"]
-  friendRequests = ["simon", "jos"]
-  blockedUsers = ["richard", "jeroen"]
+  friends = ["Harald", "Anne Pier", "Justin", "Robbin"]
+  friendRequests = ["Simon", "Jos", "Wijmar"]
+  blockedUsers = ["Richard", "Jeroen"]
 
   constructor() {
   }

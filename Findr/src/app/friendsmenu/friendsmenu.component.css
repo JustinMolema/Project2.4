@@ -5,16 +5,17 @@
   padding-top: 50px;
   display: flex;
   flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.blocked-user-tab{
+.blocked-user-tab {
   width: 100%;
   color: white;
   padding-left: 100px;
   padding-top: 50px;
-  /*display: flex;*/
   flex-direction: column;
   display: none;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .friend-request-container {
@@ -32,43 +33,26 @@
   height: 5%;
 }
 
-.blockedButton{
+.blockedButton {
   background-color: #313135;
 }
 
-.friendButton{
+.friendButton {
   background-color: #313135;
 }
 
 button {
   color: white;
-  background-color: rgb(53, 49, 49, 0.1);
+  background-color: rgba(53, 49, 49, 0.1);
   border-radius: 7px;
   height: 35px;
   margin-left: 20px;
 }
 
 button:hover {
-  background-color: rgb(53, 49, 49, 1);
+  background-color: rgba(53, 49, 49, 1);
 }
 
 button:active {
-  background-color: rgb(53, 49, 49, 0.1);
+  background-color: rgba(53, 49, 49, 0.1);
 }
-
-
-/*.friend-requests{*/
-
-/*}*/
-
-/*.friend-requests-container{*/
-
-/*}*/
-
-/*.blocked-users{*/
-
-/*}*/
-
-/*.blocked-users-container{*/
-
-/*}*/
