@@ -3,14 +3,14 @@
     min-width: 100px;
     max-height: 100px;
     max-width: 100px;
-    background: url(https://cdn.discordapp.com/emojis/839834472970846258.png?v=1);
-    
+    background: url(https://cdn.discordapp.com/attachments/535443771052130317/840928723326074910/pfp.png);
+    background-size: cover;
 
     border-color: rgb(255, 255, 255);
     border-radius: 50px;
     border-width: 0.1px;
     border-style: solid;
-    animation: you-spin-me-right-round 1s infinite;
+    /*animation: you-spin-me-right-round 15s infinite linear;*/
 }
 .messagebox{
     
@@ -20,7 +20,8 @@
     max-width: 1000px;
     border-radius: 15px;
     margin-left: 20px;
-    background-color: rgba(255, 255, 255, 0.007);
+    /*background-color: rgba(255, 255, 255, 0.007);*/
+    background: rgba(255, 255, 255, 0.007);
     padding-left: 10px;
     display: flex;
     
@@ -33,6 +34,13 @@
     max-width: 150px;
     align-items: center;
     display: flex;
+}
+
+.username{
+    padding-top: 50px;
+    margin-left: 120px;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .receivedmessagebox{
@@ -61,6 +69,13 @@
     transform: scalex(-1);
 }
 
+.receivedusername{
+    padding-top: 50px;
+    margin-left: 1750px;
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 @keyframes mirror-message{
     0%{
         transform: scalex(1);
@@ -74,6 +89,8 @@
     
     100%{
         transform:rotate(720deg);
+        
+        filter:hue-rotate(720deg);
     }    
 }
 
@@ -84,9 +101,3 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.username{
-    padding-top: 50px;
-    margin-left: 120px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-}
