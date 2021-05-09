@@ -13,11 +13,6 @@ export class ChatsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /*onClick($event: any): Observable<any> {
-    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-    return undefined;
-  }*/
-
   onClick():void{
     console.log("chats clicked")
   }
