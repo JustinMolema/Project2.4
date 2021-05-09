@@ -17,6 +17,9 @@ import {AppRoutingModule} from "../app-routing.module";
     imports: [
         CommonModule,
         AppRoutingModule
+    ],
+    exports: [
+        FriendsmenuComponent
     ]
 })
 export class FriendsmenuModule { }

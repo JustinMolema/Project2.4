@@ -30,7 +30,7 @@ input:focus{
 }
 
 .chat-inputfield:hover{
-    animation: 1s inputhover forwards
+    animation: 1s inputhover forwards;
 }
 
 @keyframes inputhover{
