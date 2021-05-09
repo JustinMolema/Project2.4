@@ -12,4 +12,8 @@ export class FriendsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClick():void{
+    console.log("friends clicked")
+  }
+
 }

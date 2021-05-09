@@ -1,0 +1,35 @@
+.current-friends-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.friend-name {
+  font-size: 18px;
+  color: white;
+  margin-right: 20px;
+  flex: 1;
+}
+
+.friend-buttons {
+  margin-left: 200px;
+  flex: 1;
+  margin-right: 20px;
+}
+
+button {
+  color: white;
+  background-color: rgba(53, 49, 49, 0.1);
+  border-radius: 7px;
+  height: 35px;
+  margin-left: 20px;
+}
+
+button:hover {
+  background-color: rgb(53, 49, 49, 1);
+}
+
+button:active {
+  background-color: rgb(53, 49, 49, 0.1);
+}
+
