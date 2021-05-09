@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="current-friends">
+    <app-friend *ngFor="let friend of friends" [friend]="friend"></app-friend>
+  </div>
+
+  <div class="friend-requests">
+    <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend"></app-friendrequests>
+  </div>
+
+
+  <!--  <div class="blocked-users">-->
+  <!--    Blocked Users-->
+  <!--  </div>-->
+  <!--  <div class="blocked-users-container">-->
+  <!--    <ul>-->
+  <!--&lt;!&ndash;      <li *ngFor="let user of blockedUsers"></li>&ndash;&gt;-->
+  <!--    </ul>-->
+  <!--  </div>-->
+</div>
