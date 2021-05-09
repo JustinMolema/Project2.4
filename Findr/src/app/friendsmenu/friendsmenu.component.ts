@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-friendsmenu',
@@ -10,9 +10,21 @@ export class FriendsmenuComponent implements OnInit {
   friendRequests = ["simon", "jos"]
   blockedUsers = ["richard", "jeroen"]
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+
+  }
+
+  showFriendTab(blockView: any, friendView: any) {
+    blockView.style.display = "none";
+    friendView.style.display = "flex";
+  }
+
+  showBlockedUserTab(blockView: any, friendView: any) {
+    blockView.style.display = "flex";
+    friendView.style.display = "none";
   }
 
 }

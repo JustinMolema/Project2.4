@@ -1,1 +1,8 @@
-<p>friendrequests works!</p>
+<div class="request-container">
+  <p class="friend-request-name">{{_friend}}</p>
+  <div class="friend-request-buttons">
+    <button class="add" (click)="addFriend()">add friend</button>
+    <button class="delete" (click)="deleteRequest()">delete request</button>
+    <button class="block" (click)="blockUser()"> block user</button>
+  </div>
+</div>

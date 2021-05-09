@@ -7,6 +7,7 @@ import {GamemenuComponent} from './gamemenu/gamemenu.component';
 import {AdminComponent} from './admin/admin.component';
 import {PasswordforgottenComponent} from './passwordforgotten/passwordforgotten.component';
 import {FriendsmenuComponent} from "./friendsmenu/friendsmenu.component";
+import {BlockedusersComponent} from "./friendsmenu/blockedusers/blockedusers.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'games', component: GamemenuComponent},
   {path: 'admin', component: AdminComponent},
   {path: "friends", component: FriendsmenuComponent},
+  {path: "blockedUsers", component: BlockedusersComponent},
   {path: 'forgot-password', component: PasswordforgottenComponent}
 ];
 

@@ -20,4 +20,16 @@ export class FriendrequestsComponent implements OnInit {
   get friend(){
     return this._friend;
   }
+
+  addFriend(){
+    console.log("new friend :D");
+  }
+
+  deleteRequest(){
+    console.log("delete >:)");
+  }
+
+  blockUser(){
+    console.log("block >:(");
+  }
 }
