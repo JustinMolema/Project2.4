@@ -6,3 +6,35 @@
     display: flex;
     flex-direction: column;
 }
+
+.chat-input {
+    background-color: rgba(255, 255, 255, 0.007);
+    width: 1000px;
+    margin: 20px;
+    height: 50px;
+    border-radius: 15px;
+}
+
+.chat-inputfield{
+    background-color: rgba(255, 255, 255, 0.007);
+    color: white;
+    border-style: none;
+    width: 1000px;
+    margin: 20px;
+    height: 50px;
+    border-radius: 15px;
+    
+}
+input:focus{
+    outline: none;
+}
+
+.chat-inputfield:hover{
+    animation: 1s inputhover forwards
+}
+
+@keyframes inputhover{
+    100%{
+        background-color: rgba(255, 255, 255, 0.157);
+    }
+}
