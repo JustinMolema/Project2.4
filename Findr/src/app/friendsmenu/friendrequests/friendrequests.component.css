@@ -10,6 +10,7 @@
   font-size: 18px;
   color: white;
   margin-right: 20px;
+  margin-left: 20px;
   flex: 1;
 }
 
@@ -17,6 +18,11 @@
   margin-left: 200px;
   flex: 1;
   margin-right: 20px;
+}
+
+img {
+  width:50px;
+  border-radius: 50%;
 }
 
 button {
