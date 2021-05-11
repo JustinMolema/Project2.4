@@ -6,17 +6,18 @@
 
 button{
     color: white;
-    background-color: rgb(53, 49, 49, 0.1);
+    background-color: rgb(53, 49, 49, 0.0);
+    border-color: #3184ad;
     border-radius: 7px;
     height: 35px;
 }
 
 button:hover{
-    background-color: rgb(53, 49, 49, 1);
+    background-color: rgb(80, 141, 158);
 }
 
 button:active{
-    background-color: rgb(53, 49, 49, 0.1);
+    background-color: rgba(80, 141, 158, 0.5);
 }
 
 .user-view {

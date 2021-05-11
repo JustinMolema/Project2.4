@@ -17,8 +17,7 @@ export class ChatmenuComponent implements OnInit {
   addMessage(message:string, received:boolean)
   {
     this.messages.push({message, received});
-
-    this.messages.push({message:"ja", received:true});
+    this.messages.push({message:"ja", received:false});
   }
 
 }

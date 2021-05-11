@@ -19,18 +19,18 @@
     width: 50%;
     height: 10%;
     color: white;
-    border: 1px solid rgb(155, 163, 155);
+    /* border: 2px solid #3184ad; */
     border-radius: 10px;
-    background-color: rgb(53, 49, 49, 0.5);
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
 .reported-users-container {
     color: white;
-    background-color: rgb(53, 49, 49, 0.5);
+    background-color: rgba(255, 255, 255, 0.01);
     height: 30%;
     width: 50%;
     margin-top: 10px;
-    border: 1px solid rgb(155, 163, 155);
+    /* border: 2px solid #3184ad; */
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -46,19 +46,19 @@
     height: 10%;
     color: white;
     margin-top: 50px;
-    border: 1px solid rgb(155, 163, 155);
+    /* border: 2px solid #3184ad; */
     border-radius: 10px;
-    background-color: rgb(53, 49, 49, 0.5);
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
 .support-ticket-container {
     color: white;
-    background-color: rgb(53, 49, 49, 0.5);
+    background-color: rgba(255, 255, 255, 0.01);
     height: 30%;
     width: 50%;
     margin-top: 10px;
     padding-top: 10px;
-    border: 1px solid rgb(155, 163, 155);
+    /* border: 2px solid #3184ad; */
     display: flex;
     flex-direction: column;
     text-align: center;

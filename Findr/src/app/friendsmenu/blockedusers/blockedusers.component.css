@@ -24,22 +24,24 @@
   margin-right: 20px;
 }
 
-button {
-  color: white;
-  background-color: rgba(53, 49, 49, 0.1);
-  border-radius: 7px;
-  height: 35px;
-  margin-left: 20px;
-}
-
 img {
   width:50px;
   border-radius: 50%;
 }
-button:hover {
-  background-color: rgba(53, 49, 49, 1);
+
+button{
+    color: white;
+    background-color: rgb(53, 49, 49, 0.0);
+    border-color: #3184ad;
+    border-radius: 7px;
+    height: 35px;
+    margin-left: 20px;
 }
 
-button:active {
-  background-color: rgba(53, 49, 49, 0.1);
+button:hover{
+    background-color: rgb(80, 141, 158);
+}
+
+button:active{
+    background-color: rgba(80, 141, 158, 0.5);
 }

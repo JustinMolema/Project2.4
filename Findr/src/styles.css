@@ -4,7 +4,7 @@ html, body {
     padding: 0;
 }
 body{
-    background-color: #121212;
+    background-color: #131c28;
 }
   
 .content {
@@ -37,8 +37,8 @@ body{
     border-radius: 10px;
 }
 
-/* @media (max-width: 800px){
+@media (max-width: 800px){
 	.content{
 		padding-left: 110px;
 	}
-} */
+}
