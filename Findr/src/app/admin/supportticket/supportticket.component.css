@@ -11,6 +11,7 @@ button{
     border-color: #3184ad;
     height: 35px;
     margin-right: 10px;
+    font-family: "Archivo";
 }
 
 button:hover{

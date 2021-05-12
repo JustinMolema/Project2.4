@@ -1,44 +1,91 @@
-button {
+button
+{
     border-radius: 10px;
 }
 
-.navbarbutton{
+.navbarbutton
+{
     cursor: pointer;
     width: 250px;
-    height: 100px;
-    background: linear-gradient(to bottom right, #2a415f, #172131);
+    height: 50px;
+    background: rgba(0, 0, 0, 0);
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
     border-radius: 10px; 
-    color: cyan;
-    border: inset 0px rgb(73, 73, 73);
-    box-shadow:  5px 5px 15px 5px #101722;
+    color: rgb(255, 255, 255);
+    font-family: "Archivo";
+    font-weight: 100;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    align-items: stretch;
+    /*border: inset 0px rgb(73, 73, 73);*/
+    /*box-shadow:  5px 5px 15px 5px #101722;*/
 }
 
-.navbarbutton:hover{
-     background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); 
+/* #2a415f #172131 */
+.navbarbutton:hover
+{
+     /*background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); */
+     background-color: #5e8fcf62;
      animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
 }
 
-.navbarbutton:active{
-    border: inset 3px rgb(73, 73, 73);;
-
+.navbarbutton:focus
+{
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
 }
 
-@keyframes nvb-button-Animation{
-    0%{
+.navbarbutton:active
+{
+  border: none;
+  outline: none;
+  filter: brightness(150%)
+}
+
+.navbaricon
+{
+  position: relative;
+  height: 50px;
+  width: 50px;
+  /*vertical-align:middle;*/
+  /*float:left;*/
+}
+.navbaricondiv{
+  flex: 0.3;
+}
+
+.navbartext
+{
+  flex: 0.7;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes nvb-button-Animation
+{
+    0%
+    {
       filter: brightness(100%)
     }
-    70%{
-      filter: brightness(150%)
+    70%
+    {
+      filter: brightness(120%)
     }
-    100%{
+    100%
+    {
       filter: brightness(100%);
     }
   }
 
-  @media (max-width: 800px){
+  @media (max-width: 800px)
+  {
     .navbarbutton {
       animation: collapse-navbar 1s forwards;
       width: 80px;
@@ -50,6 +97,36 @@ button {
       background:  url("https://cdn.discordapp.com/attachments/833684306462507011/841024213414051880/cracklogo_nog_beter.png");
       background-size:contain;
       color: rgba(0,0,0,0);
-      
     }
+
+    .navbaricon {
+      width: 0;
+      height: 0;
+    }
+
+    .navbaricondiv
+    {
+      width: 0;
+      height: 0;
+    }
+
+    .navbartext
+    {
+      width: 0;
+      height: 0;
+    }
+    /*
+    .navbarbutton:hover
+    { 
+      background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); 
+      width: 80px;
+      max-width: 80px;
+      min-width: 80px;
+      height: 80px;
+      margin-left: 10px;
+      margin-right: 10px;
+      background:  url("https://cdn.discordapp.com/attachments/833684306462507011/841024213414051880/cracklogo_nog_beter.png");
+      animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+    }
+    */
   }

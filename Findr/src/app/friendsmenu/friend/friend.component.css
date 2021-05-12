@@ -6,6 +6,7 @@
 
 .friend-name {
   font-size: 18px;
+  font-family: "Archivo";
   color: white;
   margin-right: 20px;
   margin-left: 20px;
@@ -24,6 +25,7 @@ img {
 
 button{
     color: white;
+    font-family: "Archivo";
     background-color: rgb(53, 49, 49, 0.0);
     border-color: #3184ad;
     border-radius: 7px;

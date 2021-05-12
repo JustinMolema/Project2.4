@@ -9,6 +9,7 @@ header {
     background-image: linear-gradient(90deg, #172131 , #131c28 );
     color: white;
     font-weight: 600;
+    font-family: "Archivo";
 }
 
 header img {

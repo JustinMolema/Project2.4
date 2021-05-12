@@ -13,8 +13,9 @@
     flex-direction: column;
     box-sizing: border-box;
     overflow: auto;
-    
+    font-family: "Archivo";
 }
+
 
 @media (max-width: 800px){
 	.navbar {

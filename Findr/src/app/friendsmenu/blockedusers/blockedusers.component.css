@@ -8,6 +8,7 @@
   margin-left: 20px;
   font-size: 18px;
   color: white;
+  font-family: "Archivo";
 }
 
 .blocked-user-container {
@@ -19,6 +20,7 @@
 }
 
 .blocked-button-container {
+  font-family: "Archivo";
   margin-left: 200px;
   flex: 1;
   margin-right: 20px;
@@ -31,6 +33,7 @@ img {
 
 button{
     color: white;
+    font-family: "Archivo";
     background-color: rgb(53, 49, 49, 0.0);
     border-color: #3184ad;
     border-radius: 7px;

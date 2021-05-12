@@ -32,6 +32,7 @@ button{
     border-radius: 7px;
     height: 35px;
     margin-left: 20px;
+    font-family: "Archivo";
 }
 
 button:hover{
