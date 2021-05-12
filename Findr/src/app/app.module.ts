@@ -5,16 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { LoginModule } from './login/login.module';
-import { SignupModule } from './signup/signup.module';
-import { PasswordforgottenModule } from './passwordforgotten/passwordforgotten.module';
-import { GamemenuModule } from './gamemenu/gamemenu.module';
+import { LoginModule } from './User/login/login.module';
+import { SignupModule } from './User/signup/signup.module';
+import { PasswordforgottenModule } from './User/passwordforgotten/passwordforgotten.module';
+import { GamemenuModule } from './User/gamemenu/gamemenu.module';
 import { NavbarModule } from './navbar/navbar.module';
-import { AdminModule } from './admin/admin.module';
 import { Routes, RouterModule } from '@angular/router';
-import { TopbarModule } from './topbar/topbar.module';
-import { ChatmenuModule } from './chatmenu/chatmenu.module';
-import {FriendsmenuModule} from "./friendsmenu/friendsmenu.module";
+import { TopbarModule } from './User/topbar/topbar.module';
+import { ChatmenuModule } from './User/chatmenu/chatmenu.module';
+import { FriendsmenuModule } from "./User/friendsmenu/friendsmenu.module";
+
+import { AdminLoginModule } from './admin/admin-login/admin-login.module';
+import { SupportticketModule } from './admin/supportticket/supportticket.module';
+import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,9 +38,11 @@ import {FriendsmenuModule} from "./friendsmenu/friendsmenu.module";
     FriendsmenuModule,
     GamemenuModule,
     NavbarModule,
-    AdminModule,
     TopbarModule,
-    ChatmenuModule
+    ChatmenuModule,
+    AdminLoginModule,
+    SupportticketModule,
+    ReporteduserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
