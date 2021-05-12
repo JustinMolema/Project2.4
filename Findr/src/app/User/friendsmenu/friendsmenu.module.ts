@@ -4,8 +4,7 @@ import { FriendsmenuComponent } from './friendsmenu.component';
 import { FriendComponent } from './friend/friend.component';
 import { FriendrequestsComponent } from './friendrequests/friendrequests.component';
 import { BlockedusersComponent } from './blockedusers/blockedusers.component';
-import {AppRoutingModule} from "../app-routing.module";
-
+import {AppRoutingModule} from "../../app-routing.module";
 
 @NgModule({
   declarations: [

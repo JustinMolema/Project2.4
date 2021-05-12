@@ -1,8 +1,6 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200&display=swap" rel="stylesheet">
-<app-navbar></app-navbar>
+<app-navbar *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && router.url != '/admin' && router.url != '/admin'" ></app-navbar>
 <router-outlet></router-outlet>
-
-<app-topbar></app-topbar>
-
+<app-topbar *ngIf="router.url !='/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin') && router.url != '/admin'"></app-topbar>
