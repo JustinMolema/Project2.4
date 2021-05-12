@@ -1,38 +1,10 @@
-<!-- <div class="report-user-view">
-    <div class="user-view">
-        <p>{{name}}</p>
-    </div>
-    <div class="reason">
-        {{offense}}
-    </div>
-    <div class="options">
-        <button class="log-view">View logs</button>
-        <button class="ban-view">Ban</button>
-        <button class="warning-view">Warning</button>
-        <button class="dismiss-view">Dismiss</button>
-    </div>
-</div>  -->
 <div class="content">
     <div class="admin-tab">
         <div class="reported-users-text">
            View reported users
         </div>
         <div class="reported-users-container">
-            <div class="report-user-view">
-                <div class="user-view">
-                    <p>{{name}}</p>
-                </div>
-                <div class="reason">
-                    {{offense}}
-                </div>
-                <div class="options">
-                    <button class="log-view">View logs</button>
-                    <button class="ban-view">Ban</button>
-                    <button class="warning-view">Warning</button>
-                    <button class="dismiss-view">Dismiss</button>
-                </div>
-            </div> 
-            <!-- <app-reporteduser *ngFor="let user of reported_users" [name] = user.naam [offense] = user.reason></app-reporteduser>                -->
+            <app-user *ngFor="let user of reported_users" [name] = user.naam [offense] = user.reason></app-user>               
         </div>
     </div>
 </div>

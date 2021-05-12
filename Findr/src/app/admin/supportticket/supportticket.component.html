@@ -1,10 +1,11 @@
-<div class="support-ticket-view">
-    <a class="tag-view">
-        <p class="tag">{{tag}}</p>
-    </a>  
-    <a class="status-view">{{status}}</a>
-    <div class="close-ticket-view">
-        <button class="view-ticket" (click)=closeTicket()>View Ticket</button>
-        <button class="close-ticket" (click)=closeTicket()>Close Ticket</button>
+<div class="content">
+    <div class="admin-tab">
+        <div class="view-support-tickets-text">
+            View support tickets
+         </div>
+         <div class="support-ticket-container">
+             Status            
+            <app-ticket *ngFor="let ticket of tickets"  [tag] = ticket.tag [status] = ticket.status></app-ticket>  
+         </div>
     </div>
 </div>

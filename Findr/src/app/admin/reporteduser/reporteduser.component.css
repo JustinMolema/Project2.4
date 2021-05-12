@@ -1,69 +1,68 @@
-.report-user-view {
-    margin-top: 10px;
+.admin-tab {
+    width: 100%;
     display: flex;
-    justify-content: center;
-}
-
-button{
-    color: white;
-    background-color: rgb(53, 49, 49, 0.0);
-    border-color: #3184ad;
-    border-radius: 7px;
-    height: 35px;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 50px;
     font-family: "Archivo";
 }
 
-button:hover{
-    background-color: rgb(80, 141, 158);
+.center {
+    text-align: center;
+    color: white;
+    border: 3px solid green;
 }
 
-button:active{
-    background-color: rgba(80, 141, 158, 0.5);
-}
-
-.user-view {
+.reported-users-text {
     display: flex;
-    align-items: center;
-    justify-content: left;
-    box-sizing: border-box;
-    flex: 1;
-}
-
-.reason {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    flex: 1;
-}
-
-.options {
-    display: flex;
     align-items: center;
-    justify-content: left;
+    width: 50%;
+    height: 10%;
+    color: white;
+    /* border: 2px solid #3184ad; */
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.01);
+}
+
+.reported-users-container {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.01);
+    height: 30%;
+    width: 50%;
+    margin-top: 10px;
+    /* border: 2px solid #3184ad; */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    overflow: auto;
     box-sizing: border-box;
-    flex: 1;
 }
 
-
-.offense-view{
-    margin-left: 10px;
+.view-support-tickets-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 10%;
+    color: white;
+    margin-top: 50px;
+    /* border: 2px solid #3184ad; */
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
-.ban-view{
-    margin-left: 10px;
+.support-ticket-container {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.01);
+    height: 30%;
+    width: 50%;
+    margin-top: 10px;
+    padding-top: 10px;
+    /* border: 2px solid #3184ad; */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    overflow: auto;
+    box-sizing: border-box;
 }
-
-.warning-view{
-    margin-left: 10px;
-}
-
-.dismiss-view{
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-p {
-    margin-left: 30%;
-}
-

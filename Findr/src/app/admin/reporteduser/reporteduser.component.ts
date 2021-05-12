@@ -6,30 +6,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./reporteduser.component.css']
 })
 export class ReporteduserComponent implements OnInit {
-    _name:String;
-    _offense:String;
+    reported_users = [{naam: "Harald", reason: "harassment"}, {naam: "Justin", reason: "harassment"},
+    {naam: "Anne Pier", reason: "bullying"}, {naam: "Merel", reason: "harassment"},
+    {naam: "Robbin", reason: "harassment"}, {naam: "Wijmar", reason: "too cool"}]
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  @Input()
-  set name(name:String){
-      this._name = name;
-  }
-
-  get name(){
-      return this._name;
-  }
-
-
-  @Input()
-  set offense(offense:String){
-      this._offense = offense;
-  }
-
-  get offense(){
-      return this._offense;
-  }
 }

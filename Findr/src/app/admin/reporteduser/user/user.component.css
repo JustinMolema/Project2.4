@@ -1,0 +1,69 @@
+.report-user-view {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    color: white;
+    background-color: rgb(53, 49, 49, 0.0);
+    border-color: #3184ad;
+    border-radius: 7px;
+    height: 35px;
+    font-family: "Archivo";
+}
+
+button:hover{
+    background-color: rgb(80, 141, 158);
+}
+
+button:active{
+    background-color: rgba(80, 141, 158, 0.5);
+}
+
+.user-view {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.reason {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+
+.offense-view{
+    margin-left: 10px;
+}
+
+.ban-view{
+    margin-left: 10px;
+}
+
+.warning-view{
+    margin-left: 10px;
+}
+
+.dismiss-view{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+p {
+    margin-left: 30%;
+}
+

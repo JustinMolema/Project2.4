@@ -36,8 +36,13 @@ a {
     text-decoration: none;
 }
 
-img{
-    cursor: pointer;
+.username{
+    padding-left: 5px;
+    border: 2px solid green;
+    height: 40px;
+    width: 75%;
+    margin-top: 5%;
+    box-sizing: border-box;
 }
 
 .passwordbuttons{

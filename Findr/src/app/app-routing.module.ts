@@ -9,7 +9,7 @@ import { ChatmenuComponent } from './User/chatmenu/chatmenu.component';
 import {FriendsmenuComponent} from "./User/friendsmenu/friendsmenu.component";
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ReporteduserComponent } from './admin/reporteduser/reporteduser.component';
-
+import { SupportticketComponent } from './admin/supportticket/supportticket.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,7 +19,9 @@ const routes: Routes = [
   {path: 'chats', component: ChatmenuComponent },
   {path: "friends", component: FriendsmenuComponent},
   {path: 'forgot-password', component: PasswordforgottenComponent},
-  {path: 'admin/home', component: ReporteduserComponent}
+  {path: 'admin/home', component: ReporteduserComponent},
+//   {path: 'admin/home', component: SupportticketComponent}
+
 
 ];
 

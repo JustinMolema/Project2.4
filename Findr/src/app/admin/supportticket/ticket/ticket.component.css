@@ -1,0 +1,48 @@
+.support-ticket-view{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    color: white;
+    background-color: rgb(53, 49, 49, 0.0);
+    border-radius: 7px;
+    border-color: #3184ad;
+    height: 35px;
+    margin-right: 10px;
+    font-family: "Archivo";
+}
+
+button:hover{
+    background-color: rgb(80, 141, 158);
+}
+
+button:active{
+    background-color: rgba(80, 141, 158, 0.5);
+}
+
+.tag-view {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 1;
+}
+.status-view {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+.close-ticket-view{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+p {
+    margin-left: 30%;
+}

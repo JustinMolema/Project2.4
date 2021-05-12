@@ -1,15 +1,28 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminLoginComponent } from './admin-login.component';
-
-
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../../app-routing.module';
+import {RouterModule, Router} from "@angular/router";
+import { ProviderAstType } from '@angular/compiler';
+import { WrongPasswordHandler } from './wrongpasswordhandler';
 
 @NgModule({
   declarations: [
-    AdminLoginComponent
+    AdminLoginComponent,
   ],
+  providers: [{ provide: ErrorHandler, useClass: WrongPasswordHandler }],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    AppRoutingModule,
+    RouterModule
   ]
 })
-export class AdminLoginModule { }
+export class AdminLoginModule {
+
+    constructor(){
+        
+    }
+
+ }

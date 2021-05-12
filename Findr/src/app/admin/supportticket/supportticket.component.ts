@@ -6,32 +6,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./supportticket.component.css']
 })
 export class SupportticketComponent implements OnInit {
-    _tag:String;
-    _status:String;
+    tickets = [{tag: "Robbin", status: "Pending"}, {tag: "Anne Pier", status: "Pending"}, {
+        tag: "Justin",
+        status: "Pending"
+      }, {tag: "Merel", status: "Pending"},
+        {tag: "Bart barnard area 51 raider ", status: "Pending"}, {
+          tag: "Wijmar Nijdam",
+          status: "Pending"
+        }, {tag: "Sietse de slang", status: "Pending"}, {tag: "Jan Peter", status: "Pending"}]
+    
     constructor() { 
 
-    }
-
-    @Input()
-    set tag(tag:String){
-      this._tag = tag;
-    }
-
-    get tag(){
-        return this._tag;
-    }
-
-    @Input()
-    set status(status:String){
-        this._status = status;
-    }
-
-    get status(){
-        return this._status;
-    }
-
-    closeTicket():void{
-        console.log(this.tag);
     }
 
     ngOnInit(): void {
