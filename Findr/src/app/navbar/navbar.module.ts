@@ -6,6 +6,8 @@ import { FriendsComponent } from './friends/friends.component';
 import { GamesComponent } from './games/games.component';
 import { ChatsComponent } from './chats/chats.component';
 import { ListeditemsComponent } from './listeditems/listeditems.component';
+import { GameslistComponent } from './gameslist/gameslist.component';
+import { FriendslistComponent } from './friendslist/friendslist.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ListeditemsComponent } from './listeditems/listeditems.component';
     FriendsComponent,
     GamesComponent,
     ChatsComponent,
-    ListeditemsComponent
+    ListeditemsComponent,
+    GameslistComponent,
+    FriendslistComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,9 @@ import { ListeditemsComponent } from './listeditems/listeditems.component';
     GamesComponent,
     ChatsComponent,
     ListeditemsComponent,
-    FriendsComponent
+    FriendsComponent,
+    FriendslistComponent,
+    GameslistComponent
   ]
 })
 export class NavbarModule { }
