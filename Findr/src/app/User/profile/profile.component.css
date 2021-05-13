@@ -1,0 +1,124 @@
+.content
+{
+    font-family: "Archivo";
+    color:white;
+}
+
+.profile-page
+{
+    font-family: "Archivo";
+    color:white;
+}
+
+.img
+{
+    font-family: "Archivo";
+    color:white;
+}
+
+img
+{
+    width:150px;
+    border-radius: 50%;
+}
+
+.current-profile-pic
+{
+    margin-left: 100px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.input-button
+{
+    background: rgba(0,0,0,0);
+}
+
+.profile-details{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 50%;
+}
+
+.setting-field
+{
+    align-items: center;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+}
+
+.user
+{
+    flex:0.2;
+}
+
+.user-button
+{
+    flex:0.8;
+}
+
+.email
+{
+    flex:0.2;
+}
+
+.email-button
+{
+    flex:0.8;
+}
+
+.password
+{
+    flex:0.2;
+}
+
+.password-button
+{
+    flex:0.8;
+}
+
+.change-button
+{
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: right;
+    align-items:center;
+    align-content: center;
+}
+
+
+button
+{
+    color: white;
+    font-family: "Archivo";
+    background-color: rgb(53, 49, 49, 0.0);
+    border-color: #3184ad;
+    border-radius: 7px;
+    height: 35px;
+    margin-left: 20px;
+}
+
+button:hover
+{
+    background-color: rgb(80, 141, 158);
+}
+
+button:active
+{
+    background-color: rgba(80, 141, 158, 0.5);
+}
+
+::-webkit-file-upload-button
+{
+    color: white;
+    font-family: "Archivo";
+    background-color: rgb(53, 49, 49, 0.0);
+    border-color: #3184ad;
+    border-radius: 7px;
+    height: 35px;
+    margin-left: 20px;
+}

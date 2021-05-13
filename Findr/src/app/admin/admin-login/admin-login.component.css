@@ -1,5 +1,5 @@
 .gradient-background {
-    background-image: url("https://cdn.discordapp.com/attachments/689448146358894665/838768166816579634/photo-1579546929662-711aa81148cf.png"); 
+    background-image: url("https://cdn.discordapp.com/attachments/689448146358894665/838768166816579634/photo-1579546929662-711aa81148cf.png");
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
@@ -19,11 +19,11 @@
     justify-content: top;
     align-items: center;
     padding-top: 1%;
-    box-shadow: 2px 2px 2px 2px black;    
+    box-shadow: 2px 2px 2px 2px black;
     margin-top: 100px;
 }
 
-.password{
+.password {
     padding-left: 5px;
     border: 2px solid black;
     height: 40px;
@@ -36,7 +36,7 @@ a {
     text-decoration: none;
 }
 
-.username{
+.username {
     padding-left: 5px;
     border: 2px solid green;
     height: 40px;
@@ -45,7 +45,7 @@ a {
     box-sizing: border-box;
 }
 
-.passwordbuttons{
+.passwordbuttons {
     margin-top: 10%;
     height: 50px;
     width: 75%;
@@ -54,25 +54,25 @@ a {
     margin-bottom: 5%;
 }
 
-.password-button{
+.password-button {
     background: #fe1777;
     border: 1px solid black;
     font-size: 125%;
     color: #fff;
-    font-weight: bold;    
+    font-weight: bold;
     width: 100%;
     height: 100%;
-} 
+}
 
 .password-button:hover {
     background: #17fe9e;
 }
 
-.password-button:active{
+.password-button:active {
     background-color: #12c278;
 }
 
-@media (max-width: 450px){
+@media (max-width: 450px) {
     .password-forgotten {
         width: 325px;
     }
@@ -91,7 +91,7 @@ a {
     }
 }
 
-@media (max-width: 325px) and (max-height: 500px){
+@media (max-width: 325px) and (max-height: 500px) {
     .password-forgotten {
         margin-top: 0%;
         height: 100vh;

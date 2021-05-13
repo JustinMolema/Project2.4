@@ -26,13 +26,13 @@ img {
 }
 
 button{
-    color: white;
-    background-color: rgb(53, 49, 49, 0.0);
-    border-color: #3184ad;
-    border-radius: 7px;
-    height: 35px;
-    margin-left: 20px;
-    font-family: "Archivo";
+  color: white;
+  background-color: rgb(53, 49, 49, 0.0);
+  border-color: #3184ad;
+  border-radius: 7px;
+  height: 35px;
+  margin-left: 20px;
+  font-family: "Archivo";
 }
 
 button:hover{

@@ -14,10 +14,11 @@
     box-sizing: border-box;
     overflow: auto;
     font-family: "Archivo";
+    padding-bottom: 30px;
 }
 
 @media (max-width: 800px){
-	.navbar {
+    .navbar {
 		/*animation: collapse-navbar 1s forwards;*/
         width: 110px;
 	}
@@ -28,3 +29,4 @@
         width: 110px;
     }
 }
+

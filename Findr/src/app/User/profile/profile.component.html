@@ -1,0 +1,50 @@
+<div class="content">
+
+    <div class="profile-page">
+
+        <img class="current-profile-pic" src="{{ selectedFile.src }}">
+        <input #imageInput class="input-button"
+         type="file"
+         accept="image/*"
+         (change)="processFile(imageInput)">
+
+    </div>
+
+    <div class="profile-details">
+        <div class="setting-field">
+
+            <div class="user">
+                {{ User }}
+            </div>
+            
+            <div class="user-button">
+                <button class="change-button">Change</button>
+            </div>
+
+        </div>
+
+        <div class="setting-field">
+
+            <div class="email">
+                {{ Email }}
+            </div>
+
+            <div class="email-button">
+                <button class="change-button">Change</button>
+            </div> 
+
+        </div> 
+
+        <div class="setting-field">
+
+            <div class="password">
+                Password: *******
+            </div>
+
+            <div class="password-button">
+                <button class="change-button">Change</button>
+            </div>
+
+        </div> 
+    </div>
+</div>

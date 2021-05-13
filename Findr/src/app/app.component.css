@@ -1,0 +1,15 @@
+.footer{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	margin-bottom: 15px;
+    text-align: center;
+    width: 290px;
+    height: 60px;
+    color: #1e2d41;
+    font-family: "Archivo";
+    font-weight: 100;
+    font-size: 16px;
+    margin-left: 85%;
+}
