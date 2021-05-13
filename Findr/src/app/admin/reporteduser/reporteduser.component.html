@@ -1,32 +1,49 @@
 <div class="content">
     <div class="admin-tab">
         <div class="reported-users-container">
+            <div class="toolbar">
+                <!-- <b class="column-name" (click)="sortByDate()"> -->
+                    <div class="recordsperpage">
+                        <select name="" id="" class="record_amount">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                        <p>records per page
+                    </p>
+                    </div>
+                    <div class="search">
+                        <p class="search-text"> Search:</p>
+                        <input class="search-input" type="search"/>
+                    </div>
+                <!-- </b> -->
+            </div>
             <hr class="line">  
             <div class="report-user-view">
                 <b class="column-name" (click)="sortByDate()">
-                    <p>Date</p>
+                    <p class="tableheader">Date</p>
                     <img class="arrow" *ngIf="dateSorting" src="../../../assets/arrow.svg">
                     <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/sort_icon.svg">
 
                     <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
                 </b>
                 <b class="column-name">
-                    <p>Time</p>
+                    <p class="tableheader">Time</p>
                 </b>
                 <b class="column-name" (click)="sortByName()">
-                    <p>Name</p>
+                    <p class="tableheader">Name</p>
                     <img class="arrow" *ngIf="nameSorting" src="../../../assets/arrow.svg">
                     <img class="navbaricon" *ngIf="!nameSorting" src="../../../assets/sort_icon.svg">
                     <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
                 </b>
                 <b class="column-name" (click)="sortByReason()">
-                    <p>Reason</p>
+                    <p class="tableheader">Reason</p>
                     <img class="arrow" *ngIf="reasonSorting" src="../../../assets/arrow.svg">
                     <img class="navbaricon" *ngIf="!reasonSorting" src="../../../assets/sort_icon.svg">
                     <img #icon class="navbaricon" *ngIf="reasonSorting" [ngClass]="sortedByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
                 </b>
                 <b class="actions">
-                    <p>Actions</p>
+                    <p class="tableheader">Actions</p>
                 </b>
             </div> 
             

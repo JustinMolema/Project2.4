@@ -18,4 +18,9 @@ export class AppComponent {
     ngOnInit(){
 
     }
+
+    //TODO: conformation for warning, ban,  dismiss (user reported)
+    //TODO: Add new game
+    //TODO: SupportTickter view
+    //TODO: Styling button (icons add)
 }

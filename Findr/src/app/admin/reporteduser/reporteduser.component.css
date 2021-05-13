@@ -7,6 +7,43 @@
     font-family: "Archivo";
 }
 
+.toolbar {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 0.5;
+}
+
+.recordsperpage {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    flex: 0.9;
+}
+
+.record_amount {
+    color: white;
+    background: rgb(53, 63, 119);
+    height: 40px;
+    margin-right: 10px;
+}
+
+.search {
+    flex: 0.1;
+    display:flex;
+    align-items: center;
+}
+
+.search-input {
+    background: rgb(53, 63, 119);
+    color: white;
+    border: 2px solid black;
+    height: 40px;
+    margin-left: 10px;
+}
+
 .reported-users-container {
     color: white;
     background-color: #212b46;
@@ -14,7 +51,6 @@
     padding-right: 10px;
     padding-top: 10px;
     width: 95%;
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -86,7 +122,7 @@
     flex: 1;
 }
 
-p {
+.tableheader {
     flex: 0.9;
     text-align: left;
     margin-left: 5%;
