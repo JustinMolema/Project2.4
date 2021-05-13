@@ -113,14 +113,14 @@ button:active
 
 .gametitle
 {
-  flex: 0.8;
+  flex: 0.75;
   display: flex;
   align-items: left;
 }
 
 .navbaricondiv
 {
-  flex: 0.2;
+  flex: 0.25;
 }
 
 img

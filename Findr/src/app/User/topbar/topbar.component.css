@@ -4,6 +4,7 @@ header {
     left: 0;
     right: 0;
     height: 60px;
+    padding-right: 20px;
     display: flex;
     align-items: center;
     background-image: linear-gradient(90deg, #172131 , #131c28 );
@@ -68,13 +69,6 @@ li {
     margin-bottom: 0.3em;
 }
 
-.tablink {
-    color: white;
-    font-size: 1rem;
-    opacity: 0;
-    transition: opacity 150ms ease-in-out;
-}
-
 .showmenu:checked ~ nav {
     transform: scale(1, 1);
 }
@@ -124,15 +118,14 @@ li {
     background-color: #555;
     bottom: 0;
     color: white;
-    border: 2px solid cyan;
     outline: none;
     cursor: pointer;
     padding: 10px 16px;
-    font-size: 15px;
     width: 200px;
-    margin-right: -5px;
-    background-color: rgba(0, 0, 0, 0);
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0);     
+    background-color: rgba(0, 0, 0, 0); 
+    border: 0px;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
 }
 
 .tablink:hover {
@@ -145,20 +138,17 @@ li {
     background-color: #555;
     bottom: 0;
     color: white;
-    border: 2px solid cyan;
     outline: none;
     cursor: pointer;
     padding: 10px 16px;
     font-size: 15px;
-    width: 200px;
-    margin-right: 1%;
-    border-radius: 50px;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0);
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0);     
+    border: 0px;
 }
 
 .bigtablink:hover {
-    background-color: rgb(94, 82, 82, 0.5);
+    background-color: rgb(0, 0, 0, 0.2);
 }
 
 @media (max-width: 800px){
