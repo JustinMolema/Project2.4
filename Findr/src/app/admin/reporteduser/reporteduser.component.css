@@ -3,66 +3,91 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 25px;
     font-family: "Archivo";
-}
-
-.center {
-    text-align: center;
-    color: white;
-    border: 3px solid green;
-}
-
-.reported-users-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 10%;
-    color: white;
-    /* border: 2px solid #3184ad; */
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.01);
 }
 
 .reported-users-container {
     color: white;
-    background-color: rgba(255, 255, 255, 0.01);
-    height: 30%;
-    width: 50%;
-    margin-top: 10px;
-    /* border: 2px solid #3184ad; */
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    overflow: auto;
-    box-sizing: border-box;
-}
-
-.view-support-tickets-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 10%;
-    color: white;
-    margin-top: 50px;
-    /* border: 2px solid #3184ad; */
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.01);
-}
-
-.support-ticket-container {
-    color: white;
-    background-color: rgba(255, 255, 255, 0.01);
-    height: 30%;
-    width: 50%;
-    margin-top: 10px;
+    background-color: #212b46;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 10px;
-    /* border: 2px solid #3184ad; */
+    width: 95%;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     text-align: center;
-    overflow: auto;
     box-sizing: border-box;
+}
+
+.arrow
+{
+    display: flex;
+    flex: 0.1;
+    height: 40px;
+    margin-right: -40px;
+    width: 40px;
+}
+
+.navbaricon
+{
+    flex: 0.1;
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+    padding-right: 10px;
+}
+
+.navbaricon2 {
+    fill: white;
+    flex: 0.1;
+    height: 40px;
+    width: 40px;
+    padding-right: 10px;
+    background-size: cover;
+    transform: scaleY(-1); 
+}
+
+.line {
+    width: 100%;
+    margin: 0;
+    height: 1px;
+    border-width: 0;
+    background: black;
+}
+
+.report-user-view {
+    background: rgba(23,27,49,0.3);
+    display: flex;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.column-name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 0.5;
+    border-right: 1px solid black;
+}
+
+.actions {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+p {
+    flex: 0.9;
+    text-align: left;
+    margin-left: 5%;
 }

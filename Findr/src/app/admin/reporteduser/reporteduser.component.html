@@ -1,10 +1,41 @@
 <div class="content">
     <div class="admin-tab">
-        <div class="reported-users-text">
-           View reported users
-        </div>
         <div class="reported-users-container">
-            <app-user *ngFor="let user of reported_users" [name] = user.naam [offense] = user.reason></app-user>               
+            <hr class="line">  
+            <div class="report-user-view">
+                <b class="column-name" (click)="sortByDate()">
+                    <p>Date</p>
+                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/arrow.svg">
+                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/sort_icon.svg">
+
+                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                </b>
+                <b class="column-name">
+                    <p>Time</p>
+                </b>
+                <b class="column-name" (click)="sortByName()">
+                    <p>Name</p>
+                    <img class="arrow" *ngIf="nameSorting" src="../../../assets/arrow.svg">
+                    <img class="navbaricon" *ngIf="!nameSorting" src="../../../assets/sort_icon.svg">
+                    <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                </b>
+                <b class="column-name" (click)="sortByReason()">
+                    <p>Reason</p>
+                    <img class="arrow" *ngIf="reasonSorting" src="../../../assets/arrow.svg">
+                    <img class="navbaricon" *ngIf="!reasonSorting" src="../../../assets/sort_icon.svg">
+                    <img #icon class="navbaricon" *ngIf="reasonSorting" [ngClass]="sortedByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                </b>
+                <b class="actions">
+                    <p>Actions</p>
+                </b>
+            </div> 
+            
+            <hr class="line">  
+            <ng-container *ngFor="let user of reported_users; index as i">
+                <app-user  
+                 [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }" [date]= user.date [name] = user.naam [offense] = user.reason></app-user> 
+                 <hr class="line">      
+            </ng-container>
         </div>
     </div>
 </div>

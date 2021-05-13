@@ -20,6 +20,7 @@ const routes: Routes = [
   {path: "friends", component: FriendsmenuComponent},
   {path: 'forgot-password', component: PasswordforgottenComponent},
   {path: 'admin/home', component: ReporteduserComponent},
+  {path: '**', redirectTo:'/login'},
 //   {path: 'admin/home', component: SupportticketComponent}
 
 

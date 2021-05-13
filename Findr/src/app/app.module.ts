@@ -18,6 +18,8 @@ import { FriendsmenuModule } from "./User/friendsmenu/friendsmenu.module";
 import { AdminLoginModule } from './admin/admin-login/admin-login.module';
 import { SupportticketModule } from './admin/supportticket/supportticket.module';
 import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
+import { AdminBarModule } from './admin/admin-bar/admin-bar.module';
+
 
 
 
@@ -43,6 +45,7 @@ import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
         AdminLoginModule,
         SupportticketModule,
         ReporteduserModule,
+        AdminBarModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

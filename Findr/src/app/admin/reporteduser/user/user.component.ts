@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UserComponent implements OnInit {
     _name:String;
     _offense:String;
+    _actions:String;
+    _date:Date;
 
   constructor() { }
 
@@ -23,6 +25,14 @@ export class UserComponent implements OnInit {
       return this._name;
   }
 
+  @Input()
+  set actions(actions:String){
+      this._actions = actions;
+  }
+
+  get actions(){
+      return this._actions;
+  }
 
   @Input()
   set offense(offense:String){
@@ -32,4 +42,15 @@ export class UserComponent implements OnInit {
   get offense(){
       return this._offense;
   }
+  
+  @Input()
+  set date(date:Date){
+      this._date = date;
+  }
+
+  get date(){
+      return this._date;
+  }
+
+
 }

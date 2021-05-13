@@ -17,7 +17,7 @@ import { FriendslistComponent } from './friendslist/friendslist.component';
     ChatsComponent,
     ListeditemsComponent,
     GameslistComponent,
-    FriendslistComponent
+    FriendslistComponent,
   ],
   imports: [
     CommonModule,

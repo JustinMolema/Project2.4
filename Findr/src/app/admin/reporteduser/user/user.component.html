@@ -1,14 +1,25 @@
 <div class="report-user-view">
-    <div class="user-view">
+    <div class="column-view">
+        <p>{{date | date: 'dd MMMM yyyy'}}
+        </p>
+    </div>
+    <div class="column-view">
+        <p>{{date | date: 'HH:mm:ss '}}</p>
+    </div>
+
+    <div class="column-view">
         <p>{{name}}</p>
     </div>
-    <div class="reason">
-        {{offense}}
+    <div class="column-view">
+        <p>{{offense}}</p>
     </div>
-    <div class="options">
-        <button class="log-view">View logs</button>
-        <button class="ban-view">Ban</button>
-        <button class="warning-view">Warning</button>
-        <button class="dismiss-view">Dismiss</button>
+    <div class="actions">
+        <div class="button-container">
+            <button class="log-view">View logs</button>
+            <button class="warning-view">Warning</button>
+            <button class="ban-view">Ban</button>
+            <button class="dismiss-view">Dismiss</button>
+        </div>
     </div>
 </div> 
+<!-- <hr class="line"> -->

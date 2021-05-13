@@ -6,7 +6,7 @@ export class WrongPasswordHandler implements ErrorHandler {
     handleError(error) {
         // your custom error handling logic
         console.log("PAPA")
-        alert("wrong password");
+        alert("Wrong password");
     }
 }
 

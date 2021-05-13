@@ -6,6 +6,10 @@ html, body {
 body{
     background-color: #131c28;
 }
+
+.adminBody {
+    background-color: #161b30;
+}
   
 .content {
     background-size: cover;
