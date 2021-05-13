@@ -1,0 +1,197 @@
+.friendslist-title
+{
+padding-left: 10px;
+}
+
+.friends-list-line
+{
+    border: 1px solid #5e8fcf62;
+}
+
+button
+{
+    border-radius: 10px;
+}
+
+button
+{
+    cursor: pointer;
+    width: 270px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0);
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px; 
+    color: rgb(255, 255, 255);
+    font-family: "Archivo";
+    font-weight: 100;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
+button:hover
+{
+     background-color: #5e8fcf62;
+     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+}
+
+button:focus
+{
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
+}
+
+button:active
+{
+  border: none;
+  outline: none;
+  filter: brightness(150%)
+}
+
+.see-more-button
+{
+    border-radius: 10px;
+}
+
+.see-more-button
+{
+    cursor: pointer;
+    width: 270px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px; 
+    color: cyan;
+    font-family: "Archivo";
+    font-weight: 100;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    display: flex;
+    padding-left: 30px;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
+.see-more-button:hover
+{
+     background-color: #5e8fcf62;
+     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+}
+
+.see-more-button:focus
+{
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
+}
+
+.see-more-button:active
+{
+  border: none;
+  outline: none;
+  filter: brightness(150%)
+}
+
+.navbaricon
+{
+  position: relative;
+  height: 30px;
+  width: 30px;
+  margin-right:20px;
+}
+
+.gametitle
+{
+  flex: 0.8;
+  display: flex;
+  align-items: left;
+}
+
+.navbaricondiv
+{
+  flex: 0.2;
+}
+
+img
+{
+    width:10px;
+    border-radius: 50%;
+}
+
+@media (max-width: 800px)
+{
+    button {
+        animation: collapse-navbar 1s forwards;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        height: 80px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background: url("https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png");
+        background-size:contain;
+        color: rgba(0,0,0,0);
+    }
+
+    .navbaricon {
+        width: 0;
+        height: 0;
+      }
+  
+      .navbaricondiv
+      {
+        width: 0;
+        height: 0;
+      }
+  
+      .navbartext
+      {
+        width: 0;
+        height: 0;
+      }
+
+      img {
+        width:10px;
+        border-radius: 40%;
+      }
+
+      .see-more-button {
+        animation: collapse-navbar 1s forwards;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        height: 80px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background: url("https://static.thenounproject.com/png/384288-200.png");
+        background-size:contain;
+        color: rgba(0,0,0,0);
+      }
+}
+
+@keyframes nvb-button-Animation
+{
+    0%
+    {
+      filter: brightness(100%)
+    }
+    70%
+    {
+      filter: brightness(120%)
+    }
+    100%
+    {
+      filter: brightness(100%);
+    }
+  }

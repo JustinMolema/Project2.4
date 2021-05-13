@@ -1,0 +1,142 @@
+.games-list
+{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.game-line
+{
+    border: 1px solid #5e8fcf62;
+}
+
+.games-list-button
+{
+    cursor: pointer;
+    width: 270px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0);
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px; 
+    color: rgb(255, 255, 255);
+    font-family: "Archivo";
+    font-weight: 100;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
+.games-list-button:hover
+{
+     background-color: #5e8fcf62;
+     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+}
+
+.games-list-button:focus
+{
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
+}
+
+.games-list-button:active
+{
+  border: none;
+  outline: none;
+  filter: brightness(150%)
+}
+
+.game-title
+{
+    padding-left: 10px;
+}
+
+.see-more-button
+{
+    border-radius: 10px;
+}
+
+.see-more-button
+{
+    cursor: pointer;
+    width: 250px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px; 
+    color: cyan;
+    font-family: "Archivo";
+    font-weight: 100;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    display: flex;
+    padding-left: 30px;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
+.see-more-button:hover
+{
+     background-color: #5e8fcf62;
+     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+}
+
+.see-more-button:focus
+{
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
+}
+
+.see-more-button:active
+{
+  border: none;
+  outline: none;
+  filter: brightness(150%)
+}
+
+.navbaricon
+{
+  position: relative;
+  height: 25px;
+  width: 25px;
+  padding-right: 10px;
+  border-radius: 15px;
+}
+
+.gametitle{
+  flex: 0.8;
+  display: flex;
+  align-items: left;
+}
+
+.navbaricondiv
+{
+  flex: 0.2;
+}
+
+@keyframes nvb-button-Animation
+{
+    0%
+    {
+      filter: brightness(100%)
+    }
+    70%
+    {
+      filter: brightness(120%)
+    }
+    100%
+    {
+      filter: brightness(100%);
+    }
+  }

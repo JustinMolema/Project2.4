@@ -1,9 +1,10 @@
-button {
+button
+{
     border-radius: 10px;
-
 }
 
-.navbarbutton{
+.navbarbutton
+{
     cursor: pointer;
     width: 250px;
     height: 100px;
@@ -17,12 +18,14 @@ button {
     box-shadow:  5px 5px 15px 5px #1f1f23;
 }
 
-.navbarbutton:hover{
-     background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); 
-     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
-  }
+.navbarbutton:hover
+{
+    background-color: linear-gradient(to bottom right, rgb(45, 45, 45) 10%, rgb(95, 95, 95) 100%); 
+    animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+}
   
-@media (max-width: 1000px){
+@media (max-width: 1000px)
+{
 	.navbarbutton {
 		animation: collapse-navbar 1s forwards;
 		width: 80px;
@@ -36,14 +39,19 @@ button {
 		color: rgba(0,0,0,0);
 	}
 }
-@keyframes nvb-button-Animation{
-0%{
-	filter: brightness(100%)
-}
-70%{
-	filter: brightness(150%)
-}
-100%{
-	filter: brightness(100%);
-}
+
+@keyframes nvb-button-Animation
+{
+    0%
+    {
+	    filter: brightness(100%)
+    }
+    70%
+    {
+	    filter: brightness(150%)
+    }
+    100%
+    {
+	    filter: brightness(100%);
+    }
 }
