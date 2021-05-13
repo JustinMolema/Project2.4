@@ -4,3 +4,6 @@
 <app-navbar *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && router.url != '/admin' && router.url != '/admin'" ></app-navbar>
 <router-outlet></router-outlet>
 <app-topbar *ngIf="router.url !='/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin') && router.url != '/admin'"></app-topbar>
+<footer class="footer">
+    <p>© 2021 Justin & Merel & verder niemand anders IT Productions</p>
+</footer>
