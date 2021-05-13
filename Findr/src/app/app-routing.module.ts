@@ -10,6 +10,7 @@ import {FriendsmenuComponent} from "./User/friendsmenu/friendsmenu.component";
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ReporteduserComponent } from './admin/reporteduser/reporteduser.component';
 import { SupportticketComponent } from './admin/supportticket/supportticket.component';
+import { ProfileComponent } from './User/profile/profile.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'games', component: GamemenuComponent},
   {path: 'admin', component: AdminLoginComponent},
   {path: 'chats', component: ChatmenuComponent },
+  {path: 'profile', component: ProfileComponent },
   {path: "friends", component: FriendsmenuComponent},
   {path: 'forgot-password', component: PasswordforgottenComponent},
   {path: 'admin/home', component: ReporteduserComponent},

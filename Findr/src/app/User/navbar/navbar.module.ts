@@ -8,6 +8,7 @@ import { ChatsComponent } from './chats/chats.component';
 import { ListeditemsComponent } from './listeditems/listeditems.component';
 import { GameslistComponent } from './gameslist/gameslist.component';
 import { FriendslistComponent } from './friendslist/friendslist.component';
+import { ProfilebuttonComponent } from './profilebutton/profilebutton.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FriendslistComponent } from './friendslist/friendslist.component';
     ChatsComponent,
     ListeditemsComponent,
     GameslistComponent,
-    FriendslistComponent
+    FriendslistComponent,
+    ProfilebuttonComponent
   ],
   imports: [
     CommonModule,
