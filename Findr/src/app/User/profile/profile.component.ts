@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';  
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -11,9 +12,12 @@ class ImageSnippet {
 })
 export class ProfileComponent implements OnInit {
 
+  hasFileBeenSelected:boolean = false;
   selectedFile: ImageSnippet;
-  User:String = "TheLegend27";
-  Email:String = "real@email.com";
+
+  User: String = "TheLegend27";
+  Email: String = "real@email.com";
+  warningCount: number = 2;
 
   constructor() {
   }
@@ -32,5 +36,6 @@ export class ProfileComponent implements OnInit {
     reader.readAsDataURL(file);
 
     console.log(this.selectedFile.src)
+    this.hasFileBeenSelected = true;
   }
 }

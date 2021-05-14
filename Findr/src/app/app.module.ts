@@ -14,6 +14,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TopbarModule } from './User/topbar/topbar.module';
 import { ChatmenuModule } from './User/chatmenu/chatmenu.module';
 import { FriendsmenuModule } from "./User/friendsmenu/friendsmenu.module";
+import { ProfileModule } from "./User/profile/profile.module";
 
 import { AdminLoginModule } from './admin/admin-login/admin-login.module';
 import { SupportticketModule } from './admin/supportticket/supportticket.module';
@@ -43,6 +44,7 @@ import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
         AdminLoginModule,
         SupportticketModule,
         ReporteduserModule,
+        ProfileModule
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -4,30 +4,44 @@
   align-items: center;
 }
 
+.friends-container{
+  justify-content: left;
+  align-items: start;
+  margin-right: 20px;
+  display: flex;
+  flex: 1;
+}
+
 .friend-name {
   font-size: 18px;
-  font-family: "Archivo";
-  color: white;
   margin-right: 20px;
   margin-left: 20px;
   flex: 1;
 }
 
 .friend-buttons {
+  /* background-color: yellow; */
   margin-left: 200px;
   flex: 1;
   margin-right: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
+
 img {
   width:50px;
   border-radius: 50%;
 }
 
+/* .profile-pic{
+} */
+
 button{
     color: white;
     font-family: "Archivo";
-    background-color: rgb(53, 49, 49, 0.0);
-    border-color: #3184ad;
+    background-color: rgba(120, 178, 255, 0.164);
+    border: none;
+    outline: none;
     border-radius: 7px;
     height: 35px;
     margin-left: 20px;

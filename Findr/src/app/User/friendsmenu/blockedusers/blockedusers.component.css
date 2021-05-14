@@ -2,13 +2,12 @@
   width: 100%;
   display: flex;
   align-items: center;
+  /* background: red; */
 }
 
 .blocked-user-name {
   margin-left: 20px;
   font-size: 18px;
-  color: white;
-  font-family: "Archivo";
 }
 
 .blocked-user-container {
@@ -20,10 +19,12 @@
 }
 
 .blocked-button-container {
-  font-family: "Archivo";
+  /* background-color: hotpink; */
   margin-left: 200px;
   flex: 1;
   margin-right: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 img {
@@ -31,11 +32,16 @@ img {
   border-radius: 50%;
 }
 
+/* .profile-pic{
+  background-color: tomato;
+} */
+
 button{
     color: white;
     font-family: "Archivo";
-    background-color: rgb(53, 49, 49, 0.0);
-    border-color: #3184ad;
+    background-color: rgba(120, 178, 255, 0.164);
+    border: none;
+    outline: none;
     border-radius: 7px;
     height: 35px;
     margin-left: 20px;

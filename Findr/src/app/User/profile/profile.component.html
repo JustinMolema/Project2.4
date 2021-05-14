@@ -2,11 +2,17 @@
 
     <div class="profile-page">
 
-        <img class="current-profile-pic" src="{{ selectedFile.src }}">
-        <input #imageInput class="input-button"
-         type="file"
-         accept="image/*"
-         (change)="processFile(imageInput)">
+        <div *ngIf="!hasFileBeenSelected;" class="current-profile-pic">
+            <img src="../../assets/wijmar.png">
+        </div>
+
+        <div *ngIf="hasFileBeenSelected;" class="current-profile-pic">
+            <img src="{{ selectedFile.src }}">
+        </div>
+
+        <div class=input-img-button>
+            <input #imageInput class="input-button" type="file" accept="image/*" (change)="processFile(imageInput)">
+        </div>
 
     </div>
 
@@ -46,5 +52,14 @@
             </div>
 
         </div> 
+
+        <div class="setting-field">
+
+            <div class="warnings">
+                Warnings: {{ warningCount }}
+            </div>
+
+        </div>
+        
     </div>
 </div>
