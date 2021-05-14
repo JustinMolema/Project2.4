@@ -2,12 +2,6 @@
   width: 100%;
   display: flex;
   align-items: center;
-  /* background: red; */
-}
-
-.blocked-user-name {
-  margin-left: 20px;
-  font-size: 18px;
 }
 
 .blocked-user-container {
@@ -15,6 +9,13 @@
   align-items: start;
   margin-right: 20px;
   display: flex;
+  flex: 1;
+}
+
+.blocked-user-name {
+  font-size: 18px;
+  margin-right: 20px;
+  margin-left: 20px;
   flex: 1;
 }
 

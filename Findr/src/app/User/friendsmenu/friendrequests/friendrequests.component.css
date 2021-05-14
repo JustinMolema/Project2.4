@@ -31,13 +31,13 @@ img {
 
 button {
   color: white;
+  font-family: "Archivo";
   background-color: rgba(120, 178, 255, 0.164);
   border: none;
   outline: none;
   border-radius: 7px;
   height: 35px;
   margin-left: 20px;
-  font-family: "Archivo";
 }
 
 button:hover {
