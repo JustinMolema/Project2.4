@@ -2,23 +2,25 @@
 
   <div class="friend-tab" #friendTab>
     <div class="blocked-users-buttons">
-      <button class="friends friendButton" #friendTabButton>friends</button>
-      <button class="blocked-users" (click)="showBlockedUserTab(blockedUserTab, friendTab)">blocked users</button>
+      <button class="friends friendButton" #friendTabButton>Friends</button>
+      <button class="blocked-users" (click)="showBlockedUserTab(blockedUserTab, friendTab)">Blocked Users</button>
     </div>
 
+    <h2>Friends</h2>
     <app-friend *ngFor="let friend of friends" [friend]="friend"></app-friend>
     <div class="friend-request-container">
-      <h1>Friend Requests</h1>
+
+      <h2>Friend Requests</h2>
       <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend"></app-friendrequests>
     </div>
   </div>
 
   <div class="blocked-user-tab" #blockedUserTab>
     <div class="blocked-users-buttons">
-      <button class="friends" (click)="showFriendTab(blockedUserTab, friendTab)">friends</button>
-      <button class="blocked-users blockedButton" #blockedUserButton>blocked users</button>
+      <button class="friends" (click)="showFriendTab(blockedUserTab, friendTab)">Friends</button>
+      <button class="blocked-users blockedButton" #blockedUserButton>Blocked Users</button>
     </div>
+    <h2>Blocked Users</h2>
     <app-blockedusers *ngFor="let user of blockedUsers" [user]="user"></app-blockedusers>
   </div>
-
 </div>

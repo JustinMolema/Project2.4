@@ -70,8 +70,14 @@ img {
 }
 
 .warnings {
+  color: rgba(255, 49, 49, 0.89);
   margin-top: 5px;
   flex: .8;
+}
+
+.warnings-explain{
+  font-size: 14px;
+  color:rgba(245, 245, 245, 0.61);
 }
 
 .change-button {
@@ -81,11 +87,16 @@ img {
   flex-direction: right;
   align-items: center;
   align-content: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 button {
   color: white;
   font-family: "Archivo";
+  font-size: 14px;
   background-color: rgba(120, 178, 255, 0.164);
   /* border-color: #3184ad; */
   border-radius: 7px;
@@ -93,6 +104,7 @@ button {
   margin-left: 20px;
   border: none;
   outline: none;
+  
 }
 
 button:hover {
@@ -106,12 +118,17 @@ button:active {
 ::-webkit-file-upload-button {
   color: white;
   font-family: "Archivo";
+  font-size: 14px;
   background-color: rgba(120, 178, 255, 0.164);
   border-radius: 7px;
   height: 35px;
   margin-left: 20px;
   border: none;
   outline: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 ::-webkit-file-upload-button:hover {

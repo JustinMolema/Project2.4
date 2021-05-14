@@ -74,6 +74,7 @@
   flex-direction: row;
   text-align: center;
   align-items: center;
+  padding-left: 30px;
 }
 
 .see-more-button:hover {

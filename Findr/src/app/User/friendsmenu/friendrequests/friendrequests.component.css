@@ -32,12 +32,17 @@ img {
 button {
   color: white;
   font-family: "Archivo";
+  font-size: 14px;
   background-color: rgba(120, 178, 255, 0.164);
   border: none;
   outline: none;
   border-radius: 7px;
   height: 35px;
   margin-left: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 button:hover {
