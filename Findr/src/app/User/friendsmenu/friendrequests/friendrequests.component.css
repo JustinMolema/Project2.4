@@ -21,7 +21,7 @@
 }
 
 img {
-  width:50px;
+  width: 50px;
   border-radius: 50%;
 }
 
@@ -29,7 +29,7 @@ img {
   background-color: tomato;
 } */
 
-button{
+button {
   color: white;
   background-color: rgba(120, 178, 255, 0.164);
   border: none;
@@ -40,10 +40,10 @@ button{
   font-family: "Archivo";
 }
 
-button:hover{
-    background-color: rgb(80, 141, 158);
+button:hover {
+  background-color: rgb(80, 141, 158);
 }
 
-button:active{
-    background-color: rgba(80, 141, 158, 0.5);
+button:active {
+  background-color: rgba(80, 141, 158, 0.5);
 }

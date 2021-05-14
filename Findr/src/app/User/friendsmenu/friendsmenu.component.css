@@ -48,7 +48,7 @@
 button{
     font-family: "Archivo";
     color: white;
-    background-color: rgb(53, 49, 49, 0.0);
+    background-color: rgba(53, 49, 49, 0.0);
     border: none;
     outline: none;
     border-radius: 7px;

@@ -4,7 +4,7 @@
   align-items: center;
 }
 
-.friends-container{
+.friends-container {
   justify-content: left;
   align-items: start;
   margin-right: 20px;
@@ -29,28 +29,28 @@
 }
 
 img {
-  width:50px;
+  width: 50px;
   border-radius: 50%;
 }
 
 /* .profile-pic{
 } */
 
-button{
-    color: white;
-    font-family: "Archivo";
-    background-color: rgba(120, 178, 255, 0.164);
-    border: none;
-    outline: none;
-    border-radius: 7px;
-    height: 35px;
-    margin-left: 20px;
+button {
+  color: white;
+  font-family: "Archivo";
+  background-color: rgba(120, 178, 255, 0.164);
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  height: 35px;
+  margin-left: 20px;
 }
 
-button:hover{
-    background-color: rgb(80, 141, 158);
+button:hover {
+  background-color: rgb(80, 141, 158);
 }
 
-button:active{
-    background-color: rgba(80, 141, 158, 0.5);
+button:active {
+  background-color: rgba(80, 141, 158, 0.5);
 }

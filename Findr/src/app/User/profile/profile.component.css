@@ -1,141 +1,123 @@
-.content
-{
-    font-family: "Archivo";
-    color:white;
+.content {
+  font-family: "Archivo";
+  color: white;
 }
 
-.profile-page
-{
-    font-family: "Archivo";
-    color:white;
+.profile-page {
+  font-family: "Archivo";
+  color: white;
 }
 
-img
-{
-    width:200px;
-    border-radius: 50%;
+img {
+  width: 200px;
+  border-radius: 50%;
 }
 
-.current-profile-pic
-{
-    margin-left: 120px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+.current-profile-pic {
+  margin-left: 120px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
-.input-button
-{
-    background: rgba(0,0,0,0);
-    margin-top: 20px;
-    margin-right: 30px;
+.input-button {
+  background: rgba(0, 0, 0, 0);
+  margin-top: 20px;
+  margin-right: 30px;
 }
 
-.input-img-button{
-    margin-left: 100px;
+.input-img-button {
+  margin-left: 100px;
 }
 
-.profile-details{
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    width: 50%;
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 50%;
 }
 
-.setting-field
-{
-    margin-left: 25%;
-    align-items: center;
-    text-align: left;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    display: flex;
+.setting-field {
+  margin-left: 25%;
+  align-items: center;
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
 }
 
-.user
-{
-    flex:0.25;
+.user {
+  flex: 0.25;
 }
 
-.user-button
-{
-    flex:0.75;
+.user-button {
+  flex: 0.75;
 }
 
-.email
-{
-    flex:0.25;
+.email {
+  flex: 0.25;
 }
 
-.email-button
-{
-    flex:0.75;
+.email-button {
+  flex: 0.75;
 }
 
-.password
-{
-    flex:0.25;
+.password {
+  flex: 0.25;
 }
 
-.password-button
-{
-    flex:0.75;
+.password-button {
+  flex: 0.75;
 }
 
-.warnings{
-    margin-top: 5px;
-    flex: .8;
+.warnings {
+  margin-top: 5px;
+  flex: .8;
 }
 
-.change-button
-{
-    justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    flex-direction: right;
-    align-items:center;
-    align-content: center;
+.change-button {
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-direction: right;
+  align-items: center;
+  align-content: center;
 }
 
-button
-{
-    color: white;
-    font-family: "Archivo";
-    background-color: rgba(120, 178, 255, 0.164);
-    /* border-color: #3184ad; */
-    border-radius: 7px;
-    height: 35px;
-    margin-left: 20px;
-    border: none;
-    outline: none;
+button {
+  color: white;
+  font-family: "Archivo";
+  background-color: rgba(120, 178, 255, 0.164);
+  /* border-color: #3184ad; */
+  border-radius: 7px;
+  height: 35px;
+  margin-left: 20px;
+  border: none;
+  outline: none;
 }
 
-button:hover
-{
-    background-color: rgb(80, 141, 158);
+button:hover {
+  background-color: rgb(80, 141, 158);
 }
 
-button:active
-{
-    background-color: rgba(80, 141, 158, 0.5);
+button:active {
+  background-color: rgba(80, 141, 158, 0.5);
 }
 
-::-webkit-file-upload-button
-{
-    color: white;
-    font-family: "Archivo";
-    background-color: rgba(120, 178, 255, 0.164);
-    border-radius: 7px;
-    height: 35px;
-    margin-left: 20px;
-    border: none;
-    outline: none;
-}
-::-webkit-file-upload-button:hover
-{
-    background-color: rgb(80, 141, 158);
+::-webkit-file-upload-button {
+  color: white;
+  font-family: "Archivo";
+  background-color: rgba(120, 178, 255, 0.164);
+  border-radius: 7px;
+  height: 35px;
+  margin-left: 20px;
+  border: none;
+  outline: none;
 }
 
-::-webkit-file-upload-button:active
-{
-    background-color: rgba(80, 141, 158, 0.5);
+::-webkit-file-upload-button:hover {
+  background-color: rgb(80, 141, 158);
+}
+
+::-webkit-file-upload-button:active {
+  background-color: rgba(80, 141, 158, 0.5);
 }
