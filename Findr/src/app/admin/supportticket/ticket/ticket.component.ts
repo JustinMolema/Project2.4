@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TicketComponent implements OnInit {
   _date: Date;
+  _time: Date;
   _tag: String;
   _status: String;
   constructor() {}
@@ -37,6 +38,16 @@ export class TicketComponent implements OnInit {
   get date() {
     return this._date;
   }
+
+  @Input()
+  set time(time:Date){
+      this._time = time;
+  }
+
+  get time(){
+      return this._time;
+  }
+
   closeTicket(): void {
     if(confirm("Are you sure you want to close this ticket?")){
         alert("Ticket closed");

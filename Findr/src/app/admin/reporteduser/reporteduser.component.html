@@ -57,11 +57,11 @@
             </div>
 
             <hr class="line">
-            <ng-container *ngFor="let user of reported_users | filterReportedUsers: searchText |  slice:0:max; index as i" >
+            <ng-container *ngFor="let user of reported_users | tablefilter:keys:searchText |  slice:0:max; index as i" >
                 <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
                     [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time
 
-                    appHightlightSearch [searchedWord]="searchText" [content]="user"
+                    appHighlightSearch [searchedWord]="searchText" [content]="user" [keys]="keys"
                     ></app-user>
                 <hr class="line">
             </ng-container>

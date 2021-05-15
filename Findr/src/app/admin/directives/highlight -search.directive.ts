@@ -2,24 +2,26 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Directive, Input, SimpleChanges, Renderer2, ElementRef, OnChanges } from '@angular/core';
 
 @Directive({
-    selector: '[appHightlightSearch]'
+    selector: '[appHighlightSearch]'
 })
-export class HightlightSearchDirective {
+export class HighlightSearchDirective {
     @Input() searchedWord: string;
     @Input() content: any;
+    @Input() keys: [];
 
     constructor(private el: ElementRef, private renderer: Renderer2, public datepipe: DatePipe) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.content) return;
-
         this.setHighlights();
     }
 
     setHighlights() {
-        this.renderer.setProperty(this.el.nativeElement.children[0].children[0].children[0], 'innerHTML', this.getFormattedText("date"));
-        this.renderer.setProperty(this.el.nativeElement.children[0].children[2].children[0], 'innerHTML', this.getFormattedText("name"));
-        this.renderer.setProperty(this.el.nativeElement.children[0].children[3].children[0], 'innerHTML', this.getFormattedText("reason"));
+        for (let i = 0; i < this.keys.length; i++) {
+            if (this.keys[i] == "time") continue;
+
+            this.renderer.setProperty(this.el.nativeElement.children[0].children[i].children[0], 'innerHTML', this.getFormattedText(this.keys[i]));
+        }
     }
 
     getFormattedText(key: string) {

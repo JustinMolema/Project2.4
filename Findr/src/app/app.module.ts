@@ -19,6 +19,7 @@ import { AdminLoginModule } from './admin/admin-login/admin-login.module';
 import { SupportticketModule } from './admin/supportticket/supportticket.module';
 import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
 import { AdminBarModule } from './admin/admin-bar/admin-bar.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
     declarations: [AppComponent],
@@ -44,7 +45,7 @@ import { AdminBarModule } from './admin/admin-bar/admin-bar.module';
         ReporteduserModule,
         AdminBarModule,
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent],
 })
 export class AppModule {

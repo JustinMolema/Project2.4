@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SupportticketComponent } from './supportticket.component';
 import { TicketComponent } from './ticket/ticket.component';
-import { FilterPipe } from './filter.pipe';
-import { FormsModule } from '@angular/forms';
-
+import { SharedmoduleModule } from '../../sharedmodule/sharedmodule.module';
 
 @NgModule({
-  declarations: [SupportticketComponent, TicketComponent, FilterPipe],
+  declarations: [SupportticketComponent, TicketComponent],
   imports: [
     CommonModule,
-    FormsModule
-  ]
+    SharedmoduleModule
+  ],
 })
 export class SupportticketModule { }

@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ReporteduserComponent } from './reporteduser.component';
 import { UserComponent } from './user/user.component';
-import { FormsModule } from '@angular/forms';
-import { FilterReportedUsersPipe } from './filter-reported-users.pipe';
-import { HightlightSearchDirective } from './hightlight-search.directive';
-
+import { SharedmoduleModule } from '../../sharedmodule/sharedmodule.module';
 
 @NgModule({
-  declarations: [ReporteduserComponent, UserComponent, FilterReportedUsersPipe, HightlightSearchDirective,],
+  declarations: [ReporteduserComponent, UserComponent,],
   imports: [
     CommonModule,
-    FormsModule,
+    SharedmoduleModule
   ],
-  providers: [DatePipe],
 })
 export class ReporteduserModule { }

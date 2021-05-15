@@ -23,6 +23,7 @@ export class ReporteduserComponent implements OnInit {
 
     max:Number;
 
+    keys = [];
     reported_users = [
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Harald', reason: 'Harassment' },
         { date: this.datepipe.transform(new Date("December 30, 2017 11:20:25"), 'dd MMMM yyyy'), 
@@ -34,6 +35,7 @@ export class ReporteduserComponent implements OnInit {
     ];
 
     constructor(public datepipe: DatePipe) { 
+        this.keys = Object.keys(this.reported_users[0]);
         this.sortByDate();
     }
 

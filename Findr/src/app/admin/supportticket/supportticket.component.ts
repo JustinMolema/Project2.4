@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -10,7 +11,6 @@ export class SupportticketComponent implements OnInit {
     searchText: string;
     dateTime = new Date();
 
-
     sortedByDate: boolean = false;
     sortedByTag: boolean = false;
     sortedByStatus: boolean = false;
@@ -21,26 +21,29 @@ export class SupportticketComponent implements OnInit {
 
     max:Number = 20;
 
+    keys = [];
     tickets = [
-        { date: this.dateTime, tag: "Robbin", status: "Failed" },
-        { date: new Date("December 30, 2017 11:20:25"), tag: "Anne Pier", status: "Success" },
-        { date: this.dateTime, tag: "Justin", status: "Pending" },
-        { date: this.dateTime, tag: "Merel", status: "Pending" },
-        { date: this.dateTime, tag: "Bart barnard area 51 raider ", status: "Pending" },
-        { date: this.dateTime, tag: "Wijmar Nijdam", status: "Pending" },
-        { date: this.dateTime, tag: "Sietse de slang", status: "Pending" },
-        { date: this.dateTime, tag: "Jan Peter", status: "Pending" },
-        { date: this.dateTime, tag: "Robbin", status: "Pending" },
-        { date: this.dateTime, tag: "Anne Pier", status: "Pending" },
-        { date: this.dateTime, tag: "Justin", status: "Pending" },
-        { date: this.dateTime, tag: "Merel", status: "Pending" },
-        { date: this.dateTime, tag: "Bart barnard area 51 raider ", status: "Pending" },
-        { date: this.dateTime, tag: "Wijmar Nijdam", status: "Pending" },
-        { date: this.dateTime, tag: "Sietse de slang", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Robbin", status: "Failed" },
+        { date: this.datepipe.transform(new Date("December 30, 2017 11:20:25"),
+        'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Anne Pier", status: "Success" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Justin", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Merel", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Jan Peter", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Robbin", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Anne Pier", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Justin", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Merel", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
     ]
 
-    constructor() {
-
+    constructor(public datepipe: DatePipe) {
+        this.keys = Object.keys(this.tickets[0]);
+        this.sortByDate();
     }
 
     ngOnInit(): void {
