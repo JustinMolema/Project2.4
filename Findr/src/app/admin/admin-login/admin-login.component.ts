@@ -21,7 +21,7 @@ export class AdminLoginComponent implements OnInit {
 
     checkUserNamePassword() {
         if (this.username == "admin" && this.password == "admin") {
-            this.router.navigate(['admin/home'])
+            this.router.navigate(['admin/reportedusers'])
         }
         else {
             throw new WrongPasswordHandler();

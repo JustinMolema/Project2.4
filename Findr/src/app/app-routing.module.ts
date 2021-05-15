@@ -21,9 +21,9 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent },
   {path: "friends", component: FriendsmenuComponent},
   {path: 'forgot-password', component: PasswordforgottenComponent},
-  {path: 'admin/home', component: ReporteduserComponent},
+  {path: 'admin/reportedusers', component: ReporteduserComponent},
+  {path: 'admin/supporttickets', component: SupportticketComponent},
   {path: '**', redirectTo:'/login'},
-//   {path: 'admin/home', component: SupportticketComponent}
 
 
 ];

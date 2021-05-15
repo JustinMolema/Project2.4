@@ -1,8 +1,7 @@
 .footer{
-	position: absolute;
+	position: fixed;
     bottom: 0;
     left: 0;
-    right: 0;
 	margin-bottom: 15px;
     text-align: center;
     width: 290px;
@@ -11,5 +10,4 @@
     font-family: "Archivo";
     font-weight: 100;
     font-size: 16px;
-    margin-left: 85%;
 }

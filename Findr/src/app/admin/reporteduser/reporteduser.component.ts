@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-reporteduser',
@@ -6,6 +7,7 @@ import { Component, Input, OnInit, Renderer2 } from '@angular/core';
     styleUrls: ['./reporteduser.component.css'],
 })
 export class ReporteduserComponent implements OnInit {
+    searchText: string;
     username = 'Username';
     offense = 'Offense';
     actions = 'Actions';
@@ -19,35 +21,30 @@ export class ReporteduserComponent implements OnInit {
     nameSorting: boolean = false;
     reasonSorting: boolean = false;
 
+    max:Number;
+
     reported_users = [
-        { date: this.dateTime, naam: 'Harald', reason: 'e' },
-        { date: new Date("December 30, 2017 11:20:25"), naam: 'Justin', reason: 'd' },
-        { date: this.dateTime, naam: 'Anne Pier', reason: 'a' },
-        { date: this.dateTime, naam: 'Merel', reason: 'b' },
-        { date: this.dateTime, naam: 'Robbin', reason: 'c' },
-        { date: this.dateTime, naam: 'Harald', reason: 'e' },
-        { date: new Date("December 30, 2017 11:20:25"), naam: 'Justin', reason: 'd' },
-        { date: this.dateTime, naam: 'Anne Pier', reason: 'a' },
-        { date: this.dateTime, naam: 'Merel', reason: 'b' },
-        { date: this.dateTime, naam: 'Robbin', reason: 'c' },
-        { date: this.dateTime, naam: 'Harald', reason: 'e' },
-        { date: new Date("December 30, 2017 11:20:25"), naam: 'Justin', reason: 'd' },
-        { date: this.dateTime, naam: 'Anne Pier', reason: 'a' },
-        { date: this.dateTime, naam: 'Merel', reason: 'b' },
-        { date: this.dateTime, naam: 'Robbin', reason: 'c' },
-        { date: this.dateTime, naam: 'Harald', reason: 'e' },
-        { date: new Date("December 30, 2017 11:20:25"), naam: 'Justin', reason: 'd' },
-        { date: this.dateTime, naam: 'Anne Pier', reason: 'a' },
-        { date: this.dateTime, naam: 'Merel', reason: 'b' },
-        { date: this.dateTime, naam: 'Robbin', reason: 'c' },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Harald', reason: 'Harassment' },
+        { date: this.datepipe.transform(new Date("December 30, 2017 11:20:25"), 'dd MMMM yyyy'), 
+        time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Justin', reason: 'q' },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Anne Pier', reason: 'qa' },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Merel', reason: 'b' },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Robbin', reason: 'c' },
+        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), name: 'Harald', reason: 'e' },
     ];
 
-    constructor() { 
+    constructor(public datepipe: DatePipe) { 
         this.sortByDate();
     }
 
     ngOnInit(): void { 
         
+    }
+
+    changeEvent(max: Number) {
+        if (max > 1) return this.max = max;
+        
+        this.max = this.reported_users.length;
     }
     
     sortByDate(): any {
@@ -69,7 +66,7 @@ export class ReporteduserComponent implements OnInit {
         this.resetDefaultSorted();
         this.nameSorting = true;
 
-        return this.sortedByName ? this.reported_users.sort((a, b) => a.naam.localeCompare(b.naam)) : this.reported_users.reverse();
+        return this.sortedByName ? this.reported_users.sort((a, b) => a.name.localeCompare(b.name)) : this.reported_users.reverse();
     }
 
     sortByReason() {    

@@ -1,31 +1,38 @@
 <div class="content">
     <div class="admin-tab">
+        <div class="header_text">
+            <h1 class="text">REPORTED USERS
+                <!--&#8674;-->
+            </h1>
+        </div>
         <div class="reported-users-container">
             <div class="toolbar">
-                <!-- <b class="column-name" (click)="sortByDate()"> -->
-                    <div class="recordsperpage">
-                        <select name="" id="" class="record_amount">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                        </select>
-                        <p>records per page
+                <div class="recordsperpage">
+                    <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20" selected>20</option>
+                        <option value="50">50</option>
+                        <option value="1"> All</option>
+                    </select>
+                    <p>records per page
                     </p>
-                    </div>
-                    <div class="search">
-                        <p class="search-text"> Search:</p>
-                        <input class="search-input" type="search"/>
-                    </div>
-                <!-- </b> -->
+                </div>
+                <div class="search">
+                    <p class="search-text"> Search:</p>
+                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                </div>
             </div>
-            <hr class="line">  
+            <hr class="line">
+            
             <div class="report-user-view">
                 <b class="column-name" (click)="sortByDate()">
                     <p class="tableheader">Date</p>
                     <img class="arrow" *ngIf="dateSorting" src="../../../assets/arrow.svg">
                     <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/sort_icon.svg">
 
-                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'"
+                        src="../../../assets/sort_button.svg">
                 </b>
                 <b class="column-name">
                     <p class="tableheader">Time</p>
@@ -34,25 +41,31 @@
                     <p class="tableheader">Name</p>
                     <img class="arrow" *ngIf="nameSorting" src="../../../assets/arrow.svg">
                     <img class="navbaricon" *ngIf="!nameSorting" src="../../../assets/sort_icon.svg">
-                    <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                    <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'"
+                        src="../../../assets/sort_button.svg">
                 </b>
                 <b class="column-name" (click)="sortByReason()">
                     <p class="tableheader">Reason</p>
                     <img class="arrow" *ngIf="reasonSorting" src="../../../assets/arrow.svg">
                     <img class="navbaricon" *ngIf="!reasonSorting" src="../../../assets/sort_icon.svg">
-                    <img #icon class="navbaricon" *ngIf="reasonSorting" [ngClass]="sortedByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                    <img #icon class="navbaricon" *ngIf="reasonSorting"
+                        [ngClass]="sortedByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
                 </b>
                 <b class="actions">
                     <p class="tableheader">Actions</p>
                 </b>
-            </div> 
-            
-            <hr class="line">  
-            <ng-container *ngFor="let user of reported_users; index as i">
-                <app-user  
-                 [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }" [date]= user.date [name] = user.naam [offense] = user.reason></app-user> 
-                 <hr class="line">      
+            </div>
+
+            <hr class="line">
+            <ng-container *ngFor="let user of reported_users | filterReportedUsers: searchText |  slice:0:max; index as i" >
+                <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
+                    [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time
+
+                    appHightlightSearch [searchedWord]="searchText" [content]="user"
+                    ></app-user>
+                <hr class="line">
             </ng-container>
         </div>
+
     </div>
 </div>

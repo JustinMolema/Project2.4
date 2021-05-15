@@ -8,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UserComponent implements OnInit {
     _name:String;
     _offense:String;
-    _actions:String;
     _date:Date;
+    _time: Date;
 
   constructor() { }
 
@@ -23,15 +23,6 @@ export class UserComponent implements OnInit {
 
   get name(){
       return this._name;
-  }
-
-  @Input()
-  set actions(actions:String){
-      this._actions = actions;
-  }
-
-  get actions(){
-      return this._actions;
   }
 
   @Input()
@@ -51,6 +42,23 @@ export class UserComponent implements OnInit {
   get date(){
       return this._date;
   }
+
+  @Input()
+  set time(time:Date){
+      this._time = time;
+  }
+
+  get time(){
+      return this._time;
+  }
+
+  delete(name:String, offense:String):void{
+    if(confirm("Are you sure you want to delete this: Name: " + name + " Offense: " + offense)){
+        alert("Item deleted");
+    }
+
+}
+
 
 
 }

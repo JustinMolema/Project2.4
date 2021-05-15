@@ -1,11 +1,72 @@
 <div class="content">
     <div class="admin-tab">
-        <div class="view-support-tickets-text">
-            View support tickets
-         </div>
-         <div class="support-ticket-container">
-             Status            
-            <app-ticket *ngFor="let ticket of tickets"  [tag] = ticket.tag [status] = ticket.status></app-ticket>  
-         </div>
+        <div class="header_text">
+            <h1 class="text">SUPPORT TICKETS
+                <!--&#8674;-->
+            </h1>
+        </div>
+        <div class="support-ticket-container">
+            <div class="toolbar">
+                <div class="recordsperpage">
+                    <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20" selected>20</option>
+                        <option value="50">50</option>
+                        <option value="1"> All</option>
+
+                    </select>
+                    <p>records per page
+                    </p>
+                </div>
+                <div class="search">
+                    <p class="search-text"> Search:</p>
+                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                </div>
+            </div>
+            <hr class="line">
+
+            <div class="support-ticket-view">
+                <b class="column-name" (click)="sortByDate()">
+                    <p class="tableheader">Date</p>
+                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/arrow.svg">
+                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/sort_icon.svg">
+
+                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'"
+                        src="../../../assets/sort_button.svg">
+                </b>
+                <b class="column-name">
+                    <p class="tableheader">Time</p>
+                </b>
+                <b class="column-name" (click)="sortByTag()">
+                    <p class="tableheader">Tag</p>
+                    <img class="arrow" *ngIf="tagSorting" src="../../../assets/arrow.svg">
+                    <img class="navbaricon" *ngIf="!tagSorting" src="../../../assets/sort_icon.svg">
+                    <img class="navbaricon" *ngIf="tagSorting" [ngClass]="sortedByTag ? 'navbaricon2' : 'navbaricon'"
+                        src="../../../assets/sort_button.svg">
+                </b>
+                <b class="column-name" (click)="sortByStatus()">
+                    <p class="tableheader">Status</p>
+                    <img class="arrow" *ngIf="statusSorting" src="../../../assets/arrow.svg">
+                    <img class="navbaricon" *ngIf="!statusSorting" src="../../../assets/sort_icon.svg">
+                    <img #icon class="navbaricon" *ngIf="statusSorting"
+                        [ngClass]="sortedByStatus ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                </b>
+                <b class="actions">
+                    <p class="tableheader">Actions</p>
+                </b>
+            </div>
+
+            <hr class="line">
+            <ng-container *ngFor="let ticket of tickets | filterPipe: searchText | slice:0:max; index as i">
+                <app-ticket [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
+                    [tag]=ticket.tag [status]=ticket.status [date]=ticket.date></app-ticket>
+                <hr class="line">
+            </ng-container>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="spacer">spacer</div>
     </div>
 </div>

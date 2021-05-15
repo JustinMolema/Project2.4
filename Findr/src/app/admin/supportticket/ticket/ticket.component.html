@@ -1,10 +1,32 @@
 <div class="support-ticket-view">
-    <a class="tag-view">
+    <div class="column-view">
+        <p>{{date | date: 'dd MMMM yyyy'}}
+        </p>
+    </div>
+    <div class="column-view">
+        <p>{{date | date: 'HH:mm:ss '}}</p>
+    </div>
+
+    <div class="column-view">
         <p class="tag">{{tag}}</p>
-    </a>  
-    <a class="status-view">{{status}}</a>
-    <div class="close-ticket-view">
-        <button class="view-ticket" (click)=closeTicket()>View Ticket</button>
-        <button class="close-ticket" (click)=closeTicket()>Close Ticket</button>
+    </div>
+    <div class="column-view">
+        <p>{{status}}</p>
+    </div>
+    <div class="actions">
+        <div class="button-container">
+            <button class="view-ticket" (click)=closeTicket()>
+                <div style="font-size: 18px;">
+                    &#9776;
+                    <span>View ticket</span>
+                </div>
+            </button>
+            <button class="close-ticket" (click)="closeTicket()"> 
+                <div style="font-size: 18px; color: lightgray;">
+                    &#10005;
+                    <span>Close ticket</span>
+                </div>
+            </button>
+        </div>
     </div>
 </div>

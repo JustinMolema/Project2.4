@@ -20,9 +20,6 @@ import { SupportticketModule } from './admin/supportticket/supportticket.module'
 import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
 import { AdminBarModule } from './admin/admin-bar/admin-bar.module';
 
-
-
-
 @NgModule({
     declarations: [AppComponent],
     imports: [
