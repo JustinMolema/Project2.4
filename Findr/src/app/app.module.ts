@@ -21,6 +21,9 @@ import { SupportticketModule } from './admin/supportticket/supportticket.module'
 import { ReporteduserModule } from './admin/reporteduser/reporteduser.module';
 import { AdminBarModule } from './admin/admin-bar/admin-bar.module';
 import { DatePipe } from '@angular/common';
+import { GamesModule } from './admin/games/games.module';
+import { UsersModule } from './admin/users/users.module';
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -45,7 +48,9 @@ import { DatePipe } from '@angular/common';
         SupportticketModule,
         ReporteduserModule,
         AdminBarModule,
-        ProfileModule
+        ProfileModule,
+        GamesModule,
+        UsersModule
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent],

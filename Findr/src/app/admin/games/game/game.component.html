@@ -1,0 +1,31 @@
+<div class="game-view">
+    <div class="column-view">
+        <p>{{name}}
+        </p>
+    </div>
+    <div class="column-view">
+        <p>{{category}}</p>
+    </div>
+    <div class="column-view">
+        <p>{{subscribercount}}</p>
+    </div>
+    <div class="column-view">
+        <p>{{subscribercount}}</p>
+    </div>
+    <div class="actions">
+        <div class="button-container">
+            <button class="log-view">
+                <div style="font-size: 18px; display: flex">
+                    <img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit"/>
+                    <span style="margin-left: 5px">Edit</span>
+                </div>
+            </button>
+            <button class="delete-view" (click)="delete(name, category)">
+                <div style="font-size: 18px; display: flex; color: lightgray;">
+                    <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete"/>
+                    <span style="margin-left: 5px">Delete</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div> 

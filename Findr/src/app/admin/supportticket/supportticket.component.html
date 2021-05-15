@@ -29,28 +29,28 @@
             <div class="support-ticket-view">
                 <b class="column-name" (click)="sortByDate()">
                     <p class="tableheader">Date</p>
-                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/arrow.svg">
-                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/sort_icon.svg">
+                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/SVG/arrow.svg">
+                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/SVG/sort_icon.svg">
 
                     <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/sort_button.svg">
+                        src="../../../assets/SVG/sort_button.svg">
                 </b>
                 <b class="column-name">
                     <p class="tableheader">Time</p>
                 </b>
                 <b class="column-name" (click)="sortByTag()">
                     <p class="tableheader">Tag</p>
-                    <img class="arrow" *ngIf="tagSorting" src="../../../assets/arrow.svg">
-                    <img class="navbaricon" *ngIf="!tagSorting" src="../../../assets/sort_icon.svg">
+                    <img class="arrow" *ngIf="tagSorting" src="../../../assets/SVG/arrow.svg">
+                    <img class="navbaricon" *ngIf="!tagSorting" src="../../../assets/SVG/sort_icon.svg">
                     <img class="navbaricon" *ngIf="tagSorting" [ngClass]="sortedByTag ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/sort_button.svg">
+                        src="../../../assets/SVG/sort_button.svg">
                 </b>
                 <b class="column-name" (click)="sortByStatus()">
                     <p class="tableheader">Status</p>
-                    <img class="arrow" *ngIf="statusSorting" src="../../../assets/arrow.svg">
-                    <img class="navbaricon" *ngIf="!statusSorting" src="../../../assets/sort_icon.svg">
+                    <img class="arrow" *ngIf="statusSorting" src="../../../assets/SVG/arrow.svg">
+                    <img class="navbaricon" *ngIf="!statusSorting" src="../../../assets/SVG/sort_icon.svg">
                     <img #icon class="navbaricon" *ngIf="statusSorting"
-                        [ngClass]="sortedByStatus ? 'navbaricon2' : 'navbaricon'" src="../../../assets/sort_button.svg">
+                        [ngClass]="sortedByStatus ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg">
                 </b>
                 <b class="actions">
                     <p class="tableheader">Actions</p>

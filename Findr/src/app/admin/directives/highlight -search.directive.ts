@@ -18,7 +18,7 @@ export class HighlightSearchDirective {
 
     setHighlights() {
         for (let i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] == "time") continue;
+            if (this.keys[i] == "time" || this.keys[i] == "subscribercount" || this.keys[i] == "warning") continue;
 
             this.renderer.setProperty(this.el.nativeElement.children[0].children[i].children[0], 'innerHTML', this.getFormattedText(this.keys[i]));
         }

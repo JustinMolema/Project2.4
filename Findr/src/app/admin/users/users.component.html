@@ -26,30 +26,34 @@
             <hr class="line">
             
             <div class="report-user-view">
-                <b class="column-name" (click)="sortByDate()">
-                    <p class="tableheader">Date</p>
-                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/SVG/sort_icon.svg">
-
-                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="column-name">
-                    <p class="tableheader">Time</p>
-                </b>
                 <b class="column-name" (click)="sortByName()">
                     <p class="tableheader">Name</p>
                     <img class="arrow" *ngIf="nameSorting" src="../../../assets/SVG/arrow.svg">
                     <img class="navbaricon" *ngIf="!nameSorting" src="../../../assets/SVG/sort_icon.svg">
+
                     <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'"
                         src="../../../assets/SVG/sort_button.svg">
                 </b>
-                <b class="column-name" (click)="sortByReason()">
-                    <p class="tableheader">Reason</p>
-                    <img class="arrow" *ngIf="reasonSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!reasonSorting" src="../../../assets/SVG/sort_icon.svg">
-                    <img #icon class="navbaricon" *ngIf="reasonSorting"
-                        [ngClass]="sortedByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg">
+                <b class="column-name" (click)="sortByEmail()">
+                    <p class="tableheader">Email</p>
+                    <img class="arrow" *ngIf="emailSorting" src="../../../assets/SVG/arrow.svg">
+                    <img class="navbaricon" *ngIf="!emailSorting" src="../../../assets/SVG/sort_icon.svg">
+                    <img class="navbaricon" *ngIf="emailSorting" [ngClass]="sortedByEmail ? 'navbaricon2' : 'navbaricon'"
+                        src="../../../assets/SVG/sort_button.svg">
+                </b>
+                <b class="column-name" (click)="sortByWarning()">
+                    <p class="tableheader">Warning</p>
+                    <img class="arrow" *ngIf="warningSorting" src="../../../assets/SVG/arrow.svg">
+                    <img class="navbaricon" *ngIf="!warningSorting" src="../../../assets/SVG/sort_icon.svg">
+                    <img #icon class="navbaricon" *ngIf="warningSorting"
+                        [ngClass]="sortedByWarning ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg">
+                </b>
+                <b class="column-name" (click)="sortByBan()">
+                    <p class="tableheader">Ban</p>
+                    <img class="arrow" *ngIf="banSorting" src="../../../assets/SVG/arrow.svg">
+                    <img class="navbaricon" *ngIf="!banSorting" src="../../../assets/SVG/sort_icon.svg">
+                    <img #icon class="navbaricon" *ngIf="banSorting"
+                        [ngClass]="sortedByBan ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg">
                 </b>
                 <b class="actions">
                     <p class="tableheader">Actions</p>
@@ -57,12 +61,12 @@
             </div>
 
             <hr class="line">
-            <ng-container *ngFor="let user of reported_users | tablefilter:keys:searchText |  slice:0:max; index as i" >
-                <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time
+            <ng-container *ngFor="let user of users | tablefilter:keys:searchText |  slice:0:max; index as i" >
+                <all-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
+                    [name]=user.name [email]=user.email [warning]=user.warning [ban]=user.ban
 
                     appHighlightSearch [searchedWord]="searchText" [content]="user" [keys]="keys"
-                    ></app-user>
+                    ></all-user>
                 <hr class="line">
             </ng-container>
         </div>

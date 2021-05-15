@@ -11,6 +11,9 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ReporteduserComponent } from './admin/reporteduser/reporteduser.component';
 import { SupportticketComponent } from './admin/supportticket/supportticket.component';
 import { ProfileComponent } from './User/profile/profile.component';
+import {GamesComponent} from './admin/games/games.component';
+import {UsersComponent} from './admin/users/users.component';
+
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -23,6 +26,8 @@ const routes: Routes = [
   {path: 'forgot-password', component: PasswordforgottenComponent},
   {path: 'admin/reportedusers', component: ReporteduserComponent},
   {path: 'admin/supporttickets', component: SupportticketComponent},
+  {path: 'admin/games', component: GamesComponent},
+  {path: 'admin/users', component: UsersComponent},
   {path: '**', redirectTo:'/login'},
 
 

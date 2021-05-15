@@ -55,7 +55,6 @@ export class SupportticketComponent implements OnInit {
         this.max = this.tickets.length;
         
     }
-
     
     sortByDate(): any {
         let sort = !this.sortedByDate;

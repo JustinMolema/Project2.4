@@ -8,9 +8,6 @@ import { DatePipe } from '@angular/common';
 })
 export class ReporteduserComponent implements OnInit {
     searchText: string;
-    username = 'Username';
-    offense = 'Offense';
-    actions = 'Actions';
     dateTime = new Date();
 
     sortedByDate: boolean = false;
