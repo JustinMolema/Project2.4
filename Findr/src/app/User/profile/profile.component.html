@@ -1,50 +1,68 @@
 <div class="content">
 
-    <div class="profile-page">
+  <div class="profile-page">
 
-        <img class="current-profile-pic" src="{{ selectedFile.src }}">
-        <input #imageInput class="input-button"
-         type="file"
-         accept="image/*"
-         (change)="processFile(imageInput)">
+    <div *ngIf="!hasFileBeenSelected;" class="current-profile-pic">
+      <img src="../../assets/wijmar.png">
+    </div>
+
+    <div *ngIf="hasFileBeenSelected;" class="current-profile-pic">
+      <img src="{{ selectedFile.src }}">
+    </div>
+
+    <div class=input-img-button>
+      <input #imageInput class="input-button" type="file" accept="image/*" (change)="processFile(imageInput)">
+    </div>
+
+  </div>
+
+  <div class="profile-details">
+    <div class="setting-field">
+
+      <div class="user">
+        {{ User }}
+      </div>
+
+      <div class="user-button">
+        <button class="change-button">Change</button>
+      </div>
 
     </div>
 
-    <div class="profile-details">
-        <div class="setting-field">
+    <div class="setting-field">
 
-            <div class="user">
-                {{ User }}
-            </div>
-            
-            <div class="user-button">
-                <button class="change-button">Change</button>
-            </div>
+      <div class="email">
+        {{ Email }}
+      </div>
 
-        </div>
+      <div class="email-button">
+        <button class="change-button">Change</button>
+      </div>
 
-        <div class="setting-field">
-
-            <div class="email">
-                {{ Email }}
-            </div>
-
-            <div class="email-button">
-                <button class="change-button">Change</button>
-            </div> 
-
-        </div> 
-
-        <div class="setting-field">
-
-            <div class="password">
-                Password: *******
-            </div>
-
-            <div class="password-button">
-                <button class="change-button">Change</button>
-            </div>
-
-        </div> 
     </div>
+
+    <div class="setting-field">
+
+      <div class="password">
+        Password: *******
+      </div>
+
+      <div class="password-button">
+        <button class="change-button">Change</button>
+      </div>
+
+    </div>
+
+    <div class="setting-field">
+
+      <div class="warnings">
+        Warnings: {{ warningCount }}
+        <div class="warnings-explain">
+          Your account gets automatically banned after reaching three warnings. 
+          If you would like to appeal a warning, please submit a support ticket.
+      </div>
+
+    </div>
+
+  </div>
 </div>

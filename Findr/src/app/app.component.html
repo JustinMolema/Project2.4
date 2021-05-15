@@ -1,4 +1,3 @@
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200&display=swap" rel="stylesheet">
 <app-navbar *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin')" ></app-navbar>
@@ -6,6 +5,8 @@
 
 <router-outlet></router-outlet>
 <app-topbar *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin')"></app-topbar>
+
+<router-outlet></router-outlet>
 <footer class="footer">
-    <p>© 2021 Justin & Merel & verder niemand anders IT Productions</p>
+  <p>© 2021 Justin & Merel & verder niemand anders IT Productions</p>
 </footer>

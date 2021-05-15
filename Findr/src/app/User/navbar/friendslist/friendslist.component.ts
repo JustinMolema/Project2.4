@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-friendslist',
@@ -12,20 +12,17 @@ export class FriendslistComponent implements OnInit {
   showMoreText: string = "Show More ⬎";
   sliceAmount = 5;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  toggleList()
-  {
-    if(this.collapsed)
-    {
+  toggleList() {
+    if (this.collapsed) {
       this.sliceAmount = this.friends.length;
       this.showMoreText = "Show Less ⬏";
-    }
-    else
-    {
+    } else {
       this.sliceAmount = 5;
       this.showMoreText = "Show More ⬎";
     }

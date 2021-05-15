@@ -1,18 +1,19 @@
 <hr class="friends-list-line">
 <div class="friendslist-title">
-    Recent Friends
+  Recent Friends
 </div>
 <hr class="friends-list-line">
 
 <button class="friends-list-button" *ngFor="let friend of friends.slice(0, sliceAmount)">
-    <div class="navbaricondiv">
-         <img class="navbaricon" src="https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png">
-    </div>
-    <div class="friendtitle">
-        {{friend}}
-    </div>
+  <div class="navbaricondiv">
+    <img class="navbaricon"
+         src="https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png">
+  </div>
+  <div class="friendtitle">
+    {{friend}}
+  </div>
 </button>
 
 <div>
-    <button class="see-more-button" (click)="toggleList()">{{ showMoreText }}</button>
+  <button class="see-more-button" (click)="toggleList()">{{ showMoreText }}</button>
 </div>

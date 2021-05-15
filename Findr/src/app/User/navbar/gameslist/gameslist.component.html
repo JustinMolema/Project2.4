@@ -1,18 +1,18 @@
 <div>
-    <hr class="game-line">
-    <div class="game-title">   Recent Games</div>
-    <hr class="game-line">
-    <!-- <div class = "games-list" *ngFor="(collapsed == false) ? (let game of games | slice:0:10) : (let game of games | slice:0:10)">  -->
-    <div class = "games-list" *ngFor="let game of games.slice(0, sliceAmount);">
-        <button class="games-list-button">
-            <div class="navbaricondiv">
-                <img class="navbaricon" src="https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg">
-            </div>
-            <div class="gametitle">
-                {{ game }}
-            </div>
-        </button>
-    </div>
-    <button class="see-more-button" (click)="toggleList()"> {{ showMoreText }}</button>
-    <hr class="game-line">
+  <hr class="game-line">
+  <div class="game-title"> Recent Games</div>
+  <hr class="game-line">
+  <!-- <div class = "games-list" *ngFor="(collapsed == false) ? (let game of games | slice:0:10) : (let game of games | slice:0:10)">  -->
+  <div class="games-list" *ngFor="let game of games.slice(0, sliceAmount);">
+    <button class="games-list-button">
+      <div class="navbaricondiv">
+        <img class="navbaricon" src="https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg">
+      </div>
+      <div class="gametitle">
+        {{ game }}
+      </div>
+    </button>
+  </div>
+  <button class="see-more-button" (click)="toggleList()"> {{ showMoreText }}</button>
+  <hr class="game-line">
 </div>

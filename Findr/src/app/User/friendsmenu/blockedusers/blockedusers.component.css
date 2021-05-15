@@ -5,46 +5,50 @@
 }
 
 .blocked-user-name {
-  margin-left: 20px;
   font-size: 18px;
-  color: white;
-  font-family: "Archivo";
-}
-
-.blocked-user-container {
-  justify-content: left;
-  align-items: start;
   margin-right: 20px;
-  display: flex;
+  margin-left: 20px;
   flex: 1;
 }
 
 .blocked-button-container {
-  font-family: "Archivo";
+  /* background-color: hotpink; */
   margin-left: 200px;
   flex: 1;
   margin-right: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 img {
-  width:50px;
+  width: 50px;
   border-radius: 50%;
 }
 
-button{
-    color: white;
-    font-family: "Archivo";
-    background-color: rgb(53, 49, 49, 0.0);
-    border-color: #3184ad;
-    border-radius: 7px;
-    height: 35px;
-    margin-left: 20px;
+/* .profile-pic{
+  background-color: tomato;
+} */
+
+button {
+  color: white;
+  font-family: "Archivo";
+  font-size: 14px;
+  background-color: rgba(120, 178, 255, 0.164);
+  border: none;
+  outline: none;
+  border-radius: 7px;
+  height: 35px;
+  margin-left: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
-button:hover{
-    background-color: rgb(80, 141, 158);
+button:hover {
+  background-color: rgb(80, 141, 158);
 }
 
-button:active{
-    background-color: rgba(80, 141, 158, 0.5);
+button:active {
+  background-color: rgba(80, 141, 158, 0.5);
 }

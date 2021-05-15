@@ -1,10 +1,8 @@
-button
-{
+button {
   border-radius: 10px;
 }
 
-.navbarbutton
-{
+.navbarbutton {
   cursor: pointer;
   width: 270px;
   height: 50px;
@@ -12,7 +10,7 @@ button
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  border-radius: 10px; 
+  border-radius: 10px;
   color: rgb(255, 255, 255);
   font-family: "Archivo";
   font-weight: 100;
@@ -25,64 +23,53 @@ button
   align-items: stretch;
 }
 
-.navbarbutton:hover
-{
+.navbarbutton:hover {
   background-color: #5e8fcf62;
-  animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+  animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
-.navbarbutton:focus
-{
+.navbarbutton:focus {
   background-color: rgb(59, 80, 116);
   border: none;
   outline: none;
 }
 
-.navbarbutton:active
-{
+.navbarbutton:active {
   border: none;
   outline: none;
   filter: brightness(150%)
 }
 
-.navbaricon
-{
+.navbaricon {
   position: relative;
   height: 50px;
   width: 50px;
 }
-.navbaricondiv
-{
+
+.navbaricondiv {
   flex: 0.3;
 }
 
-.navbartext
-{
+.navbartext {
   flex: 0.7;
   display: flex;
   align-items: center;
 }
 
-@keyframes nvb-button-Animation
-{
-  0%
-  {
+@keyframes nvb-button-Animation {
+  0% {
     filter: brightness(100%)
   }
-  70%
-  {
+  70% {
     filter: brightness(120%)
   }
-  100%
-  {
+  100% {
     filter: brightness(100%);
   }
 }
 
-@media (max-width: 800px)
-{
-  .navbarbutton
-  {
+@media (max-width: 800px) {
+  .navbarbutton {
     animation: collapse-navbar 1s forwards;
     width: 80px;
     max-width: 80px;
@@ -90,25 +77,22 @@ button
     height: 80px;
     margin-left: 10px;
     margin-right: 10px;
-    background:  url("https://cdn.discordapp.com/attachments/833684306462507011/841025080946589726/sergfba.png");
-    background-size:contain;
-    color: rgba(0,0,0,0);
+    background: url("https://cdn.discordapp.com/attachments/833684306462507011/841025080946589726/sergfba.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
   }
 
-  .navbaricon
-  {
+  .navbaricon {
     width: 0;
     height: 0;
   }
 
-  .navbaricondiv
-  {
+  .navbaricondiv {
     width: 0;
     height: 0;
   }
 
-  .navbartext
-  {
+  .navbartext {
     width: 0;
     height: 0;
   }
