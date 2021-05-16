@@ -1,0 +1,15 @@
+<div class="report-user-view">
+    <b *ngFor="let key of keys; index as i" [style.flex]="infoSize" class="column-name" (click)="sortItems(columnName.innerHTML.toLowerCase())">
+        <p #columnName class="tableheader">{{keys[i] | titlecase}}</p>
+        <div style="display: flex; flex: 0.1">
+            <img class="arrow" *ngIf="sortingBy == columnName.innerHTML.toLowerCase()" src="../../../assets/SVG/arrow.svg">
+            <img class="navbaricon" *ngIf="sortingBy != columnName.innerHTML.toLowerCase()" src="../../../assets/SVG/sort_icon.svg">
+
+            <img class="navbaricon" *ngIf="sortingBy == columnName.innerHTML.toLowerCase()" [ngClass]="ascending ? 'navbaricon2' : 'navbaricon'"
+                src="../../../assets/SVG/sort_button.svg">
+        </div>
+    </b>
+    <b class="actions" [style.flex]="actionSize">
+        <p class="tableheader">Actions</p>
+    </b> 
+</div>

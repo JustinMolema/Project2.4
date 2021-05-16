@@ -13,6 +13,8 @@ import { SupportticketComponent } from './admin/supportticket/supportticket.comp
 import { ProfileComponent } from './User/profile/profile.component';
 import {GamesComponent} from './admin/games/games.component';
 import {UsersComponent} from './admin/users/users.component';
+import { AssignedticketsComponent } from './admin/assignedtickets/assignedtickets.component';
+import { NewgameComponent } from './admin/games/newgame/newgame.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
   {path: 'admin/supporttickets', component: SupportticketComponent},
   {path: 'admin/games', component: GamesComponent},
   {path: 'admin/users', component: UsersComponent},
+  {path: 'admin/mytickets', component: AssignedticketsComponent},
+  {path: 'admin/games/new', component: NewgameComponent},
   {path: '**', redirectTo:'/login'},
 
 

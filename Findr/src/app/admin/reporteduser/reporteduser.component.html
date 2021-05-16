@@ -1,12 +1,20 @@
 <div class="content">
-    <div class="admin-tab">
-        <div class="header_text">
-            <h1 class="text">REPORTED USERS
-                <!--&#8674;-->
-            </h1>
+    <div class="reported-users-tab">
+        <div class="view-log-tab">
+            <div class="header_text">
+                <h1> REPORTED USERS
+                    &#8674; LOG
+                </h1>
+            </div>
+            <div class="reported-users-content">
+                <app-log></app-log>
+            </div>
         </div>
-        <div class="reported-users-container">
-            <div class="toolbar">
+        <!-- <div class="header_text">
+            <h1>REPORTED USERS</h1>
+        </div>
+        <div class="reported-users-content">
+            <div class="records-and-search">
                 <div class="recordsperpage">
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
@@ -19,53 +27,20 @@
                     </p>
                 </div>
                 <div class="search">
-                    <p class="search-text"> Search:</p>
+                    <p> Search:</p>
                     <input class="search-input" type="search" [(ngModel)]="searchText" />
                 </div>
             </div>
             <hr class="line">
-            
-            <div class="report-user-view">
-                <b class="column-name" (click)="sortByDate()">
-                    <p class="tableheader">Date</p>
-                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/SVG/sort_icon.svg">
-
-                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="column-name">
-                    <p class="tableheader">Time</p>
-                </b>
-                <b class="column-name" (click)="sortByName()">
-                    <p class="tableheader">Name</p>
-                    <img class="arrow" *ngIf="nameSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!nameSorting" src="../../../assets/SVG/sort_icon.svg">
-                    <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="column-name" (click)="sortByReason()">
-                    <p class="tableheader">Reason</p>
-                    <img class="arrow" *ngIf="reasonSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!reasonSorting" src="../../../assets/SVG/sort_icon.svg">
-                    <img #icon class="navbaricon" *ngIf="reasonSorting"
-                        [ngClass]="sortedByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="actions">
-                    <p class="tableheader">Actions</p>
-                </b>
-            </div>
+            <app-tableheader [items]="reported_users" [actionSize]='0.32' [infoSize]='0.17'></app-tableheader>
 
             <hr class="line">
-            <ng-container *ngFor="let user of reported_users | tablefilter:keys:searchText |  slice:0:max; index as i" >
+            <ng-container *ngFor="let user of reported_users | tablefilter:keys:searchText |  slice:0:max; index as i">
                 <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time
-
-                    appHighlightSearch [searchedWord]="searchText" [content]="user" [keys]="keys"
-                    ></app-user>
+                    [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time appHighlightSearch
+                    [searchedWord]="searchText" [content]="user" [keys]="keys"></app-user>
                 <hr class="line">
             </ng-container>
-        </div>
-
+        </div> -->
     </div>
 </div>

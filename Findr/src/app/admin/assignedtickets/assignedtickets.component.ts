@@ -1,13 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-
 @Component({
-    selector: 'app-supportticket',
-    templateUrl: './supportticket.component.html',
-    styleUrls: ['./supportticket.component.css']
+  selector: 'app-assignedtickets',
+  templateUrl: './assignedtickets.component.html',
+  styleUrls: ['./assignedtickets.component.css']
 })
-export class SupportticketComponent implements OnInit {
+export class AssignedticketsComponent implements OnInit {
     searchText: string;
     dateTime = new Date();
     

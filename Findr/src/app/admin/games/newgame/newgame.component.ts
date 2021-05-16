@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -7,24 +6,16 @@ class ImageSnippet {
 }
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.css']
+    selector: 'app-newgame',
+    templateUrl: './newgame.component.html',
+    styleUrls: ['./newgame.component.css']
 })
-export class ProfileComponent implements OnInit {
-
+export class NewgameComponent implements OnInit {
     hasFileBeenSelected: boolean = false;
     selectedFile: ImageSnippet;
-
-    User: String = "TheLegend27";
-    Email: String = "real@email.com";
-    warningCount: number = 2;
-
-    constructor() {
-    }
+    constructor() { }
 
     ngOnInit(): void {
-
     }
 
     processFile(imageInput: any) {
@@ -33,14 +24,10 @@ export class ProfileComponent implements OnInit {
 
         reader.addEventListener('load', (event: any) => {
             this.selectedFile = new ImageSnippet(event.target.result, file);
-            console.log(this.selectedFile);
         });
-        
-        reader.readAsDataURL(file);
 
-        setTimeout(() => {
-            console.log(this.selectedFile.src)
-        }, 2000); 
+        reader.readAsDataURL(file);
         this.hasFileBeenSelected = true;
     }
+
 }

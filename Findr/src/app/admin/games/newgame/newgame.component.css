@@ -1,0 +1,98 @@
+.imagecontainer {
+    width: 100%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    cursor: pointer;
+    background: rgb(53, 63, 119);
+    width: 200px;
+    /* border-radius: 50%; */
+}
+  
+.current-profile-pic {
+    background: rgb(53, 63, 119);
+
+    border-radius: 50%;
+}
+
+.uploadimagecontainer {
+    cursor: pointer;
+    background: green;
+}
+
+.uploadimage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(100, 116, 206);
+    border-radius: 5px;
+    margin-top: 30px;
+    color: white;
+    border: 0px solid;
+    height: 40px;
+    width: 125px;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 50px;
+    width: 100%;
+}
+
+.textareafield {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.fieldnamecontainer {
+    display: flex;
+    flex: 0.2;
+}
+
+.inputfieldcontainer {
+    font-size: 15px;
+    background: rgb(53, 63, 119);
+    color: white;
+    border: 2px solid black;
+    height: 50px;
+    flex: 0.8;
+}
+
+.inputfield {
+    color: white;
+    width: 100%;
+    background: rgba(53, 63, 119, 0);
+    border: 0px;
+    height: 100%;
+}
+
+.category {
+    width: 100%;
+    background: rgba(53, 63, 119);
+    border: 0px;
+    color: white;
+    height: 100%;
+}
+
+.addgame {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: rgb(100, 116, 206);
+    border-radius: 5px;
+    color: white;
+    border: 0px solid black;
+    margin-top: 50px;
+    /* margin-top: 33554020px; */
+    height: 40px;
+    width: 125px;
+}

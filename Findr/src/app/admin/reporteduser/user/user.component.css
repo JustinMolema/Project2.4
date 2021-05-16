@@ -87,12 +87,6 @@ p {
     margin-left: 5%;
 }
 
-.icon{
-    color: yellow;
-    font-size: 1px;
-    padding-right: 10px;
-}
-
 @keyframes nvb-button-Animation
 {
     0%

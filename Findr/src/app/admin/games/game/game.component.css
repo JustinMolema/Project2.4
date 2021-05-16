@@ -41,28 +41,35 @@ button:active{
     align-items: center;
     justify-content: left;
     box-sizing: border-box;
-    flex: 0.17;
+    flex: 0.25;
     border-right: 1px solid black;
 }
 
 * { 
     box-sizing: border-box;
 }
+
 .actions {
-    padding-top: 10px;
-    padding-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: left;
     box-sizing: border-box;
-    flex: 0.32;
+    flex: 0.25;
 }
 
 .button-container {
     height: 100%;
     width: 100%;
-    padding-left: 10px;
     display: flex;
+}
+
+.edit-view{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width:100%;
+    border-right: 1px solid black;
 }
 
 .delete-view{
@@ -72,12 +79,6 @@ button:active{
 
 p {
     margin-left: 5%;
-}
-
-.icon{
-    color: yellow;
-    font-size: 1px;
-    padding-right: 10px;
 }
 
 @keyframes nvb-button-Animation

@@ -1,12 +1,12 @@
 <div class="content">
-    <div class="admin-tab">
+    <div class="support-ticket-tab">
         <div class="header_text">
             <h1 class="text">SUPPORT TICKETS
                 <!--&#8674;-->
             </h1>
         </div>
-        <div class="support-ticket-container">
-            <div class="toolbar">
+        <div class="support-ticket-content">
+            <div class="records-and-search">
                 <div class="recordsperpage">
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
@@ -26,36 +26,7 @@
             </div>
             <hr class="line">
 
-            <div class="support-ticket-view">
-                <b class="column-name" (click)="sortByDate()">
-                    <p class="tableheader">Date</p>
-                    <img class="arrow" *ngIf="dateSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!dateSorting" src="../../../assets/SVG/sort_icon.svg">
-
-                    <img class="navbaricon" *ngIf="dateSorting" [ngClass]="sortedByDate ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="column-name">
-                    <p class="tableheader">Time</p>
-                </b>
-                <b class="column-name" (click)="sortByTag()">
-                    <p class="tableheader">Tag</p>
-                    <img class="arrow" *ngIf="tagSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!tagSorting" src="../../../assets/SVG/sort_icon.svg">
-                    <img class="navbaricon" *ngIf="tagSorting" [ngClass]="sortedByTag ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="column-name" (click)="sortByStatus()">
-                    <p class="tableheader">Status</p>
-                    <img class="arrow" *ngIf="statusSorting" src="../../../assets/SVG/arrow.svg">
-                    <img class="navbaricon" *ngIf="!statusSorting" src="../../../assets/SVG/sort_icon.svg">
-                    <img #icon class="navbaricon" *ngIf="statusSorting"
-                        [ngClass]="sortedByStatus ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg">
-                </b>
-                <b class="actions">
-                    <p class="tableheader">Actions</p>
-                </b>
-            </div>
+            <app-tableheader [items]="tickets"></app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let ticket of tickets | tablefilter:keys:searchText | slice:0:max; index as i">

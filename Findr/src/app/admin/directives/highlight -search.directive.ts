@@ -18,7 +18,7 @@ export class HighlightSearchDirective {
 
     setHighlights() {
         for (let i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] == "time" || this.keys[i] == "subscribercount" || this.keys[i] == "warning") continue;
+            if (this.keys[i] == "time" || this.keys[i] == "subscribercount") continue;
 
             this.renderer.setProperty(this.el.nativeElement.children[0].children[i].children[0], 'innerHTML', this.getFormattedText(this.keys[i]));
         }
@@ -26,6 +26,6 @@ export class HighlightSearchDirective {
 
     getFormattedText(key: string) {
         const re = new RegExp(`(${this.searchedWord})`, 'gi');
-        return this.content[key].replace(re, `<b style="background: rgb(63, 63, 119);">$1</b>`);
+        return this.content[key].toString().replace(re, `<b style="background: rgb(63, 63, 119);">$1</b>`);
     }
 }

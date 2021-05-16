@@ -1,22 +1,32 @@
 <meta name="Description" content="This page is for displaying games">
 <div class="content">
-    <div class="admin-tab">
+    <div class="new-game-tab">
         <div class="header_text">
-            <h1 class="text"> GAMES
-                <!-- &#8674; -->
+            <h1> GAMES
+                &#8674; NEW
             </h1>
         </div>
-        <div class="games-container">
-            <button class="addgame">
+        <div class="games-tab-content">
+            <app-newgame></app-newgame>
+        </div>
+    </div>
+    <!-- <div class="game-admin-tab">
+        <div class="header_text">
+            <h1> GAMES
+            </h1>
+        </div>
+        <div class="games-tab-content">
+            <button class="addgame" routerLink="new">
                 <div style="font-size: 18px; display: flex">
-                    <img src="../../../../assets/SVG/add.svg" style="width: 20px; height: 20px;" alt="Edit"/>
+                    <img src="../../../../assets/SVG/add.svg" style="width: 20px; height: 20px;" alt="Edit" />
                     <span style="margin-top: 1px; margin-left: 10px; font-size: 15px;">Add game</span>
                 </div>
             </button>
             <hr class="line">
 
-            <div class="toolbar">
+            <div class="records-and-search">
                 <div class="recordsperpage">
+                    <p>Records per page:</p>
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -24,57 +34,23 @@
                         <option value="50">50</option>
                         <option value="1"> All</option>
                     </select>
-                    <p>records per page
-                    </p>
                 </div>
                 <div class="search">
-                    <p class="search-text"> Search:</p>
+                    <p> Search:</p>
                     <input class="search-input" type="search" [(ngModel)]="searchText" />
                 </div>
             </div>
             <hr class="line">
-            
-            <div class="game-view">
-                <b class="column-name" (click)="sortByName()">
-                    <p class="tableheader">Name</p>
-                    <img class="arrow" *ngIf="nameSorting" src="../../../assets/SVG/arrow.svg" alt="Sort">
-                    <img class="navbaricon" *ngIf="!nameSorting" src="../../../assets/SVG/sort_icon.svg" alt="Sort">
 
-                    <img class="navbaricon" *ngIf="nameSorting" [ngClass]="sortedByName ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg" alt="Sort">
-                </b>
-                <b class="column-name" (click)="sortByCategory()">
-                    <p class="tableheader">Category</p>
-                    <img class="arrow" *ngIf="categorySorting" src="../../../assets/SVG/arrow.svg" alt="Sort">
-                    <img class="navbaricon" *ngIf="!categorySorting" src="../../../assets/SVG/sort_icon.svg" alt="Sort">
-                    <img class="navbaricon" *ngIf="categorySorting" [ngClass]="sortedByCategory ? 'navbaricon2' : 'navbaricon'"
-                        src="../../../assets/SVG/sort_button.svg" alt="Sort">
-                </b>
-                <b class="column-name" (click)="sortBySubscribercount()">
-                    <p class="tableheader">Subscribercount</p>
-                    <img class="arrow" *ngIf="subscribercountSorting" src="../../../assets/SVG/arrow.svg" alt="Sort">
-                    <img class="navbaricon" *ngIf="!subscribercountSorting" src="../../../assets/SVG/sort_icon.svg" alt="Sort">
-                    <img #icon class="navbaricon" *ngIf="subscribercountSorting"
-                        [ngClass]="subscribercountByReason ? 'navbaricon2' : 'navbaricon'" src="../../../assets/SVG/sort_button.svg" alt="Sort">
-                </b>
-                <b class="column-name">
-                    <p class="tableheader">Image</p>
-                </b>
-                <b class="actions">
-                    <p class="tableheader">Actions</p>
-                </b>
-            </div>
+            <app-tableheader [items]="games" [actionSize]='0.25' [infoSize]='0.25'></app-tableheader>
 
             <hr class="line">
-            <ng-container *ngFor="let game of games | tablefilter:keys:searchText |  slice:0:max; index as i" >
+            <ng-container *ngFor="let game of games | tablefilter:keys:searchText |  slice:0:max; index as i">
                 <app-game [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                [name]=game.name [category]=game.category [subscribercount]=game.subscribercount
-
-                    appHighlightSearch [searchedWord]="searchText" [content]="game" [keys]="keys"
-                    ></app-game>
+                    [name]=game.name [category]=game.category [subscribercount]=game.subscribercount appHighlightSearch
+                    [searchedWord]="searchText" [content]="game" [keys]="keys"></app-game>
                 <hr class="line">
             </ng-container>
         </div>
-
-    </div>
+    </div> -->
 </div>

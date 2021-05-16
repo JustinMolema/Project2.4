@@ -23,6 +23,8 @@ import { AdminBarModule } from './admin/admin-bar/admin-bar.module';
 import { DatePipe } from '@angular/common';
 import { GamesModule } from './admin/games/games.module';
 import { UsersModule } from './admin/users/users.module';
+import { TableheaderModule } from './admin/tableheader/tableheader.module';
+import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.module';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { UsersModule } from './admin/users/users.module';
         AdminBarModule,
         ProfileModule,
         GamesModule,
-        UsersModule
+        UsersModule,
+        TableheaderModule,
+        AssignedticketsModule,
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent],

@@ -10,8 +10,8 @@ export class TablefilterPipe implements PipeTransform {
         searchText = searchText.toLocaleLowerCase();
         return items.filter(it => {
             for (let key of keys) {
-                if (key == "time" || key == "subscribercount" || key == "warning") continue;
-                if (it[key].toLocaleLowerCase().includes(searchText)) return true;
+                if (key == "time" || key == "subscribercount") continue;
+                if (it[key].toString().toLocaleLowerCase().includes(searchText)) return true;
             }
             return false;
         })

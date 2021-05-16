@@ -1,11 +1,11 @@
 <div class="content">
-    <div class="users-admin-tab">
+    <div class="support-ticket-tab">
         <div class="header_text">
-            <h1 class="text">USERS
+            <h1 class="text">MY TICKETS
                 <!--&#8674;-->
             </h1>
         </div>
-        <div class="users-content">
+        <div class="support-ticket-content">
             <div class="records-and-search">
                 <div class="recordsperpage">
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
@@ -14,6 +14,7 @@
                         <option value="20" selected>20</option>
                         <option value="50">50</option>
                         <option value="1"> All</option>
+
                     </select>
                     <p>records per page
                     </p>
@@ -25,18 +26,21 @@
             </div>
             <hr class="line">
 
-            <app-tableheader [items]="users"></app-tableheader>
-        
-            <hr class="line">
-            <ng-container *ngFor="let user of users | tablefilter:keys:searchText |  slice:0:max; index as i" >
-                <all-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [name]=user.name [email]=user.email [warning]=user.warning [ban]=user.ban
+            <app-tableheader [items]="tickets"></app-tableheader>
 
-                    appHighlightSearch [searchedWord]="searchText" [content]="user" [keys]="keys"
-                    ></all-user>
+            <hr class="line">
+            <ng-container *ngFor="let ticket of tickets | tablefilter:keys:searchText | slice:0:max; index as i">
+                <app-ticket [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
+                    [tag]=ticket.tag [status]=ticket.status [date]=ticket.date [time]=ticket.time
+                    
+                    appHighlightSearch [searchedWord]="searchText" [content]="ticket" [keys]="keys"
+                    ></app-ticket>
                 <hr class="line">
             </ng-container>
         </div>
-
+        <br>
+        <br>
+        <br>
+        <div class="spacer">spacer</div>
     </div>
 </div>
