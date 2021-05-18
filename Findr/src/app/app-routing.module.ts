@@ -6,13 +6,13 @@ import { SignupComponent } from './User/signup/signup.component';
 import { GamemenuComponent } from './User/gamemenu/gamemenu.component';
 import { PasswordforgottenComponent } from './User/passwordforgotten/passwordforgotten.component';
 import { ChatmenuComponent } from './User/chatmenu/chatmenu.component';
-import {FriendsmenuComponent} from "./User/friendsmenu/friendsmenu.component";
+import { FriendsmenuComponent } from "./User/friendsmenu/friendsmenu.component";
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ReporteduserComponent } from './admin/reporteduser/reporteduser.component';
 import { SupportticketComponent } from './admin/supportticket/supportticket.component';
 import { ProfileComponent } from './User/profile/profile.component';
-import {GamesComponent} from './admin/games/games.component';
-import {UsersComponent} from './admin/users/users.component';
+import { GamesComponent } from './admin/games/games.component';
+import { UsersComponent } from './admin/users/users.component';
 import { AssignedticketsComponent } from './admin/assignedtickets/assignedtickets.component';
 import { NewgameComponent } from './admin/games/newgame/newgame.component';
 

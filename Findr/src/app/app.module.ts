@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
 import { LoginModule } from './User/login/login.module';
 import { SignupModule } from './User/signup/signup.module';
 import { PasswordforgottenModule } from './User/passwordforgotten/passwordforgotten.module';
@@ -25,6 +26,10 @@ import { GamesModule } from './admin/games/games.module';
 import { UsersModule } from './admin/users/users.module';
 import { TableheaderModule } from './admin/tableheader/tableheader.module';
 import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.module';
+
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './User/login/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -55,8 +60,10 @@ import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.m
         UsersModule,
         TableheaderModule,
         AssignedticketsModule,
+        ReactiveFormsModule,
+        HttpClientModule
     ],
-    providers: [DatePipe],
+    providers: [DatePipe, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
     bootstrap: [AppComponent],
 })
 export class AppModule {

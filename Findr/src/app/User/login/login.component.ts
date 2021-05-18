@@ -1,4 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from './auth.service';
+
 
 @Component({
     selector: 'app-login',
@@ -8,17 +12,42 @@ import { Component, OnInit, Output } from '@angular/core';
 export class LoginComponent implements OnInit {
     username: String;
     password: String;
+    form: FormGroup;
+
     accounts = [{naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont"}];
-    constructor() { }
+
+    constructor(private fb: FormBuilder, 
+                private authService: AuthService) 
+    {
+        this.form = this.fb.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required]
+    });
+}
 
     ngOnInit(): void { }
 
     login() {
-        if (this.username == this.accounts[0].naam && this.password == this.accounts[0].wachtwoord){
-            console.log("You are now logged in");
-            console.log(this.accounts[0].naam + " " + this.accounts[0].wachtwoord);
-        } else {
-            console.log("Error, no username")
+        const val = this.form.value;
+    
+        if(val.email == "test" && val.password == "test")
+        {
+          if (val.email && val.password) {
+            this.authService.login(val.email, val.password).subscribe(res => console.log(res));
+          }
+    
+          if (val.email && val.password) {
+            this.authService.testding(val.email, val.password).subscribe(res => console.log(res));
+          }
         }
+        else
+        {
+          console.log("WRONG!");
+        }
+
+    
+      }
+    secret() {
+        this.authService.secret().subscribe(res => console.log(res));
     }
 }
