@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdmindataService} from '../admindata.service';
+import { AdmindataService } from '../admindata.service';
 
 @Component({
     selector: 'app-games',
@@ -15,21 +15,21 @@ export class GamesComponent implements OnInit {
     games = [
     ];
     constructor(private admindataService: AdmindataService) {
-        // this.admindataService.getGames().subscribe(response => {
-        //     this.fillGames(response);
-        //     this.allowViewToLoad();
-        // });
+        this.admindataService.getGames().subscribe(response => {
+            this.fillGames(response);
+            this.allowViewToLoad();
+        });
 
-        // this.admindataService.addGame("dit","dat", "nani").subscribe(response => {
-        //     console.log(response);
-        // });
+        this.admindataService.addGame("dit","dat", "nani").subscribe(response => {
+            console.log(response);
+        });
 
-        this.admindataService.deleteGame("x").subscribe(result => {
-            console.log(result)
-          },
-          error => {
-            console.log(error);
-          });
+        // this.admindataService.deleteGame("x").subscribe(result => {
+        //     console.log(result)
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     });
     }
 
     ngOnInit(): void {

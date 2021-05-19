@@ -2,8 +2,36 @@
     <div class="login">
         <div class="image" routerLink="/login"></div>
         <img src="../../assets/SVG/Logo.svg" width="175" height="175"/>
-        <input [(ngModel)]="username" class="username" type="text" placeholder="Username"/>
-        <input [(ngModel)]="password" class="password" type="password" placeholder="Password"/>
+        
+        <form [formGroup]="form">
+            <fieldset>
+            <legend>Login</legend>
+              <div class="form-field">
+                <label>Email:</label>
+              </div>
+                <div class="field">
+                  <input name="email" formControlName="email">
+                </div>
+              
+              <div class="form-field">
+                <label>Password:</label>
+              </div>
+                <div class="field">
+                  <input name="password" formControlName="password"
+                       type="password">
+                </div>
+              
+            </fieldset>
+            <div class="form-buttons">
+              <button class="button button-primary"
+                      (click)="login()">Login
+              </button>
+              <button class="button button-secondary"
+                      (click)="secret()">secret toookkeeeen
+              </button>
+            </div>
+        </form>
+
         <a class="forgot"  routerLink="/forgot-password">Forgot password</a>
 
         <div class="loginbuttons">
