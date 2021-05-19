@@ -21,24 +21,34 @@
     padding-top: 1%;
     box-shadow: 2px 2px 2px 2px black;    
     margin-top: 5%;
+    font-family: 'Archivo';
 }
 
 .username{
     padding-left: 5px;
+    margin-left: 20px;
+    margin-right:35px;
     border: 2px solid green;
     height: 40px;
-    width: 75%;
-    margin-top: 5%;
+    width: 100%;
+    margin-top: 10px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Archivo';
 }
 
 .password{
     padding-left: 5px;
+    margin-left: 20px;
+    margin-right:80px;
     border: 2px solid green;
     height: 40px;
-    width: 75%;
+    width: 100%;
     margin-top: 10px;
     box-sizing: border-box;
+    display: flex;
+    font-family: 'Archivo';
 }
 
 a {
@@ -50,8 +60,9 @@ a {
     font-weight: bold;
     color: #468aba;
     width: 75%;
-    font-size: 18px;
+    font-size: 16px;
     text-align: right;
+    font-family: 'Archivo';
 }
 
 .forgot:hover{
@@ -65,6 +76,7 @@ a {
     display: flex;
     flex-direction: column;
     margin-bottom: 5%;
+    font-family: 'Archivo';
 } 
 
 .login-button{
@@ -75,6 +87,7 @@ a {
     font-weight: bold;    
     width: 100%;
     height: 50px;
+    font-family: 'Archivo';
 }
 
 .login-button:hover {
@@ -102,6 +115,7 @@ a {
     margin-top: 5%;
     width: 100%;
     height: 50px;
+    font-family: 'Archivo';
 }
 
 

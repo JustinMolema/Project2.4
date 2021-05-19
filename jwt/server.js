@@ -158,9 +158,7 @@ function authenticateToken(req, res, next) {
 		next()
 	})
 	// Bearer TOKEN 
-
 }
-
 
 app.listen(port, () => {
 	console.log(`Express server listening on port ${port}`);

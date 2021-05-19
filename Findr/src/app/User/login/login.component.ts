@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
         private authService: AuthService) {
         this.form = this.fb.group({
             email: ['', Validators.required],
-            password: ['', Validators.required]
+        password: ['', Validators.required]
         });
     }
 
@@ -28,27 +28,26 @@ export class LoginComponent implements OnInit {
 
     login() {
         const val = this.form.value;
-
         if (val.email == "test" && val.password == "test") {
             if (val.email && val.password) {
+                
                 this.authService.login(val.email, val.password).subscribe(res => {
+                    
                     localStorage.setItem('jwt', res["accessToken"]);
+                    localStorage.setItem('refreshToken', res["refreshToken"]);
                     console.log(res["refreshToken"]);
-
                 });
-
-                if (val.email && val.password) {
-                    this.authService.testding(val.email, val.password).subscribe(res => console.log(res));
-                }
             }
             else {
                 console.log("WRONG!");
             }
-
-
         }
     }
     secret() {
-        this.authService.refreshToken().subscribe(res => console.log(res));
+        console.log("PLEASE WORK I BEG YOU1");
+        this.authService.refreshToken().subscribe(res => {
+            localStorage.setItem('jwt', res['accessToken'])
+            console.log("PLEASE WORK I BEG YOU2");
+        });
     }
 }

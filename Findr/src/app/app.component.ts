@@ -12,12 +12,9 @@ export class AppComponent {
 
     showHeader = false;
 
-    constructor(public router: Router) {
+    constructor(public router: Router) { }
 
-    }
-
-    ngOnInit(){
-    }
+    ngOnInit(){ }
 
     //TODO: conformation for warning, ban,  dismiss (user reported)
     //TODO: Add new game
