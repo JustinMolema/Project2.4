@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AdmindataService } from '../../admindata.service';
 
 @Component({
     selector: 'app-game',
@@ -10,7 +11,7 @@ export class GameComponent implements OnInit {
     _category: String;
     _subscribercount: Number;
 
-    constructor() { 
+    constructor(private admindataService: AdmindataService) { 
     }
 
     ngOnInit(): void {
@@ -43,9 +44,11 @@ export class GameComponent implements OnInit {
         return this._subscribercount;
     }
 
-    delete(name: String, offense: String): void {
-        if (confirm("Are you sure you want to delete this: Name: " + name + " Offense: " + offense)) {
+    delete(name: string): void {
+        if (confirm("Are you sure you want to delete game: " + name)) {
             alert("Item deleted");
+            console.log(typeof(name))
+            this.admindataService.deleteGame(name).subscribe(response => console.log(response));
         }
     }
 }

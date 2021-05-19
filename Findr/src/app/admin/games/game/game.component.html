@@ -14,17 +14,19 @@
             <div class="edit-view">
                 <button>
                     <div style="font-size: 18px; display: flex">
-                        <img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit"/>
+                        <img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit" />
                         <span style="margin-left: 5px">Edit</span>
                     </div>
                 </button>
             </div>
-            <button class="delete-view" (click)="delete(name, category)">
-                <div style="font-size: 18px; display: flex; color: lightgray;">
-                    <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete"/>
-                    <span style="margin-left: 5px">Delete</span>
-                </div>
-            </button>
+            <div class="delete-view">
+                <button (click)="delete(name.toString())">
+                    <div style="font-size: 18px; display: flex; color: lightgray;">
+                        <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete" />
+                        <span style="margin-left: 5px">Delete</span>
+                    </div>
+                </button>
+            </div>
         </div>
     </div>
-</div> 
+</div>

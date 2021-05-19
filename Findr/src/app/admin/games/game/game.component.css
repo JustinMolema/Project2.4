@@ -73,8 +73,11 @@ button:active{
 }
 
 .delete-view{
-    margin-left: 10px;
-    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width:100%;
 }
 
 p {

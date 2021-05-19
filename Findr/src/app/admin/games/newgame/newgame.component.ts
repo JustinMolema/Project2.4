@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdmindataService } from '../../admindata.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -13,7 +15,18 @@ class ImageSnippet {
 export class NewgameComponent implements OnInit {
     hasFileBeenSelected: boolean = false;
     selectedFile: ImageSnippet;
-    constructor() { }
+    form: FormGroup;
+    name;
+    description;
+    category;
+
+    constructor(private admindataService: AdmindataService, private fb: FormBuilder) { 
+        this.form = this.fb.group({
+            name: ['', Validators.required],
+            description: ['', Validators.required],
+            category: ['', Validators.required]
+        });
+    }
 
     ngOnInit(): void {
     }
@@ -30,4 +43,8 @@ export class NewgameComponent implements OnInit {
         this.hasFileBeenSelected = true;
     }
 
+    addGame(){
+        const val = this.form.value;
+        this.admindataService.addGame(val.name, val.description, val.category).subscribe(response => console.log(response));
+    }
 }

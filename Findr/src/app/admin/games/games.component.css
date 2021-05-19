@@ -58,6 +58,14 @@
     width: 125px;
 }
 
+.addgame:hover{
+    background-color: rgba(100, 116, 206, 0.822);;
+}
+
+.addgame:hover{
+    background-color: rgba(100, 116, 206, 0.9);;
+}
+
 .records-and-search {
     margin-bottom: 10px;
     display: flex;

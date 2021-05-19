@@ -10,6 +10,7 @@ export class GamesComponent implements OnInit {
     searchText: string;
     max: Number;
     isLoaded: boolean;
+    addingNewGame = false;
 
     keys = [];
     games = [
@@ -20,16 +21,8 @@ export class GamesComponent implements OnInit {
             this.allowViewToLoad();
         });
 
-        this.admindataService.addGame("dit","dat", "nani").subscribe(response => {
-            console.log(response);
-        });
 
-        // this.admindataService.deleteGame("x").subscribe(result => {
-        //     console.log(result)
-        //     },
-        //     error => {
-        //         console.log(error);
-        //     });
+        this.admindataService.deleteGame("rerer").subscribe(response => console.log(response));
     }
 
     ngOnInit(): void {

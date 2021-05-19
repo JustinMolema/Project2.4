@@ -1,6 +1,6 @@
 <meta name="Description" content="This page is for displaying games">
 <div class="content">
-    <!-- <div class="new-game-tab">
+    <div class="new-game-tab" *ngIf="addingNewGame">
         <div class="header_text">
             <h1> GAMES
                 &#8674; NEW
@@ -9,14 +9,14 @@
         <div class="games-tab-content">
             <app-newgame></app-newgame>
         </div>
-    </div> -->
-    <div class="game-admin-tab">
+    </div>
+    <div class="game-admin-tab" *ngIf="!addingNewGame">
         <div class="header_text">
             <h1> GAMES
             </h1>
         </div>
         <div class="games-tab-content">
-            <button class="addgame" routerLink="new">
+            <button class="addgame" (click)="addingNewGame = !addingNewGame">
                 <div style="font-size: 18px; display: flex">
                     <img src="../../../../assets/SVG/add.svg" style="width: 20px; height: 20px;" alt="Edit" />
                     <span style="margin-top: 1px; margin-left: 10px; font-size: 15px;">Add game</span>
@@ -42,7 +42,8 @@
             </div>
             <hr class="line">
 
-            <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="games" [actionSize]='0.25' [infoSize]='0.25'></app-tableheader>
+            <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="games" [actionSize]='0.25' [infoSize]='0.25'>
+            </app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let game of games | tablefilter:keys:searchText |  slice:0:max; index as i">
