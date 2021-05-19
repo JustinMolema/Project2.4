@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdmindataService } from './admin/admindata.service';
 
 @Component({
     selector: 'app-root',
@@ -16,7 +17,6 @@ export class AppComponent {
     }
 
     ngOnInit(){
-
     }
 
     //TODO: conformation for warning, ban,  dismiss (user reported)

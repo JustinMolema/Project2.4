@@ -25,6 +25,7 @@ import { GamesModule } from './admin/games/games.module';
 import { UsersModule } from './admin/users/users.module';
 import { TableheaderModule } from './admin/tableheader/tableheader.module';
 import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.module';
+import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
 
 
 @NgModule({
@@ -55,8 +56,9 @@ import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.m
         UsersModule,
         TableheaderModule,
         AssignedticketsModule,
+        HttpClientModule
     ],
-    providers: [DatePipe],
+    providers: [DatePipe, HttpClient],
     bootstrap: [AppComponent],
 })
 export class AppModule {

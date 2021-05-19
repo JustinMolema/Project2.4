@@ -13,14 +13,13 @@ export class TableheaderComponent implements OnInit {
     _actionSize = 0.2;
     _infoSize = 0.2;
 
-    keys = [];
+    _keys = [];
     _items = [];
 
     constructor(public datepipe: DatePipe) {
     }
 
     ngOnInit(): void {
-        this.keys = Object.keys(this.items[0]);
     }
 
     ngAfterViewInit() {
@@ -35,6 +34,16 @@ export class TableheaderComponent implements OnInit {
     get items() {
         return this._items;
     }
+
+    @Input()
+    set keys(keys: any[]) {
+        this._keys = keys;
+    }
+
+    get keys() {
+        return this._keys;
+    }
+
 
     @Input()
     set actionSize(size:any){
