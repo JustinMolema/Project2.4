@@ -25,7 +25,7 @@ app.listen(8001, () => {
 	console.log('Server started!')
 })
 
-app.route('/api/users').get((req, res) => {
+app.route('/api/users').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM users', function (err, result, fields) {
 		if (err) throw err;
@@ -33,7 +33,7 @@ app.route('/api/users').get((req, res) => {
 	})
 })
 
-app.route('/api/games').get((req, res) => {
+app.route('/api/games').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM games', function (err, result, fields) {
 		if (err) throw err;
@@ -62,21 +62,20 @@ app.route('/api/addgame').post((req, res) => {
 	})
 })
 
-app.route('/api/deletegame').delete((req, res) => {
-	console.log("deleting");
+app.route('/api/deletegame/:name').delete((req, res) => {
+	let name = req.params['name']
 
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "*");
 	res.header("Access-Control-Allow-Headers", "*");
-	res.json({ status: "ok" });
 
-	// connection.connect(function (err) {
-	// 	connection.query('DELETE FROM games WHERE GameName = ?', ["dit"], function (err, result, fields) {
-	// 		if (err) return res.json({ status: "error" });
+	connection.connect(function (req, err) {
+		connection.query('DELETE FROM games WHERE GameName = ?', [name], function (err, result, fields) {
+			if (err) return res.json({ status: "error" });
 
-	// 		res.json({ status: "ok" });
-	// 	})
-	// })
+			res.json({ status: "ok" });
+		})
+	})
 })
 
 let refreshTokens = []
@@ -158,12 +157,10 @@ function authenticateToken(req, res, next) {
 		next()
 	})
 	// Bearer TOKEN 
-
 }
-
 
 app.listen(port, () => {
 	console.log(`Express server listening on port ${port}`);
 });
 
-app.use(cors)
+app.use(cors())

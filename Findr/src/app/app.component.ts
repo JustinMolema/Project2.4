@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdmindataService } from './admin/admindata.service';
+import { AuthService } from './User/login/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -12,11 +13,23 @@ export class AppComponent {
 
     showHeader = false;
 
-    constructor(public router: Router) {
+    constructor(public router: Router, private authService: AuthService) { }
 
+    ngOnInit(){ 
+        this.refreshToken();
+        this.setRefreshInterval();
     }
 
-    ngOnInit(){
+    setRefreshInterval(): void{
+        setInterval(() => {
+            this.refreshToken();
+        }, 1499000);
+    }
+
+    refreshToken(): void{
+        this.authService.refreshToken().subscribe(res => {
+            localStorage.setItem('jwt', res['accessToken'])
+        });
     }
 
     //TODO: conformation for warning, ban,  dismiss (user reported)

@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
     }
 
     secret() {
-        this.authService.refreshToken().subscribe(res => console.log(res));
+        console.log("PLEASE WORK I BEG YOU1");
+        this.authService.refreshToken().subscribe(res => {
+            localStorage.setItem('jwt', res['accessToken'])
+            console.log("PLEASE WORK I BEG YOU2");
+        });
     }
 }

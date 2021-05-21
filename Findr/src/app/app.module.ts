@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HttpClient, HttpClientModule, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './User/login/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginModule } from './User/login/login.module';
 import { SignupModule } from './User/signup/signup.module';
@@ -26,12 +29,6 @@ import { GamesModule } from './admin/games/games.module';
 import { UsersModule } from './admin/users/users.module';
 import { TableheaderModule } from './admin/tableheader/tableheader.module';
 import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.module';
-import { HttpClient, HttpClientModule, HttpHandler } from '@angular/common/http';
-
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './User/login/auth.interceptor';
-import { ReactiveFormsModule } from '@angular/forms';
-
 
 @NgModule({
     declarations: [AppComponent],

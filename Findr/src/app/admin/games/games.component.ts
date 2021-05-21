@@ -22,7 +22,7 @@ export class GamesComponent implements OnInit {
         });
 
 
-        this.admindataService.deleteGame("rerer").subscribe(response => console.log(response));
+        this.admindataService.deleteGame("fucking hell man").subscribe(response => console.log(response));
     }
 
     ngOnInit(): void {

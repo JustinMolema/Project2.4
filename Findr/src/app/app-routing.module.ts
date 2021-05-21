@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './User/login/login.component';
 import { AppComponent } from './app.component';
@@ -32,9 +33,7 @@ const routes: Routes = [
   {path: 'admin/users', component: UsersComponent},
   {path: 'admin/mytickets', component: AssignedticketsComponent},
   {path: 'admin/games/new', component: NewgameComponent},
-  {path: '**', redirectTo:'/login'},
-
-
+  {path: '**', redirectTo:'/login'}
 ];
 
 @NgModule({
@@ -42,5 +41,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {
-
 }

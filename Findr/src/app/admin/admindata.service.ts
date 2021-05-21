@@ -30,7 +30,7 @@ export class AdmindataService {
         console.log(name);
         let params: HttpParams = new HttpParams();
         params = params.set("name", name)
-        return this.http.post("http://localhost:8001/api/deletegame", params);
+        return this.http.delete("http://localhost:8001/api/deletegame/" + name);
     }
 
     getSupportTickets(): Observable<any> {
