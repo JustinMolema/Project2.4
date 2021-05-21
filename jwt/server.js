@@ -25,7 +25,7 @@ app.listen(8001, () => {
 	console.log('Server started!')
 })
 
-app.route('/api/users').get((req, res) => {
+app.route('/api/users').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM users', function (err, result, fields) {
 		if (err) throw err;
@@ -33,7 +33,7 @@ app.route('/api/users').get((req, res) => {
 	})
 })
 
-app.route('/api/games').get((req, res) => {
+app.route('/api/games').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM games', function (err, result, fields) {
 		if (err) throw err;
@@ -94,7 +94,7 @@ app.post('/api/login', (req, res) => {
 })
 
 function generateAccessToken(user) {
-	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' });
 }
 
 app.post('/api/token', (req, res) => {

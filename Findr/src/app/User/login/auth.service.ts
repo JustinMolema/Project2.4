@@ -14,6 +14,7 @@ export class AuthService {
   login(email: string, password: string): Observable<any>{
     let params: HttpParams = new HttpParams();
     params = params.set("username", email);
+    
     return this.http.post("http://localhost:8001/api/login/", params);
     // return this.http.post<any>('http://localhost:5000/api/login', {name: email, password}).pipe(
     //   tap(res => localStorage.setItem('jwt', res.token)));
