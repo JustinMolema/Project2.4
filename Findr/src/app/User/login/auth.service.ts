@@ -28,6 +28,7 @@ export class AuthService {
     params = params.set("token", localStorage.getItem('refreshToken'));
     return this.http.post("http://localhost:8001/api/token/", params);
   }
+  
   logout(): void{
     localStorage.removeItem('jwt');
     // localStorage.removeItem('expires_at');

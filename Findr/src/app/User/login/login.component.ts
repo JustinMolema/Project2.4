@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
             if (val.email && val.password) {
                 
                 this.authService.login(val.email, val.password).subscribe(res => {
-                    
                     localStorage.setItem('jwt', res["accessToken"]);
                     localStorage.setItem('refreshToken', res["refreshToken"]);
                     console.log(res["refreshToken"]);
