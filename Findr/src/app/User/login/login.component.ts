@@ -37,9 +37,6 @@ export class LoginComponent implements OnInit {
                     console.log(res)});
             }
 
-            if (val.email && val.password) {
-                this.authService.testding(val.email, val.password).subscribe(res => console.log(res));
-            }
         }
         else {
             console.log("WRONG!");

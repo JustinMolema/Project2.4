@@ -17,7 +17,7 @@ export class AppComponent {
 
     ngOnInit(){ 
         this.refreshToken();
-        this.setRefreshInterval();
+        this.authService.refreshTokenInterval = this.setRefreshInterval();
     }
 
     setRefreshInterval(): void{
@@ -27,6 +27,7 @@ export class AppComponent {
     }
 
     refreshToken(): void{
+        console.log("refresh dat shit");
         this.authService.refreshToken().subscribe(res => {
             localStorage.setItem('jwt', res['accessToken'])
         });

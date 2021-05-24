@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
+  refreshTokenInterval;
+
   constructor(private http: HttpClient) {
   }
 
@@ -30,18 +32,18 @@ export class AuthService {
     return this.http.post("http://localhost:8001/api/token/", params);
   }
   
-  testding(email: string, password: string)
-  {
-    return this.http.get<any>('http://localhost:5000/api')
-  } 
-  
   logout(): void{
     localStorage.removeItem('jwt');
+    localStorage.removeItem('refreshToken')
     // localStorage.removeItem('expires_at');
+    clearInterval(this.refreshTokenInterval);
   }
 
   secret()
   {
     return this.http.get<any>('http://localhost:5000/api/secret');
   }
+
+  
+
 }
