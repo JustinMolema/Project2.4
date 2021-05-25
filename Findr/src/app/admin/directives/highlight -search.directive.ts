@@ -8,18 +8,19 @@ export class HighlightSearchDirective {
     @Input() searchedWord: string;
     @Input() content: any;
     @Input() keys: [];
+    skip = ["subscribercount", "time", "GameID", "Image"]
 
     constructor(private el: ElementRef, private renderer: Renderer2, public datepipe: DatePipe) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.content) return;
         this.setHighlights();
+        
     }
 
     setHighlights() {
         for (let i = 0; i < this.keys.length; i++) {
-            if (this.keys[i] == "time" || this.keys[i] == "subscribercount") continue;
-
+            if (this.skip.includes(this.keys[i])) continue;
             this.renderer.setProperty(this.el.nativeElement.children[0].children[i].children[0], 'innerHTML', this.getFormattedText(this.keys[i]));
         }
     }

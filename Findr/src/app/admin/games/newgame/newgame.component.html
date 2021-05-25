@@ -11,10 +11,8 @@
                 <img src="{{ selectedFile.src }}">
             </label>
         </div>
-        <div class="uploadimage">
-            <label style="font-size: 15px; cursor: pointer; display: flex; justify-content: center; width: 100%"
-                for="upload">Upload image</label>
-        </div>
+        <label class="uploadimage" for="upload">Upload image</label>
+       
     </div>
     <div class="field">
         <div class="fieldnamecontainer">
@@ -46,6 +44,11 @@
         <textarea class="inputfieldcontainer" type="text" placeholder="Game Name" formControlName="description"></textarea>
     </div>
     <div style="width: 100%;display: flex; justify-content: flex-end;">
+        <button class="cancel" (click)="returnToGame('Are you sure you want to cancel?')">
+            <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
+                Cancel
+            </div>
+        </button>
         <button class="addgame" (click)="addGame()">
             <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
                 Add game

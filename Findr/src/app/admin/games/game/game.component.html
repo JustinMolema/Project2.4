@@ -1,18 +1,20 @@
 <div class="game-view">
     <div class="column-view">
-        <p>{{name}}
+        <p>{{game.name}}
         </p>
     </div>
     <div class="column-view">
-        <p>{{category}}</p>
+        <p>{{game.category}}</p>
     </div>
     <div class="column-view">
-        <p>{{subscribercount}}</p>
+        <!-- <p>{{game.subscribercount}}</p> -->
+        <p>5</p>
+
     </div>
     <div class="actions">
         <div class="button-container">
             <div class="edit-view">
-                <button>
+                <button (click)="editGame(game)">
                     <div style="font-size: 18px; display: flex">
                         <img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit" />
                         <span style="margin-left: 5px">Edit</span>
@@ -20,7 +22,7 @@
                 </button>
             </div>
             <div class="delete-view">
-                <button (click)="delete(name.toString())">
+                <button (click)="delete(game.Name)">
                     <div style="font-size: 18px; display: flex; color: lightgray;">
                         <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete" />
                         <span style="margin-left: 5px">Delete</span>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AdmindataService } from '../../admindata.service';
+import { GamesService } from '../games.service';
 
 @Component({
     selector: 'app-game',
@@ -7,41 +8,21 @@ import { AdmindataService } from '../../admindata.service';
     styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-    _name: String;
-    _category: String;
-    _subscribercount: Number;
+    _game: any;
 
-    constructor(private admindataService: AdmindataService) { 
+    constructor(private admindataService: AdmindataService, private gamesService: GamesService) { 
     }
 
     ngOnInit(): void {
     }
 
     @Input()
-    set name(name: String) {
-        this._name = name;
+    set game(game: any){
+        this._game = game;
     }
-
-    get name() {
-        return this._name;
-    }
-
-    @Input()
-    set category(category: String) {
-        this._category = category;
-    }
-
-    get category() {
-        return this._category;
-    }
-
-    @Input()
-    set subscribercount(subscribercount: Number) {
-        this._subscribercount = subscribercount;
-    }
-
-    get subscribercount() {
-        return this._subscribercount;
+    
+    get game(){
+        return this._game;
     }
 
     delete(name: string): void {
@@ -50,5 +31,9 @@ export class GameComponent implements OnInit {
             console.log(typeof(name))
             this.admindataService.deleteGame(name).subscribe(response => console.log(response));
         }
+    }
+
+    editGame(game: object){
+        this.gamesService.editGame(game);
     }
 }
