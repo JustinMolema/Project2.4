@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AdmindataService } from '../../admindata.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,11 +16,11 @@ export class NewgameComponent implements OnInit {
     hasFileBeenSelected: boolean = false;
     selectedFile: ImageSnippet;
     form: FormGroup;
-    name;
-    description;
-    category;
 
-    constructor(private admindataService: AdmindataService, private fb: FormBuilder) { 
+    @Input() returnToGames: Function
+
+    constructor(private admindataService: AdmindataService, private fb: FormBuilder) {
+        console.log("dfdfdf");
         this.form = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
@@ -43,8 +43,24 @@ export class NewgameComponent implements OnInit {
         this.hasFileBeenSelected = true;
     }
 
-    addGame(){
+    addGame() {
         const val = this.form.value;
-        this.admindataService.addGame(val.name, val.description, val.category).subscribe(response => console.log(response));
+        this.admindataService.addGame(val.name, val.description, val.category).subscribe(response => {
+            if (this.gameAlreadyExists(response))
+                alert("Game already exists")
+            else {
+                this.returnToGame("Game has been added");
+            }
+        });
+    }
+
+    returnToGame(alertText) {
+        if(confirm(alertText)){
+            this.returnToGames();
+        }
+    }    
+
+    gameAlreadyExists(response) {
+        return response["status"] == "error";
     }
 }

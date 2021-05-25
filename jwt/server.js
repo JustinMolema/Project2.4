@@ -45,16 +45,14 @@ app.route('/api/supporttickets').get((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
 		if (err) throw err;
-		console.log((result));
 		res.send(result);
 	})
 })
 
 app.route('/api/addgame').post((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	console.log("ff");
 	connection.connect(function (err) {
-		connection.query('insert into games (GameName, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
+		connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
 
 			res.json({ status: "ok" });
@@ -70,7 +68,7 @@ app.route('/api/deletegame/:name').delete((req, res) => {
 	res.header("Access-Control-Allow-Headers", "*");
 
 	connection.connect(function (req, err) {
-		connection.query('DELETE FROM games WHERE GameName = ?', [name], function (err, result, fields) {
+		connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
 
 			res.json({ status: "ok" });
@@ -88,7 +86,6 @@ app.post('/api/login', (req, res) => {
 	const accessToken = generateAccessToken(user);
 	const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 	refreshTokens.push(refreshToken)
-	console.log(refreshToken);
 	res.json({ accessToken: accessToken, refreshToken: refreshToken })
 })
 
@@ -100,15 +97,9 @@ app.post('/api/token', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 
 	const refreshToken = req.body.token;
-	console.log(refreshToken == null);
-	console.log(refreshToken);
-	console.log(typeof refreshToken);
-	console.log(refreshTokens.includes(refreshToken));
-	console.log(typeof refreshToken[0]);
 
 	if (refreshToken == null) return res.sendStatus(401)
 	if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-	console.log("here");
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 		if (err) return res.sendStatus(403)
 		const accessToken = generateAccessToken({ name: user.name })
@@ -146,7 +137,6 @@ app.post("/posts", authenticateToken, (req, res) => {
 })
 
 function authenticateToken(req, res, next) {
-	console.log("nani");
 	const authHeader = req.headers['authorization'];
 	const token = authHeader && authHeader.split(' ')[1]
 	if (token == null) return res.sendStatus(401)
@@ -156,7 +146,6 @@ function authenticateToken(req, res, next) {
 		req.user = user;
 		next()
 	})
-	// Bearer TOKEN 
 }
 
 app.listen(port, () => {
