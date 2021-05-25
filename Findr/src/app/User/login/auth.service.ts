@@ -33,6 +33,7 @@ export class AuthService {
     {
       this.router.navigate(['/login']);
       this.logout();
+      alert("Session Expired");
       return null;
     }
     let params: HttpParams = new HttpParams();
@@ -44,7 +45,7 @@ export class AuthService {
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.refreshTokenInterval = false;
-    
+
   }
 
   secret()

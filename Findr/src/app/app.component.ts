@@ -16,7 +16,6 @@ export class AppComponent {
     constructor(public router: Router, private authService: AuthService) { }
 
     ngOnInit(){ 
-        this.refreshToken();
         this.setRefreshInterval();
     }
 
