@@ -1,22 +1,24 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import {tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  refreshTokenInterval;
+  refreshTokenInterval: boolean = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(email: string, password: string): Observable<any>{
     let params: HttpParams = new HttpParams();
     params = params.set("username", email);
-    
+    this.refreshTokenInterval = true;
+
     return this.http.post("http://localhost:8001/api/login/", params);
     // return this.http.post<any>('http://localhost:5000/api/login', {name: email, password}).pipe(
     //   tap(res => localStorage.setItem('jwt', res.token)));
@@ -27,6 +29,12 @@ export class AuthService {
   }
 
   refreshToken() {
+    if(!localStorage.getItem('refreshToken'))
+    {
+      this.router.navigate(['/login']);
+      this.logout();
+      return null;
+    }
     let params: HttpParams = new HttpParams();
     params = params.set("token", localStorage.getItem('refreshToken'));
     return this.http.post("http://localhost:8001/api/token/", params);
@@ -34,16 +42,13 @@ export class AuthService {
   
   logout(): void{
     localStorage.removeItem('jwt');
-    localStorage.removeItem('refreshToken')
-    // localStorage.removeItem('expires_at');
-    clearInterval(this.refreshTokenInterval);
+    localStorage.removeItem('refreshToken');
+    this.refreshTokenInterval = false;
+    
   }
 
   secret()
   {
     return this.http.get<any>('http://localhost:5000/api/secret');
   }
-
-  
-
 }
