@@ -1,15 +1,10 @@
 <div class="gradient-background">
     <div class="login">
         <div class="inputs">
-            <div class="image" routerLink="/login"></div>
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo" />
-
             <form [formGroup]="form">
-
-                <input name="username" class="inputfields" formControlName="username" placeholder="Username">
-                <input name="password" class="inputfields" formControlName="password" type="password"
-                    placeholder="Password">
-
+                <input name="username" class="inputfields username" formControlName="username" placeholder="Username">
+                <input name="password" class="inputfields" formControlName="password" type="password" placeholder="Password">
             </form>
             <div class="actions">
                 <label class="remember_me" for="remember">
@@ -21,11 +16,10 @@
         </div>
         <div class="loginbuttons">
             <button class="login-button" (click)="login()">Login</button>
-            <button class="signup" routerLink="/signup"> Sign Up</button>
-            <div class="account">
-                Don't have an account?
-                <a class="no_account" routerLink="/login">Sign Up</a>
-            </div>
+        </div>
+        <div class="account">
+            Don't have an account?
+            <a class="no_account" routerLink="/signup">Sign Up</a>
         </div>
     </div>
 </div>

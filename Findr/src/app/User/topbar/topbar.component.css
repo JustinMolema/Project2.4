@@ -1,6 +1,6 @@
 header {
     position: fixed;
-    width: 300px;
+    width: 100%;
     top: 0;
     left: 0;
     right: 0;
@@ -38,8 +38,7 @@ header img {
     cursor: pointer;
 }
 
-
-a .image:hover{
+a .image:hover {
     animation: rotate-logo 2s ease-in forwards infinite  alternate;
 }
 

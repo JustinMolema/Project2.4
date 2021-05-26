@@ -4,125 +4,109 @@
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     overflow: auto;
 }
 
 .signup-form {
-    height: 700px;
-    min-height: 600px;
+    height: 550px;
+    min-height: 500px;
     width: 425px;
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    padding-top: 1%;
-    box-shadow: 2px 2px 2px 2px black;
     margin-top: 5%;
     padding-top: 1.5%;
-    box-shadow: 0px 0px 1px 1px rgb(8, 57, 117);
+    box-sizing: border-box;
 }
 
+.inputs {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+}
+
+form {
+    width: 75%;
+}
 
 h2{
     color: white;
 }
 
-.username{
-    padding-left: 5px;
-    height: 40px;
-    width: 75%;
-    margin-top: 1%;
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 50000000s;
+}
+
+input:-webkit-autofill::first-line {
+    font-size: 24px;
+}
+
+input {
+    width: 100%;
+    height: 45px;
+    padding-left: 10px;
+    font-size: 24px;
+    border-radius: 5px;
+    border: 1px solid #22305f;
+    background-color: #1b2956;  
+    color: white;
     box-sizing: border-box;
-    background-color: rgb(8, 57, 117, 0.3); 
-    border: 0px;
-    color: white;
-
-}
-
-.username::placeholder{
-    color: white;
-}
-
-.password{
-    padding-left: 5px;
-    height: 40px;
-    width: 75%;
-    margin-top: 10px;
-    box-sizing: border-box;
-    background-color: rgb(8, 57, 117, 0.3); 
-    border: 0px;
-    color: white;
-}
-
-.password::placeholder{
-    color: white;
+    margin-top: 3%;
 }
 
 a {
+    color: #468aba;
     text-decoration: none;
+    font-weight: bold;
+    color: #468aba;
 }
 
-.email{
-    padding-left: 5px;
-    height: 40px;
-    width: 75%;
-    margin-top: 10px;
-    box-sizing: border-box;
-    background-color: rgb(8, 57, 117, 0.3); 
-    border: 0px;
-    color: white;
-}
-
-.email::placeholder{
-    color: white;
+a:hover{
+    color: #ba7646;
 }
 
 .loginbuttons{
+    flex: 0.1;
     margin-top: 10%;
-    height: 10%;
     width: 75%;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 5%;
-}
+    align-items: center;
+} 
 
 img{
     cursor: pointer;
 }
 
-.signup{
-    background-image: linear-gradient(to right, #201f61 0%, #463c9e  51%,  #201f61 100%);
-    border: 1px solid black;
-    font-size: 125%;
-    color: white;
-    font-weight: bold;
-    width: 100%;
+button {
+    cursor: pointer;
+    background: #DC143C;
     height: 50px;
-    transition: 0.5s;
-    background-size: 200% auto;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 50px;
+    font-size: 125%;
+    color: #fff;
+    font-weight: bold;    
 }
 
-.signup:hover {
-    background-position: right center;
+button:hover {
+    background: #ca0030;
 }
 
-.signup:active{
-    background-position: left;
-}
-
-.alreadyHaveAnAccount {
-    font-weight: bold;
-    color: #468aba;
-    width: 75%;
-    font-size: 18px;
-    text-align: right;
-}
-
-.alreadyHaveAnAccount:hover{
-    color: #ba7646;
+button:active{
+    background: #ca0030;
+    opacity: 0.9;
 }
 
 .account{
@@ -131,50 +115,14 @@ img{
     margin-bottom: 5%;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus {
-    -webkit-text-fill-color: white;
-    -webkit-box-shadow: 0 0 0px 1000px #0b2258 inset;
-}
-
 @media (max-width: 450px){
     .signup-form {
-        width: 325px;
+        width: 95%;
+        height: 95%;
+        box-shadow: 0px 0px 1px 1px rgb(8, 57, 117, 0);
     }
-}
-
-@media (max-height: 800px) {
-    .signup-form {
-        height: 600px;
-    }
-}
-
-@media (max-height: 700px) {
-    .signup-form {
-        margin-top: 2%;
-    }
-}
-
-@media (max-height: 650px) {
-    .signup-form {
-        margin-top: 2vh;
-    }
-
-    .account {
-        margin-top: 20px;
-    }
-}
-
-@media (max-height: 620px) {
-    .signup-form {
-        margin-top: 0%;
-    }
-}
-
-@media (max-width: 325px) and (max-height: 800px){
-    .signup-form{
-        margin-top: 0%;
-        height: 100vh;
+    
+    .signup{
+        cursor: default;
     }
 }

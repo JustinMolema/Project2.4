@@ -1,13 +1,18 @@
 <div class="gradient-background">
     <div class="signup-form">
-        <div class="image"></div>
-        <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" routerLink="/login">
-        <h2>Welcome {{ name}}!</h2>
+        <div class="inputs">
 
-        <input class="email" type="text" placeholder="email" />
-        <input class="username" [(ngModel)]="name" type="text" placeholder="Username" />
-        <input class="password" type="password" placeholder="Password" />
-        <input class="password" type="password" placeholder="Confirm password" />
+            <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" routerLink="/login">
+            <h2>Welcome {{name}}!</h2>
+
+            <form>
+                <input class="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="name" type="text"
+                    placeholder="Username" />
+                <input class="email" type="text" placeholder="email" />
+                <input class="password" type="password" placeholder="Password" />
+                <input class="password" type="password" placeholder="Confirm password" />
+            </form>
+        </div>
 
         <div class="loginbuttons">
             <button class="signup"> Sign Up</button>

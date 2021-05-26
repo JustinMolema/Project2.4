@@ -6,6 +6,10 @@ html, body {
 
 body{
     background-color: #131c28;
+    /* background-image:  url("assets/SVG/wave.svg");
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed; */
 }
 
 * {
