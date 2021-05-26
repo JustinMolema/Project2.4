@@ -1,20 +1,31 @@
 <div class="gradient-background">
     <div class="login">
-        <div class="image" routerLink="/login"></div>
-        <img src="../../assets/SVG/Logo.svg" width="175" height="175"/>
-        
-        <form [formGroup]="form">
+        <div class="inputs">
+            <div class="image" routerLink="/login"></div>
+            <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo" />
 
-          <input name="email" class="username" formControlName="email" placeholder="Username">
-          <input name="password" class="password" formControlName="password" type="password" placeholder="Password">
-          
-      </form>
-        <a class="forgot" routerLink="/forgot-password">Forgot password</a>
+            <form [formGroup]="form">
 
+                <input name="username" class="inputfields" formControlName="username" placeholder="Username">
+                <input name="password" class="inputfields" formControlName="password" type="password"
+                    placeholder="Password">
+
+            </form>
+            <div class="actions">
+                <label class="remember_me" for="remember">
+                    <input type="checkbox" id="remember" class="remember">
+                    Remember me
+                </label>
+                <a class="forgot" routerLink="/forgot-password">Forgot password</a>
+            </div>
+        </div>
         <div class="loginbuttons">
             <button class="login-button" (click)="login()">Login</button>
             <button class="signup" routerLink="/signup"> Sign Up</button>
-            <button class="button button-secondary" (click)="secret()">secret toookkeeeen</button>
+            <div class="account">
+                Don't have an account?
+                <a class="no_account" routerLink="/login">Sign Up</a>
+            </div>
         </div>
     </div>
 </div>
