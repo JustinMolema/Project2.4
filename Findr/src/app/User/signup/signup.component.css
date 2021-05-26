@@ -56,7 +56,7 @@ input {
     padding-left: 10px;
     font-size: 24px;
     border-radius: 5px;
-    border: 1px solid #22305f;
+    border: 1px solid rgb(41, 57, 176);
     background-color: #1b2956;  
     color: white;
     box-sizing: border-box;
@@ -71,7 +71,7 @@ a {
 }
 
 a:hover{
-    color: #ba7646;
+    color: #B01030;
 }
 
 .loginbuttons{
@@ -90,10 +90,10 @@ img{
 
 button {
     cursor: pointer;
-    background: #DC143C;
+    background: #B01030;
     height: 50px;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid rgb(140, 130, 115);;
     border-radius: 50px;
     font-size: 125%;
     color: #fff;
@@ -101,11 +101,11 @@ button {
 }
 
 button:hover {
-    background: #ca0030;
+    background: #a20026;
 }
 
 button:active{
-    background: #ca0030;
+    background: #980424;
     opacity: 0.9;
 }
 
