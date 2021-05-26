@@ -2,8 +2,9 @@
     <div class="login">
         <div class="inputs">
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo" />
+
             <form [formGroup]="form">
-                <input name="username" class="inputfields username" formControlName="username" placeholder="Username">
+                <input name="username" class="inputfields username" formControlName="username" placeholder="Username" autofocus>
                 <input name="password" class="inputfields" formControlName="password" type="password" placeholder="Password">
             </form>
             <div class="actions">

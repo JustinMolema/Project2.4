@@ -6,9 +6,8 @@
             <h2>Welcome {{name}}!</h2>
 
             <form>
-                <input class="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="name" type="text"
-                    placeholder="Username" />
-                <input class="email" type="text" placeholder="email" />
+                <input name="username" class="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="name" type="text" placeholder="Username" />
+                <input name="email" class="email" type="text" placeholder="email" />
                 <input class="password" type="password" placeholder="Password" />
                 <input class="password" type="password" placeholder="Confirm password" />
             </form>
