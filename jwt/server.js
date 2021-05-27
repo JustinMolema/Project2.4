@@ -5,6 +5,8 @@ const app = express()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql')
 
+let rememberme = true;
+
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -45,14 +47,14 @@ app.route('/api/supporttickets').get((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
 		if (err) throw err;
-		console.log((result));
+		//console.log((result));
 		res.send(result);
 	})
 })
 
 app.route('/api/addgame').post((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	console.log("ff");
+	//console.log("ff");
 	connection.connect(function (err) {
 		connection.query('insert into games (GameName, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
@@ -61,6 +63,8 @@ app.route('/api/addgame').post((req, res) => {
 		})
 	})
 })
+
+
 
 app.route('/api/deletegame/:name').delete((req, res) => {
 	let name = req.params['name']
@@ -93,27 +97,51 @@ app.post('/api/login', (req, res) => {
 })
 
 function generateAccessToken(user) {
-	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+	if(rememberme = true)
+	{
+		console.log('43800m');
+		return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '43800m' });
+	}
+	else
+	{
+		console.log('25m');
+		return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+	}
+	
 }
 
 app.post('/api/token', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 
 	const refreshToken = req.body.token;
-	console.log(refreshToken == null);
+	/*console.log(refreshToken == null);
 	console.log(refreshToken);
 	console.log(typeof refreshToken);
 	console.log(refreshTokens.includes(refreshToken));
-	console.log(typeof refreshToken[0]);
+	console.log(typeof refreshToken[0]);*/
 
 	if (refreshToken == null) return res.sendStatus(401)
 	if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-	console.log("here");
+	//console.log("here");
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 		if (err) return res.sendStatus(403)
 		const accessToken = generateAccessToken({ name: user.name })
 		res.json({ accessToken: accessToken })
 	})
+})
+
+app.post('/api/remember', (req, res) => {
+	
+	res.header("Access-Control-Allow-Origin", "*");
+	if(req.body.remember == "true")
+	{
+		rememberme = true;
+	}
+	else
+	{
+		rememberme = false;
+	}
+	
 })
 
 // app.route('/api/cats/:name').get((req, res) => {

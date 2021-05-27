@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   refreshTokenInterval: boolean = false;
-
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -18,7 +17,7 @@ export class AuthService {
     let params: HttpParams = new HttpParams();
     params = params.set("username", email);
     this.refreshTokenInterval = true;
-
+    
     return this.http.post("http://localhost:8001/api/login/", params);
     // return this.http.post<any>('http://localhost:5000/api/login', {name: email, password}).pipe(
     //   tap(res => localStorage.setItem('jwt', res.token)));
@@ -29,7 +28,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    if(!localStorage.getItem('refreshToken'))
+    if(!localStorage.getItem('refreshToken') || !localStorage.getItem('jwt'))
     {
       this.router.navigate(['/login']);
       this.logout();
@@ -38,14 +37,27 @@ export class AuthService {
     }
     let params: HttpParams = new HttpParams();
     params = params.set("token", localStorage.getItem('refreshToken'));
+
+    /*this.updateRememberMe().subscribe(res => {
+      console.log("updated that shit");
+    });*/
+
     return this.http.post("http://localhost:8001/api/token/", params);
+  }
+
+  updateRememberMe(rememberme: boolean)
+  {
+    let params: HttpParams = new HttpParams();
+    console.log(rememberme);
+    params = params.set("remember", rememberme.toString());
+    //console.log("????? WORK FOR THE LOVE OF GOD PLEASE BLIZZARD FIX YOUR SHIT");
+    return this.http.post("http://localhost:8001/api/remember/", params);
   }
   
   logout(): void{
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.refreshTokenInterval = false;
-
   }
 
   secret()

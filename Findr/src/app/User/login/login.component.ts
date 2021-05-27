@@ -10,8 +10,7 @@ import { AuthService } from './auth.service';
     styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    username: String;
-    password: String;
+    
     form: FormGroup;
 
     accounts = [{ naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont" }];
@@ -20,7 +19,8 @@ export class LoginComponent implements OnInit {
         private authService: AuthService, private router: Router) {
         this.form = this.fb.group({
             email: ['', Validators.required],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
+            rememberme: [false]
         });
     }
 
@@ -31,26 +31,25 @@ export class LoginComponent implements OnInit {
 
         if (val.email == "test" && val.password == "test") {
             if (val.email && val.password) {
+                console.log(val.rememberme)
+                this.authService.updateRememberMe(val.rememberme).subscribe(res => {
+                });
+
                 this.authService.login(val.email, val.password).subscribe(res => {
                     localStorage.setItem('jwt', res["accessToken"]);
                     localStorage.setItem('refreshToken', res["refreshToken"]);
                     console.log(res)});
-                    //TODO: add navigation to games page
                     this.router.navigate(["/games"]);
-
             }
-
         }
         else {
             console.log("WRONG!");
         }
     }
 
-    secret() {
-        console.log("PLEASE WORK I BEG YOU1");
-        this.authService.refreshToken().subscribe(res => {
-            localStorage.setItem('jwt', res['accessToken'])
-            console.log("PLEASE WORK I BEG YOU2");
-        });
-    }
+    // secret() {
+    //     this.authService.refreshToken().subscribe(res => {
+    //         localStorage.setItem('jwt', res['accessToken'])
+    //     });
+    // }
 }

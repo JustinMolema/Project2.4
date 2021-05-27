@@ -24,7 +24,7 @@
     font-family: 'Archivo';
 }
 
-.username{
+.username {
     padding-left: 5px;
     margin-left: 20px;
     margin-right:35px;
@@ -51,6 +51,13 @@
     font-family: 'Archivo';
 }
 
+.remember{
+    margin-top: 10px;
+    flex-direction: column;
+    flex:.5;
+    align-items: left;
+}
+
 a {
     text-decoration: none;
 }
@@ -63,6 +70,9 @@ a {
     font-size: 16px;
     text-align: right;
     font-family: 'Archivo';
+    flex-direction: column;
+    flex:.5;
+    align-items: right;
 }
 
 .forgot:hover{
