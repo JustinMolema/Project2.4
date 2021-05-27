@@ -1,56 +1,66 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from './auth.service';
 
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
-    form: FormGroup;
+  form: FormGroup;
 
-    accounts = [{ naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont" }];
+  accounts = [{naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont"}];
 
-    constructor(private fb: FormBuilder,
-        private authService: AuthService, private router: Router) {
-        this.form = this.fb.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required],
-            rememberme: [true]
-        });
-    }
+  constructor(private fb: FormBuilder,
+              private authService: AuthService, private router: Router) {
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      rememberme: [true]
+    });
+  }
 
-    ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
-    login() {
-        const val = this.form.value;
+  login() {
+    const val = this.form.value;
 
-        if (val.email == "test" && val.password == "test") {
-            if (val.email && val.password) {
-                this.authService.updateRememberMe(val.rememberme).subscribe(res => {
-                });
-
-                this.authService.login(val.email, val.password).subscribe(res => {
-                    localStorage.setItem('jwt', res["accessToken"]);
-                    localStorage.setItem('refreshToken', res["refreshToken"]);
-                    this.router.navigate(["/games"]);
-                    console.log(res)});
-
-
-            }
+    if (val.email == "test" && val.password == "test") {
+      if (val.email && val.password) {
+        if (val.rememberme == false) {
+          this.authService.login(val.email, val.password).subscribe(res => {
+            sessionStorage.setItem('jwt', res["accessToken"]);
+            sessionStorage.setItem('refreshToken', res["refreshToken"]);
+            this.router.navigate(["/games"]);
+            this.authService.localstorage = false;
+            console.log(res)
+          });
+        } else {
+          this.authService.login(val.email, val.password).subscribe(res => {
+            localStorage.setItem('jwt', res["accessToken"]);
+            localStorage.setItem('refreshToken', res["refreshToken"]);
+            this.router.navigate(["/games"]);
+            console.log(res)
+          });
         }
-        else {
-            console.log("WRONG!");
-        }
-    }
+        // this.authService.updateRememberMe(val.rememberme).subscribe(res => {
+        // });
 
-    // secret() {
-    //     this.authService.refreshToken().subscribe(res => {
-    //         localStorage.setItem('jwt', res['accessToken'])
-    //     });
-    // }
+
+      }
+    } else {
+      console.log("WRONG!");
+    }
+  }
+
+  // secret() {
+  //     this.authService.refreshToken().subscribe(res => {
+  //         localStorage.setItem('jwt', res['accessToken'])
+  //     });
+  // }
 }

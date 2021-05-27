@@ -42,6 +42,29 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 		res.send(JSON.stringify(result));
 	})
 })
+app.route('/api/chats').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * FROM chats', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
+app.route('/api/friends').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * FROM friends', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
+
+app.route('/api/profile').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	console.log("profile aks")
+	connection.query('SELECT * FROM profile', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
 
 app.route('/api/supporttickets').get((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -96,16 +119,17 @@ app.post('/api/login', (req, res) => {
 })
 
 function generateAccessToken(user) {
-	if(rememberme === true)
-	{
-		console.log('43800m');
-		return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '43800m' });
-	}
-	else
-	{
-		console.log('25m');
-		return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
-	}
+	// if(rememberme === true)
+	// {
+	// 	console.log('43800m');
+	// 	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '43800m' });
+	// }
+	// else
+	// {
+	// 	console.log('25m');
+	// 	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+	// }
+	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
 	
 }
 
@@ -143,6 +167,9 @@ app.post('/api/remember', (req, res) => {
 	
 })
 
+
+
+
 // app.route('/api/cats/:name').get((req, res) => {
 // 	// res.header("Access-Control-Allow-Origin", "*");
 // 	// res.header("Access-Control-Allow-Methods", "*");
@@ -163,17 +190,7 @@ app.post('/api/remember', (req, res) => {
 // 	res.sendStatus(204)
 // })
 
-
-const posts = [{ username: "Kenobi", title: "General" },
-{ username: "Robbin", title: "Noob" }]
-
-app.post("/posts", authenticateToken, (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.json(posts.filter(post => post.username === req.user.name));
-})
-
 function authenticateToken(req, res, next) {
-	console.log("nani");
 	const authHeader = req.headers['authorization'];
 	const token = authHeader && authHeader.split(' ')[1]
 	if (token == null) return res.sendStatus(401)
