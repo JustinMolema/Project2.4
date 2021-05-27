@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     accounts = [{ naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont" }];
 
     constructor(private fb: FormBuilder,
-        private authService: AuthService) {
+        private authService: AuthService, private router: Router) {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
@@ -33,10 +33,8 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('jwt', res["accessToken"]);
                     localStorage.setItem('refreshToken', res["refreshToken"]);
                     console.log(res)});
-            }
-
-            if (val.email && val.password) {
-                this.authService.testding(val.username, val.password).subscribe(res => console.log(res));
+                    //TODO: add navigation to games page
+                    this.router.navigate(["/games"]);
             }
         }
         else {

@@ -16,19 +16,26 @@ export class AppComponent {
     constructor(public router: Router, private authService: AuthService) { }
 
     ngOnInit(){ 
-        this.refreshToken();
         this.setRefreshInterval();
     }
 
     setRefreshInterval(): void{
         setInterval(() => {
-            this.refreshToken();
-        }, 1499000);
+            if(this.authService.refreshTokenInterval)
+            {
+                this.refreshToken();
+            }
+            // 1499000
+        }, 1000);
     }
 
     refreshToken(): void{
+        console.log("refresh dat shit");
         this.authService.refreshToken().subscribe(res => {
-            localStorage.setItem('jwt', res['accessToken'])
+            if(res != null)
+            {
+                localStorage.setItem('jwt', res['accessToken'])
+            }
         });
     }
 
@@ -36,4 +43,5 @@ export class AppComponent {
     //TODO: Add new game
     //TODO: SupportTickter view
     //TODO: Styling button (icons add)
+    //TODO: Automatic rerouting to /login if not logged in and trying to access games/friends/etc
 }
