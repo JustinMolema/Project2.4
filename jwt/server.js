@@ -96,7 +96,7 @@ app.post('/api/login', (req, res) => {
 })
 
 function generateAccessToken(user) {
-	if(rememberme = true)
+	if(rememberme === true)
 	{
 		console.log('43800m');
 		return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '43800m' });

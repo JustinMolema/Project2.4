@@ -15,7 +15,7 @@ export class AppComponent {
 
     constructor(public router: Router, private authService: AuthService) { }
 
-    ngOnInit(){ 
+    ngOnInit(){
         this.setRefreshInterval();
     }
 
@@ -30,7 +30,6 @@ export class AppComponent {
     }
 
     refreshToken(): void{
-        console.log("refresh dat shit");
         this.authService.refreshToken().subscribe(res => {
             if(res != null)
             {

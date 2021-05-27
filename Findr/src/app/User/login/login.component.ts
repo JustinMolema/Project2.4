@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
     styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    
+
     form: FormGroup;
 
     accounts = [{ naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont" }];
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
         this.form = this.fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
-            rememberme: [false]
+            rememberme: [true]
         });
     }
 
@@ -37,8 +37,10 @@ export class LoginComponent implements OnInit {
                 this.authService.login(val.email, val.password).subscribe(res => {
                     localStorage.setItem('jwt', res["accessToken"]);
                     localStorage.setItem('refreshToken', res["refreshToken"]);
-                    console.log(res)});
                     this.router.navigate(["/games"]);
+                    console.log(res)});
+
+
             }
         }
         else {
