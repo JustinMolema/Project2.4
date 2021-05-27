@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
+    <g mask="url(&quot;#SvgjsMask1011&quot;)" fill="none" >
+        <path d="M858.8 258.47 a178.16 178.16 0 1 0 356.32 0 a178.16 178.16 0 1 0 -356.32 0z" fill="rgba(28, 83, 142, 0.4)"  class="triangle-float2">        
+        </path>
+        <path d="M858.8 258.47 a178.16 178.16 0 1 0 356.32 0 a178.16 178.16 0 1 0 -356.32 0z" fill="rgba(28, 83, 142, 0.4)"  class="triangle-float1">
+        </path>
+    </g>
+    <defs>
+        <mask id="SvgjsMask1011">
+            <rect width="1440" height="560" fill="#ffffff"></rect>
+        </mask>
+        <style>
+
+            @keyframes float1 {
+                0%{
+                    transform: rotate(-1turn) scale(0.1) translate(4150px, 1275px)
+                }
+                100% {
+                    transform:rotate(-1turn) scale(0.1) translate(4150px, 1275px) rotate(1turn);
+                }
+            }
+            
+            .triangle-float1 {
+                animation: float1 60s infinite linear;
+            }
+
+            @keyframes float2 {
+                0%{
+                    transform: translate(0, 25px) scale(0.4);
+                }
+                50%{transform: translate(0px, 25px) scale(0.4)}
+                100%{transform: translate(0, 25px) scale(0.4)}
+            }
+            
+            .triangle-float2 {
+                animation: float2 4s infinite;
+            }
+
+        </style>
+    </defs>
+</svg>

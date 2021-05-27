@@ -1,6 +1,6 @@
 .gradient-background {
     background: #09143b;
-    background-image: url("../../../assets/SVG/waves2.svg");
+    background-image: url("../../../assets/SVG/waves2.svg"), url("../../../assets/SVG/stars.svg");
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;

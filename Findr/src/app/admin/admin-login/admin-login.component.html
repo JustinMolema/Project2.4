@@ -1,12 +1,16 @@
 <div class="gradient-background">
-    <div class="password-forgotten">
-        <div class="image"></div>
-        <img src="../../assets/Logo.svg" width="175" height="175" routerLink="/login" >
-        <input [(ngModel)]="username" class="username" type="text" placeholder="Username"/>
-        <input [(ngModel)]="password" class="password" type="password" placeholder="Password"/>
+    <div class="admin-login">
+        <div class="inputs">
+            <img src="../../assets/SVG/Logo-white.svg" width="175" height="175">
+            <h2 style="color: white">Admin Login</h2>
 
-        <div class="passwordbuttons">
-            <button class="password-button" (click)="checkUserNamePassword()">Login</button>
+            <form>
+                <input type="text" placeholder="Username" />
+                <input type="password" placeholder="Password" />
+            </form>
+        </div>
+        <div class="loginbutton">
+            <button>Login</button>
         </div>
     </div>
 </div>
