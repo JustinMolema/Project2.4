@@ -92,7 +92,6 @@ app.post('/api/login', (req, res) => {
 	const accessToken = generateAccessToken(user);
 	const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 	refreshTokens.push(refreshToken)
-	console.log(refreshToken);
 	res.json({ accessToken: accessToken, refreshToken: refreshToken })
 })
 

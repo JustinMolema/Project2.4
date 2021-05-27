@@ -48,7 +48,6 @@ export class AuthService {
   updateRememberMe(rememberme: boolean)
   {
     let params: HttpParams = new HttpParams();
-    console.log(rememberme);
     params = params.set("remember", rememberme.toString());
     //console.log("????? WORK FOR THE LOVE OF GOD PLEASE BLIZZARD FIX YOUR SHIT");
     return this.http.post("http://localhost:8001/api/remember/", params);

@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
         if (val.email == "test" && val.password == "test") {
             if (val.email && val.password) {
-                console.log(val.rememberme)
                 this.authService.updateRememberMe(val.rememberme).subscribe(res => {
                 });
 
