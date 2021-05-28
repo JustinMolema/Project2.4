@@ -1,11 +1,46 @@
+<!-- <div #layer1 class="layer1">
+    <div *ngFor="let star of stars; let i = index" class="star" [ngStyle]="getStyle(i)"> </div>
+</div> -->
+
+
+<div class="red">
+    <div class="space">
+        <div class="moon-space" id="Ganymedes">
+            <div class="moon">
+
+            </div>
+        </div>
+        <div class="moon-space" id="Io">
+            <div class="moon">
+
+            </div>
+        </div>
+        <div class="moon-space" id="Europa">
+            <div class="moon">
+
+            </div>
+        </div>
+        <div class="moon-space" id="Calisto">
+            <div class="moon">
+
+            </div>
+        </div>
+        <div class="jupiter">
+
+        </div>
+    </div>
+</div>
 <div class="gradient-background">
     <div class="login">
         <div class="inputs">
+
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo" />
 
             <form [formGroup]="form">
-                <input name="username" class="inputfields username" formControlName="username" placeholder="Username" autofocus>
-                <input name="password" class="inputfields" formControlName="password" type="password" placeholder="Password">
+                <input name="username" class="inputfields username" formControlName="username" placeholder="Username"
+                    autofocus>
+                <input name="password" class="inputfields" formControlName="password" type="password"
+                    placeholder="Password">
             </form>
             <div class="actions">
                 <label class="remember_me" for="remember">
@@ -24,3 +59,14 @@
         </div>
     </div>
 </div>
+
+<!-- <div #layer2 class="space layer2"></div>
+<div #layer3 class="space layer3"></div>
+<div class="wrapper">
+  <div #sphere class="sphere">
+    <div *ngFor="let a of s; let i = index" class="circle" style="transform: rotateY({{a}})"> </div>
+
+    <div class="weapon"></div>
+  </div>
+</div>
+<div class="planet"></div> -->
