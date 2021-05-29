@@ -11,6 +11,10 @@
     overflow: auto;
 }
 
+input:focus{
+    outline: none;
+}
+
 .admin-login {
     height: 550px;
     min-height: 500px;
