@@ -107,7 +107,7 @@
 .line {
     width: 100%;
     margin: 0;
-    height: 1px;
+    height: 0.9px;
     border-width: 0;
     background: black;
 }
@@ -115,6 +115,6 @@
 @media (max-width: 850px)
 {
   .content {
-      padding-left: 110px;
+      padding-left: 50px;
   }
 }

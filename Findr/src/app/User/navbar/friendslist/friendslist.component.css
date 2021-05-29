@@ -3,14 +3,14 @@
 }
 
 .friends-list-line {
-  border: 1px solid #5e8fcf62;
+  border: 1px solid #131c28;
 }
 
 button {
   border-radius: 10px;
 }
 
-button {
+.friends-list-button {
   cursor: pointer;
   width: 270px;
   height: 30px;
@@ -30,18 +30,18 @@ button {
   align-items: center;
 }
 
-button:hover {
+.friends-list-button:hover {
   background-color: #5e8fcf62;
   animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
-button:focus {
+.friends-list-button:focus {
   background-color: rgb(59, 80, 116);
   border: none;
   outline: none;
 }
 
-button:active {
+.friends-list-button:active {
   border: none;
   outline: none;
   filter: brightness(150%)
@@ -114,7 +114,7 @@ img {
 }
 
 @media (max-width: 800px) {
-  button {
+  .friends-list-button {
     animation: collapse-navbar 1s forwards;
     width: 80px;
     max-width: 80px;
@@ -127,17 +127,16 @@ img {
     color: rgba(0, 0, 0, 0);
   }
 
+  .friendname{
+    display: none;
+  }
+
   .navbaricon {
     width: 0;
     height: 0;
   }
 
   .navbaricondiv {
-    width: 0;
-    height: 0;
-  }
-
-  .navbartext {
     width: 0;
     height: 0;
   }
@@ -171,4 +170,99 @@ img {
   100% {
     filter: brightness(100%);
   }
+}
+
+.friends-list-button-collapsed {
+  cursor: pointer;
+  
+  border-radius: 10px;
+  font-weight: 100;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+
+  animation: collapse-navbar 1s forwards;
+  width: 80px;
+  max-width: 80px;
+  min-width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: url("https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png");
+  background-size: contain;
+  color: rgba(0, 0, 0, 0);
+}
+
+.friends-title-collapsed{
+  flex: 0.8;
+  display: flex;
+  width: 0;
+  height: 0;
+  color: rgba(0, 0, 0, 0);
+  display: none;
+}
+
+.navbaricon-collapsed {
+  position: relative;
+  height: 30px;
+  margin-right: 30px;
+
+  width: 10px;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+}
+
+.navbaricondiv-collapsed {
+  flex: 0.25;
+  width: 0;
+  height: 0;
+}
+.see-more-button-collapsed {
+  cursor: pointer;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-weight: 100;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  padding-left: 30px;
+
+  animation: collapse-navbar 1s forwards;
+  width: 80px;
+  max-width: 80px;
+  min-width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
+  background-size: contain;
+  color: rgba(0, 0, 0, 0);
+}
+
+.see-more-button-collapsed:hover {
+  background-color: #5e8fcf62;
+  animation: nvb-button-Animation 2s ease-in-out infinite backwards;
+}
+
+.see-more-button-collapsed:focus {
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
+}
+
+.see-more-button-collapsed:active {
+  border: none;
+  outline: none;
+  filter: brightness(150%)
 }

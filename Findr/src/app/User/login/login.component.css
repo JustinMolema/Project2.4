@@ -1,6 +1,6 @@
 .gradient-background {
     background: #09143b;
-    background-image: url("../../../assets/SVG/waves2.svg");
+    background-image: url("../../../assets/SVG/waves2.svg"), url("../../../assets/SVG/stars.svg");
     background-position: center center;
     background-size: cover;
     background-attachment: fixed;
@@ -21,17 +21,11 @@
     margin-top: 5%;
     padding-top: 1.5%;
     box-sizing: border-box;
+    z-index: 10;
 }
 
-.username {
-    padding-left: 5px;
-    margin-left: 20px;
-    margin-right:35px;
-    border: 2px solid green;
-    height: 40px;
-    width: 100%;
-    margin-top: 10px;
-    box-sizing: border-box;
+.inputs {
+    flex: 0.8;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -66,6 +60,12 @@ input:-webkit-autofill::first-line {
     margin-top: 3%;
 }
 
+input:focus{
+    outline: none;
+}
+
+
+
 .actions {
     width: 75%;
     margin-top: 15px;
@@ -74,15 +74,14 @@ input:-webkit-autofill::first-line {
     color: white;
 }
 
-.remember{
-    margin-top: 10px;
-    flex-direction: column;
-    flex:.5;
-    align-items: left;
+.remember_me {
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
-a {
-    text-decoration: none;
+.remember {
+    margin-right: 10px;
 }
 
 .forgot {
@@ -95,13 +94,6 @@ a {
     text-decoration: none;
     font-weight: bold;
     color: #468aba;
-    width: 75%;
-    font-size: 16px;
-    text-align: right;
-    font-family: 'Archivo';
-    flex-direction: column;
-    flex:.5;
-    align-items: right;
 }
 
 a:hover{
@@ -155,4 +147,24 @@ button:active{
     button {
         cursor: default;
     }
+}
+
+.layer1 {
+    /* background: red; */
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+   
+  
+.star {
+    background-color:#fff;
+    border-radius:50%;
+    height:2px;
+    position:absolute;
+    width:2px;
+    z-index:-1;
 }

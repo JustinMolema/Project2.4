@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AdmindataService } from '../admindata.service';
 import { GamesService } from './games.service';
+import { Admindata } from '../admindata';
 
 @Component({
     selector: 'app-games',
     templateUrl: './games.component.html',
     styleUrls: ['./games.component.css']
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent implements OnInit, Admindata {
     searchText: string;
     max: Number;
     isLoaded: boolean;
@@ -18,21 +19,21 @@ export class GamesComponent implements OnInit {
 
     constructor(private admindataService: AdmindataService, private gamesService: GamesService) {
         this.gamesService.setGameComponent(this);
-        this.getGames();
+        this.getData();
     }
 
     ngOnInit(): void {
 
     }
 
-    getGames() {
+    getData() {
         this.admindataService.getGames().subscribe(response => {
-            this.fillGames(response);
+            this.fillData(response);
             this.allowViewToLoad();
         });
     }
 
-    fillGames(response: any): void {
+    fillData(response: any): void {
         for (let game of response) {
             this.games.push(game);
         }
@@ -61,7 +62,7 @@ export class GamesComponent implements OnInit {
 
     returnToGames() {
         this.clearGames();
-        this.getGames();
+        this.getData();
         this.addingNewGame = false;
     }
 
