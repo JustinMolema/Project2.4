@@ -13,7 +13,7 @@ export class AdmindataService {
     }
 
     getGames(): Observable<any> {
-        return this.http.get("http://localhost:8001/api/games");
+        return this.http.get("http://192.168.178.234:8001/api/games");
     }
 
     addGame(name: string, description: string, category: string): Observable<any> {

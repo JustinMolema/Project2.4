@@ -6,6 +6,7 @@ import { AppRoutingModule } from '../../app-routing.module';
 import {RouterModule, Router} from "@angular/router";
 import { ProviderAstType } from '@angular/compiler';
 import { WrongPasswordHandler } from './wrongpasswordhandler';
+import { LoginModule } from '../../User/login/login.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { WrongPasswordHandler } from './wrongpasswordhandler';
     CommonModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    LoginModule
   ]
 })
 export class AdminLoginModule {

@@ -1,6 +1,6 @@
 <div class="content">
     <div class="reported-users-tab">
-        <div class="view-log-tab">
+        <!-- <div class="view-log-tab">
             <div class="header_text">
                 <h1> REPORTED USERS
                     &#8674; LOG
@@ -9,8 +9,8 @@
             <div class="reported-users-content">
                 <app-log></app-log>
             </div>
-        </div>
-        <!-- <div class="header_text">
+        </div> -->
+        <div class="header_text">
             <h1>REPORTED USERS</h1>
         </div>
         <div class="reported-users-content">
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <hr class="line">
-            <app-tableheader [items]="reported_users" [actionSize]='0.32' [infoSize]='0.17'></app-tableheader>
+            <app-tableheader [items]="reported_users" [keys]="keys" [actionSize]='0.32' [infoSize]='0.17'></app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let user of reported_users | tablefilter:keys:searchText |  slice:0:max; index as i">
@@ -41,6 +41,6 @@
                     [searchedWord]="searchText" [content]="user" [keys]="keys"></app-user>
                 <hr class="line">
             </ng-container>
-        </div> -->
+        </div>
     </div>
 </div>

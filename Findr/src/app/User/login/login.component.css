@@ -10,19 +10,6 @@
     overflow: auto;
 }
 
-.red {
-    overflow: hidden;
-    color: white;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    padding-top: 10%;
-    padding-right: 10%;
-    justify-content: flex-end;
-    box-sizing: border-box;
-}
-
 .login {
     height: 550px;
     min-height: 500px;
@@ -160,97 +147,6 @@ button:active{
     button {
         cursor: default;
     }
-}
-
-.space {
-    clear: fix;
-}
-.moon-space {
-    animation: rotate360 2s linear infinite;
-    width: 64px;
-    height: 64px;
-    border-radius: 100%;
-    position: absolute;
-}
-.jupiter {
-    width: 64px;
-    animation: rotate360 30s linear infinite;
-    height: 64px;
-    background-color: rgba(28, 83, 142, 0.4);
-    background: url("../../../assets/SVG/Jupiter.svg");
-    background-size: cover;
-    border-radius: 100%;
-}
-
-#Ganymedes {
-    animation-duration: 21.48s;
-}
-#Ganymedes .moon {
-    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ganymede%2C_moon_of_Jupiter%2C_NASA.jpg/266px-Ganymede%2C_moon_of_Jupiter%2C_NASA.jpg");
-    background-size: cover;
-    animation-duration: 8s;
-    width: 21px;
-    height: 21px;
-    left: -101px;
-}
-#Io {
-    animation-duration: 5.31s;
-}
-#Io .moon {
-    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Io%2C_moon_of_Jupiter%2C_NASA.jpg/266px-Io%2C_moon_of_Jupiter%2C_NASA.jpg");
-    background-size: cover;
-    width: 21px;
-    height: 21px;
-    left: -31px;
-}
-#Europa {
-    animation-duration: 10.65s;
-}
-#Europa .moon {
-    background: url("https://upload.wikimedia.org/wikipedia/commons/e/e4/Europa-moon-with-margins.jpg");
-    background-size: cover;
-    width: 21px;
-    height: 21px;
-    left: -61px;
-}
-#Calisto {
-    animation-duration: 50.07s;
-}
-#Calisto .moon {
-    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Callisto.jpg/266px-Callisto.jpg");
-    background-size: cover;
-    width: 21px;
-    height: 21px;
-    left: -181px;
-}
-.moon {
-    background-color: rgba(28, 83, 142, 0.4);
-
-    width: 18px;
-    height: 18px;
-    border-radius: 100%;
-    position: absolute;
-    left: -21px;
-    top: 32px;
-}
-@keyframes rotate360 {
-    from {
-        transform: rotate(0deg);
-   }
-    to {
-        transform: rotate(360deg);
-   }
-}
-@keyframes inAndOut {
-    0% {
-        transform: translate(0px, 0px);
-   }
-    50% {
-        transform: translate(-4px, -4px);
-   }
-    100% {
-        transform: translate(0px, 0px);
-   }
 }
 
 .layer1 {
