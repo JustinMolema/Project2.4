@@ -1,8 +1,40 @@
-<div class="navbar">
-        <app-chats></app-chats>
-        <app-profilebutton></app-profilebutton>    
-        <app-friends></app-friends>
-        <app-games></app-games>
+<div [ngClass]="(topbar.collapseNavbar == false) ? 'navbar' : 'navbarcollapsed'">
+        <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'" routerLink="chats">
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
+                  <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
+                       src="https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png">
+                </div>
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+                  Chats
+                </div>
+        </button>
+        <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'" routerLink="profile">
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
+                        <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
+                       src="https://cdn.discordapp.com/attachments/833684306462507011/842360214435266600/tandwiel_mooier.png">
+                </div>
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+                  Profile
+                </div>
+        </button>    
+        <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'" routerLink="friends">
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
+                        <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
+                       src="https://cdn.discordapp.com/attachments/833684306462507011/841025080946589726/sergfba.png">
+                </div>
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+                  Friends
+                </div>
+        </button> 
+        <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'" routerLink="games">
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
+                        <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
+                    src="https://cdn.discordapp.com/attachments/833684306462507011/841024213414051880/cracklogo_nog_beter.png">
+                </div>
+                <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+                    Games
+                </div>
+        </button>
         <app-friendslist></app-friendslist>
         <app-gameslist></app-gameslist>
 </div>

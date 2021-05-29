@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../login/auth.service';
+import { TopbarService } from './topbar.service';
 
 @Component({
   selector: 'app-topbar',
@@ -8,7 +9,8 @@ import { AuthService } from '../login/auth.service';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private topBarService: TopbarService) { }
 
   ngOnInit(): void {
   }
@@ -16,4 +18,14 @@ export class TopbarComponent implements OnInit {
   logout(){
     this.authService.logout();
   }
+
+  altCollapse(){
+    if (this.topBarService.collapseNavbar){
+      this.topBarService.collapseNavbar = false;
+    } else {
+      this.topBarService.collapseNavbar = true;
+    }
+  }
+
+  
 }

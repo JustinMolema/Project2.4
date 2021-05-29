@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TopbarService } from '../../topbar/topbar.service';
 
 @Component({
   selector: 'app-gameslist',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameslistComponent implements OnInit {
 
-  games = ["Fortnite", "Roblox", "Amogus", "Fall guys", "Five night at Freddys", "Rollercoaster Tycoon", "Minecraft", "Raid: Shadow Legends", "Overwatch"];
+  games = ["Fortnite", "Roblox", "Amogus", "Fall guys", "Five night at Freddy's", "Rollercoaster Tycoon", "Minecraft", "Raid: Shadow Legends", "Overwatch"];
   collapsed: boolean = true;
   showMoreText: string = "Show More ⬎";
   sliceAmount: number = 5;
+  topbar: TopbarService
 
-  constructor() { }
+  constructor(private topbarService: TopbarService) { 
+    this.topbar = topbarService;
+  }
 
   ngOnInit(): void {
   }

@@ -30,11 +30,13 @@ export class AppComponent {
     }
 
     refreshToken(): void{
-        console.log("refresh dat shit");
         this.authService.refreshToken().subscribe(res => {
-            if(res != null)
-            {
-                localStorage.setItem('jwt', res['accessToken'])
+            if(res != null) {
+              if (this.authService.localstorage){
+                localStorage.setItem('jwt', res['accessToken']);
+              } else {
+                sessionStorage.setItem('jwt', res['accessToken']);
+              }
             }
         });
     }

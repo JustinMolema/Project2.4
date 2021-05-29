@@ -32,7 +32,7 @@
                 </div>
             </div>
             <hr class="line">
-            <app-tableheader [items]="reported_users" [keys]="keys" [actionSize]='0.32' [infoSize]='0.17'></app-tableheader>
+            <app-tableheader [items]="reported_users" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let user of reported_users | tablefilter:keys:searchText |  slice:0:max; index as i">

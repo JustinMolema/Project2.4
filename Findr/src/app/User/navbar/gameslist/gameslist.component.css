@@ -5,7 +5,7 @@
 }
 
 .game-line {
-  border: 1px solid #5e8fcf62;
+  border: 1px solid #131c28;
 }
 
 .games-list-button {
@@ -124,8 +124,8 @@
 }
 
 @media (max-width: 800px) {
-  .games-list {
-  }
+  /* .games-list {
+  } */
 
   .games-list-button {
     animation: collapse-navbar 1s forwards;
@@ -154,6 +154,7 @@
     width: 0;
     height: 0;
     color: rgba(0, 0, 0, 0);
+    display: none;
   }
 
   .see-more-button {
@@ -168,4 +169,97 @@
     background-size: contain;
     color: rgba(0, 0, 0, 0);
   }
+}
+/* For the collapsed version */
+.games-list-button-collapsed {
+  padding-left: 10px;
+  cursor: pointer;
+  height: 30px;
+  border-radius: 10px;
+  font-weight: 100;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+
+  animation: collapse-navbar 1s forwards;
+  width: 80px;
+  max-width: 80px;
+  min-width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: url("https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg");
+  background-size: contain;
+  color: rgba(0, 0, 0, 0);
+}
+
+.navbaricon-collapsed {
+  position: relative;
+  border-radius: 50%;
+  margin-right: 30px;
+  width: 0;
+  height: 0;
+}
+
+.navbaricondiv-collapsed {
+  flex: 0.2;
+  width: 0;
+  height: 0;
+}
+
+.gametitle-collapsed {
+  flex: 0.8;
+  display: flex;
+  width: 0;
+  height: 0;
+  color: rgba(0, 0, 0, 0);
+  display: none;
+}
+
+.see-more-button-collapsed {
+  cursor: pointer;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-weight: 100;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  padding-left: 30px;
+  display: none;
+  animation: collapse-navbar 1s forwards;
+  width: 80px;
+  max-width: 80px;
+  min-width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
+  background-size: contain;
+  color: rgba(0, 0, 0, 0);
+}
+
+.see-more-button-collapsed:hover {
+  background-color: #5e8fcf62;
+  animation: nvb-button-Animation 2s ease-in-out infinite backwards;
+}
+
+.see-more-button-collapsed:focus {
+  background-color: rgb(59, 80, 116);
+  border: none;
+  outline: none;
+}
+
+.see-more-button-collapsed:active {
+  border: none;
+  outline: none;
+  filter: brightness(150%)
 }

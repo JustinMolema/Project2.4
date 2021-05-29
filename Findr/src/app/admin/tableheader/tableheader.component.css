@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: left;
     box-sizing: border-box;
-    flex: 0.2;
+    /* width: 10%; */
     border-right: 1px solid black;
 }
 
@@ -51,7 +51,7 @@
     align-items: center;
     justify-content: left;
     box-sizing: border-box;
-    flex: 0.2;
+    /* width: 10%; */
 }
 
 .tableheader {
