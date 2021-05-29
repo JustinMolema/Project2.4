@@ -6,14 +6,16 @@
             <form [formGroup]="form">
                 <input name="username" class="inputfields username" formControlName="username" placeholder="Username" autofocus>
                 <input name="password" class="inputfields" formControlName="password" type="password" placeholder="Password">
-            </form>
+            
             <div class="actions">
                 <label class="remember_me" for="remember">
-                    <input type="checkbox" id="remember" class="remember">
+                    <input type="checkbox" class="remember" formControlName="rememberme" checked>
                     Remember me
                 </label>
+            
                 <a class="forgot" routerLink="/forgot-password">Forgot password</a>
             </div>
+            </form>
         </div>
         <div class="loginbuttons">
             <button class="login-button" (click)="login()">Login</button>

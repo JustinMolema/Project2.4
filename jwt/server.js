@@ -5,6 +5,8 @@ const app = express()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql')
 
+let rememberme = true;
+
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -40,25 +42,52 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 		res.send(JSON.stringify(result));
 	})
 })
+app.route('/api/chats').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * FROM chats', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
+app.route('/api/friends').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * FROM friends', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
+
+app.route('/api/profile').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	console.log("profile aks")
+	connection.query('SELECT * FROM profile', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
 
 app.route('/api/supporttickets').get((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
 		if (err) throw err;
+		//console.log((result));
 		res.send(result);
 	})
 })
 
 app.route('/api/addgame').post((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
+	//console.log("ff");
 	connection.connect(function (err) {
-		connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
+		connection.query('insert into games (GameName, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
 
 			res.json({ status: "ok" });
 		})
 	})
 })
+
+
 
 app.route('/api/deletegame/:name').delete((req, res) => {
 	let name = req.params['name']
@@ -68,7 +97,7 @@ app.route('/api/deletegame/:name').delete((req, res) => {
 	res.header("Access-Control-Allow-Headers", "*");
 
 	connection.connect(function (req, err) {
-		connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
+		connection.query('DELETE FROM games WHERE GameName = ?', [name], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
 
 			res.json({ status: "ok" });
@@ -89,17 +118,21 @@ app.post('/api/login', (req, res) => {
 	res.json({ accessToken: accessToken, refreshToken: refreshToken })
 })
 
-function generateAccessToken(user) {
-	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
-}
+
 
 app.post('/api/token', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 
 	const refreshToken = req.body.token;
+	/*console.log(refreshToken == null);
+	console.log(refreshToken);
+	console.log(typeof refreshToken);
+	console.log(refreshTokens.includes(refreshToken));
+	console.log(typeof refreshToken[0]);*/
 
 	if (refreshToken == null) return res.sendStatus(401)
 	if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+	//console.log("here");
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 		if (err) return res.sendStatus(403)
 		const accessToken = generateAccessToken({ name: user.name })
@@ -127,14 +160,9 @@ app.post('/api/token', (req, res) => {
 // 	res.sendStatus(204)
 // })
 
-
-const posts = [{ username: "Kenobi", title: "General" },
-{ username: "Robbin", title: "Noob" }]
-
-app.post("/posts", authenticateToken, (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.json(posts.filter(post => post.username === req.user.name));
-})
+function generateAccessToken(user) {
+	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+}
 
 function authenticateToken(req, res, next) {
 	const authHeader = req.headers['authorization'];
@@ -146,6 +174,7 @@ function authenticateToken(req, res, next) {
 		req.user = user;
 		next()
 	})
+	// Bearer TOKEN 
 }
 
 app.listen(port, () => {

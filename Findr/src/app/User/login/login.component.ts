@@ -1,52 +1,57 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from './auth.service';
 
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-    form: FormGroup;
 
-    accounts = [{ naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont" }];
+  form: FormGroup;
 
-    constructor(private fb: FormBuilder,
-        private authService: AuthService, private router: Router) {
-        this.form = this.fb.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-    }
+//   accounts = [{naam: "PeterJanmetdehondindepan", wachtwoord: "johnpakthemindekont"}];
 
-    ngOnInit(): void { }
+  constructor(private fb: FormBuilder,
+              private authService: AuthService, private router: Router) {
+    this.form = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      rememberme: [true]
+    });
+  }
 
-    login() {
-        const val = this.form.value;
+  ngOnInit(): void {
+  }
 
-        if (val.username == "test" && val.password == "test") {
-            if (val.username && val.password) {
-                this.authService.login(val.username, val.password).subscribe(res => {
-                    localStorage.setItem('jwt', res["accessToken"]);
-                    localStorage.setItem('refreshToken', res["refreshToken"]);
-                    console.log(res)});
-                    //TODO: add navigation to games page
-                    this.router.navigate(["/games"]);
-            }
+  login() {
+    const val = this.form.value;
+
+    if (val.email == "test" && val.password == "test") {
+      if (val.email && val.password) {
+        if (val.rememberme == false) {
+          this.authService.login(val.email, val.password).subscribe(res => {
+            sessionStorage.setItem('jwt', res["accessToken"]);
+            sessionStorage.setItem('refreshToken', res["refreshToken"]);
+            this.router.navigate(["/games"]);
+            this.authService.localstorage = false;
+            console.log(res)
+          });
+        } else {
+          this.authService.login(val.email, val.password).subscribe(res => {
+            localStorage.setItem('jwt', res["accessToken"]);
+            localStorage.setItem('refreshToken', res["refreshToken"]);
+            this.router.navigate(["/games"]);
+            console.log(res)
+          });
         }
-        else {
-            console.log("WRONG!");
-        }
-    }
 
-    secret() {
-        console.log("PLEASE WORK I BEG YOU1");
-        this.authService.refreshToken().subscribe(res => {
-            localStorage.setItem('jwt', res['accessToken'])
-            console.log("PLEASE WORK I BEG YOU2");
-        });
+      }
+    } else {
+      console.log("WRONG!");
     }
+  }
 }
