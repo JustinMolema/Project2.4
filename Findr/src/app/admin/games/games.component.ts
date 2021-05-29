@@ -10,7 +10,7 @@ import { Admindata } from '../admindata';
 })
 export class GamesComponent implements OnInit, Admindata {
     searchText: string;
-    max: Number;
+    max: number;
     isLoaded: boolean;
     addingNewGame = false;
 
@@ -26,7 +26,7 @@ export class GamesComponent implements OnInit, Admindata {
 
     }
 
-    getData() {
+    getData(): void {
         this.admindataService.getGames().subscribe(response => {
             this.fillData(response);
             this.allowViewToLoad();
@@ -39,34 +39,34 @@ export class GamesComponent implements OnInit, Admindata {
         }
     }
 
-    allowViewToLoad() {
+    allowViewToLoad(): void {
         this.keys = ["Name", "Category", "subscribercount"] //Object.keys(this.games[0]);
         this.isLoaded = true;
     }
 
-    clearGames() {
+    clearGames(): void {
         this.keys = [];
         this.games = [];
         this.isLoaded = false;
     }
 
-    changeEvent(max: Number) {
+    changeEvent(max: number): any {
         if (max > 1) return this.max = max;
 
         this.max = this.games.length;
     }
 
-    get getReturnToGames() {
+    get getReturnToGames(): any {
         return this.returnToGames.bind(this);
     }
 
-    returnToGames() {
+    returnToGames(): void {
         this.clearGames();
         this.getData();
         this.addingNewGame = false;
     }
 
-    editGame(game){
+    editGame(game): any{
         this.addingNewGame = true;
     }
 }

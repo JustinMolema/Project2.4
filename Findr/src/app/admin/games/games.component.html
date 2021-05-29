@@ -17,7 +17,7 @@
         </div>
         <div class="games-tab-content">
             <button class="addgame" (click)="addingNewGame = !addingNewGame">
-                <div style="font-size: 18px; display: flex">
+                <div style="font-size: 18px; display: flex" >
                     <img src="../../../../assets/SVG/add.svg" style="width: 20px; height: 20px;" alt="Edit" />
                     <span style="margin-top: 1px; margin-left: 10px; font-size: 15px;">Add game</span>
                 </div>
@@ -40,7 +40,7 @@
                     <input class="search-input" type="search" [(ngModel)]="searchText" />
                 </div>
             </div>
-            <hr class="line">
+            <hr class="line headerline">
 
             <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="games" [actionSize]='25' [infoSize]='25'>
             </app-tableheader>
@@ -52,13 +52,6 @@
                     appHighlightSearch [searchedWord]="searchText" [content]="game" [keys]="keys"></app-game>
                 <hr class="line">
             </ng-container>
-
-            <!-- <ng-container *ngFor="let game of games2 | tablefilter:keys:searchText |  slice:0:max; index as i">
-                <app-game [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [name]=game.name [category]=game.category [subscribercount]=game.getSubscriberCount() 
-                    appHighlightSearch [searchedWord]="searchText" [content]="game" [keys]="keys"></app-game>
-                <hr class="line">
-            </ng-container> -->
         </div>
     </div>
 </div>

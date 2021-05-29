@@ -1,4 +1,4 @@
-<div class="report-user-view">
+<div class="header">
     <b *ngFor="let key of keys; index as i" [style.width.%]="infoSize" class="column-name" (click)="sortItems(columnName.innerHTML.toLowerCase())">
         <p #columnName class="tableheader">{{keys[i] | titlecase}}</p>
         <div style="display: flex; flex: 0.1">
@@ -11,5 +11,5 @@
     </b>
     <b class="actions" [style.width.%]="actionSize">
         <p class="tableheader">Actions</p>
-    </b> 
+    </b>
 </div>
