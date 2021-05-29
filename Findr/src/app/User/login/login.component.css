@@ -23,8 +23,15 @@
     box-sizing: border-box;
 }
 
-.inputs {
-    flex: 0.8;
+.username {
+    padding-left: 5px;
+    margin-left: 20px;
+    margin-right:35px;
+    border: 2px solid green;
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -67,14 +74,15 @@ input:-webkit-autofill::first-line {
     color: white;
 }
 
-.remember_me {
-    flex: 1;
-    display: flex;
-    align-items: center;
+.remember{
+    margin-top: 10px;
+    flex-direction: column;
+    flex:.5;
+    align-items: left;
 }
 
-.remember {
-    margin-right: 10px;
+a {
+    text-decoration: none;
 }
 
 .forgot {
@@ -87,6 +95,13 @@ a {
     text-decoration: none;
     font-weight: bold;
     color: #468aba;
+    width: 75%;
+    font-size: 16px;
+    text-align: right;
+    font-family: 'Archivo';
+    flex-direction: column;
+    flex:.5;
+    align-items: right;
 }
 
 a:hover{

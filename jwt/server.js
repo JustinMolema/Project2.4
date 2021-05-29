@@ -5,6 +5,8 @@ const app = express()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql')
 
+let rememberme = true;
+
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -40,6 +42,29 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 		res.send(JSON.stringify(result));
 	})
 })
+app.route('/api/chats').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * FROM chats', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
+app.route('/api/friends').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	connection.query('SELECT * FROM friends', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
+
+app.route('/api/profile').get(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	console.log("profile aks")
+	connection.query('SELECT * FROM profile', function (err, result, fields) {
+		if (err) throw err;
+		res.send(JSON.stringify(result));
+	})
+})
 
 app.route('/api/supporttickets').get((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -59,6 +84,8 @@ app.route('/api/addgame').post((req, res) => {
 		})
 	})
 })
+
+
 
 app.route('/api/deletegame/:name').delete((req, res) => {
 	let name = req.params['name']
@@ -90,7 +117,18 @@ app.post('/api/login', (req, res) => {
 })
 
 function generateAccessToken(user) {
+	// if(rememberme === true)
+	// {
+	// 	console.log('43800m');
+	// 	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '43800m' });
+	// }
+	// else
+	// {
+	// 	console.log('25m');
+	// 	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+	// }
 	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+	
 }
 
 app.post('/api/token', (req, res) => {
@@ -106,6 +144,23 @@ app.post('/api/token', (req, res) => {
 		res.json({ accessToken: accessToken })
 	})
 })
+
+app.post('/api/remember', (req, res) => {
+	
+	res.header("Access-Control-Allow-Origin", "*");
+	if(req.body.remember == "true")
+	{
+		rememberme = true;
+	}
+	else
+	{
+		rememberme = false;
+	}
+	
+})
+
+
+
 
 // app.route('/api/cats/:name').get((req, res) => {
 // 	// res.header("Access-Control-Allow-Origin", "*");
@@ -126,15 +181,6 @@ app.post('/api/token', (req, res) => {
 // app.route('/api/cats/:name').delete((req, res) => {
 // 	res.sendStatus(204)
 // })
-
-
-const posts = [{ username: "Kenobi", title: "General" },
-{ username: "Robbin", title: "Noob" }]
-
-app.post("/posts", authenticateToken, (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.json(posts.filter(post => post.username === req.user.name));
-})
 
 function authenticateToken(req, res, next) {
 	const authHeader = req.headers['authorization'];
