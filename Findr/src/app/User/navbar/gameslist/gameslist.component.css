@@ -235,7 +235,7 @@
   text-align: center;
   align-items: center;
   padding-left: 30px;
-  display: none;
+
   animation: collapse-navbar 1s forwards;
   width: 80px;
   max-width: 80px;

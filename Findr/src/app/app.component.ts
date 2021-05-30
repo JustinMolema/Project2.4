@@ -27,7 +27,7 @@ export class AppComponent {
                 console.log("sdfdsafdsf");
 
             }
-        }, 1000);
+        }, 149000);
     }
 
     refreshToken(): void {

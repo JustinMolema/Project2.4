@@ -1,10 +1,12 @@
 .current-friends-container {
+  /* background-color: yellow; */
   width: 100%;
   display: flex;
   align-items: center;
 }
 
 .friends-container {
+  /* background-color: salmon; */
   justify-content: left;
   align-items: start;
   margin-right: 20px;
@@ -13,6 +15,7 @@
 }
 
 .friend-name {
+  /* background-color: red; */
   font-size: 18px;
   margin-right: 20px;
   margin-left: 20px;
@@ -20,6 +23,7 @@
 }
 
 .friend-buttons {
+  /* background-color: green; */
   margin-left: 200px;
   flex: 1;
   margin-right: 20px;
@@ -31,9 +35,6 @@ img {
   width: 50px;
   border-radius: 50%;
 }
-
-/* .profile-pic{
-} */
 
 button {
   color: white;
@@ -57,4 +58,51 @@ button:hover {
 
 button:active {
   background-color: rgba(80, 141, 158, 0.5);
+}
+
+@media (max-width: 1600px){
+  .current-friends-container{
+    flex: auto;
+  }
+
+  .friend-buttons{
+    flex:auto;
+    overflow: hidden;
+    width: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left:0px;
+    padding-right: 0px;
+  }
+
+  .friend-name{
+    margin-right: 10px;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  .chat{
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .delete{
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848562840856035368/beautiful.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .block{
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563223015456809/beautiful2.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
 }

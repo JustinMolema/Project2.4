@@ -22,14 +22,6 @@
 	align-items: center;
 }
 
-.chat-input {
-    background-color: rgba(255, 255, 255, 0.007);
-    width: 1000px;
-    margin: 20px;
-    height: 50px;
-    border-radius: 15px;
-}
-
 .chat-inputfield{
     background-color: rgba(255, 255, 255, 0.055);
     color: white;
@@ -49,5 +41,19 @@ input:focus{
 @keyframes inputhover{
     100%{
         background-color: rgba(255, 255, 255, 0.157);
+    }
+}
+
+@media (max-width: 1200px){
+    .chat-inputfield{
+        max-width: 500px;
+        min-width: 1px;
+        height: 20px;
+        display: inline-flex;
+    }
+
+    .chat-tab{
+        overflow: hidden;
+        padding-left: 10%;
     }
 }

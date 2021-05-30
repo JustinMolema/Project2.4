@@ -52,3 +52,37 @@ button:hover {
 button:active {
   background-color: rgba(80, 141, 158, 0.5);
 }
+
+@media (max-width: 1600px){
+
+  .blocked-users {
+    flex: auto;
+  }
+
+  .blocked-user-name{
+    margin-right: 10px;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  .blocked-button-container {
+    flex:auto;
+    overflow: hidden;
+    width: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left:0px;
+    padding-right: 0px;
+  }
+
+  .unblock-button {
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848564015089451058/frtgyhujikolpkijuhyujikmolhnygtfrtgyhujikokijuhygt6rf5tgyhujikoijuhygtfrtgyhujikijuhygtfr5tgyhuji.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+
+  
+}

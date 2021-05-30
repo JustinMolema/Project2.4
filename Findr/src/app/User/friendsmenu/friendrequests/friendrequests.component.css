@@ -52,3 +52,50 @@ button:hover {
 button:active {
   background-color: rgba(80, 141, 158, 0.5);
 }
+
+@media (max-width: 1600px) {
+  .request-container{
+    flex: auto;
+  }
+
+  .friend-request-buttons {
+    flex:auto;
+    overflow: hidden;
+    width: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left:0px;
+    padding-right: 0px;
+  }
+
+  .friend-request-name {
+    margin-right: 10px;
+    margin-left: 10px;
+    white-space: nowrap;
+  }
+
+  .add {
+    width: 40px;
+    height: 40px;
+    background: url("https://media.discordapp.net/attachments/838036012969754674/848563510241656842/gfdnjipigdagnsdag.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .delete {
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563746216345620/trash.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .block {
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563223015456809/beautiful2.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+}
