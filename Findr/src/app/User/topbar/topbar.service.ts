@@ -8,8 +8,4 @@ export class TopbarService {
   collapseNavbar: boolean = false;
 
   constructor() { }
-
-  altCollapseNavBar(){
-      return this.collapseNavbar = !this.collapseNavbar;
-  }
 }
