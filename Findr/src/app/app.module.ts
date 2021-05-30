@@ -29,6 +29,7 @@ import { GamesModule } from './admin/games/games.module';
 import { UsersModule } from './admin/users/users.module';
 import { TableheaderModule } from './admin/tableheader/tableheader.module';
 import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.module';
+import {TabledataModule} from './admin/tabledata/tabledata.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -59,7 +60,8 @@ import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.m
         TableheaderModule,
         ReactiveFormsModule,
         AssignedticketsModule,
-        HttpClientModule
+        HttpClientModule,
+        TabledataModule
     ],
     providers: [DatePipe, HttpClient, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
     bootstrap: [AppComponent],

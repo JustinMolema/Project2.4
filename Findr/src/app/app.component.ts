@@ -24,17 +24,16 @@ export class AppComponent {
             this.refreshToken();
 
             if (this.authService.refreshTokenInterval) {
-                console.log("sdfdsafdsf");
 
             }
         }, 1000);
     }
 
     refreshToken(): void {
-        
+
         this.authService.refreshToken().subscribe(res => {
             if (res != null) {
-                
+
                 if (this.authService.localstorage) {
                     localStorage.setItem('jwt', res['accessToken']);
                 } else {
