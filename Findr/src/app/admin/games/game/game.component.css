@@ -8,7 +8,7 @@
 
 app-tabledata {
     display: flex;
-    width: 75%;
+    width: 25%;
 }
 
 button{
@@ -35,17 +35,6 @@ button:hover{
 
 button:active{
     background: #5e8fcf94;
-}
-
-.column-view {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    box-sizing: border-box;
-    width: 25%;
-    border-right: 1px solid black;
 }
 
 * {
@@ -88,7 +77,6 @@ p {
 
 .mobileHeader {
 	display: none;
-
 }
 
 @keyframes nvb-button-Animation
@@ -128,7 +116,7 @@ p {
         width: 100%;
     }
 
-	.column-view, .actions {
+	.actions {
 		padding: 0px;
 		/*border: 0px;*/
 		border-right: 0px;
@@ -136,10 +124,6 @@ p {
 		width: 100%;
 		justify-content: flex-end;
 		flex-direction: row-reverse;
-	}
-
-	.column-view {
-		border-bottom: 2px solid  rgb(100, 116, 206);
 	}
 
 	.mobileHeader{
@@ -152,10 +136,6 @@ p {
 	.button-container{
 		margin-left: 10px;
 		height: 100%;
-	}
-
-	button:hover {
-		background: #444444;
 	}
 
 	.edit-view {

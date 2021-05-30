@@ -4,12 +4,17 @@
     border-left: 1px solid black;
 }
 
+app-tabledata {
+    display: flex;
+    width: 17%;
+}
+
 button{
     cursor: pointer;
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0);
-    border-radius: 10px; 
+    border-radius: 10px;
     color: rgb(255, 255, 255);
     font-family: "Archivo";
     font-weight: 100;
@@ -26,7 +31,7 @@ button{
 button:hover{
     border: 0px solid rgba(0,0,0,0);
     background-color: #5e8fcf62;
-    animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+    animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
 button:active{
@@ -34,20 +39,10 @@ button:active{
     background: #5e8fcf94;
 }
 
-.column-view {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
+* {
     box-sizing: border-box;
-    flex: 0.17;
-    border-right: 1px solid black;
 }
 
-* { 
-    box-sizing: border-box;
-}
 .actions {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -55,7 +50,7 @@ button:active{
     align-items: center;
     justify-content: left;
     box-sizing: border-box;
-    flex: 0.32;
+    width: 32%;
 }
 
 .button-container {
@@ -87,6 +82,10 @@ p {
     margin-left: 5%;
 }
 
+.mobileHeader {
+    display: none;
+}
+
 @keyframes nvb-button-Animation
 {
     0%
@@ -108,5 +107,69 @@ p {
         visibility: none;
         color: white;
         display: none;
+    }
+}
+
+@media (max-width: 850px){
+    .report-user-view {
+        /*background-color: #303030;*/
+        background-color: #212b46;
+        flex-direction: column;
+        border: 2px solid  rgb(100, 116, 206);
+    }
+
+    app-tabledata {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .actions {
+        padding: 0px;
+        /*border: 0px;*/
+        border-right: 0px;
+        height: 100%;
+        width: 100%;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+
+    .mobileHeader{
+        height: 100%;
+        display: block;
+        border-right: 2px solid  rgb(100, 116, 206);
+        width: 35%;
+    }
+
+    .button-container{
+        margin-left: 10px;
+        height: 100%;
+    }
+
+    .log-view, .warning-view, .ban-view, .dismiss-view {
+        height: 100%;
+        padding: 5px;
+    }
+
+    .field {
+
+        width: 60%;
+    }
+
+    p {
+        margin-left: 10px;
+    }
+
+    b {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 530px) {
+    .field {
+        width: 50%;
+    }
+
+    .mobileHeader{
+        width: 45%;
     }
 }

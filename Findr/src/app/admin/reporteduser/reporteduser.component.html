@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <div class="content">
     <div class="reported-users-tab">
         <!-- <div class="view-log-tab">
@@ -16,6 +17,7 @@
         <div class="reported-users-content">
             <div class="records-and-search">
                 <div class="recordsperpage">
+                    <p>Records per page:</p>
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -23,15 +25,13 @@
                         <option value="50">50</option>
                         <option value="1"> All</option>
                     </select>
-                    <p>records per page
-                    </p>
                 </div>
                 <div class="search">
-                    <p> Search:</p>
-                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                    <input class="search-input" type="search" [(ngModel)]="searchText" placeholder="Search..." />
+                    <i class="fas fa-search"></i>
                 </div>
             </div>
-            <hr class="line">
+            <hr class="line headerline">
             <app-tableheader [items]="reported_users" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
 
             <hr class="line">
@@ -40,6 +40,7 @@
                     [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time appHighlightSearch
                     [searchedWord]="searchText" [content]="user" [keys]="keys"></app-user>
                 <hr class="line">
+                <br class="mobileBreak">
             </ng-container>
         </div>
     </div>

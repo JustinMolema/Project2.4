@@ -6,14 +6,12 @@ import {Component, OnInit, Input} from '@angular/core';
     styleUrls: ['./tabledata.component.css']
 })
 export class TabledataComponent implements OnInit {
-
+    @Input() key: string;
+    @Input() game = [];
     constructor() {
     }
 
     ngOnInit(): void {
     }
-
-    // @Input()
-    //
 
 }
