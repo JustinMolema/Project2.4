@@ -26,7 +26,7 @@ export class AppComponent {
             if (this.authService.refreshTokenInterval) {
 
             }
-        }, 1000);
+        }, 149000);
     }
 
     refreshToken(): void {
