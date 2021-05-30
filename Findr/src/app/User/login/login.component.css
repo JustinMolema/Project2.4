@@ -37,7 +37,7 @@ form {
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
     -webkit-text-fill-color: white;
     transition: background-color 50000000s;
@@ -54,7 +54,7 @@ input:-webkit-autofill::first-line {
     font-size: 24px;
     border-radius: 5px;
     border: 1px solid rgb(41, 57, 176);
-    background-color: #1b2956;  
+    background-color: #1b2956;
     color: white;
     box-sizing: border-box;
     margin-top: 3%;
@@ -63,8 +63,6 @@ input:-webkit-autofill::first-line {
 input:focus{
     outline: none;
 }
-
-
 
 .actions {
     width: 75%;
@@ -108,7 +106,7 @@ a:hover{
     display: flex;
     flex-direction: column;
     align-items: center;
-} 
+}
 
 button {
     cursor: pointer;
@@ -119,7 +117,7 @@ button {
     border-radius: 50px;
     font-size: 125%;
     color: #fff;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 button:hover {
@@ -138,7 +136,7 @@ button:active{
 }
 
 @media (max-width: 450px){
-    .login {        
+    .login {
         width: 95%;
         height: 95%;
         box-shadow: 0px 0px 1px 1px rgb(8, 57, 117, 0);
@@ -158,8 +156,8 @@ button:active{
     overflow: hidden;
     pointer-events: none;
 }
-   
-  
+
+
 .star {
     background-color:#fff;
     border-radius:50%;

@@ -1,17 +1,38 @@
+<!--<header>-->
+<!--	<input type="checkbox" id="showmenu" class="showmenu" (click)="altCollapse()">-->
+<!--	<label for="showmenu" class="showmenulabel">-->
+<!--		<span></span>-->
+<!--	</label>-->
+<!--	<a routerLink="/games"><img class="image" width="40" alt="Angular Logo" src="../../assets/SVG/Logo-white.svg"/></a>-->
+<!--	<span class="findr">Findr</span>-->
+<!--	<div class="spacer"></div>-->
+<!--	<button class="bigtablink" id="defaultOpen" routerLink="login" (click)="logout()">Log Out</button>-->
+
+<!--	&lt;!&ndash; <nav>-->
+<!--		<ul>-->
+<!--			<li><button class="tablink" id="defaultOpen" routerLink="login" (click)="logout()">Log Out</button></li>-->
+<!--		</ul>-->
+<!--	</nav> &ndash;&gt;-->
+
+<!--</header>-->
+
 <header>
-    <input type="checkbox" id="showmenu" class="showmenu" (click)="altCollapse()">
-    <label for="showmenu" class="showmenulabel">
-        <span></span>
-    </label>
-    <a routerLink="/games"><img class="image" width="40" alt="Angular Logo" src="../../assets/SVG/Logo-white.svg"/></a>
-    <span class="findr">Findr</span>
-    <div class="spacer"></div>
-    <button class="bigtablink" id="defaultOpen" routerLink="login" (click)="logout()">Log Out</button>
+	<input type="checkbox" id="shownavbar" class="shownavbar" (click)="altCollapse()">
+	<label for="shownavbar" class="shownavbarlabel">
+		<span></span>
+	</label>
 
-    <!-- <nav>
-        <ul>
-            <li><button class="tablink" id="defaultOpen" routerLink="login" (click)="logout()">Log Out</button></li>
-        </ul>
-    </nav> -->
-
+	<a routerLink="/login"><img class="image" width="40" alt="Angular Logo" src="../../assets/SVG/Logo-white.svg"/></a>
+	<span class="findr">Findr</span>
+	<div class="spacer"></div>
+	<button class="bigtablink" id="defaultOpen" routerLink="login" (click)="logout()">Log Out</button>
+	<input type="checkbox" id="showmenu" class="showmenu">
+	<nav>
+		<ul>
+			<li><button class="tablink" id="defaultOpen" routerLink="login" (click)="logout()">Log Out</button></li>
+		</ul>
+	</nav>
+	<label for="showmenu" class="showmenulabel">
+		<span></span>
+	</label>
 </header>
