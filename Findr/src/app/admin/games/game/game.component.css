@@ -1,8 +1,14 @@
 .game-view {
 	height: 100%;
+    width: 100%;
     display: flex;
     border-right: 1px solid black;
     border-left: 1px solid black;
+}
+
+app-tabledata {
+    display: flex;
+    width: 75%;
 }
 
 button{
@@ -12,26 +18,22 @@ button{
     background: rgba(0, 0, 0, 0);
     border-radius: 10px;
     color: rgb(255, 255, 255);
-    font-family: "Archivo";
     font-weight: 100;
     font-size: 16px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-family: "Archivo";
     box-sizing: border-box;
     border: 0px solid black;
 }
 
 button:hover{
-    border: 0px solid rgba(0,0,0,0);
     background-color: #5e8fcf62;
     animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
 button:active{
-    border: 0px solid rgba(0,0,0,0);
     background: #5e8fcf94;
 }
 
@@ -86,6 +88,7 @@ p {
 
 .mobileHeader {
 	display: none;
+
 }
 
 @keyframes nvb-button-Animation
@@ -114,23 +117,36 @@ p {
 
 @media (max-width: 850px){
 	.game-view {
+		/*background-color: #303030;*/
+		background-color: #212b46;
 		flex-direction: column;
+		border: 2px solid  rgb(100, 116, 206);
 	}
+
+    app-tabledata {
+        flex-direction: column;
+        width: 100%;
+    }
 
 	.column-view, .actions {
 		padding: 0px;
-		border: 0px;
+		/*border: 0px;*/
+		border-right: 0px;
 		height: 100%;
 		width: 100%;
 		justify-content: flex-end;
 		flex-direction: row-reverse;
 	}
 
+	.column-view {
+		border-bottom: 2px solid  rgb(100, 116, 206);
+	}
+
 	.mobileHeader{
 		height: 100%;
 		display: block;
-		border-right: 1px solid black;
-		width: 25%;
+		border-right: 2px solid  rgb(100, 116, 206);
+		width: 35%;
 	}
 
 	.button-container{
@@ -138,17 +154,23 @@ p {
 		height: 100%;
 	}
 
+	button:hover {
+		background: #444444;
+	}
+
 	.edit-view {
 		height: 100%;
-		padding: 0px;
+		padding: 5px;
 	}
 
 	.delete-view{
 		height: 100%;
-		padding: 0px;
+		padding: 5px;
 	}
+
 	.field {
-		width: 70%;
+
+		width: 60%;
 	}
 
 	p {
@@ -157,5 +179,15 @@ p {
 
 	b {
 		visibility: visible;
+	}
+}
+
+@media (max-width: 530px) {
+	.field {
+		width: 50%;
+	}
+
+	.mobileHeader{
+		width: 45%;
 	}
 }

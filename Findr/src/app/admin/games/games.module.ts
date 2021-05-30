@@ -7,6 +7,7 @@ import { TableheaderModule } from '../tableheader/tableheader.module';
 import { NewgameComponent } from './newgame/newgame.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import {TabledataModule} from '../tabledata/tabledata.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TableheaderModule,
     RouterModule,
     ReactiveFormsModule,
+	TabledataModule
   ]
 })
 export class GamesModule { }

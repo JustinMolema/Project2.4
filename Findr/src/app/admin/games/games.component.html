@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <meta name="Description" content="This page is for displaying games">
 <div class="content">
     <div class="new-game-tab" *ngIf="addingNewGame">
@@ -36,8 +37,8 @@
                     </select>
                 </div>
                 <div class="search">
-                    <p> Search:</p>
-                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                    <input class="search-input" type="search" [(ngModel)]="searchText" placeholder="Search..." />
+					<i class="fas fa-search"></i>
                 </div>
             </div>
             <hr class="line headerline">
@@ -51,6 +52,7 @@
                     [game]=game
                     appHighlightSearch [searchedWord]="searchText" [content]="game" [keys]="keys"></app-game>
                 <hr class="line">
+				<br class="mobileBreak">
             </ng-container>
         </div>
     </div>

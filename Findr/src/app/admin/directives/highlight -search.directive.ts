@@ -15,13 +15,13 @@ export class HighlightSearchDirective {
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.content) return;
         this.setHighlights();
-        
+
     }
 
     setHighlights() {
         for (let i = 0; i < this.keys.length; i++) {
             if (this.skip.includes(this.keys[i])) continue;
-            this.renderer.setProperty(this.el.nativeElement.children[0].children[i].children[0], 'innerHTML', this.getFormattedText(this.keys[i]));
+            this.renderer.setProperty(this.el.nativeElement.children[0].children[0].children[i].children[0], 'innerHTML', this.getFormattedText(this.keys[i]));
         }
     }
 
