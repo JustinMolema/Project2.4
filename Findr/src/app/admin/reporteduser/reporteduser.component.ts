@@ -1,15 +1,17 @@
 import { Component, Input, OnInit, Renderer2 } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Admindata } from '../admindata';
 
 @Component({
     selector: 'app-reporteduser',
     templateUrl: './reporteduser.component.html',
     styleUrls: ['./reporteduser.component.css'],
 })
-export class ReporteduserComponent implements OnInit {
+export class ReporteduserComponent implements OnInit, Admindata {
     searchText: string;
     dateTime = new Date();
-
+    isLoaded: boolean;
+    addingNewGame = false;
     max:Number;
 
     keys = [];
@@ -25,6 +27,7 @@ export class ReporteduserComponent implements OnInit {
 
     constructor(public datepipe: DatePipe) { 
         this.keys = Object.keys(this.reported_users[0]);
+        this.getData();
     }
 
     ngOnInit(): void { 
@@ -36,4 +39,19 @@ export class ReporteduserComponent implements OnInit {
         
         this.max = this.reported_users.length;
     }
+
+    getData(){
+        
+    }
+
+    fillData(response: any): void {
+        for (let user of response) {
+            this.reported_users.push(user);
+        }
+    }
+    allowViewToLoad() {
+        this.keys = ["Date", "Time", "Username", "Reason"];
+        this.isLoaded = true;
+    }
+
 }

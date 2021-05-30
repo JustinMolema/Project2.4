@@ -15,28 +15,31 @@ export class AppComponent {
 
     constructor(public router: Router, private authService: AuthService) { }
 
-    ngOnInit(){ 
+    ngOnInit() {
         this.setRefreshInterval();
     }
 
-    setRefreshInterval(): void{
+    setRefreshInterval(): void {
         setInterval(() => {
-            if(this.authService.refreshTokenInterval)
-            {
-                this.refreshToken();
+            this.refreshToken();
+
+            if (this.authService.refreshTokenInterval) {
+                console.log("sdfdsafdsf");
+
             }
-            // 1499000
         }, 1000);
     }
 
-    refreshToken(): void{
+    refreshToken(): void {
+        
         this.authService.refreshToken().subscribe(res => {
-            if(res != null) {
-              if (this.authService.localstorage){
-                localStorage.setItem('jwt', res['accessToken']);
-              } else {
-                sessionStorage.setItem('jwt', res['accessToken']);
-              }
+            if (res != null) {
+                
+                if (this.authService.localstorage) {
+                    localStorage.setItem('jwt', res['accessToken']);
+                } else {
+                    sessionStorage.setItem('jwt', res['accessToken']);
+                }
             }
         });
     }

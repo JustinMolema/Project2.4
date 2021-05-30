@@ -10,8 +10,8 @@ import { logWarnings } from 'protractor/built/driverProviders';
 export class TableheaderComponent implements OnInit {
     ascending: boolean = true;
     sortingBy: string = "";
-    _actionSize = 0.2;
-    _infoSize = 0.2;
+    _actionSize = "25";
+    _infoSize = "25";
 
     _keys = [];
     _items = [];
@@ -44,7 +44,6 @@ export class TableheaderComponent implements OnInit {
         return this._keys;
     }
 
-
     @Input()
     set actionSize(size:any){
         this._actionSize = size;
@@ -62,8 +61,6 @@ export class TableheaderComponent implements OnInit {
     get infoSize(){
         return this._infoSize;
     }
-
-
     
     sortItems(columnName: string): any {
         if (this.alreadySortingByThisColumn(columnName)) {

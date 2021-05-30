@@ -5,8 +5,6 @@ const app = express()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql')
 
-let rememberme = true;
-
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -77,17 +75,15 @@ app.route('/api/supporttickets').get((req, res) => {
 
 app.route('/api/addgame').post((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	//console.log("ff");
+	console.log("ff");
 	connection.connect(function (err) {
-		connection.query('insert into games (GameName, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
+		connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
 
 			res.json({ status: "ok" });
 		})
 	})
 })
-
-
 
 app.route('/api/deletegame/:name').delete((req, res) => {
 	let name = req.params['name']
@@ -97,13 +93,17 @@ app.route('/api/deletegame/:name').delete((req, res) => {
 	res.header("Access-Control-Allow-Headers", "*");
 
 	connection.connect(function (req, err) {
-		connection.query('DELETE FROM games WHERE GameName = ?', [name], function (err, result, fields) {
+		connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });
 
 			res.json({ status: "ok" });
 		})
 	})
 })
+
+function generateAccessToken(user) {
+	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+}
 
 let refreshTokens = []
 app.post('/api/login', (req, res) => {
@@ -119,10 +119,8 @@ app.post('/api/login', (req, res) => {
 })
 
 
-
 app.post('/api/token', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-
 	const refreshToken = req.body.token;
 	/*console.log(refreshToken == null);
 	console.log(refreshToken);
@@ -139,30 +137,6 @@ app.post('/api/token', (req, res) => {
 		res.json({ accessToken: accessToken })
 	})
 })
-
-// app.route('/api/cats/:name').get((req, res) => {
-// 	// res.header("Access-Control-Allow-Origin", "*");
-// 	// res.header("Access-Control-Allow-Methods", "*");
-// 	// res.header("Access-Control-Allow-Headers", "*");
-// 	const requestedCatName = req.params['name'];
-// 	res.send({ name: requestedCatName });
-// })
-
-// app.route('/api/cats').post((req, res) => {
-// 	res.send(201, req.body)
-// })
-
-// app.route('/api/cats/:name').put((req, res) => {
-// 	res.send(200, req.body)
-// })
-
-// app.route('/api/cats/:name').delete((req, res) => {
-// 	res.sendStatus(204)
-// })
-
-function generateAccessToken(user) {
-	return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
-}
 
 function authenticateToken(req, res, next) {
 	const authHeader = req.headers['authorization'];

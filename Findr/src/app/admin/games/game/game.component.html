@@ -1,34 +1,45 @@
 <div class="game-view">
-    <div class="column-view">
-        <p>{{game.name}}
-        </p>
-    </div>
-    <div class="column-view">
-        <p>{{game.category}}</p>
-    </div>
-    <div class="column-view">
-        <!-- <p>{{game.subscribercount}}</p> -->
-        <p>5</p>
-
-    </div>
-    <div class="actions">
-        <div class="button-container">
-            <div class="edit-view">
-                <button (click)="editGame(game)">
-                    <div style="font-size: 18px; display: flex">
-                        <img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit" />
-                        <span style="margin-left: 5px">Edit</span>
-                    </div>
-                </button>
-            </div>
-            <div class="delete-view">
-                <button (click)="delete(game.Name)">
-                    <div style="font-size: 18px; display: flex; color: lightgray;">
-                        <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete" />
-                        <span style="margin-left: 5px">Delete</span>
-                    </div>
-                </button>
-            </div>
-        </div>
-    </div>
+	<div class="column-view">
+		<p class="field">{{game.name}}
+		</p>
+		<div class="mobileHeader">
+			<p><b>Name: </b></p>
+		</div>
+	</div>
+	<div class="column-view">
+		<p class="field">{{game.category}}</p>
+		<div class="mobileHeader">
+			<p><b>Category:</b></p>
+		</div>
+	</div>
+	<div class="column-view">
+		<!-- <p>{{game.subscribercount}}</p> -->
+		<p class="field">5</p>
+		<div class="mobileHeader">
+			<p><b>Subscribercount:</b></p>
+		</div>
+	</div>
+	<div class="actions">
+		<div class="field" class="button-container">
+			<div class="edit-view">
+				<button (click)="editGame(game)">
+					<div style="font-size: 18px; display: flex">
+						<img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit"/>
+						<span style="margin-left: 5px">Edit</span>
+					</div>
+				</button>
+			</div>
+			<div class="delete-view">
+				<button (click)="delete(game.Name)">
+					<div style="font-size: 18px; display: flex; color: lightgray;">
+						<img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete"/>
+						<span style="margin-left: 5px">Delete</span>
+					</div>
+				</button>
+			</div>
+		</div>
+		<div class="mobileHeader">
+			<p><b>Actions:</b></p>
+		</div>
+	</div>
 </div>

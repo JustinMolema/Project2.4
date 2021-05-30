@@ -6,7 +6,7 @@
   /* border-right: 5px solid #29475c; */
   /* border-bottom: 5px solid #29475c; */
   border-radius: 10px;
-  height: 100vh;
+  height: 100%;
   width: 300px;
   color: white;
   display: flex;
@@ -242,7 +242,7 @@ button {
     width: 0;
     height: 0;
   }
-  
+
   .navbartext {
     width: 0;
     height: 0;
@@ -253,8 +253,8 @@ button {
     width: 0;
     height: 0;
     background: rgba(0, 0, 0, 0);
-  } 
-  
+  }
+
   .navbarcollapsed {
     width: 0;
     height: 0;

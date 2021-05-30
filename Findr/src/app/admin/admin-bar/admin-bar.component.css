@@ -38,7 +38,7 @@ button
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    border-radius: 10px; 
+    border-radius: 10px;
     color: rgb(255, 255, 255);
     font-family: "Archivo";
     font-weight: 100;
@@ -54,7 +54,7 @@ button
 .navbarbutton:hover
 {
      background-color: #5e8fcf62;
-     animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
+     animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
 .navbarbutton:focus
@@ -94,10 +94,10 @@ button
   }
 
   @media (max-width: 850px)
-  {    
+  {
     .adminbar {
 		/*animation: collapse-navbar 1s forwards;*/
-        width: 110px;
+        width: 0px;
 	}
 
     .navbarbutton {
@@ -112,7 +112,7 @@ button
       background-size:contain;
       color: rgba(0,0,0,0);
     }
-    
+
     .navbartext
     {
       width: 0;

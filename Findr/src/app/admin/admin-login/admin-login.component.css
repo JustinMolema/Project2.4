@@ -26,6 +26,7 @@ input:focus{
     margin-top: 5%;
     padding-top: 1.5%;
     box-sizing: border-box;
+    z-index: 10;
 }
 
 .inputs {

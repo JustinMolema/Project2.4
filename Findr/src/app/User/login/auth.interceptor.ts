@@ -18,8 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
       this.idToken = sessionStorage.getItem('jwt');
     }
 
-    console.log("INTERCEPT");
-
     if (this.idToken) {
       const cloned = request.clone({
         headers: request.headers.set('Authorization',

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
         console
         for (let i = 0; i < 100; i++) {
-            this.stars.push({left: this.getLeft(), top: this.getTop()});
+            this.stars.push({ left: this.getLeft(), top: this.getTop() });
         }
     }
 
@@ -43,25 +43,39 @@ export class LoginComponent implements OnInit {
 
     getTop() {
         console.log(this.vh + "     " + this.vw);
-        return Math.floor(Math.random() * this.vh ) + 'px';
+        return Math.floor(Math.random() * this.vh) + 'px';
     }
 
     login() {
         const val = this.form.value;
-
+        console.log(val.username);
         if (val.username == "test" && val.password == "test") {
             if (val.username && val.password) {
-                this.authService.login(val.username, val.password).subscribe(res => {
-                    localStorage.setItem('jwt', res["accessToken"]);
-                    localStorage.setItem('refreshToken', res["refreshToken"]);
-                    console.log(res)
-                });
-                //TODO: add navigation to games page
-                this.router.navigate(["/games"]);
+                if (val.rememberme == false) {
+                    this.authService.login(val.username, val.password).subscribe(res => {
+                        sessionStorage.setItem('jwt', res["accessToken"]);
+                        sessionStorage.setItem('refreshToken', res["refreshToken"]);
+                        this.router.navigate(["/games"]);
+                        this.authService.localstorage = false;
+                        console.log(res)
+                    });
+                } 
+                else {
+                    this.authService.login(val.username, val.password).subscribe(res => {
+                        localStorage.setItem('jwt', res["accessToken"]);
+                        localStorage.setItem('refreshToken', res["refreshToken"]);
+                        this.router.navigate(["/games"]);
+                        console.log(res)
+                    });
+                }
+                // this.authService.updateRememberMe(val.rememberme).subscribe(res => {
+                // });
+
+
             }
-        }
-        else {
+        } else {
             console.log("WRONG!");
+            
         }
     }
 
@@ -71,13 +85,5 @@ export class LoginComponent implements OnInit {
             'top': this.stars[i].top,
             'position': "absolute"
         }
-    }
-
-    secret() {
-        console.log("PLEASE WORK I BEG YOU1");
-        this.authService.refreshToken().subscribe(res => {
-            localStorage.setItem('jwt', res['accessToken'])
-            console.log("PLEASE WORK I BEG YOU2");
-        });
     }
 }

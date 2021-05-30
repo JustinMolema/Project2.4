@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PasswordforgottenComponent } from './passwordforgotten.component';
 import { RouterModule } from '@angular/router';
+import { LoginModule } from '../login/login.module';
 
 
 
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    LoginModule
   ], exports:[
       PasswordforgottenComponent,
   ]
