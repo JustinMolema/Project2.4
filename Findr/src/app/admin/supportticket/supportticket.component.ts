@@ -21,7 +21,6 @@ export class SupportticketComponent implements OnInit, Admindata {
         'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Anne Pier", status: "Success" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Justin", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Merel", status: "Pending" },
-        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Jan Peter", status: "Pending" },
@@ -29,7 +28,6 @@ export class SupportticketComponent implements OnInit, Admindata {
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Anne Pier", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Justin", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Merel", status: "Pending" },
-        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
     ];

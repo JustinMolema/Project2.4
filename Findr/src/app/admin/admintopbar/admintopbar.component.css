@@ -1,0 +1,27 @@
+.admintopbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+
+.showmenu:checked ~ label {
+    color: darkmagenta;
+}
+
+.showmenu {
+    display: none;
+}
+
+label{
+}
+.showmenu:checked ~ nav button {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out;
+}
+
+.showmenulabel {
+    margin-right: 2em;
+    display: flex;
+}
+

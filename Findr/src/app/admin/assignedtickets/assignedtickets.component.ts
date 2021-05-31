@@ -9,7 +9,7 @@ import { DatePipe } from '@angular/common';
 export class AssignedticketsComponent implements OnInit {
     searchText: string;
     dateTime = new Date();
-    
+
     max:Number = 20;
 
     keys = [];
@@ -19,7 +19,6 @@ export class AssignedticketsComponent implements OnInit {
         'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Anne Pier", status: "Success" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Justin", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Merel", status: "Pending" },
-        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Jan Peter", status: "Pending" },
@@ -27,7 +26,6 @@ export class AssignedticketsComponent implements OnInit {
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Anne Pier", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Justin", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Merel", status: "Pending" },
-        { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
     ]
@@ -41,8 +39,8 @@ export class AssignedticketsComponent implements OnInit {
 
     changeEvent(max: Number) {
         if (max > 1) return this.max = max;
-        
+
         this.max = this.tickets.length;
-        
+
     }
 }

@@ -2,11 +2,7 @@
 <meta name="Description" content="This page is for displaying games">
 <div class="admincontent">
     <div class="new-game-tab" *ngIf="addingNewGame">
-        <div class="header_text">
-            <h1> GAMES
-                &#8674; NEW
-            </h1>
-        </div>
+        <app-admintopbar [title]="'GAMES &#8674; NEW'"></app-admintopbar>
         <div class="admin-view-container">
             <app-newgame [returnToGames]="getReturnToGames"></app-newgame>
         </div>

@@ -30,6 +30,8 @@ import { UsersModule } from './admin/users/users.module';
 import { TableheaderModule } from './admin/tableheader/tableheader.module';
 import { AssignedticketsModule } from './admin/assignedtickets/assignedtickets.module';
 import {TabledataModule} from './admin/tabledata/tabledata.module';
+import {AdmintopbarModule} from "./admin/admintopbar/admintopbar.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
     declarations: [AppComponent],
@@ -61,7 +63,9 @@ import {TabledataModule} from './admin/tabledata/tabledata.module';
         ReactiveFormsModule,
         AssignedticketsModule,
         HttpClientModule,
-        TabledataModule
+        TabledataModule,
+        AdmintopbarModule,
+        BrowserAnimationsModule,
     ],
     providers: [DatePipe, HttpClient, [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]],
     bootstrap: [AppComponent],
