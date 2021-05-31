@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { relative } from 'node:path';
+import {Component, OnInit, Output, ViewChild, ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from './auth.service';
+import {relative} from 'node:path';
 
 
 @Component({
@@ -13,19 +13,18 @@ import { relative } from 'node:path';
 export class LoginComponent implements OnInit {
     form: FormGroup;
     numbers: Number[];
-    s = ["0deg", "45deg", "90deg", "135deg", "180deg", "225deg", "270deg"];
+    s = ['0deg', '45deg', '90deg', '135deg', '180deg', '225deg', '270deg'];
     stars = [];
 
     constructor(private fb: FormBuilder,
-        private authService: AuthService, private router: Router) {
+                private authService: AuthService, private router: Router) {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
 
-        console
         for (let i = 0; i < 100; i++) {
-            this.stars.push({ left: this.getLeft(), top: this.getTop() });
+            this.stars.push({left: this.getLeft(), top: this.getTop()});
         }
     }
 
@@ -42,40 +41,40 @@ export class LoginComponent implements OnInit {
     }
 
     getTop() {
-        console.log(this.vh + "     " + this.vw);
+        console.log(this.vh + '     ' + this.vw);
         return Math.floor(Math.random() * this.vh) + 'px';
     }
 
-    login() {
+    login(): void {
         const val = this.form.value;
-        console.log(val.username);
-        if (val.username == "test" && val.password == "test") {
-            if (val.username && val.password) {
-                if (val.rememberme == false) {
-                    this.authService.login(val.username, val.password).subscribe(res => {
-                        sessionStorage.setItem('jwt', res["accessToken"]);
-                        sessionStorage.setItem('refreshToken', res["refreshToken"]);
-                        this.router.navigate(["/games"]);
-                        this.authService.localstorage = false;
-                        console.log(res)
-                    });
-                } 
-                else {
-                    this.authService.login(val.username, val.password).subscribe(res => {
-                        localStorage.setItem('jwt', res["accessToken"]);
-                        localStorage.setItem('refreshToken', res["refreshToken"]);
-                        this.router.navigate(["/games"]);
-                        console.log(res)
-                    });
-                }
-                // this.authService.updateRememberMe(val.rememberme).subscribe(res => {
-                // });
-
-
-            }
+        if (this.tempValidateUser(val)) {
+            this.loginToServer(val);
         } else {
-            console.log("WRONG!");
-            
+            console.log('WRONG!');
+        }
+    }
+
+    // Temp until server side validation is done
+    tempValidateUser(val): boolean {
+        return val.username === 'test' && val.password === 'test';
+    }
+
+    loginToServer(val): void {
+        this.authService.login(val.username, val.password).subscribe(res => {
+            this.setJWT(val.rememberme, res);
+            this.router.navigate(['/games']);
+        });
+    }
+
+    setJWT(rememberme: boolean, response): void {
+        this.authService.localstorage = rememberme;
+
+        if (rememberme) {
+            localStorage.setItem('jwt', response.accessToken);
+            localStorage.setItem('refreshToken', response.refreshToken);
+        } else {
+            sessionStorage.setItem('jwt', response.accessToken);
+            sessionStorage.setItem('refreshToken', response.refreshToken);
         }
     }
 
@@ -83,7 +82,7 @@ export class LoginComponent implements OnInit {
         return {
             'left': this.stars[i].left,
             'top': this.stars[i].top,
-            'position': "absolute"
-        }
+            'position': 'absolute'
+        };
     }
 }
