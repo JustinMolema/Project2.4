@@ -20,11 +20,10 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        console.log(this.keys);
     }
 
     ngAfterViewInit(): void {
-        this.sortItems(this.keys[0].toLowerCase());
+        this.sortItems(this.keys[0]);
     }
 
     @Input()
@@ -77,7 +76,7 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
 
         // Sorting by date does NOT ascend the first time, so reverse the list after sorting it by date (descending default)
         // Don't remove this line thinking the first if statement can replace it.
-        if (columnName == "date") this._items.reverse();
+        if (columnName == "Date") this._items.reverse();
     }
 
     alreadySortingByThisColumn(columnName: string): boolean {
@@ -85,7 +84,7 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
     }
 
     isColumnNumeric(columnName: string): boolean {
-        return columnName === "warning" || columnName === "subscribercount";
+        return columnName === "Warning" || columnName === "Subscribercount";
     }
 
     sortByNumbers(columnName: string): void {

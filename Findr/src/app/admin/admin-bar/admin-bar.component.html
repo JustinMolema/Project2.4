@@ -1,15 +1,15 @@
-<div class="adminbar">
+<div class="adminbar" [@show]="state" (click)="kermit()">
     <div class="logoholder">
         <img class="logo" src="../../../assets/SVG/Logo-white.svg"  alt="Logo">
     </div>
-    <button class="navbarbutton" routerLink="admin/reportedusers">
-        
-        <div class="navbartext">
+    <button class="navbarbutton" [@state]="state" routerLink="admin/reportedusers">
+
+        <div class="navbartext" >
             Reported Users
         </div>
     </button>
     <button class="navbarbutton" routerLink="admin/supporttickets">
-        
+
         <div class="navbartext">
             Support Tickets
         </div>

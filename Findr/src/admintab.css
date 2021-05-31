@@ -7,6 +7,10 @@
     overflow: auto;
 }
 
+app-admintopbar {
+    width: 95%;
+}
+
 .view-log-tab {
     width: 100%;
     display: flex;
@@ -17,10 +21,9 @@
 
 .header_text {
     width: 95%;
-    color:white;
     display: flex;
     align-items: flex-start;
-    justify-content: left;
+    justify-content: center;
     margin-bottom: 10px;
 }
 

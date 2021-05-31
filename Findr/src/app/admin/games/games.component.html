@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <meta name="Description" content="This page is for displaying games">
 <div class="admincontent">
     <div class="new-game-tab" *ngIf="addingNewGame">
@@ -8,10 +7,11 @@
         </div>
     </div>
     <div class="admintab" *ngIf="!addingNewGame">
-        <div class="header_text">
-            <h1> GAMES
-            </h1>
-        </div>
+        <app-admintopbar [title]="'GAMES'"></app-admintopbar>
+<!--        <div class="header_text">-->
+<!--            <h1> GAMES-->
+<!--            </h1>-->
+<!--        </div>-->
         <div class="admin-view-container">
             <button class="addgame" (click)="addingNewGame = !addingNewGame">
                 <div style="font-size: 18px; display: flex" >

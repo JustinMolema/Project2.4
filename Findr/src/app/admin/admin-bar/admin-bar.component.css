@@ -18,6 +18,8 @@ button
     position: fixed;
     background: #212b46;
     border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     height: 100%;
     width: 250px;
     color: white;
@@ -36,8 +38,6 @@ button
     height: 50px;
     background: rgba(0, 0, 0, 0);
     margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
     border-radius: 10px;
     color: rgb(255, 255, 255);
     font-family: "Archivo";
