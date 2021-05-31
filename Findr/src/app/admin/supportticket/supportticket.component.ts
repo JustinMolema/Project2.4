@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import {Admindata} from '../admindata';
 
 
 @Component({
@@ -7,11 +8,11 @@ import { DatePipe } from '@angular/common';
     templateUrl: './supportticket.component.html',
     styleUrls: ['./supportticket.component.css']
 })
-export class SupportticketComponent implements OnInit {
+export class SupportticketComponent implements OnInit, Admindata {
     searchText: string;
     dateTime = new Date();
-    
-    max:Number = 20;
+    isLoaded: boolean;
+    max = 20;
 
     keys = [];
     tickets = [
@@ -31,19 +32,34 @@ export class SupportticketComponent implements OnInit {
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Bart barnard area 51 raider ", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Wijmar Nijdam", status: "Pending" },
         { date: this.datepipe.transform(this.dateTime, 'dd MMMM yyyy'), time: this.datepipe.transform(this.dateTime, 'HH:mm:ss '), tag: "Sietse de slang", status: "Pending" },
-    ]
+    ];
 
     constructor(public datepipe: DatePipe) {
         this.keys = Object.keys(this.tickets[0]);
+        // this.getData();
+        this.isLoaded = true;
     }
 
     ngOnInit(): void {
     }
 
-    changeEvent(max: Number) {
+    changeEvent(max: number): number {
         if (max > 1) return this.max = max;
-        
+
         this.max = this.tickets.length;
-        
+    }
+
+    getData(): void {
+    }
+
+    fillData(response: any): void {
+        for (let ticket of response) {
+            this.tickets.push(ticket);
+        }
+    }
+
+    allowViewToLoad(): void {
+        this.keys = ['Date', 'Time', 'Username', 'Status'];
+        this.isLoaded = true;
     }
 }

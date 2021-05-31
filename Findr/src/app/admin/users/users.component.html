@@ -1,13 +1,15 @@
-<div class="content">
-    <div class="users-admin-tab">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<div class="admincontent">
+    <div class="admintab">
         <div class="header_text">
             <h1 class="text">USERS
                 <!--&#8674;-->
             </h1>
         </div>
-        <div class="users-content">
+        <div class="admin-view-container">
             <div class="records-and-search">
                 <div class="recordsperpage">
+                    <p>Records per page:</p>
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -15,18 +17,16 @@
                         <option value="50">50</option>
                         <option value="1"> All</option>
                     </select>
-                    <p>records per page
-                    </p>
                 </div>
                 <div class="search">
-                    <p class="search-text"> Search:</p>
-                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                    <input class="search-input" type="search" [(ngModel)]="searchText" placeholder="Search..." />
+                    <i class="fas fa-search"></i>
                 </div>
             </div>
-            <hr class="line">
+            <hr class="line headerline">
 
-            <app-tableheader [items]="users"></app-tableheader>
-        
+            <app-tableheader  [keys]="keys" [items]="users" [actionSize]='20' [infoSize]='20'></app-tableheader>
+
             <hr class="line">
             <ng-container *ngFor="let user of users | tablefilter:keys:searchText |  slice:0:max; index as i" >
                 <all-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
@@ -35,6 +35,7 @@
                     appHighlightSearch [searchedWord]="searchText" [content]="user" [keys]="keys"
                     ></all-user>
                 <hr class="line">
+                <br class="mobileBreak">
             </ng-container>
         </div>
 

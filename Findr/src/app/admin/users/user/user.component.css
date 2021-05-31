@@ -1,100 +1,120 @@
-.user-view {
-    display: flex;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-}
+@import "../../../../adminrowview.css";
 
-button{
-    cursor: pointer;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0);
-    border-radius: 10px; 
-    color: rgb(255, 255, 255);
-    font-family: "Archivo";
-    font-weight: 100;
-    font-size: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-family: "Archivo";
-    box-sizing: border-box;
-    border: 0px solid black;
-}
-
-button:hover{
-    border: 0px solid rgba(0,0,0,0);
-    background-color: #5e8fcf62;
-    animation: nvb-button-Animation 2s ease-in-out infinite backwards; 
-}
-
-button:active{
-    border: 0px solid rgba(0,0,0,0);
-    background: #5e8fcf94;
-}
-
-.column-view {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    box-sizing: border-box;
-    flex: 0.2;
-    border-right: 1px solid black;
-}
-
-* { 
-    box-sizing: border-box;
+app-tabledata {
+    width: 20%;
 }
 
 .actions {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    box-sizing: border-box;
-    flex: 0.2;
+    width: 20%;
 }
 
-.button-container {
-    height: 100%;
-    width: 100%;
-    padding-left: 10px;
-    display: flex;
-}
-
-.delete-view{
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-p {
-    margin-left: 5%;
-}
-
-@keyframes nvb-button-Animation
-{
-    0%
-    {
-      filter: brightness(100%)
+@media (max-width: 850px) {
+    app-tabledata {
+        width: 100%;
     }
-    70%
-    {
-      filter: brightness(120%)
-    }
-    100%
-    {
-      filter: brightness(100%);
+
+    .actions {
+        width: 100%;
     }
 }
 
-@media (max-width: 1275px){
-    span {
-        visibility: none;
-        color: white;
-        display: none;
-    }
-}
+/*.user-view {*/
+/*    display: flex;*/
+/*    border-right: 1px solid black;*/
+/*    border-left: 1px solid black;*/
+/*}*/
+
+/*button{*/
+/*    cursor: pointer;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    background: rgba(0, 0, 0, 0);*/
+/*    border-radius: 10px; */
+/*    color: rgb(255, 255, 255);*/
+/*    font-family: "Archivo";*/
+/*    font-weight: 100;*/
+/*    font-size: 16px;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    font-family: "Archivo";*/
+/*    box-sizing: border-box;*/
+/*    border: 0px solid black;*/
+/*}*/
+
+/*button:hover{*/
+/*    border: 0px solid rgba(0,0,0,0);*/
+/*    background-color: #5e8fcf62;*/
+/*    animation: nvb-button-Animation 2s ease-in-out infinite backwards; */
+/*}*/
+
+/*button:active{*/
+/*    border: 0px solid rgba(0,0,0,0);*/
+/*    background: #5e8fcf94;*/
+/*}*/
+
+/*.column-view {*/
+/*    padding-top: 10px;*/
+/*    padding-bottom: 10px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: left;*/
+/*    box-sizing: border-box;*/
+/*    flex: 0.2;*/
+/*    border-right: 1px solid black;*/
+/*}*/
+
+/** { */
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*.actions {*/
+/*    padding-top: 10px;*/
+/*    padding-bottom: 10px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: left;*/
+/*    box-sizing: border-box;*/
+/*    flex: 0.2;*/
+/*}*/
+
+/*.button-container {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    padding-left: 10px;*/
+/*    display: flex;*/
+/*}*/
+
+/*.delete-view{*/
+/*    margin-left: 10px;*/
+/*    margin-right: 10px;*/
+/*}*/
+
+/*p {*/
+/*    margin-left: 5%;*/
+/*}*/
+
+/*@keyframes nvb-button-Animation*/
+/*{*/
+/*    0%*/
+/*    {*/
+/*      filter: brightness(100%)*/
+/*    }*/
+/*    70%*/
+/*    {*/
+/*      filter: brightness(120%)*/
+/*    }*/
+/*    100%*/
+/*    {*/
+/*      filter: brightness(100%);*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 1275px){*/
+/*    span {*/
+/*        visibility: none;*/
+/*        color: white;*/
+/*        display: none;*/
+/*    }*/
+/*}*/

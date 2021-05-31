@@ -1,22 +1,22 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <meta name="Description" content="This page is for displaying games">
-<div class="content">
+<div class="admincontent">
     <div class="new-game-tab" *ngIf="addingNewGame">
         <div class="header_text">
             <h1> GAMES
                 &#8674; NEW
             </h1>
         </div>
-        <div class="games-tab-content">
+        <div class="admin-view-container">
             <app-newgame [returnToGames]="getReturnToGames"></app-newgame>
         </div>
     </div>
-    <div class="game-admin-tab" *ngIf="!addingNewGame">
+    <div class="admintab" *ngIf="!addingNewGame">
         <div class="header_text">
             <h1> GAMES
             </h1>
         </div>
-        <div class="games-tab-content">
+        <div class="admin-view-container">
             <button class="addgame" (click)="addingNewGame = !addingNewGame">
                 <div style="font-size: 18px; display: flex" >
                     <img src="../../../../assets/SVG/add.svg" style="width: 20px; height: 20px;" alt="Edit" />
