@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
                 private authService: AuthService, private router: Router) {
         this.form = this.fb.group({
             username: ['', Validators.required],
-            password: ['', Validators.required]
+            password: ['', Validators.required],
+            rememberme: [true]
         });
 
         for (let i = 0; i < 100; i++) {
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
 
     login(): void {
         const val = this.form.value;
+        console.log(val.username);
         if (this.tempValidateUser(val)) {
             this.loginToServer(val);
         } else {
@@ -56,7 +58,8 @@ export class LoginComponent implements OnInit {
 
     // Temp until server side validation is done
     tempValidateUser(val): boolean {
-        return val.username === 'test' && val.password === 'test';
+        console.log(val.rememberme);
+        return val.username == 'test' && val.password == 'test';
     }
 
     loginToServer(val): void {
