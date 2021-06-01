@@ -33,7 +33,7 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 	})
 })
 
-app.route('/api/games').get((req, res) => {
+app.route('/api/games').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM games', function (err, result, fields) {
 		if (err) throw err;

@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./friendrequests.component.css']
 })
 export class FriendrequestsComponent implements OnInit {
-  public _friend: String;
+  @Input() friend: string;
 
   constructor() {
   }
@@ -14,24 +14,15 @@ export class FriendrequestsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input()
-  set friend(friend: String) {
-    this._friend = friend;
-  }
-
-  get friend() {
-    return this._friend;
-  }
-
-  addFriend() {
+  addFriend(): void {
     console.log("new friend");
   }
 
-  deleteRequest() {
+  deleteRequest(): void {
     console.log("delete");
   }
 
-  blockUser() {
+  blockUser(): void {
     console.log("block");
   }
 }

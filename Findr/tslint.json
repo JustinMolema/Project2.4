@@ -12,7 +12,6 @@
     },
     "array-type": false,
     "arrow-return-shorthand": true,
-    "curly": true,
     "deprecation": {
       "severity": "warning"
     },
@@ -65,8 +64,14 @@
       "as-needed"
     ],
     "quotemark": [
-      true,
-      "single"
+        [
+            true,
+            "double"
+        ],
+        [
+            true,
+            "single"
+        ]
     ],
     "semicolon": {
       "options": [

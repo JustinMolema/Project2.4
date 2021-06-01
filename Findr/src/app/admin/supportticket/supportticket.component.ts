@@ -51,7 +51,7 @@ export class SupportticketComponent implements OnInit, Admindata {
     }
 
     fillData(response: any): void {
-        for (let ticket of response) {
+        for (const ticket of response) {
             this.tickets.push(ticket);
         }
     }

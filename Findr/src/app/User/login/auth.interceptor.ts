@@ -1,32 +1,31 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AuthService} from "./auth.service";
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  idToken;
-
-  constructor(private authService: AuthService) {
-  }
-
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (this.authService.localstorage) {
-      this.idToken = localStorage.getItem('jwt');
-    } else {
-      this.idToken = sessionStorage.getItem('jwt');
+    constructor(private authService: AuthService) {
     }
 
-    if (this.idToken) {
-      const cloned = request.clone({
-        headers: request.headers.set('Authorization',
-          'Bearer ' + this.idToken)
-      });
+    intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+        const idToken = this.getToken();
+        if (!idToken) { return next.handle(request); }
 
-      return next.handle(cloned);
-    } else {
-      return next.handle(request);
+        const cloned = this.requestCloneWithHeader(request, idToken);
+
+        return next.handle(cloned);
     }
-  }
+
+    requestCloneWithHeader(request: HttpRequest<unknown>, idToken: string): HttpRequest<unknown>{
+        return request.clone({
+            headers: request.headers.set('Authorization',
+                'Bearer ' + idToken)
+        });
+    }
+
+    getToken(): string {
+        return this.authService.localstorage ? localStorage.getItem('jwt') : sessionStorage.getItem('jwt');
+    }
 }

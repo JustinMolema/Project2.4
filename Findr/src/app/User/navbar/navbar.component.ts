@@ -7,13 +7,12 @@ import {TopbarService} from '../topbar/topbar.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  topbar: TopbarService
+  topbar: TopbarService;
 
-  constructor(private topbarService: TopbarService) { 
+  constructor(private topbarService: TopbarService) {
     this.topbar = topbarService;
   }
 
   ngOnInit(): void {
-    
   }
 }

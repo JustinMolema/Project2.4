@@ -8,10 +8,9 @@ import {Component, OnInit, Input} from '@angular/core';
 export class TabledataComponent implements OnInit {
     @Input() key: string;
     @Input() game = [];
-    constructor() {
-    }
+
+    constructor() { }
 
     ngOnInit(): void {
     }
-
 }

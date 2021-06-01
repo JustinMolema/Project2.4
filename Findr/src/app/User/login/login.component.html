@@ -1,26 +1,26 @@
-<!-- <div #layer1 class="layer1">
-    <div *ngFor="let star of stars; let i = index" class="star" [ngStyle]="getStyle(i)"> </div>
-</div> -->
+<!--<div #layer1 class="layer1">-->
+<!--    <div *ngFor="let star of stars; let i = index" class="star" [ngStyle]="getStyle(i)"> </div>-->
+<!--</div>-->
 
 <app-jupiter></app-jupiter>
 
 <div class="gradient-background">
-    <div class="login">
+    <div class="form-container">
         <div class="inputs">
 
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo" />
 
             <form [formGroup]="form">
-                <input name="username" class="inputfields username" formControlName="username" placeholder="Username" autofocus>
+                <input name="username" class="inputfields" formControlName="username" placeholder="Username" autofocus>
                 <input name="password" class="inputfields" formControlName="password" type="password" placeholder="Password">
+                <div class="actions">
+                    <label class="remember_me" for="remember">
+                        <input type="checkbox" id="remember" class="remember" formControlName="rememberme" checked>
+                        Remember me
+                    </label>
+                    <a class="forgot" routerLink="/forgot-password">Forgot password</a>
+                </div>
             </form>
-            <div class="actions">
-                <label class="remember_me" for="remember">
-                    <input type="checkbox" id="remember" class="remember" formControlName="rememberme" checked>
-                    Remember me
-                </label>
-                <a class="forgot" routerLink="/forgot-password">Forgot password</a>
-            </div>
         </div>
         <div class="loginbuttons">
             <button class="login-button" (click)="login()">Login</button>
@@ -32,12 +32,12 @@
     </div>
 </div>
 
-<!-- <div #layer2 class="space layer2"></div>
-<div #layer3 class="space layer3"></div>
-<div class="wrapper">
-  <div #sphere class="sphere">
-    <div *ngFor="let a of s; let i = index" class="circle" style="transform: rotateY({{a}})"> </div>
-    <div class="weapon"></div>
-  </div>
-</div>
-<div class="planet"></div> -->
+<!--<div #layer2 class="space layer2"></div>-->
+<!--<div #layer3 class="space layer3"></div>-->
+<!--<div class="wrapper">-->
+<!--  <div #sphere class="sphere">-->
+<!--    <div *ngFor="let a of s; let i = index" class="circle" style="transform: rotateY({{a}})"> </div>-->
+<!--    <div class="weapon"></div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="planet"></div>-->

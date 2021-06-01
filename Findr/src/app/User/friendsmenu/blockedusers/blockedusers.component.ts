@@ -6,25 +6,14 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./blockedusers.component.css']
 })
 export class BlockedusersComponent implements OnInit {
-  public _user: String;
+  @Input() user: string;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  @Input()
-  set user(user: String) {
-    this._user = user;
+  unblock(): void {
+    console.log("unblock");
   }
-
-  get user() {
-    return this._user;
-  }
-
-  unblock() {
-    console.log("unblock")
-  }
-
 }

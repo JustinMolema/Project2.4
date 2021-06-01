@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class TopbarService {
 
-  collapseNavbar: boolean = false;
+  collapseNavbar = false;
 
   constructor() { }
 }

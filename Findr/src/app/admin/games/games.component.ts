@@ -23,7 +23,6 @@ export class GamesComponent implements OnInit, Admindata {
     }
 
     ngOnInit(): void {
-
     }
 
     getData(): void {

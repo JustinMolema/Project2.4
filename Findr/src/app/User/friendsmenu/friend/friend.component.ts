@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FriendComponent implements OnInit {
 
-  public _friend: String;
+  @Input() friend: string;
 
   constructor() {
   }
@@ -15,25 +15,16 @@ export class FriendComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input()
-  set friend(friend: String) {
-    this._friend = friend;
+  startChat(): void {
+    console.log("start chat");
   }
 
-  get friend() {
-    return this._friend;
+  deleteFriend(): void {
+    console.log("delete friend");
   }
 
-  startChat() {
-    console.log("start chat")
-  }
-
-  deleteFriend() {
-    console.log("delete friend")
-  }
-
-  blockFriend() {
-    console.log("block friend")
+  blockFriend(): void {
+    console.log("block friend");
   }
 
 }

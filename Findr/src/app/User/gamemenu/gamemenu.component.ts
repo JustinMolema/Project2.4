@@ -11,5 +11,4 @@ export class GamemenuComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

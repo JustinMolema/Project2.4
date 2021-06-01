@@ -8,20 +8,20 @@ import { WrongPasswordHandler } from './wrongpasswordhandler';
     styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent implements OnInit {
-    username: String = '';
-    password: String = '';
+    username = '';
+    password = '';
     authorized: boolean;
-    constructor(private router: Router) {
 
+    constructor(private router: Router) {
     }
 
     ngOnInit(): void {
         this.authorized = true;
     }
 
-    checkUserNamePassword() {
-        if (this.username == "admin" && this.password == "admin") {
-            this.router.navigate(['admin/reportedusers'])
+    checkUserNamePassword(): void {
+        if (this.username === "admin" && this.password === "admin") {
+            this.router.navigate(['admin/reportedusers']);
         }
         else {
             throw new WrongPasswordHandler();

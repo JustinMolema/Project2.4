@@ -95,13 +95,10 @@ export class ReporteduserComponent implements OnInit, Admindata {
     }
 
     ngOnInit(): void {
-
     }
 
     changeEvent(max: number): number {
         if (max > 1) return this.max = max;
-
-
         this.max = this.reported_users.length;
     }
 
@@ -110,7 +107,7 @@ export class ReporteduserComponent implements OnInit, Admindata {
     }
 
     fillData(response: any): void {
-        for (let user of response) {
+        for (const user of response) {
             this.reported_users.push(user);
         }
     }

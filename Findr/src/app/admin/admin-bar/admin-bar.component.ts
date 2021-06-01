@@ -7,8 +7,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     styleUrls: ['./admin-bar.component.css'],
     animations: [
         trigger('show', [
-            state('left', style({ 'width': '0px' , 'padding': '0', 'color': 'black'})),
-            state('right', style({ 'width': '185px' })),
+            state('left', style({ width: '0px' , padding: '0', color: 'black'})),
+            state('right', style({ width: '185px' })),
             transition('right => left', [
                 animate(2000)
             ]),
@@ -17,8 +17,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
             ]),
         ]),
         trigger('state', [
-            state('left', style({ 'color': 'black'})),
-            state('right', style({ 'width': '185px' })),
+            state('left', style({ color: 'black'})),
+            state('right', style({ width: '185px' })),
             transition('right => left', [
                 animate(300)
             ]),
@@ -29,7 +29,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ]
 })
 export class AdminBarComponent implements OnInit, OnDestroy {
-    state: string = "right";
+    state = "right";
     constructor(private renderer: Renderer2) {
         this.renderer.addClass(document.body, 'adminBody');
     }
@@ -42,19 +42,6 @@ export class AdminBarComponent implements OnInit, OnDestroy {
     }
 
     collapse(): void {
-
-    }
-
-    kermit() {
-        console.log("dfsdf");
-        this.state = "left";
-    }
-
-    thirdCardFlipped() {
-        this.state = "right";
-    }
-
-    startTimer() {
         this.state = "left";
     }
 }

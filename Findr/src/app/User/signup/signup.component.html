@@ -1,21 +1,19 @@
 <app-jupiter></app-jupiter>
 <div class="gradient-background">
-    <div class="signup-form">
+    <div class="form-container">
         <div class="inputs">
-
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" routerLink="/login">
             <h2>Welcome {{name}}!</h2>
-
             <form>
-                <input name="username" class="username" [ngModelOptions]="{standalone: true}" [(ngModel)]="name" type="text" placeholder="Username" />
-                <input name="email" class="email" type="text" placeholder="email" />
-                <input class="password" type="password" placeholder="Password" />
-                <input class="password" type="password" placeholder="Confirm password" />
+                <input name="username" class="inputfields" [ngModelOptions]="{standalone: true}" [(ngModel)]="name" type="text" placeholder="Username" />
+                <input name="email" class="inputfields" type="text" placeholder="email" />
+                <input class="inputfields" type="password" placeholder="Password" />
+                <input class="inputfields" type="password" placeholder="Confirm password" />
             </form>
         </div>
 
         <div class="loginbuttons">
-            <button class="signup"> Sign Up</button>
+            <button> Sign Up</button>
         </div>
         <div class="account">
             Already have an account?

@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="content-override">
 		<div class="chat-tab">
-			<app-chatmessage *ngFor="let message of messages" [chatmessage]="message.message" [chatreceived]="message.received"></app-chatmessage>
+			<app-chatmessage *ngFor="let message of messages" [message]="message.message" [received]="message.received"></app-chatmessage>
 		</div>
 		<div class="chat-container">
 			<input type="text" class="chat-inputfield" #inputvalue (change)="addMessage(inputvalue.value, true)">

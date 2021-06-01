@@ -4,7 +4,7 @@ import { Directive, Input, SimpleChanges, Renderer2, ElementRef, OnChanges } fro
 @Directive({
     selector: '[appHighlightSearch]'
 })
-export class HighlightSearchDirective {
+export class HighlightSearchDirective implements OnChanges{
     @Input() searchedWord: string;
     @Input() content: any;
     @Input() keys: [];

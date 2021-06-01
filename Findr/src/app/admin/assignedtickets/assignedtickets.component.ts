@@ -10,7 +10,7 @@ export class AssignedticketsComponent implements OnInit {
     searchText: string;
     dateTime = new Date();
 
-    max:Number = 20;
+    max = 20;
 
     keys = [];
     tickets = [
@@ -37,7 +37,7 @@ export class AssignedticketsComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    changeEvent(max: Number) {
+    changeEvent(max: number): number {
         if (max > 1) return this.max = max;
 
         this.max = this.tickets.length;

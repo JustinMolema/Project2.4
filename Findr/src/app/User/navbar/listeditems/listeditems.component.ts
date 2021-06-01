@@ -11,5 +11,4 @@ export class ListeditemsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
