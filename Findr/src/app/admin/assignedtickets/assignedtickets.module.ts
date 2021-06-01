@@ -5,6 +5,7 @@ import {SharedmoduleModule} from '../../sharedmodule/sharedmodule.module';
 import {TableheaderModule} from '../tableheader/tableheader.module';
 import {SupportticketModule} from '../supportticket/supportticket.module';
 import {TabledataModule} from "../tabledata/tabledata.module";
+import {AdmintopbarModule} from "../admintopbar/admintopbar.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {TabledataModule} from "../tabledata/tabledata.module";
         SharedmoduleModule,
         TableheaderModule,
         SupportticketModule,
-        TabledataModule
+        TabledataModule,
+        AdmintopbarModule
     ]
 })
 export class AssignedticketsModule {

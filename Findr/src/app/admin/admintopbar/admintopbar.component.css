@@ -6,7 +6,6 @@
 
 
 .showmenu:checked ~ label {
-    color: darkmagenta;
 }
 
 .showmenu {

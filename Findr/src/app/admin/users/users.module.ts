@@ -5,6 +5,7 @@ import {UserComponent} from './user/user.component';
 import {SharedmoduleModule} from '../../sharedmodule/sharedmodule.module';
 import {TableheaderModule} from '../tableheader/tableheader.module';
 import {TabledataModule} from '../tabledata/tabledata.module';
+import {AdmintopbarModule} from "../admintopbar/admintopbar.module";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {TabledataModule} from '../tabledata/tabledata.module';
         SharedmoduleModule,
         TableheaderModule,
         TabledataModule,
+        AdmintopbarModule
     ]
 })
 export class UsersModule {

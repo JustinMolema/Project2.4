@@ -1,5 +1,7 @@
 import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, animateChild, group, query, stagger, state, style, transition, trigger} from '@angular/animations';
+import {AdminBarService} from "./admin-bar.service";
+import {delay} from "rxjs/operators";
 
 @Component({
     selector: 'app-admin-bar',
@@ -7,8 +9,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     styleUrls: ['./admin-bar.component.css'],
     animations: [
         trigger('show', [
-            state('left', style({ 'width': '0px' , 'padding': '0', 'color': 'black'})),
-            state('right', style({ 'width': '185px' })),
+            state('left', style({'width': '0px', 'padding': '0'})),
+            state('right', style({'width': '250px'})),
             transition('right => left', [
                 animate(2000)
             ]),
@@ -43,18 +45,5 @@ export class AdminBarComponent implements OnInit, OnDestroy {
 
     collapse(): void {
 
-    }
-
-    kermit() {
-        console.log("dfsdf");
-        this.state = "left";
-    }
-
-    thirdCardFlipped() {
-        this.state = "right";
-    }
-
-    startTimer() {
-        this.state = "left";
     }
 }

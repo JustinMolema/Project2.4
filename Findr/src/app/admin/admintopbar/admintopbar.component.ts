@@ -13,5 +13,4 @@ export class AdmintopbarComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
 }
