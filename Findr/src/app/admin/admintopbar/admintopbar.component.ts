@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {AdminBarService} from "../admin-bar/admin-bar.service";
 
 @Component({
     selector: 'app-admintopbar',
@@ -8,7 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class AdmintopbarComponent implements OnInit {
     @Input() title;
 
-    constructor() {
+    constructor(public adminbarService: AdminBarService) {
     }
 
     ngOnInit(): void {

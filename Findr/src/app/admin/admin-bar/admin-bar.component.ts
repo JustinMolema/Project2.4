@@ -12,28 +12,41 @@ import {delay} from "rxjs/operators";
             state('left', style({'width': '0px', 'padding': '0'})),
             state('right', style({'width': '250px'})),
             transition('right => left', [
-                animate(2000)
+                group([
+                    query('@showchild', animateChild()),
+                    animate(200),
+                ]),
             ]),
             transition('left => right', [
-                animate(0)
+                group([
+                    query("@showchild", [
+                        stagger(175, [
+                            animateChild()
+                        ])
+                    ]),
+                    // query('@showchild', animateChild()),
+                    animate(200),
+                ]),
             ]),
         ]),
-        trigger('state', [
-            state('left', style({ 'color': 'black'})),
-            state('right', style({ 'width': '185px' })),
+        trigger('showchild', [
+            state('left', style({'opacity': '0'})),
+            state('right', style({'opacity': '1'})),
             transition('right => left', [
-                animate(300)
+                animate(15)
             ]),
             transition('left => right', [
-                animate(0)
+                animate(15)
             ]),
         ]),
     ]
 })
 export class AdminBarComponent implements OnInit, OnDestroy {
     state: string = "right";
-    constructor(private renderer: Renderer2) {
+
+    constructor(private renderer: Renderer2, private adminbarService: AdminBarService) {
         this.renderer.addClass(document.body, 'adminBody');
+        this.adminbarService.setNavbarComponent(this);
     }
 
     ngOnInit(): void {
@@ -44,6 +57,6 @@ export class AdminBarComponent implements OnInit, OnDestroy {
     }
 
     collapse(): void {
-
+        this.state = this.state === "left" ? "right" : "left";
     }
 }

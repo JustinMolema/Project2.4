@@ -3,9 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import {AdminBarComponent} from "./admin-bar.component";
 @Injectable({
     providedIn: 'root',
-
 })
-
 
 export class AdminBarService {
     navbar: AdminBarComponent;
