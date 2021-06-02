@@ -72,19 +72,12 @@ export class AppComponent {
     }
 
     setRefreshInterval(): void {
-        this.linterval(function() {
-            console.log("ddfdf");
-        },25000, 10);
-        // this.interval = setInterval(() => {
-        //     console.log("Pieter");
-        // }, 149000)
-        // setInterval(() => {
-        //     // this.refreshToken();
-        //
-        //     if (this.authService.refreshTokenInterval) {
-        //
-        //     }
-        // }, 149000);
+        setInterval(() => {
+            this.refreshToken();
+            // if (this.authService.refreshTokenInterval) {
+            //
+            // }
+        }, 1000);
     }
 
     ngOnDestroy(){
