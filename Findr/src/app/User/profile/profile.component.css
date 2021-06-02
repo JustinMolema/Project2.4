@@ -107,7 +107,7 @@ button {
   margin-left: 20px;
   border: none;
   outline: none;
-  
+
 }
 
 button:hover {
@@ -160,8 +160,8 @@ button:active {
 
   .profile-page
   {
-    
-    width: 100;
+
+    width: 100%;
   }
 
   .setting-field{
