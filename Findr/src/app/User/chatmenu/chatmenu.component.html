@@ -3,9 +3,9 @@
 		<div class="chat-tab">
 			<app-chatmessage *ngFor="let message of messages" [message]="message.message" [received]="message.received"></app-chatmessage>
 		</div>
-		<div class="chat-container">
+		<span class="chat-container">
 			<input type="text" class="chat-inputfield" #inputvalue (change)="addMessage(inputvalue.value, true)">
-		</div>
+		</span>
 	</div>
 </div>
 

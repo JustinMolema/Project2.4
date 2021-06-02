@@ -39,7 +39,7 @@ img {
 button {
   color: white;
   font-family: "Archivo";
-  font-size: 14px;
+  font-size: 15px;
   background-color: rgba(120, 178, 255, 0.164);
   border: none;
   outline: none;
@@ -61,6 +61,35 @@ button:active {
 }
 
 @media (max-width: 1600px){
+
+  .chat{
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .delete{
+    
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848562840856035368/beautiful.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+  .block{
+    width: 40px;
+    height: 40px;
+    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563223015456809/beautiful2.png");
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+  }
+
+}
+
+@media (max-width: 1200px){
   .current-friends-container{
     flex: auto;
   }
@@ -80,29 +109,4 @@ button:active {
     margin-left: 10px;
     white-space: nowrap;
   }
-
-  .chat{
-    width: 40px;
-    height: 40px;
-    background: url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-  }
-
-  .delete{
-    width: 40px;
-    height: 40px;
-    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848562840856035368/beautiful.png");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-  }
-
-  .block{
-    width: 40px;
-    height: 40px;
-    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563223015456809/beautiful2.png");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-  }
-
 }

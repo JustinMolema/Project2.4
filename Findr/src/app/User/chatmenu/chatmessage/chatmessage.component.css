@@ -12,6 +12,7 @@
     border-style: solid;
     /*animation: you-spin-me-right-round 15s infinite linear;*/
 }
+
 .messagebox{
     min-height: 100px;
     min-width: 500px;
@@ -23,7 +24,6 @@
     background: rgba(255, 255, 255, 0.007);
     padding-left: 10px;
     display: flex;
-    
 }
 
 .message{
@@ -33,6 +33,8 @@
     max-width: 500px;
     align-items: center;
     display: flex;
+    background: hotpink;
+    overflow-wrap: break-word;
 }
 
 .username{
@@ -60,7 +62,6 @@
     min-width: 500px;
     max-height: 100px;
     max-width: 500px;
-    
     margin-left: 1000px;
     align-items: center;
     display: flex;
@@ -105,6 +106,7 @@
         max-width: 200px;
         min-height: 40px;
         max-height: 40px;
+        background: orangered;
     }
 
     .receivedmessagebox{
@@ -117,10 +119,16 @@
     }
 
     .message{
+        background: aqua;
+        min-height: 50px;
+        max-height: 50px;
+        max-width: 50%;
     }
 
     .receivedmessage{
         transform: scalex(1);
+        margin-left: 0px;
+        max-width: 20%;
     }
 
     .pfp{
@@ -132,13 +140,16 @@
 
     .message-text{
         font-size: 100%;
+        background: greenyellow;
     }
 
     .username{
         margin-left: 5%;
+        padding-top: 5px;
     }
 
     .receivedusername{
+        padding-top: 5px;
         margin-left: 5%;
     }
 }

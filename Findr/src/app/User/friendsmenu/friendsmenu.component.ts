@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { TopbarService } from '../topbar/topbar.service';
 
 @Component({
   selector: 'app-friendsmenu',
@@ -10,11 +11,11 @@ export class FriendsmenuComponent implements OnInit {
   friendRequests = ["Simon", "Jos", "Wijmar"];
   blockedUsers = ["Richard", "Jeroen"];
 
-  constructor() {
+  //TODO: push tabs further to left when topbar is triggered
+  constructor(private topbarService: TopbarService) {
   }
 
   ngOnInit(): void {
-
   }
 
   showFriendTab(blockView: any, friendView: any): void {

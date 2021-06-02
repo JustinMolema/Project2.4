@@ -40,6 +40,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
+            // registrationStrategy: 'registerImmediately',
             // Register the ServiceWorker as soon as the app is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000',
@@ -66,9 +67,16 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         TabledataModule,
         AdmintopbarModule,
         BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        }),
     ],
     providers: [DatePipe, HttpClient, [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]],
     bootstrap: [AppComponent],
 })
 export class AppModule {
 }
+
