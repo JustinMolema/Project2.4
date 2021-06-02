@@ -19,7 +19,6 @@ button {
   margin-right: 10px;
   border-radius: 10px;
   color: rgb(255, 255, 255);
-  font-family: "Archivo";
   font-weight: 100;
   font-size: 16px;
   border: none;
@@ -28,6 +27,7 @@ button {
   flex-direction: row;
   text-align: center;
   align-items: center;
+  
 }
 
 .friends-list-button:hover {
@@ -59,7 +59,7 @@ button {
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-radius: 10px;
   color: cyan;
   font-family: "Archivo";
@@ -113,18 +113,16 @@ img {
   border-radius: 50%;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .friends-list-button {
-    animation: collapse-navbar 1s forwards;
-    width: 80px;
-    max-width: 80px;
-    min-width: 80px;
-    height: 80px;
-    margin-left: 10px;
+    width: 55px;
+    height: 55px;
+    margin-left: 8px;
     margin-right: 10px;
     background: url("https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png");
     background-size: contain;
     color: rgba(0, 0, 0, 0);
+    align-items: center;
   }
 
   .friendname{
@@ -147,16 +145,14 @@ img {
   }
 
   .see-more-button {
-    animation: collapse-navbar 1s forwards;
-    width: 80px;
-    max-width: 80px;
-    min-width: 80px;
-    height: 80px;
-    margin-left: 10px;
+    width: 55px;
+    height: 55px;
+    margin-left: 8px;
     margin-right: 10px;
     background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
     background-size: contain;
     color: rgba(0, 0, 0, 0);
+    align-items: center;
   }
 }
 
@@ -185,12 +181,9 @@ img {
   text-align: center;
   align-items: center;
 
-  animation: collapse-navbar 1s forwards;
-  width: 80px;
-  max-width: 80px;
-  min-width: 80px;
-  height: 80px;
-  margin-left: 10px;
+  width: 55px;
+  height: 55px;
+  margin-left: 8px;
   margin-right: 10px;
   background: url("https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png");
   background-size: contain;
@@ -222,11 +215,12 @@ img {
   width: 0;
   height: 0;
 }
+
 .see-more-button-collapsed {
   cursor: pointer;
   height: 30px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-radius: 10px;
   font-weight: 100;
   font-size: 16px;
@@ -238,12 +232,9 @@ img {
   align-items: center;
   padding-left: 30px;
 
-  animation: collapse-navbar 1s forwards;
-  width: 80px;
-  max-width: 80px;
-  min-width: 80px;
-  height: 80px;
-  margin-left: 10px;
+  width: 55px;
+  height: 55px;
+  margin-left: 8px;
   margin-right: 10px;
   background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
   background-size: contain;

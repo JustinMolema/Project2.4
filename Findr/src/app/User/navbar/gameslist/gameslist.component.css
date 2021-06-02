@@ -62,10 +62,9 @@
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-radius: 10px;
   color: cyan;
-  font-family: "Archivo";
   font-weight: 100;
   font-size: 16px;
   border: none;
@@ -123,16 +122,13 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   /* .games-list {
   } */
 
   .games-list-button {
-    animation: collapse-navbar 1s forwards;
-    width: 80px;
-    max-width: 80px;
-    min-width: 80px;
-    height: 80px;
+    width: 55px;
+    height: 55px;
     margin-left: 10px;
     margin-right: 10px;
     background: url("https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg");
@@ -158,16 +154,15 @@
   }
 
   .see-more-button {
-    animation: collapse-navbar 1s forwards;
-    width: 80px;
-    max-width: 80px;
-    min-width: 80px;
-    height: 80px;
-    margin-left: 10px;
+    width: 55px;
+    height: 55px;
+    margin-left: 8px;
     margin-right: 10px;
     background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
     background-size: contain;
     color: rgba(0, 0, 0, 0);
+    align-items: center;
+    margin-bottom: 60px;
   }
 }
 /* For the collapsed version */
@@ -185,11 +180,8 @@
   text-align: center;
   align-items: center;
 
-  animation: collapse-navbar 1s forwards;
-  width: 80px;
-  max-width: 80px;
-  min-width: 80px;
-  height: 80px;
+  width: 55px;
+  height: 55px;
   margin-left: 10px;
   margin-right: 10px;
   background: url("https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg");
@@ -236,13 +228,11 @@
   align-items: center;
   padding-left: 30px;
 
-  animation: collapse-navbar 1s forwards;
-  width: 80px;
-  max-width: 80px;
-  min-width: 80px;
-  height: 80px;
+  width: 55px;
+  height: 55px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 60px;
   background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
   background-size: contain;
   color: rgba(0, 0, 0, 0);

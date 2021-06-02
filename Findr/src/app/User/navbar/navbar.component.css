@@ -1,17 +1,15 @@
 .navbar {
-  animation: decollapse-navbar 5s forwards;
   position: fixed;
   padding-top: 60px;
   background: linear-gradient(to bottom right, #2a415f, #172131);
   /* border-right: 5px solid #29475c; */
   /* border-bottom: 5px solid #29475c; */
-  border-radius: 10px;
   height: 100%;
   width: 300px;
   color: white;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  box-sizing: content-box;
   overflow: auto;
   font-family: "Archivo";
   padding-bottom: 30px;
@@ -38,7 +36,6 @@ button {
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  border-radius: 10px;
   color: rgb(255, 255, 255);
   /* font-family: "Archivo"; */
   font-weight: 100;
@@ -84,24 +81,23 @@ button {
   flex-direction: row;
   text-align: left;
   align-items: stretch;
-  animation: collapse-navbar 1s forwards;
-  width: 80px;
-  max-width: 80px;
-  min-width: 80px;
-  height: 80px;
-  margin-left: 10px;
+  width: 55px;
+  height: 55px;
+  margin-left: 8px;
   margin-right: 10px;
-  padding-bottom: 80px;
+  padding-bottom: 55px;
   background-size: contain;
   color: rgba(0, 0, 0, 0);
+  align-items: center;
+  flex:0.7;
 }
 
 
 
 .navbariconcollapsed {
   margin-top: 5px;
-  width: 67px;
-  height: 67px;
+  width: 45px;
+  height: 45px;
   align-items: center;
   justify-content: center;
   flex: 1;
@@ -125,19 +121,17 @@ button {
 }
 
 .navbarcollapsed {
-  animation: decollapse-navbar 5s forwards;
   position: fixed;
   padding-top: 60px;
   background: linear-gradient(to bottom right, #2a415f, #172131);
   /* border-right: 5px solid #29475c; */
   /* border-bottom: 5px solid #29475c; */
-  border-radius: 10px;
   height: 100vh;
-  width: 120px;
+  width: 70px;
   color: white;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  box-sizing: content-box;
   overflow: auto;
   padding-bottom: 30px;
 
@@ -208,45 +202,50 @@ button {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .navbar {
     /*animation: collapse-navbar 1s forwards;*/
-    width: 120px;
+    width: 70px;
     flex: 1;
     /* height: ; */
+    /*stops horizontal scrolling in navbar when small*/
+    overflow-x: hidden;
   }
   .navbarbutton {
-    animation: collapse-navbar 1s forwards;
-    width: 80px;
-    max-width: 80px;
-    min-width: 80px;
-    height: 80px;
-    margin-left: 10px;
+    width: 55px;
+    height: 55px;
+    margin-left: 8px;
     margin-right: 10px;
-    padding-bottom: 80px;
+    padding-bottom: 55px;
     background-size: contain;
     color: rgba(0, 0, 0, 0);
+    align-items: center;
+    flex:0.7;
   }
   .navbaricon {
     position: relative;
     /* background-color: green; */
     margin-top: 5px;
-    width: 67px;
-    height: 67px;
+    width: 45px;
+    height: 45px;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    flex: 0.3;
     flex-direction: row;
   }
+
   .navbaricondiv {
     width: 0;
     height: 0;
+    flex: 0;
   }
 
   .navbartext {
     width: 0;
     height: 0;
     display: none;
+    overflow: hidden;
+    flex: 0;
   }
 
   .navbarbuttoncollapsed{
@@ -259,6 +258,7 @@ button {
     width: 0;
     height: 0;
     background: rgba(0, 0, 0, 0);
+    overflow-x: hidden;
   }
   .navbariconcollapsed {
     width: 0;

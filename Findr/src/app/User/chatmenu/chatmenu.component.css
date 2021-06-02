@@ -1,6 +1,7 @@
 .content-override {
 	width: 100%;
 }
+
 .chat-tab {
     color: white;
 	width: 100%;
@@ -16,10 +17,10 @@
 
 .chat-container {
     /* background: red; */
-	width: 100;
+    background: hotpink;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content:left;
+	align-items:inherit;
 }
 
 .chat-inputfield{
@@ -45,15 +46,19 @@ input:focus{
 }
 
 @media (max-width: 1200px){
+
+    .chat-container{
+        margin-left: 10px;
+        margin-right: 10px;
+        display: inline-block;
+    }
+
     .chat-inputfield{
         max-width: 500px;
-        min-width: 1px;
-        height: 20px;
-        display: inline-flex;
     }
 
     .chat-tab{
-        overflow: hidden;
         padding-left: 10%;
+        overflow-x: hidden;
     }
 }

@@ -31,6 +31,7 @@ img {
 }
 
 .profile-details {
+  white-space: nowrap;
   display: flex;
   flex-direction: column;
   margin-top: 50px;
@@ -145,14 +146,26 @@ button:active {
 {
   .profile-details{
     width: 300px;
-    margin-left: 70px;
     margin-top: 5px;
     margin-bottom: 25px;
   }
 
+  .current-profile-pic{
+    margin-left: 0px;
+  }
+
+  .input-img-button{
+    margin-left: 0px;
+  }
+
   .profile-page
   {
+    
     width: 100;
+  }
+
+  .setting-field{
+    margin-left: 0%;
   }
 
   .content{
