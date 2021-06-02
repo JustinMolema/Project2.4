@@ -66,14 +66,14 @@ button:active {
   background-color: rgba(80, 141, 158, 0.5);
 }
 
-@media (max-width: 1200px) {
-  .friend-tab {
-    padding-left: 20px;
-    padding-top: 50px;
-  }
+/*@media (max-width: 800px) {*/
+/*  .friend-tab {*/
+/*    padding-left: 20px;*/
+/*    padding-top: 50px;*/
+/*  }*/
 
-  .blocked-user-tab {
-    padding-left: 20px;
-    padding-top: 50px;
-  }
-}
+/*  .blocked-user-tab {*/
+/*    padding-left: 20px;*/
+/*    padding-top: 50px;*/
+/*  }*/
+/*}*/

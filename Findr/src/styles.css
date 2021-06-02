@@ -28,7 +28,6 @@ body{
     padding-top: 60px;
     padding-left: 300px;
     display: flex;
-    justify-content: left;
     box-sizing: border-box;
 }
 
@@ -74,7 +73,7 @@ body{
 
 @media (max-width: 800px){
 	.content{
-		padding-left: 110px;
+		padding-left: 70px;
 	}
 }
 

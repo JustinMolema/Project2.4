@@ -202,7 +202,7 @@ button {
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
   .navbar {
     /*animation: collapse-navbar 1s forwards;*/
     width: 70px;
