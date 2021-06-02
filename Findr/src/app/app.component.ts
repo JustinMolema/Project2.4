@@ -50,7 +50,7 @@
 //     //TODO: Automatic rerouting to /login if not logged in and trying to access games/friends/etc
 // }
 
-import { Component } from '@angular/core';
+import {ApplicationRef, Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "./User/login/auth.service";
 
@@ -62,13 +62,19 @@ import {AuthService} from "./User/login/auth.service";
 export class AppComponent {
     title = 'Findr';
 
+    stable;
     interval;
 
-    constructor(public router: Router, private authService: AuthService) { }
+    constructor(public router: Router, private authService: AuthService, private app: ApplicationRef) {
+    }
 
     ngOnInit() {
-        // setTimeout(this.setRefreshInterval, 3000);
-        this.setRefreshInterval();
+        this.stable = this.app.isStable.subscribe((isStable) => {
+            if (isStable) {
+                this.setRefreshInterval();
+                this.stable.unsubscribe();
+            }
+        });
     }
 
     setRefreshInterval(): void {
@@ -80,23 +86,16 @@ export class AppComponent {
         }, 1000);
     }
 
-    ngOnDestroy(){
-    }
+    refreshToken(): void {
 
-    linterval(func, wait, times): void{
-        var interv = function() {
-            if (typeof times === "undefined" || times-- > 0) {
-                setTimeout(interv, wait);
-                try {
-                    func.call(null);
-                }
-                catch(e) {
-                    times = 0;
-                    throw e.toString();
+        this.authService.refreshToken().subscribe(res => {
+            if (res != null) {
+                if (this.authService.localstorage) {
+                    localStorage.setItem('jwt', res['accessToken']);
+                } else {
+                    sessionStorage.setItem('jwt', res['accessToken']);
                 }
             }
-        };
-
-        setTimeout(interv, wait);
-    };
+        });
+    }
 }
