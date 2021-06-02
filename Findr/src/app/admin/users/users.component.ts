@@ -12,14 +12,15 @@ export class UsersComponent implements OnInit {
 
     keys = [];
     users = [
-        { name: 'Harald', email: 'HaraldThelegend@hotmail.com', warning: 1, ban: "Yes" },
-        { name: 'Justin', email: 'noobmaster420@gamur.com', warning: 100, ban: "No"},
-        { name: 'Anne Pier', email: 'GilfHunter69@lindanoordhuis.com', warning: 7, ban: "Yes please"},
-        { name: 'Merel', email: 'Vogel@nitroflex.com', warning: 3, ban: "No" },
-        { name: 'Robbin', email: 'Robbin@rooieraket.com', warning: 4, ban: "No" },
-        { name: 'Bart', email: 'BartBarnard@area51raider.com', warning: 2, ban: "No" },
+        { name: 'a', email: 'HaraldThelegend@hotmail.com', warning: 2, ban: "No" },
+        { name: 'c', email: 'HaraldThelegend@hotmail.com', warning: 1, ban: "No" },
+        { name: 'b', email: 'HaraldThelegend@hotmail.com', warning: 3, ban: "Yes" },
+        { name: 'Harald', email: 'HaraldThelegend@hotmail.com', warning: 5, ban: "Yes" },
+        { name: 'Harald', email: 'HaraldThelegend@hotmail.com', warning: 8, ban: "Yes" },
+        { name: 'e', email: 'HaraldThelegend@hotmail.com', warning: 3, ban: "Yes" },
+        { name: 'Harald', email: 'HaraldThelegend@hotmail.com', warning: 0, ban: "Yes" },
     ];
-    
+
     constructor() {
         this.keys = Object.keys(this.users[0]);
     }

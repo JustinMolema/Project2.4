@@ -7,6 +7,8 @@ import { TableheaderModule } from '../tableheader/tableheader.module';
 import { NewgameComponent } from './newgame/newgame.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import {TabledataModule} from '../tabledata/tabledata.module';
+import {AdmintopbarModule} from "../admintopbar/admintopbar.module";
 
 @NgModule({
   declarations: [
@@ -14,12 +16,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     GameComponent,
     NewgameComponent
   ],
-  imports: [
-    CommonModule,
-    SharedmoduleModule,
-    TableheaderModule,
-    RouterModule,
-    ReactiveFormsModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedmoduleModule,
+        TableheaderModule,
+        RouterModule,
+        ReactiveFormsModule,
+        TabledataModule,
+        AdmintopbarModule
+    ]
 })
 export class GamesModule { }

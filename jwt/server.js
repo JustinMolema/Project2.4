@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 const connection = mysql.createConnection({
-	host: process.env.HOST,
-	user: process.env.USER,
-	password: process.env.PASSWORD,
-	database: process.env.DATABASE
+	host: 'localhost',
+	user: 'root',
+	password: '',
+	database: 'Findr'
 });
 
 // connection.connect(function (err) {
@@ -33,7 +33,7 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 	})
 })
 
-app.route('/api/games').get(authenticateToken, (req, res) => {
+app.route('/api/games').get((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM games', function (err, result, fields) {
 		if (err) throw err;

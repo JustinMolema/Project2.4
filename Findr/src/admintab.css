@@ -1,0 +1,151 @@
+.admintab {
+    padding-bottom: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+app-admintopbar {
+    width: 95%;
+}
+
+.view-log-tab {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Archivo";
+}
+
+.header_text {
+    width: 95%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.admin-view-container {
+    color: white;
+    background-color: #212b46;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    width: 95%;
+    border: 2px solid rgb(53, 63, 119);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.records-and-search {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    flex: 0.5;
+}
+
+.recordsperpage {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    margin-top: 10px;
+    flex: 0.9;
+}
+
+.record_amount {
+    color: white;
+    background: rgb(53, 63, 119);
+    height: 40px;
+    margin-left: 10px;
+    border: 1px solid gray;
+}
+
+.record_amount:focus, .search-input:focus{
+    outline: none;
+    border: 2px solid black;
+}
+
+.search {
+    /*position: absolute;*/
+    flex: 0.1;
+    display: flex;
+    align-items: center;
+}
+
+i {
+    pointer-events: none;
+    z-index: 9999;
+    transform: translateX(-50%);
+}
+
+.search-input {
+    width: 100%;
+    align-items: flex-end;
+    min-width: 150px;
+    /*padding-left: 50%;*/
+    background: rgb(53, 63, 119);
+    color: white;
+    border: 1px solid gray;
+    height: 40px;
+    margin-right: -17px;
+}
+
+.mobileBreak{
+    display: none;
+}
+
+.line {
+    width: 100%;
+    margin: 0;
+    height: 1px;
+    border-width: 0;
+    background: black;
+}
+
+@media (max-width: 850px) {
+    .mobileBreak{
+        display: block;
+    }
+
+    .admin-view-container{
+        background: none;
+        width: 100%;
+        border: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .records-and-search {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .recordsperpage {
+        width: 100%;
+    }
+
+    .search, .search-input {
+        margin-left: 0px;
+        width: 100%;
+    }
+
+    .headerline {
+        visibility: hidden;
+    }
+    .line {
+        display: none
+    }
+}
+
+@media (max-width: 550px) {
+    .records-and-search {
+        flex-direction: column-reverse;
+    }
+}

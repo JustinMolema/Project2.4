@@ -1,27 +1,11 @@
-<div class="game-view">
-	<div class="column-view">
-		<p class="field">{{game.name}}
-		</p>
-		<div class="mobileHeader">
-			<p><b>Name: </b></p>
-		</div>
-	</div>
-	<div class="column-view">
-		<p class="field">{{game.category}}</p>
-		<div class="mobileHeader">
-			<p><b>Category:</b></p>
-		</div>
-	</div>
-	<div class="column-view">
-		<!-- <p>{{game.subscribercount}}</p> -->
-		<p class="field">5</p>
-		<div class="mobileHeader">
-			<p><b>Subscribercount:</b></p>
-		</div>
-	</div>
+<div class="adminrow">
+    <app-tabledata [game]="game" [key]="keys[0]"></app-tabledata>
+    <app-tabledata [game]="game" [key]="keys[1]"></app-tabledata>
+    <app-tabledata [game]="game" [key]="keys[2]"></app-tabledata>
+
 	<div class="actions">
-		<div class="field" class="button-container">
-			<div class="edit-view">
+		<div class="field button-container">
+			<div class="buttonview">
 				<button (click)="editGame(game)">
 					<div style="font-size: 18px; display: flex">
 						<img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit"/>
@@ -29,7 +13,7 @@
 					</div>
 				</button>
 			</div>
-			<div class="delete-view">
+			<div class="buttonview">
 				<button (click)="delete(game.Name)">
 					<div style="font-size: 18px; display: flex; color: lightgray;">
 						<img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete"/>

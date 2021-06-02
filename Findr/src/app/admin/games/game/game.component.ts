@@ -8,32 +8,23 @@ import { GamesService } from '../games.service';
     styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-    _game: any;
-
-    constructor(private admindataService: AdmindataService, private gamesService: GamesService) { 
+    @Input() game: any;
+    @Input() keys = [];
+    constructor(private admindataService: AdmindataService, private gamesService: GamesService) {
     }
 
     ngOnInit(): void {
     }
 
-    @Input()
-    set game(game: any){
-        this._game = game;
-    }
-    
-    get game(){
-        return this._game;
-    }
-
     delete(name: string): void {
-        if (confirm("Are you sure you want to delete game: " + name)) {
-            alert("Item deleted");
-            console.log(typeof(name))
+        if (confirm('Are you sure you want to delete game: ' + name)) {
+            alert('Item deleted');
+            console.log(typeof(name));
             this.admindataService.deleteGame(name).subscribe(response => console.log(response));
         }
     }
 
-    editGame(game: object){
+    editGame(game: object): void{
         this.gamesService.editGame(game);
     }
 }

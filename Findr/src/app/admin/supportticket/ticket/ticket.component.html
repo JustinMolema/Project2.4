@@ -1,32 +1,30 @@
-<div class="support-ticket-view">
-    <div class="column-view">
-        <p>{{date}}
-        </p>
-    </div>
-    <div class="column-view">
-        <p>{{time}}</p>
-    </div>
-
-    <div class="column-view">
-        <p class="tag">{{tag}}</p>
-    </div>
-    <div class="column-view">
-        <p>{{status}}</p>
-    </div>
+<div class="adminrow">
+    <app-tabledata [game]="date" [key]="'date'"></app-tabledata>
+    <app-tabledata [game]="time" [key]="'time'"></app-tabledata>
+    <app-tabledata [game]="tag" [key]="'name'"></app-tabledata>
+    <app-tabledata [game]="status" [key]="'reason'"></app-tabledata>
     <div class="actions">
-        <div class="button-container">
-            <button class="view-ticket" (click)=closeTicket()>
-                <div style="font-size: 18px;">
-                    &#9776;
-                    <span>View ticket</span>
-                </div>
-            </button>
-            <button class="close-ticket" (click)="closeTicket()"> 
-                <div style="font-size: 18px; color: lightgray;">
-                    <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
-                    <span>Close ticket</span>
-                </div>
-            </button>
+        <div class="field button-container">
+            <div class="buttonview">
+
+                <button (click)=closeTicket()>
+                    <div style="font-size: 18px;">
+                        &#9776;
+                        <span>View ticket</span>
+                    </div>
+                </button>
+            </div>
+            <div class="buttonview">
+                <button (click)="closeTicket()">
+                    <div style="font-size: 18px; color: lightgray;">
+                        <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
+                        <span>Close ticket</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="mobileHeader">
+            <p><b>Actions:</b></p>
         </div>
     </div>
 </div>

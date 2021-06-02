@@ -1,21 +1,14 @@
 <meta name="Description" content="This page is for displaying games">
-<div class="content">
+<div class="admincontent">
     <div class="new-game-tab" *ngIf="addingNewGame">
-        <div class="header_text">
-            <h1> GAMES
-                &#8674; NEW
-            </h1>
-        </div>
-        <div class="games-tab-content">
+        <app-admintopbar [title]="'GAMES &#8674; NEW'"></app-admintopbar>
+        <div class="admin-view-container">
             <app-newgame [returnToGames]="getReturnToGames"></app-newgame>
         </div>
     </div>
-    <div class="game-admin-tab" *ngIf="!addingNewGame">
-        <div class="header_text">
-            <h1> GAMES
-            </h1>
-        </div>
-        <div class="games-tab-content">
+    <div class="admintab" *ngIf="!addingNewGame">
+        <app-admintopbar [title]="'GAMES'"></app-admintopbar>
+        <div class="admin-view-container">
             <button class="addgame" (click)="addingNewGame = !addingNewGame">
                 <div style="font-size: 18px; display: flex" >
                     <img src="../../../../assets/SVG/add.svg" style="width: 20px; height: 20px;" alt="Edit" />
@@ -36,11 +29,11 @@
                     </select>
                 </div>
                 <div class="search">
-                    <p> Search:</p>
-                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                    <input class="search-input" type="search" [(ngModel)]="searchText" placeholder="Search..." />
+					<i class="fas fa-search"></i>
                 </div>
             </div>
-            <hr class="line headerline">
+            <hr class="line">
 
             <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="games" [actionSize]='25' [infoSize]='25'>
             </app-tableheader>
@@ -48,9 +41,10 @@
             <hr class="line">
             <ng-container *ngFor="let game of games | tablefilter:keys:searchText |  slice:0:max; index as i">
                 <app-game [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [game]=game
+                    [game]=game [keys]="keys"
                     appHighlightSearch [searchedWord]="searchText" [content]="game" [keys]="keys"></app-game>
                 <hr class="line">
+				<br class="mobileBreak">
             </ng-container>
         </div>
     </div>

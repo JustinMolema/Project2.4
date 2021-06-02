@@ -1,27 +1,23 @@
-<div class="content">
-    <div class="support-ticket-tab">
-        <div class="header_text">
-            <h1 class="text">MY TICKETS
-                <!--&#8674;-->
-            </h1>
-        </div>
-        <div class="support-ticket-content">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+<div class="admincontent">
+    <div class="admintab">
+        <app-admintopbar [title]="'MY TICKETS'"></app-admintopbar>
+        <div class="admin-view-container">
             <div class="records-and-search">
                 <div class="recordsperpage">
+                    <p>Records per page:</p>
                     <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20" selected>20</option>
                         <option value="50">50</option>
                         <option value="1"> All</option>
-
                     </select>
-                    <p>records per page
-                    </p>
                 </div>
                 <div class="search">
-                    <p class="search-text"> Search:</p>
-                    <input class="search-input" type="search" [(ngModel)]="searchText" />
+                    <input class="search-input" type="search" [(ngModel)]="searchText" placeholder="Search..." />
+                    <i class="fas fa-search"></i>
                 </div>
             </div>
             <hr class="line">
@@ -32,15 +28,12 @@
             <ng-container *ngFor="let ticket of tickets | tablefilter:keys:searchText | slice:0:max; index as i">
                 <app-ticket [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
                     [tag]=ticket.tag [status]=ticket.status [date]=ticket.date [time]=ticket.time
-                    
+
                     appHighlightSearch [searchedWord]="searchText" [content]="ticket" [keys]="keys"
                     ></app-ticket>
                 <hr class="line">
+                <br class="mobileBreak">
             </ng-container>
         </div>
-        <br>
-        <br>
-        <br>
-        <div class="spacer">spacer</div>
     </div>
 </div>

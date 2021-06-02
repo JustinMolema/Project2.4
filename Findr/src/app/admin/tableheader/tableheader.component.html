@@ -1,11 +1,12 @@
 <div class="header">
-    <b *ngFor="let key of keys; index as i" [style.width.%]="infoSize" class="column-name" (click)="sortItems(columnName.innerHTML.toLowerCase())">
+
+    <b *ngFor="let key of keys; index as i" [style.width.%]="infoSize" class="column-name" (click)="sortItems(columnName.innerHTML)">
         <p #columnName class="tableheader">{{keys[i] | titlecase}}</p>
         <div style="display: flex; flex: 0.1">
-            <img class="arrow" *ngIf="sortingBy == columnName.innerHTML.toLowerCase()" src="../../../assets/SVG/arrow.svg">
-            <img class="navbaricon" *ngIf="sortingBy != columnName.innerHTML.toLowerCase()" src="../../../assets/SVG/sort_icon.svg">
+            <img class="arrow" *ngIf="sortingBy == columnName.innerHTML" src="../../../assets/SVG/arrow.svg">
+            <img class="navbaricon" *ngIf="sortingBy != columnName.innerHTML" src="../../../assets/SVG/sort_icon.svg">
 
-            <img class="navbaricon" *ngIf="sortingBy == columnName.innerHTML.toLowerCase()" [ngClass]="ascending ? 'navbaricon2' : 'navbaricon'"
+            <img class="navbaricon" *ngIf="sortingBy == columnName.innerHTML" [ngClass]="ascending ? 'navbaricon2' : 'navbaricon'"
                 src="../../../assets/SVG/sort_button.svg">
         </div>
     </b>

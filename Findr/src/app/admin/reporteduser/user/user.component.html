@@ -1,44 +1,46 @@
-<div class="report-user-view">
-    <div class="column-view">
-        <p>{{date}}
-        </p>
-    </div>
-    <div class="column-view">
-        <p>{{time}}</p>
-    </div>
+<div class="adminrow">
+    <app-tabledata [game]="date" [key]="'date'"></app-tabledata>
+    <app-tabledata [game]="time" [key]="'time'"></app-tabledata>
+    <app-tabledata [game]="name" [key]="'name'"></app-tabledata>
+    <app-tabledata [game]="offense" [key]="'reason'"></app-tabledata>
 
-    <div class="column-view">
-        <p>{{name}}</p>
-    </div>
-    <div class="column-view">
-        <p>{{offense}}</p>
-    </div>
     <div class="actions">
-        <div class="button-container">
-            <button class="log-view">
-                <div style="font-size: 18px;">
-                    &#9776;
-                    <span>View logs</span>
-                </div>
-            </button>
-            <button class="warning-view">
-                <div style="font-size: 18px; color: yellow;">
-                    &#9888;
-                    <span>Warning</span>
-                </div>
-            </button>
-            <button class="ban-view">
-                <div style="font-size: 18px; color: red;">
-                    &#8856;
-                    <span>Ban</span>
-                </div>
-            </button>
-            <button class="dismiss-view" (click)="delete(name, offense)">
-                <div style="font-size: 18px; color: lightgray;">
-                    <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
-                    <span>Dismiss</span>
-                </div>
-            </button>
+        <div class="field button-container">
+            <div class="buttonview">
+                <button>
+                    <div style="font-size: 18px;">
+                        &#9776;
+                        <span>View logs</span>
+                    </div>
+                </button>
+            </div>
+            <div class="buttonview">
+                <button>
+                    <div style="font-size: 18px; color: yellow;">
+                        &#9888;
+                        <span>Warning</span>
+                    </div>
+                </button>
+            </div>
+            <div class="buttonview">
+                <button>
+                    <div style="font-size: 18px; color: red;">
+                        &#8856;
+                        <span>Ban</span>
+                    </div>
+                </button>
+            </div>
+            <div class="buttonview">
+                <button (click)="delete(name, offense)">
+                    <div style="font-size: 18px; color: lightgray;">
+                        <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
+                        <span>Dismiss</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="mobileHeader">
+            <p><b>Actions:</b></p>
         </div>
     </div>
-</div> 
+</div>
