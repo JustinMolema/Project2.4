@@ -35,7 +35,6 @@ export class AppComponent {
     }
 
     refreshToken(): void {
-
         this.authService.refreshToken().subscribe(res => {
             if (res != null) {
                 if (this.authService.localstorage) {

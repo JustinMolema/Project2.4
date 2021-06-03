@@ -1,11 +1,17 @@
-.pfp{
-    min-height: 100px;
+.message-container {
+    display: flex;
+    align-items: center;
+}
+
+* {
+    /*box-sizing: border-box;*/
+}
+
+.pfp {
+    height: 100px;
     min-width: 100px;
-    max-height: 100px;
-    max-width: 100px;
     background: url(https://cdn.discordapp.com/attachments/535443771052130317/840928723326074910/pfp.png);
     background-size: cover;
-
     border-color: rgb(255, 255, 255);
     border-radius: 50px;
     border-width: 0.1px;
@@ -19,25 +25,34 @@
     flex-direction: column;
 }
 
-.username{
-    padding-top: 50px;
-    margin-left: 120px;
+.username {
     color: rgb(255, 255, 255);
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.receivedmessagebox{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
+.messagebox {
+    box-sizing: border-box;
+
+    width: 100%;
     border-radius: 15px;
-    margin-left: 20px;
-    background-color: rgba(255, 255, 255, 0.007);
-    padding-left: 100px;
-    display: flex;
-    transform: scalex(-1);
+    background: rgba(255, 255, 255, 0.055);
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 20px;
+    overflow-wrap: break-word;
 }
+/*.receivedmessagebox {*/
+/*    min-height: 100px;*/
+/*    min-width: 500px;*/
+/*    max-height: 100px;*/
+/*    max-width: 500px;*/
+/*    border-radius: 15px;*/
+/*    margin-left: 20px;*/
+/*    background-color: rgba(255, 255, 255, 0.007);*/
+/*    padding-left: 100px;*/
+/*    display: flex;*/
+/*    transform: scalex(-1);*/
+/*}*/
 
 /*.receivedmessage {*/
 /*    min-height: 100px;*/
@@ -83,14 +98,14 @@
 /*        max-height: 40px;*/
 /*    }*/
 
-    .receivedmessagebox{
-        min-width: 50px;
-        max-width: 200px;
-        transform: scalex(1);
-        padding-left: 10px;
-        min-height: 40px;
-        max-height: 40px;
-    }
+/*    .receivedmessagebox {*/
+/*        min-width: 50px;*/
+/*        max-width: 200px;*/
+/*        transform: scalex(1);*/
+/*        padding-left: 10px;*/
+/*        min-height: 40px;*/
+/*        max-height: 40px;*/
+/*    }*/
 
 /*    .message {*/
 /*        min-height: 50px;*/
@@ -98,33 +113,33 @@
 /*        max-width: 50%;*/
 /*    }*/
 
-    .receivedmessage{
-        transform: scalex(1);
-        margin-left: 0px;
-        max-width: 20%;
-    }
+/*    .receivedmessage {*/
+/*        transform: scalex(1);*/
+/*        margin-left: 0px;*/
+/*        max-width: 20%;*/
+/*    }*/
 
-    .pfp{
-        min-height: 12vw;
-        min-width: 12vw;
-        max-height: 12vw;
-        max-width: 12vw;
-    }
+/*    .pfp {*/
+/*        min-height: 12vw;*/
+/*        min-width: 12vw;*/
+/*        max-height: 12vw;*/
+/*        max-width: 12vw;*/
+/*    }*/
 
 /*    .message-text {*/
 /*        font-size: 100%;*/
 /*    }*/
 
-    .username{
-        margin-left: 5%;
-        padding-top: 5px;
-    }
+/*    .username {*/
+/*        margin-left: 5%;*/
+/*        padding-top: 5px;*/
+/*    }*/
 
-    .receivedusername{
-        padding-top: 5px;
-        margin-left: 5%;
-    }
-}
+/*    .receivedusername {*/
+/*        padding-top: 5px;*/
+/*        margin-left: 5%;*/
+/*    }*/
+/*}*/
 
 
 

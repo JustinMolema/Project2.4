@@ -21,6 +21,7 @@ body{
 }
 
 .content {
+    color: white;
     background-size: cover;
     background-attachment: fixed;
     height: 100%;
@@ -71,7 +72,7 @@ body{
     }
 }
 
-@media (max-width: 800px){
+@media (max-width: 1000px){
 	.content{
 		padding-left: 70px;
 	}

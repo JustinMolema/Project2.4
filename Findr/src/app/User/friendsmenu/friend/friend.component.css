@@ -1,112 +1,97 @@
 .current-friends-container {
-  /* background-color: yellow; */
-  width: 100%;
-  display: flex;
-  align-items: center;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
 }
 
-.friends-container {
-  /* background-color: salmon; */
-  justify-content: left;
-  align-items: start;
-  margin-right: 20px;
-  display: flex;
-  flex: 1;
+.friend-container {
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 .friend-name {
-  /* background-color: red; */
-  font-size: 18px;
-  margin-right: 20px;
-  margin-left: 20px;
-  flex: 1;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-left: 20px;
+    flex: 1;
 }
 
 .friend-buttons {
-  /* background-color: green; */
-  margin-left: 200px;
-  flex: 1;
-  margin-right: 20px;
-  padding-left: 5px;
-  padding-right: 5px;
+    flex: 1;
+    margin-right: 20px;
+    padding-left: 10%;
+    padding-right: 5px;
 }
 
 img {
-  width: 50px;
-  border-radius: 50%;
+    width: 50px;
+    border-radius: 50%;
 }
 
 button {
-  color: white;
-  font-family: "Archivo";
-  font-size: 15px;
-  background-color: rgba(120, 178, 255, 0.164);
-  border: none;
-  outline: none;
-  border-radius: 7px;
-  height: 35px;
-  margin-left: 20px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    background-color: rgba(120, 178, 255, 0.164);
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    height: 35px;
+    margin-right: 15px;
+    padding: 8px 15px;
 }
 
 button:hover {
-  background-color: rgb(80, 141, 158);
+    background-color: rgb(80, 141, 158);
 }
 
 button:active {
-  background-color: rgba(80, 141, 158, 0.5);
+    background-color: rgba(80, 141, 158, 0.5);
 }
 
-@media (max-width: 1600px){
+@media (max-width: 1600px) {
+    .chat {
+        width: 40px;
+        height: 40px;
+        background: url("../../../../assets/SVG/chat.svg");
+        background-size: contain;
+        font-size: 0;
+    }
 
-  .chat{
-    width: 40px;
-    height: 40px;
-    background: url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-  }
+    .delete {
+        width: 40px;
+        height: 40px;
+        background: url("../../../../assets/SVG/temp.svg");
+        background-size: contain;
+        font-size: 0;
+    }
 
-  .delete{
-    
-    width: 40px;
-    height: 40px;
-    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848562840856035368/beautiful.png");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-  }
-
-  .block{
-    width: 40px;
-    height: 40px;
-    background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563223015456809/beautiful2.png");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-  }
-
+    .block {
+        width: 40px;
+        height: 40px;
+        background: url("https://cdn.discordapp.com/attachments/838036012969754674/848563223015456809/beautiful2.png");
+        background-size: contain;
+        font-size: 0;
+    }
 }
 
-@media (max-width: 1200px){
-  .current-friends-container{
-    flex: auto;
-  }
+@media (max-width: 1200px) {
+    .friend-name {
+        margin-right: 10px;
+        margin-left: 10px;
+        white-space: nowrap;
+    }
+}
 
-  .friend-buttons{
-    flex:auto;
-    overflow: hidden;
-    width: 25px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding-left:0px;
-    padding-right: 0px;
-  }
+@media (max-width: 800px) {
+    .current-friends-container {
+        flex-direction: column;
+        align-items: start;
+        margin-top: 30px;
+    }
 
-  .friend-name{
-    margin-right: 10px;
-    margin-left: 10px;
-    white-space: nowrap;
-  }
+    .friend-buttons {
+        padding-left: 0;
+    }
 }

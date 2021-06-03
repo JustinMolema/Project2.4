@@ -26,8 +26,7 @@
 .box {
     height: 100%;
     width: 100%;
-    background: red;
-    transform: scale(1) rotate(0deg);
+    /*transform: scale(1) rotate(0deg);*/
     transition: 0.5s;
     margin-bottom: 15px;
 }

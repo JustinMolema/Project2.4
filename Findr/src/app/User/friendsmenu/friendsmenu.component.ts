@@ -26,5 +26,4 @@ export class FriendsmenuComponent implements OnInit {
     blockView.style.display = "flex";
     friendView.style.display = "none";
   }
-
 }

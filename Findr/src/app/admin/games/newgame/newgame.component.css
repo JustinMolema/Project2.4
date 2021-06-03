@@ -11,12 +11,10 @@ img {
     cursor: pointer;
     /*background: rgb(53, 63, 119);*/
     width: 200px;
-    /* border-radius: 50%; */
 }
-  
+
 .current-profile-pic {
     background: rgb(53, 63, 119);
-
     border-radius: 50%;
 }
 

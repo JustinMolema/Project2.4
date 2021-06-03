@@ -7,21 +7,12 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FriendComponent implements OnInit {
 
-  public _friend: String;
+  @Input() friend: String;
 
   constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  @Input()
-  set friend(friend: String) {
-    this._friend = friend;
-  }
-
-  get friend() {
-    return this._friend;
   }
 
   startChat() {
