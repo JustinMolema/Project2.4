@@ -22,6 +22,7 @@
     "@angular/service-worker": "~11.2.12",
     "@ionic-native/text-to-speech": "^5.33.0",
     "cordova": "^10.0.0",
+    "js-sha512": "^0.8.0",
     "node-timers": "^0.0.2",
     "rxjs": "~6.6.0",
     "speak-tts": "^2.0.8",

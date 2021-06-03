@@ -73,7 +73,7 @@ export class AppComponent {
 
     setRefreshInterval(): void {
         this.linterval(function() {
-            console.log("ddfdf");
+            // console.log("ddfdf");
         },25000, 10);
         // this.interval = setInterval(() => {
         //     console.log("Pieter");

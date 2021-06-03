@@ -57,8 +57,8 @@ app.route('/api/friends').get(authenticateToken, (req, res) => {
 
 app.route('/api/profile').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	console.log("profile aks")
-	connection.query('SELECT * FROM profile', function (err, result, fields) {
+	var sql = 'SELECT * FROM users WHERE ' + req.user + '==userID';
+	connection.query(sql, function (err, result, fields) {
 		if (err) throw err;
 		res.send(JSON.stringify(result));
 	})
@@ -116,6 +116,23 @@ app.post('/api/login', (req, res) => {
 	const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 	refreshTokens.push(refreshToken)
 	res.json({ accessToken: accessToken, refreshToken: refreshToken })
+})
+
+// api call to create user in database
+app.post('/api/login/signup', async (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+
+	const username = encodeURIComponent(req.body.username);
+	const password = encodeURIComponent(req.body.password);
+	const email = encodeURIComponent(req.body.email);
+
+	connection.connect(function (req, err) {
+		connection.query('INSERT INTO users (username, password, email) VALUES (?, ?, ?)', [username, password, email], function (err, result, fields) {
+
+			if (err) return res.json({ status: "error" });
+			res.json({ status: "ok" });
+		})
+	})
 })
 
 
