@@ -5,14 +5,14 @@
       <button class="blocked-users" (click)="showBlockedUserTab(blockedUserTab, friendTab)">Blocked Users</button>
     </div>
 
-    <h2>Friends</h2>
-    <app-friend *ngFor="let friend of friends" [friend]="friend"></app-friend>
-    <div class="friend-request-container">
+        <h2>Friends</h2>
+        <app-friend *ngFor="let friend of friends" [friend]="friend"></app-friend>
+        <div class="friend-request-container">
 
-      <h2>Friend Requests</h2>
-      <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend"></app-friendrequests>
+            <h2>Friend Requests</h2>
+            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend"></app-friendrequests>
+        </div>
     </div>
-  </div>
 
   <div class="blocked-user-tab" #blockedUserTab>
     <div class="blocked-users-buttons">

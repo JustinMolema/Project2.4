@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AdmindataService } from '../../admindata.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {AdmindataService} from '../../admindata.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -55,10 +55,10 @@ export class NewgameComponent implements OnInit {
     }
 
     returnToGame(alertText) {
-        if(confirm(alertText)){
+        if (confirm(alertText)) {
             this.returnToGames();
         }
-    }    
+    }
 
     gameAlreadyExists(response) {
         return response["status"] == "error";

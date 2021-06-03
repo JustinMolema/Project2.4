@@ -10,31 +10,13 @@
     border-radius: 50px;
     border-width: 0.1px;
     border-style: solid;
-    /*animation: you-spin-me-right-round 15s infinite linear;*/
 }
 
-.messagebox{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
-    border-radius: 15px;
+.message {
     margin-left: 20px;
-    /*background-color: rgba(255, 255, 255, 0.007);*/
-    background: rgba(255, 255, 255, 0.007);
-    padding-left: 10px;
+    width: 100%;
     display: flex;
-}
-
-.message{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
-    align-items: center;
-    display: flex;
-    background: hotpink;
-    overflow-wrap: break-word;
+    flex-direction: column;
 }
 
 .username{
@@ -57,57 +39,49 @@
     transform: scalex(-1);
 }
 
-.receivedmessage{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
-    margin-left: 1000px;
-    align-items: center;
-    display: flex;
-    transform: scalex(-1);
-}
+/*.receivedmessage {*/
+/*    min-height: 100px;*/
+/*    min-width: 500px;*/
+/*    max-height: 100px;*/
+/*    max-width: 500px;*/
+/*    margin-left: 10%;*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    transform: scalex(-1);*/
+/*}*/
 
-.receivedusername{
-    padding-top: 50px;
-    margin-left: 1280px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-}
+/*.receivedusername {*/
+/*    padding-top: 50px;*/
+/*    margin-left: 15%;*/
+/*    color: rgb(255, 255, 255);*/
+/*    font-family: Arial, Helvetica, sans-serif;*/
+/*}*/
 
-.message-text{
-    font-size: 30px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-}
+/*@keyframes mirror-message {*/
+/*    0% {*/
+/*        transform: scalex(1);*/
+/*    }*/
+/*    100% {*/
+/*        transform: scalex(-1);*/
+/*    }*/
+/*}*/
 
-@keyframes mirror-message{
-    0%{
-        transform: scalex(1);
-    }    
-    100%{
-        transform: scalex(-1);
-    }    
-}
+/*@keyframes you-spin-me-right-round {*/
 
-@keyframes you-spin-me-right-round{
-    
-    100%{
-        transform:rotate(720deg);
-        
-        filter:hue-rotate(720deg);
-    }    
-}
+/*    100% {*/
+/*        transform: rotate(720deg);*/
 
-@media (max-width: 1200px)
-{
-    .messagebox{
-        min-width: 50px;
-        max-width: 200px;
-        min-height: 40px;
-        max-height: 40px;
-        background: orangered;
-    }
+/*        filter: hue-rotate(720deg);*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 1200px) {*/
+/*    .messagebox {*/
+/*        min-width: 50px;*/
+/*        max-width: 200px;*/
+/*        min-height: 40px;*/
+/*        max-height: 40px;*/
+/*    }*/
 
     .receivedmessagebox{
         min-width: 50px;
@@ -118,12 +92,11 @@
         max-height: 40px;
     }
 
-    .message{
-        background: aqua;
-        min-height: 50px;
-        max-height: 50px;
-        max-width: 50%;
-    }
+/*    .message {*/
+/*        min-height: 50px;*/
+/*        max-height: 50px;*/
+/*        max-width: 50%;*/
+/*    }*/
 
     .receivedmessage{
         transform: scalex(1);
@@ -138,10 +111,9 @@
         max-width: 12vw;
     }
 
-    .message-text{
-        font-size: 100%;
-        background: greenyellow;
-    }
+/*    .message-text {*/
+/*        font-size: 100%;*/
+/*    }*/
 
     .username{
         margin-left: 5%;

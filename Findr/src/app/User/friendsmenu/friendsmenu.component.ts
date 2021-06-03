@@ -11,7 +11,6 @@ export class FriendsmenuComponent implements OnInit {
   friendRequests = ["Simon", "Jos", "Wijmar"]
   blockedUsers = ["Richard", "Jeroen"]
 
-  //TODO: push tabs further to left when topbar is triggered
   constructor(private topbarService: TopbarService) {
   }
 

@@ -4,7 +4,7 @@
 			<app-chatmessage *ngFor="let message of messages" [chatmessage]="message.message" [chatreceived]="message.received"></app-chatmessage>
 		</div>
 		<span class="chat-container">
-			<input type="text" class="chat-inputfield" #inputvalue (change)="addMessage(inputvalue.value, true)">
+			<input type="text" class="chat-inputfield" #inputvalue (change)="addMessage(inputvalue.value, true)" placeholder="Type a message">
 		</span>
 	</div>
 </div>
