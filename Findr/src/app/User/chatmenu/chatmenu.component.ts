@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-chatmenu',
-  templateUrl: './chatmenu.component.html',
-  styleUrls: ['./chatmenu.component.css']
+    selector: 'app-chatmenu',
+    templateUrl: './chatmenu.component.html',
+    styleUrls: ['./chatmenu.component.css']
 })
 export class ChatmenuComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  messages = [];
+    messages = [{message: 'dasdaadadsasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', received: false},
+        {message: 'ja', received: true}];
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  addMessage(message:string, received:boolean)
-  {
-    this.messages.push({message, received});
-    this.messages.push({message:"ja", received:false});
-  }
+    addMessage(message: string, received: boolean) {
+        this.messages.push({message, received});
+        this.messages.push({message: "ja", received: true});
+    }
 
 }

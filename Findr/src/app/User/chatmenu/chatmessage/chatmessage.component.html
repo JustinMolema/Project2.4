@@ -1,16 +1,9 @@
-<div class="message-container">
-    <div class="pfp"></div>
+<div class="message-container" [ngStyle]="(received) ? {'flex-direction': 'row'} : {'flex-direction': 'row-reverse'}" >
+    <div class="pfp" [ngStyle]="(received) ? {'margin-right': '20px'} : {'margin-left': '20px'}"></div>
     <div class="message">
         <span class="username">Wallbuilder6d9</span>
         <div class="messagebox">
             <p>{{ message }}</p>
         </div>
     </div>
-<!--    <div [ngClass]="(received == false)? 'message' : 'receivedmessage'">-->
-<!--        <p [ngClass]="(received == false)? 'username' : 'receivedusername'">Wallbuilder6d9</p>-->
-
-<!--        <div [ngClass]="(received == false) ? 'messagebox' : 'receivedmessagebox'">-->
-<!--            <p class="message-text">{{ message }}</p>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>
