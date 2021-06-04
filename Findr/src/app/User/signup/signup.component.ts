@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
     username: "";
     constructor(private appService: AppService, private fb: FormBuilder,) {
         this.form = this.fb.group({
-            username: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+            username: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(25)])],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required],
             email : ['', Validators.compose([Validators.required, Validators.email])],
@@ -40,12 +40,12 @@ export class SignupComponent implements OnInit {
         return (formGroup: FormGroup) => {
             const control = formGroup.controls[controlName];
             const matchingControl = formGroup.controls[matchingControlName];
-    
+
             if (matchingControl.errors && !matchingControl.errors.mustMatch) {
                 // return if another validator has already found an error on the matchingControl
                 return;
             }
-    
+
             // set error on matchingControl if validation fails
             if (control.value !== matchingControl.value) {
                 matchingControl.setErrors({ mustMatch: true });

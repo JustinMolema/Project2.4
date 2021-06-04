@@ -16,6 +16,9 @@
                     <div *ngIf="form.controls['username'].errors.minlength">
                         Username must be at least 5 characters.
                     </div>
+                    <div *ngIf="form.controls['username'].errors.maxlength">
+                        Username can't be longer than 25 characters.
+                    </div>
                 </div>
 
                 <input name="email" class="inputfields" formControlName="email" type="text" placeholder="Email" />
