@@ -4,6 +4,10 @@ const cors = require('cors')
 const app = express()
 const jwt = require('jsonwebtoken')
 const mysql = require('mysql')
+const test = require('./api.js');
+const http = require('http')
+
+// import {test} from './api'
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -15,14 +19,47 @@ const connection = mysql.createConnection({
 	database: 'Findr'
 });
 
+
 // connection.connect(function (err) {
 // 	if (err) throw err;
 // })
+
+const chatport = '8081';
+app.set('port', chatport);
+var server = http.createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    methods: ["GET", "POST"]
+  }
+});
+
+// server.listen();
+
+io.on('connection', (socket) => {
+	console.log("aaaa");
+	socket.on('join', function (data) {
+		console.log(data)
+		socket.join(data.room);
+		io.emit('new user joined', { user: data.user, message: 'has joined  room.' });
+	});
+	socket.on('leave', function (data) {
+		io.emit('left room', { user: data.user, message: 'has left room.' });
+		socket.leave(data.room);
+	});
+
+	socket.on('message', function (data) {
+		io.in(data.room).emit('new message', { user: data.user, message: data.message });
+	})
+});
+
+server.listen(chatport);
+
 
 const port = process.env.PORT || 8080;
 
 app.listen(8001, () => {
 	console.log('Server started!')
+	test()
 })
 
 app.route('/api/users').get(authenticateToken, (req, res) => {
@@ -40,6 +77,7 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 		res.send(JSON.stringify(result));
 	})
 })
+
 app.route('/api/chats').get(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	connection.query('SELECT * FROM chats', function (err, result, fields) {
@@ -172,4 +210,10 @@ app.listen(port, () => {
 	console.log(`Express server listening on port ${port}`);
 });
 
+app.use((req,res,next)=>{
+    res.setHeader('Acces-Control-Allow-Origin','*');
+    res.setHeader('Acces-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+    res.setHeader('Acces-Contorl-Allow-Methods','Content-Type','Authorization');
+    next(); 
+})
 app.use(cors())
