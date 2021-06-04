@@ -6,8 +6,9 @@ import {Component, OnInit, Input} from '@angular/core';
     styleUrls: ['./chatmessage.component.css']
 })
 export class ChatmessageComponent implements OnInit {
-    @Input() received;
-    @Input() message;
+
+  @Input() received: boolean;
+  @Input() message: string;
 
     constructor() {
     }

@@ -1,158 +1,41 @@
-.pfp{
-    min-height: 100px;
-    min-width: 100px;
+.message-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.pfp {
+    height: 5vw;
+    width: 5vw;
+    min-height: 50px;
+    min-width: 50px;
     max-height: 100px;
     max-width: 100px;
     background: url(https://cdn.discordapp.com/attachments/535443771052130317/840928723326074910/pfp.png);
     background-size: cover;
-
     border-color: rgb(255, 255, 255);
     border-radius: 50px;
     border-width: 0.1px;
     border-style: solid;
-    /*animation: you-spin-me-right-round 15s infinite linear;*/
 }
 
-.messagebox{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
+.message {
+    display: flex;
+    max-width: 50%;
+    flex-direction: column;
+}
+
+.username {
+    color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.messagebox {
+    box-sizing: border-box;
     border-radius: 15px;
-    margin-left: 20px;
-    /*background-color: rgba(255, 255, 255, 0.007);*/
-    background: rgba(255, 255, 255, 0.007);
-    padding-left: 10px;
-    display: flex;
-}
-
-.message{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
-    align-items: center;
-    display: flex;
-    background: hotpink;
+    background: rgba(255, 255, 255, 0.055);
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 16px;
     overflow-wrap: break-word;
 }
-
-.username{
-    padding-top: 50px;
-    margin-left: 120px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.receivedmessagebox{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
-    border-radius: 15px;
-    margin-left: 20px;
-    background-color: rgba(255, 255, 255, 0.007);
-    padding-left: 100px;
-    display: flex;
-    transform: scalex(-1);
-}
-
-.receivedmessage{
-    min-height: 100px;
-    min-width: 500px;
-    max-height: 100px;
-    max-width: 500px;
-    margin-left: 1000px;
-    align-items: center;
-    display: flex;
-    transform: scalex(-1);
-}
-
-.receivedusername{
-    padding-top: 50px;
-    margin-left: 1280px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.message-text{
-    font-size: 30px;
-    color: rgb(255, 255, 255);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-@keyframes mirror-message{
-    0%{
-        transform: scalex(1);
-    }    
-    100%{
-        transform: scalex(-1);
-    }    
-}
-
-@keyframes you-spin-me-right-round{
-    
-    100%{
-        transform:rotate(720deg);
-        
-        filter:hue-rotate(720deg);
-    }    
-}
-
-@media (max-width: 1200px)
-{
-    .messagebox{
-        min-width: 50px;
-        max-width: 200px;
-        min-height: 40px;
-        max-height: 40px;
-        background: orangered;
-    }
-
-    .receivedmessagebox{
-        min-width: 50px;
-        max-width: 200px;
-        transform: scalex(1);
-        padding-left: 10px;
-        min-height: 40px;
-        max-height: 40px;
-    }
-
-    .message{
-        background: aqua;
-        min-height: 50px;
-        max-height: 50px;
-        max-width: 50%;
-    }
-
-    .receivedmessage{
-        transform: scalex(1);
-        margin-left: 0px;
-        max-width: 20%;
-    }
-
-    .pfp{
-        min-height: 12vw;
-        min-width: 12vw;
-        max-height: 12vw;
-        max-width: 12vw;
-    }
-
-    .message-text{
-        font-size: 100%;
-        background: greenyellow;
-    }
-
-    .username{
-        margin-left: 5%;
-        padding-top: 5px;
-    }
-
-    .receivedusername{
-        padding-top: 5px;
-        margin-left: 5%;
-    }
-}
-
-
-

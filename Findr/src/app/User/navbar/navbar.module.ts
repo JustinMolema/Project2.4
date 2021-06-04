@@ -25,5 +25,3 @@ import { FriendslistComponent } from './friendslist/friendslist.component';
   ]
 })
 export class NavbarModule { }
-//TODO: Center buttons
-//TODO: Friend/chat/profile view PWA

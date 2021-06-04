@@ -7,9 +7,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ChatmenuComponent implements OnInit {
 
-    constructor() { }
+    constructor() {
+    }
 
-    messages = [];
+    messages = [{message: 'dasdaadadsasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', received: false},
+        {message: 'ja', received: true}];
 
     ngOnInit(): void {
     }
