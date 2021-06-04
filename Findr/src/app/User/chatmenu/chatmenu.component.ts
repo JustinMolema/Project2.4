@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ChatService} from './chat.service';
 
 @Component({
     selector: 'app-chatmenu',
@@ -7,7 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ChatmenuComponent implements OnInit {
 
-    constructor() {
+    constructor(private chat: ChatService) {
+        chat.joinRoom({user: 'testUser', room: 'testRoom'});
     }
 
     messages = [{message: 'dasdaadadsasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', received: false},
