@@ -6,10 +6,6 @@ html, body {
 
 body{
     background-color: #131c28;
-    /* background-image:  url("assets/SVG/wave.svg");
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed; */
 }
 
 * {
@@ -24,25 +20,29 @@ body{
     color: white;
     background-size: cover;
     background-attachment: fixed;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     padding-top: 60px;
     padding-left: 300px;
     display: flex;
     box-sizing: border-box;
+    padding-bottom: 125px;
+    overflow: auto;
 }
 
 .admincontent {
     color: white;
     background-size: cover;
     background-attachment: fixed;
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     padding-top: 10px;
     padding-left: 250px;
     display: flex;
     justify-content: left;
     box-sizing: border-box;
+    padding-bottom: 50px;
+    overflow: auto;
 }
 
 ::-webkit-scrollbar {
@@ -79,3 +79,6 @@ body{
 }
 
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

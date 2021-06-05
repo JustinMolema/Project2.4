@@ -1,6 +1,6 @@
 <div class="content">
     <div class="chat-tab">
-        <div class="chat-message">
+        <div class="chat-message" #chat>
             <app-chatmessage *ngFor="let message of messages" [message]="message.message" [userName]="message.username" [received]="message.received"></app-chatmessage>
         </div>
         <form [formGroup]="form" class="chat-container">

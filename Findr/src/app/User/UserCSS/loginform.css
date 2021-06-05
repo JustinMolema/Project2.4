@@ -3,6 +3,7 @@ app-jupiter {
 }
 
 .gradient-background {
+    color: tomato;
     background: #09143b;
     background-image: url("../../../assets/SVG/waves2.svg"), url("../../../assets/SVG/stars.svg");
     background-position: center center;
@@ -27,7 +28,12 @@ app-jupiter {
     z-index: 10;
 }
 
+input:invalid {
+    border: 1px solid red;
+}
+
 .inputs {
+    width: 100%;
     flex: 0.8;
     display: flex;
     flex-direction: column;
@@ -70,7 +76,6 @@ a {
     color: #468aba;
     text-decoration: none;
     font-weight: bold;
-    color: #468aba;
 }
 
 a:hover{
@@ -80,7 +85,7 @@ a:hover{
 .loginbuttons{
     flex: 0.1;
     margin-top: 10%;
-    width: 75%;
+    width: 100%;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;

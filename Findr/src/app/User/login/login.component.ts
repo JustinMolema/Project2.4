@@ -19,15 +19,19 @@ export class LoginComponent implements OnInit {
     vw = window.screen.width;
 
     constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+        this.createForm();
+
+        for (let i = 0; i < 100; i++) {
+            this.stars.push({left: this.getLeft(), top: this.getTop()});
+        }
+    }
+
+    createForm(): void {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
             rememberme: [true]
         });
-
-        for (let i = 0; i < 100; i++) {
-            this.stars.push({left: this.getLeft(), top: this.getTop()});
-        }
     }
 
     ngOnInit(): void {

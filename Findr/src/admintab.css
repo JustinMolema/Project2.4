@@ -1,10 +1,8 @@
 .admintab {
-    padding-bottom: 50px;
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: auto;
 }
 
 app-admintopbar {
@@ -16,7 +14,6 @@ app-admintopbar {
     display: flex;
     align-items: center;
     flex-direction: column;
-    font-family: "Archivo";
 }
 
 .header_text {

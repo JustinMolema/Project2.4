@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewChecked, ViewChild, ElementRef} from '@angular/core';
 import {ChatService} from './chat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -7,11 +7,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     templateUrl: './chatmenu.component.html',
     styleUrls: ['./chatmenu.component.css']
 })
-export class ChatmenuComponent implements OnInit {
+export class ChatmenuComponent implements OnInit, AfterViewChecked {
     username: string;
     roomName: string;
     form: FormGroup;
     messages = [];
+    @ViewChild('chat') private scrollContainer: ElementRef;
 
     constructor(private fb: FormBuilder, private chat: ChatService) {
         this.createForm();
@@ -22,6 +23,16 @@ export class ChatmenuComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    ngAfterViewChecked(): void{
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void{
+        try{
+            this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+        } catch (err){}
+    }
+
     createForm(): void {
         this.form = this.fb.group({
             message: ['', Validators.required],
@@ -29,8 +40,8 @@ export class ChatmenuComponent implements OnInit {
     }
 
     tempRoomSettings(): void {
-        this.username = prompt('Type username here');
-        this.roomName = prompt('Type room here');
+        this.username = "a" //prompt('Type username here');
+        this.roomName = "b" //prompt('Type room here');
         this.chat.joinRoom({user: this.username, room: this.roomName});
     }
 

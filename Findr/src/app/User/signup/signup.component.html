@@ -5,59 +5,39 @@
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" routerLink="/login">
             <h2>Welcome {{username}}!</h2>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <input name="username" class="inputfields" formControlName="username" [(ngModel)]='username' type="text"
-                    placeholder="Username" />
 
-                <div *ngIf="form.controls['username'].invalid && (form.controls['username'].dirty || form.controls['username'].touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="form.controls['username'].errors.required">
-                        Username is required.
-                    </div>
-                    <div *ngIf="form.controls['username'].errors.minlength">
-                        Username must be at least 5 characters.
-                    </div>
-                    <div *ngIf="form.controls['username'].errors.maxlength">
-                        Username can't be longer than 25 characters.
-                    </div>
+                <input name="username" class="inputfields" formControlName="username" [(ngModel)]='username' type="text" placeholder="Username" autofocus/>
+
+                <div *ngIf="form.controls['username'].invalid && (form.controls['username'].dirty || form.controls['username'].touched)">
+                    <span *ngIf="form.controls['username'].errors.required">Username is required.</span>
+                    <span *ngIf="form.controls['username'].errors.minlength">Username must be at least 5 characters.</span>
+                    <span *ngIf="form.controls['username'].errors.maxlength">Username can't be longer than 25 characters.</span>
                 </div>
 
-                <input name="email" class="inputfields" formControlName="email" type="text" placeholder="Email" />
+                <input name="email" class="inputfields" formControlName="email" type="text" placeholder="Email">
 
-                <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="form.controls['email'].errors.required">
-                        Email is required.
-                    </div>
-
-                    <div *ngIf="form.controls['email'].errors.email">
-                        Must be an email.
-                    </div>
+                <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+                    <span *ngIf="form.controls['email'].errors.required">Email is required.</span>
+                    <span *ngIf="form.controls['email'].errors.email">Must be an email.</span>
                 </div>
 
                 <input class="inputfields" type="password" formControlName="password" placeholder="Password" />
 
-                <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="form.controls['password'].errors.required">
-                        Password is required.
-                    </div>
+                <div *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)">
+                    <span *ngIf="form.controls['password'].errors.required">Password is required.</span>
+                    <span *ngIf="form.controls['password'].errors.minlength">Password must be longer than 16 characters.</span>
                 </div>
 
                 <input class="inputfields" type="password" formControlName="confirmPassword"
                     placeholder="Confirm password" />
 
-                <div *ngIf="form.controls['confirmPassword'].invalid && (form.controls['confirmPassword'].dirty || form.controls['confirmPassword'].touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="form.controls['confirmPassword'].errors.mustMatch">
-                        Passwords must match.
-                    </div>
-                    <div *ngIf="form.controls['confirmPassword'].errors.required">
-                        Confirm password is required.
-                    </div>
+                <div *ngIf="form.controls['confirmPassword'].invalid && (form.controls['confirmPassword'].dirty || form.controls['confirmPassword'].touched)">
+                    <span *ngIf="form.controls['confirmPassword'].errors.mustMatch">Passwords must match.</span>
+                    <span *ngIf="form.controls['confirmPassword'].errors.required">Confirm password is required.</span>
                 </div>
 
                 <div class="loginbuttons">
-                    <button type="submit" [disabled]="form.pristine || form.invalid" class="btn btn-success"> Sign
+                    <button type="submit" [disabled]="form.pristine || form.invalid" class="btn btn-success">Sign
                         Up</button>
                 </div>
             </form>

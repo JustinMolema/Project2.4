@@ -114,7 +114,6 @@ app.route('/api/supporttickets').get((req, res) => {
 
 app.route('/api/addgame').post((req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	console.log("ff");
 	connection.connect(function (err) {
 		connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
 			if (err) return res.json({ status: "error" });

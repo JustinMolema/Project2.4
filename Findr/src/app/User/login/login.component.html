@@ -20,11 +20,12 @@
                     </label>
                     <a class="forgot" routerLink="/forgot-password">Forgot password</a>
                 </div>
+                <div class="loginbuttons">
+                    <button class="login-button" (click)="login()">Login</button>
+                </div>
             </form>
         </div>
-        <div class="loginbuttons">
-            <button class="login-button" (click)="login()">Login</button>
-        </div>
+
         <div class="account">
             Don't have an account?
             <a class="no_account" routerLink="/signup">Sign Up</a>

@@ -32,6 +32,7 @@ import {AssignedticketsModule} from './admin/assignedtickets/assignedtickets.mod
 import {TabledataModule} from './admin/tabledata/tabledata.module';
 import {AdmintopbarModule} from "./admin/admintopbar/admintopbar.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
     declarations: [AppComponent],

@@ -2,6 +2,7 @@
   "name": "findr",
   "version": "0.0.0",
   "scripts": {
+    "postinstall": "ngcc",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
@@ -12,10 +13,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.12",
+    "@angular/cdk": "^11.2.13",
     "@angular/common": "~11.2.12",
     "@angular/compiler": "~11.2.12",
     "@angular/core": "^11.2.14",
     "@angular/forms": "~11.2.12",
+    "@angular/material": "^11.2.13",
     "@angular/platform-browser": "~11.2.12",
     "@angular/platform-browser-dynamic": "~11.2.12",
     "@angular/router": "~11.2.12",
