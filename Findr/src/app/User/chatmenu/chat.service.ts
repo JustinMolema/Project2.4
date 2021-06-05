@@ -13,7 +13,6 @@ export class ChatService {
     private socket = io('http://localhost:8081');
 
     joinRoom(data): void {
-        console.log("wrqwerewqreqwrewr");
         this.socket.emit('join', data);
     }
 

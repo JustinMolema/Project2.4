@@ -33,7 +33,6 @@ const io = require("socket.io")(server, {
   }
 });
 
-// server.listen();
 
 io.on('connection', (socket) => {
 	console.log("aaaa");
@@ -42,13 +41,15 @@ io.on('connection', (socket) => {
 		socket.join(data.room);
 		io.emit('new user joined', { user: data.user, message: 'has joined  room.' });
 	});
+	
 	socket.on('leave', function (data) {
 		io.emit('left room', { user: data.user, message: 'has left room.' });
 		socket.leave(data.room);
 	});
 
 	socket.on('message', function (data) {
-		io.in(data.room).emit('new message', { user: data.user, message: data.message });
+		console.log(data);
+		socket.to(data.room).emit('new message', { user: data.user, message: data.message });
 	})
 });
 

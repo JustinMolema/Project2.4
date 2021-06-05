@@ -1,10 +1,10 @@
 <div class="content">
     <div class="chat-tab">
         <div class="chat-message">
-            <app-chatmessage *ngFor="let message of messages" [message]="message.message" [received]="message.received"></app-chatmessage>
+            <app-chatmessage *ngFor="let message of messages" [message]="message.message" [userName]="message.username" [received]="message.received"></app-chatmessage>
         </div>
-        <span class="chat-container">
-            <input type="text" class="chat-inputfield" #inputvalue (change)="addMessage(inputvalue.value, false)" placeholder="Type a message">
-        </span>
+        <form [formGroup]="form" class="chat-container">
+            <input type="text" class="chat-inputfield" #inputvalue (keydown.enter)="addMessage(inputvalue.value, false)" formControlName="message" placeholder="Type a message">
+        </form>
     </div>
 </div>

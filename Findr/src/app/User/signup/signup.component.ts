@@ -32,11 +32,11 @@ export class SignupComponent implements OnInit {
         console.log(hashedPassword.hex());
         this.appService.signUp(val.username, hashedPassword.hex(), val.email).subscribe(res => {
             return true;
-        })
+        });
         return false;
     }
 
-    mustMatch(controlName: string, matchingControlName: string) {
+    mustMatch(controlName: string, matchingControlName: string): any {
         return (formGroup: FormGroup) => {
             const control = formGroup.controls[controlName];
             const matchingControl = formGroup.controls[matchingControlName];
@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
             } else {
                 matchingControl.setErrors(null);
             }
-        }
+        };
     }
 
 }

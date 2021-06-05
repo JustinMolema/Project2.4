@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatService} from './chat.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-chatmenu',
@@ -7,19 +8,49 @@ import {ChatService} from './chat.service';
     styleUrls: ['./chatmenu.component.css']
 })
 export class ChatmenuComponent implements OnInit {
+    username: string;
+    roomName: string;
+    form: FormGroup;
+    messages = [];
 
-    constructor(private chat: ChatService) {
-        chat.joinRoom({user: 'testUser', room: 'testRoom'});
+    constructor(private fb: FormBuilder, private chat: ChatService) {
+        this.createForm();
+        this.tempRoomSettings();
+        this.receiveMessageListener();
     }
-
-    messages = [{message: 'dasdaadadsasddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', received: false},
-        {message: 'ja', received: true}];
 
     ngOnInit(): void {
     }
 
+    createForm(): void {
+        this.form = this.fb.group({
+            message: ['', Validators.required],
+        });
+    }
+
+    tempRoomSettings(): void {
+        this.username = prompt('Type username here');
+        this.roomName = prompt('Type room here');
+        this.chat.joinRoom({user: this.username, room: this.roomName});
+    }
+
     addMessage(message: string, received: boolean): void {
-        this.messages.push({message, received});
-        this.messages.push({message: 'ja', received: false});
+        this.messages.push({username: this.username, message, received});
+        this.sendMessage(message);
+        this.clearInputfield();
+    }
+
+    sendMessage(text: string): void {
+        this.chat.sendMessage({user: this.username, message: text, room: this.roomName});
+    }
+
+    receiveMessageListener(): void {
+        this.chat.newMessageReceived().subscribe(res => {
+            this.messages.push({username: res.user, message: res.message, received: true});
+        });
+    }
+
+    clearInputfield(): void {
+        this.form.controls.message.reset();
     }
 }

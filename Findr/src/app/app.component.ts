@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
             // if (this.authService.refreshTokenInterval) {
             //
             // }
-        }, 1000);
+        }, 1000000);
     }
 
     refreshToken(): void {
