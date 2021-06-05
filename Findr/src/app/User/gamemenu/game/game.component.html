@@ -1,8 +1,17 @@
 <div class="game" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" (click)="gameclick()" target="_blank">
     <div class="box">
-        <div class="image">
+        <div class="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500">
         </div>
 
-        <div class="game-info"> <b matTooltip={{game.Name}}> {{game.Name}} <br> </b> 5 Subscribers  <br> {{game.Category}}</div>
+        <div class="game-info">
+            <div class="gamename">
+                <b class="gamename" matTooltip={{game.Name}} [matTooltipShowDelay]="500">
+                    {{game.Name}}
+                </b>
+            </div>
+            5 Subscribers
+            <br>
+            {{game.Category}}
+        </div>
     </div>
 </div>
