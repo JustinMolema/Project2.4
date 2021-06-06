@@ -17,7 +17,6 @@ export class AppService {
     params = params.set('password', password);
     params = params.set('email', email);
 
-
     return this.http.post('http://localhost:8001/api/login/signup', params);
   }
 
@@ -31,6 +30,6 @@ export class AppService {
   getFriends(userID: string): Observable<any>{
     let params: HttpParams = new HttpParams();
     params = params.set('userID', userID);
-    return this.http.post('http://localhost:8001/api/friends', params);
+    return this.http.post('http://localhost:8001/api/getFriends', params);
   }
 }

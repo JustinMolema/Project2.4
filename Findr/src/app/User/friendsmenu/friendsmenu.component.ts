@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { TopbarService } from '../topbar/topbar.service';
 
 @Component({
@@ -7,14 +8,24 @@ import { TopbarService } from '../topbar/topbar.service';
   styleUrls: ['./friendsmenu.component.css']
 })
 export class FriendsmenuComponent implements OnInit {
-  friends = ["Harald", "Anne Pier", "Justin", "Robbin"];
-  friendRequests = ["Simon", "Jos", "Wijmar"];
-  blockedUsers = ["Richard", "Jeroen"];
+  // friends = ["Harald", "Anne Pier", "Justin", "Robbin"];
+  // friendRequests = ["Simon", "Jos", "Wijmar"];
+  // blockedUsers = ["Richard", "Jeroen"];
 
-  constructor(private topbarService: TopbarService) {
-  }
+  friends: [any];
+  friendRequests: [];
+  blockedUsers : [];
+
+  constructor(private topbarService: TopbarService, private appService: AppService) {}
 
   ngOnInit(): void {
+    
+    this.appService.getFriends(this.appService.storedUserID).subscribe(res =>{
+      res.friendsInfo.forEach(element => {
+        console.log(element);
+        this.friends.push(element);
+      });
+    });
   }
 
   showFriendTab(blockView: any, friendView: any): void {
