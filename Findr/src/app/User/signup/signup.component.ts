@@ -33,10 +33,11 @@ export class SignupComponent implements OnInit {
     onSubmit(): void {
         const val = this.form.value;
         const hash = sha512.create();
-        const hashedPassword = hash.update(val.password);
+        hash.update(val.password);
+        const encryptedpassword = hash.hex();
 
-        this.appService.signUp(val.username, hashedPassword.hex(), val.email).subscribe(res => {
-            console.log(res);
+        this.appService.signUp(val.username, encryptedpassword, val.email).subscribe(res => {
+            this.appService.storedUserID = res.userID;
         });
     }
 

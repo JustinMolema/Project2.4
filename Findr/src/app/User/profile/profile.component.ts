@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import { AppService } from 'src/app/app.service';
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -20,11 +21,11 @@ export class ProfileComponent implements OnInit {
     Email = 'real@email.com';
     warningCount = 2;
 
-    constructor() {
+    constructor(private appService: AppService) {
     }
 
     ngOnInit(): void {
-
+        this.appService.getProfile(this.appService.storedUserID);
     }
 
     processFile(imageInput: any): void {

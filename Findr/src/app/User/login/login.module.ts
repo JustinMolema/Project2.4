@@ -6,13 +6,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JupiterComponent } from './jupiter/jupiter.component';
 
 
-
 @NgModule({
     declarations: [LoginComponent, JupiterComponent],
     imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
     exports: [LoginComponent, JupiterComponent],
 })
 export class LoginModule {
-
 }
 

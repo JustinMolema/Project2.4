@@ -15,7 +15,7 @@ import { LoginModule } from '../login/login.module';
     FormsModule,
     RouterModule,
     LoginModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ], exports: [
       SignupComponent
   ]
