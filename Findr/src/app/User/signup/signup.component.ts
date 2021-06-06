@@ -11,7 +11,7 @@ import { AppService } from 'src/app/app.service';
 export class SignupComponent implements OnInit {
     form: FormGroup;
     username: "";
-    constructor(private appService: AppService, private fb: FormBuilder,) {
+    constructor(private appService: AppService, private fb: FormBuilder) {
         this.form = this.fb.group({
             username: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(25)])],
             password: ['', Validators.required],
@@ -27,12 +27,15 @@ export class SignupComponent implements OnInit {
 
     onSubmit(): boolean {
         const val = this.form.value;
-        var hash = sha512.create();
-        const hashedPassword = hash.update(val.password);
-        console.log(hashedPassword.hex());
-        this.appService.signUp(val.username, hashedPassword.hex(), val.email).subscribe(res => {
+        const hash = sha512.create();
+        hash.update(val.password);
+        const encryptedpassword = hash.hex();
+        console.log(encryptedpassword)
+        this.appService.signUp(val.username, encryptedpassword, val.email).subscribe(res => {
+            this.appService.storedUserID = res.userID;
             return true;
         });
+        
         return false;
     }
 

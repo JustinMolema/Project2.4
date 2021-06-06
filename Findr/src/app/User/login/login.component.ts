@@ -1,8 +1,8 @@
-import {Component, OnInit, Output, ViewChild, ElementRef} from '@angular/core';
-import {Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from './auth.service';
-import {relative} from 'node:path';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
+import { sha512 } from 'js-sha512';
 
 @Component({
     selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         });
 
         for (let i = 0; i < 100; i++) {
-            this.stars.push({left: this.getLeft(), top: this.getTop()});
+            this.stars.push({ left: this.getLeft(), top: this.getTop() });
         }
     }
 
@@ -43,22 +43,27 @@ export class LoginComponent implements OnInit {
 
     login(): void {
         const val = this.form.value;
-        if (this.tempValidateUser(val)) {
-            this.loginToServer(val);
-        } else {
-            console.log('WRONG!');
-        }
-    }
 
-    // Temp until server side validation is done
-    tempValidateUser(val): boolean {
-        return val.username === 'test' && val.password === 'test';
+        this.loginToServer(val);
+
     }
 
     loginToServer(val): void {
-        this.authService.login(val.username, val.password).subscribe(res => {
-            this.setJWT(val.rememberme, res);
-            this.router.navigate(['/games']);
+        const hash = sha512.create();
+        hash.update(val.password);
+        const encryptedpassword = hash.hex();
+        console.log(encryptedpassword)
+        this.authService.login(val.username, encryptedpassword).subscribe(res => {
+            console.log(res);
+            if (res.status == "ok") // res = goed
+            {
+                this.setJWT(val.rememberme, res);
+                this.router.navigate(['/games']);
+            }
+            else if (res.status == "error") {
+                console.log("error");
+            }
+
         });
     }
 

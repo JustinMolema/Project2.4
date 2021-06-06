@@ -17,20 +17,13 @@ export class AuthService {
   login(email: string, password: string): Observable<any>{
     let params: HttpParams = new HttpParams();
     params = params.set('username', email);
+    params = params.set('password', password);
     this.refreshTokenInterval = true;
 
     return this.http.post('http://localhost:8001/api/login/', params);
   }
 
   refreshToken(): Observable<any> {
-    // if(!localStorage.getItem('refreshToken') || !localStorage.getItem('jwt'))
-    // {
-    //   this.router.navigate(['/login']);
-    //   this.logout();
-    //   alert("Session Expired");
-    //   return null;
-    // }
-
     let params: HttpParams = new HttpParams();
     if (this.localstorage){
       params = params.set('token', localStorage.getItem('refreshToken'));
