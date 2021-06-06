@@ -11,7 +11,7 @@ export class UserComponent implements OnInit {
     _warning: Number;
     _ban: string;
 
-    constructor() { 
+    constructor() {
     }
 
     ngOnInit(): void {

@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DialogComponent} from '../../../sharedmodule/dialog/dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-game',
@@ -8,7 +10,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class GameComponent implements OnInit {
     @Input() game;
 
-    constructor() {
+    constructor(private dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -16,6 +18,9 @@ export class GameComponent implements OnInit {
     }
 
     gameclick(): void{
+        const dialogRef = this.dialog.open(DialogComponent, {
+            width: '300px',
+        });
         console.log("ddd");
     }
 }

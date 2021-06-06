@@ -33,6 +33,8 @@ import {TabledataModule} from './admin/tabledata/tabledata.module';
 import {AdmintopbarModule} from "./admin/admintopbar/admintopbar.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     declarations: [AppComponent],
@@ -59,6 +61,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
         ReporteduserModule,
         AdminBarModule,
         ProfileModule,
+        MatSnackBarModule,
+        MatDialogModule,
         GamesModule,
         UsersModule,
         TableheaderModule,

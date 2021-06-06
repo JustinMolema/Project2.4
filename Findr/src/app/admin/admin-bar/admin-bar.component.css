@@ -1,22 +1,7 @@
-button
-{
-    border-radius: 0px;
-}
-
-.logoholder {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-.logo {
-    width: 100px;
-    height: 200px;
-}
-
-.adminbar{
-
+.adminbar {
     animation: decollapse-navbar 5s forwards;
     position: fixed;
+    top: 0;
     background: #212b46;
     border-radius: 10px;
     padding-left: 10px;
@@ -24,16 +9,25 @@ button
     height: 100%;
     width: 250px;
     color: white;
-    display:flex;
+    display: flex;
     flex-direction: column;
     box-sizing: border-box;
     overflow: auto;
-    font-family: "Archivo";
     z-index: 999;
 }
 
-.navbarbutton
-{
+.logoholder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 100px;
+    height: 200px;
+}
+
+button {
     cursor: pointer;
     width: 100%;
     height: 50px;
@@ -41,7 +35,6 @@ button
     margin-top: 10px;
     border-radius: 10px;
     color: rgb(255, 255, 255);
-    font-family: "Archivo";
     font-weight: 100;
     font-size: 20px;
     border: none;
@@ -52,72 +45,54 @@ button
     align-items: stretch;
 }
 
-.navbarbutton:hover
-{
-     background-color: #5e8fcf62;
-     animation: nvb-button-Animation 2s ease-in-out infinite backwards;
+button:hover {
+    background-color: #5e8fcf62;
+    animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
-.navbarbutton:focus
-{
-  background-color: rgb(59, 80, 116);
-  border: none;
-  outline: none;
+button:focus {
+    background-color: rgb(59, 80, 116);
 }
 
-.navbarbutton:active
-{
-  border: none;
-  outline: none;
-  filter: brightness(150%)
-}
-.navbartext
-{
-  flex: 0.7;
-  display: flex;
-  align-items: center;
+.navbartext {
+    flex: 0.7;
+    display: flex;
+    align-items: center;
 }
 
-@keyframes nvb-button-Animation
-{
-    0%
-    {
-      filter: brightness(100%)
+@keyframes nvb-button-Animation {
+    0% {
+        filter: brightness(100%)
     }
-    70%
-    {
-      filter: brightness(120%)
+    70% {
+        filter: brightness(120%)
     }
-    100%
-    {
-      filter: brightness(100%);
+    100% {
+        filter: brightness(100%);
     }
-  }
+}
 
-  @media (max-width: 850px)
-  {
+@media (max-width: 850px) {
     .adminbar {
-		/*animation: collapse-navbar 1s forwards;*/
         width: 0px;
         padding: 0;
-	}
-
-    .navbarbutton {
-      animation: collapse-navbar 1s forwards;
-      width: 80px;
-      max-width: 80px;
-      min-width: 80px;
-      height: 80px;
-      margin-left: 10px;
-      margin-right: 10px;
-      background:  url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
-      background-size:contain;
-      color: rgba(0,0,0,0);
     }
 
-    .navbartext
-    {
-      width: 0;
-      height: 0;
+    button {
+        animation: collapse-navbar 1s forwards;
+        width: 80px;
+        max-width: 80px;
+        min-width: 80px;
+        height: 80px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background: url("https://cdn.discordapp.com/attachments/833684306462507011/841025966075936808/shthgfgsfdg.png");
+        background-size: contain;
+        color: rgba(0, 0, 0, 0);
     }
-  }
+
+    .navbartext {
+        width: 0;
+        height: 0;
+    }
+}

@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../../sharedmodule/dialog/dialog.component';
 
 @Component({
     selector: 'app-user',
@@ -6,59 +9,33 @@ import { Component, OnInit, Input } from '@angular/core';
     styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    _name: String;
-    _offense: String;
-    _date: Date;
-    _time: Date;
+    @Input() name: string;
+    @Input() offense: string;
+    @Input() date: Date;
+    @Input() time: Date;
 
-    constructor() { }
+    constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {
+    }
 
     ngOnInit(): void {
-    }
-
-    @Input()
-    set name(name: String) {
-        this._name = name;
-    }
-
-    get name() {
-        return this._name;
-    }
-
-    @Input()
-    set offense(offense: String) {
-        this._offense = offense;
-    }
-
-    get offense() {
-        return this._offense;
-    }
-
-    @Input()
-    set date(date: Date) {
-        this._date = date;
-    }
-
-    get date() {
-        return this._date;
-    }
-
-    @Input()
-    set time(time: Date) {
-        this._time = time;
-    }
-
-    get time() {
-        return this._time;
-    }
-
-    delete(name: String, offense: String): void {
-        if (confirm("Are you sure you want to delete this: Name: " + name + " Offense: " + offense)) {
-            alert("Item deleted");
-        }
 
     }
 
+    openDialogAndListenForClose(name: string, offense: string): void {
+        this.snackBar.dismiss();
+        const dialogRef = this.dialog.open(DialogComponent, {
+            width: '300px',
+        });
 
+        dialogRef.afterClosed().subscribe(res => {
+            this.handleDialogResponse(res);
+        });
+    }
 
+    handleDialogResponse(res: string): void {
+        if (res === "Cancel" || res === undefined) return;
+
+        // TODO Delete item from database and list.
+        this.snackBar.open('Item deleted', 'undo');
+    }
 }

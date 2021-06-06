@@ -1,17 +1,17 @@
 .navbar {
     position: fixed;
-    padding-top: 60px;
+    margin-top: 60px;
+    top: 0;
     background: linear-gradient(to bottom right, #2a415f, #172131);
-    /* border-right: 5px solid #29475c; */
-    /* border-bottom: 5px solid #29475c; */
-    height: 100%;
+     /*border-right: 5px solid #29475c;*/
+     /*border-bottom: 5px solid #29475c;*/
+    height: calc(100% - 60px);
     width: 300px;
     color: white;
     display: flex;
     flex-direction: column;
-    box-sizing: content-box;
+    box-sizing: border-box;
     overflow: auto;
-    font-family: "Archivo";
     padding-bottom: 30px;
     -ms-overflow-style: none;
     /* IE and Edge */
