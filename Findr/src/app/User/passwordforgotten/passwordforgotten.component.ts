@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AppService} from "../../app.service";
+import {sha512} from "js-sha512";
 
 @Component({
   selector: 'app-passwordforgotten',
@@ -10,7 +12,7 @@ export class PasswordforgottenComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private appService: AppService) {
     this.form = this.fb.group({
       password:['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirm:['', Validators.required]
@@ -20,6 +22,17 @@ export class PasswordforgottenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(){
+      console.log("hey man")
+      const val = this.form.value;
+      const hash = sha512.create();
+      hash.update(val.password);
+      const encryptedpassword = hash.hex();
+      this.appService.changePassword(this.appService.storedUserID, encryptedpassword).subscribe(res => {
+        console.log("Password changed")
+      })
   }
 
   // TODO extract this method here and in signup component

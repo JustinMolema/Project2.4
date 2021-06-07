@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AppService {
- 
+
   storedUserID;
- 
+
   constructor(private http: HttpClient) { }
 
   signUp(username: string, password: string, email: string): Observable<any>{
@@ -18,6 +18,13 @@ export class AppService {
     params = params.set('email', email);
 
     return this.http.post('http://localhost:8001/api/login/signup', params);
+  }
+
+  changePassword(userID:string, newPass:string): Observable<any>{
+      let params: HttpParams = new HttpParams();
+      params = params.set('userID', userID);
+      params = params.set('newPass', newPass)
+      return this.http.post('http://localhost:8001/api/passwordchange', params);
   }
 
   getProfile(userID: string): Observable<any>{
