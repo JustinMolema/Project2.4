@@ -14,9 +14,9 @@ export class FriendsmenuComponent implements OnInit {
   // friendRequests = ["Simon", "Jos", "Wijmar"];
   // blockedUsers = ["Richard", "Jeroen"];
 
-  friends: [any];
-  friendRequests: [any];
-  blockedUsers: [any];
+  friends = [];
+  friendRequests = [];
+  blockedUsers = [];
   
   constructor(private topbarService: TopbarService, private appService: AppService) { }
 
@@ -28,12 +28,30 @@ export class FriendsmenuComponent implements OnInit {
        this.getFriendRequestsFromServer(),
        this.getBlockedUsersFromServer()]
      ).subscribe(([friendsFromServer, friendRequestsFromServer, blockedUsersFromServer]) => {
-      friendsFromServer[0].array.forEach(element => {
-        
+      
+      friendsFromServer[0].forEach(element => {
+        this.friends.push(element)
       });
-      console.log(friendsFromServer[0]);
-      console.log(friendRequestsFromServer[0]);
-      console.log(blockedUsersFromServer[0]);
+
+      friendRequestsFromServer[0].forEach(element => {
+        this.friendRequests.push(element)
+      });
+
+      blockedUsersFromServer[0].forEach(element => {
+        this.blockedUsers.push(element)
+      });
+
+      this.friends.forEach(element =>{
+        console.log(element)
+      })
+
+      this.friendRequests.forEach(element =>{
+        console.log(element)
+      })
+
+      this.blockedUsers.forEach(element =>{
+        console.log(element)
+      })
      }) 
   }
   
