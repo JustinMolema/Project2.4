@@ -15,7 +15,7 @@ export class PasswordforgottenComponent implements OnInit {
       password:['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirm:['', Validators.required]
     },{
-      validator: this.mustMatch('password', 'confirm-password')
+        validator: this.mustMatch('password', 'confirm')
   })
   }
 
