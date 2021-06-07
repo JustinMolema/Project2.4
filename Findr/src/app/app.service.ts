@@ -32,4 +32,16 @@ export class AppService {
     params = params.set('userID', userID);
     return this.http.post('http://localhost:8001/api/getFriends', params);
   }
+
+  getFriendRequests(userID: string): Observable<any>{
+    let params: HttpParams = new HttpParams();
+    params = params.set('userID', userID);
+    return this.http.post('http://localhost:8001/api/getFriendRequests', params);
+  }
+
+  getBlockedUsers(userID: string): Observable<any>{
+    let params: HttpParams = new HttpParams();
+    params = params.set('userID', userID);
+    return this.http.post('http://localhost:8001/api/getBlockedUsers', params);
+  }
 }

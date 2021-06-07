@@ -89,40 +89,41 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
 	})
 })
 
-app.route('/api/getFriends').post(authenticateToken, (req, res) => {
+app.route('/api/getFriends').post(authenticateToken, async (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-
-	const user_id = req.body.userID
-	var friendInfo;
-	var friendRequests;
-	var blockedInfo;
-
-	//Friends
-	connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], function (err, result, fields) {
+	const user_id = req.body.userID;
+	console.log(user_id)
+	connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
 		console.log("Friends: ");
 		console.log(result);
 		if (err) throw err;
 		friendInfo = JSON.stringify(result);
-		
+		res.send([result]);
 	})
-	
-	//Friend Requests
+})
+
+app.route('/api/getFriendRequests').post(authenticateToken, async (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	const user_id = req.body.userID;
 	connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
 		console.log("Friends Requests: ");
 		console.log(result);
-			if (err) throw err;
-			friendRequests = JSON.stringify(result);
-		})
-	
-	//Blocked Users
+		if (err) throw err;
+		friendRequests = JSON.stringify(result);
+		res.send([result]);
+	})
+})
+
+app.route('/api/getBlockedUsers').post(authenticateToken, async (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	const user_id = req.body.userID;
 	connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
 		console.log("Blocked Users: ");
 		console.log(result);
-			if (err) throw err;
-			blockedInfo = JSON.stringify(result);
-		})
-
-	res.send(friendInfo, friendRequests, blockedInfo);
+		if (err) throw err;
+		BlockedInfo = JSON.stringify(result);
+		res.send([result]);
+	})
 })
 
 // for getting basic user information such as name and profile picture by ID
