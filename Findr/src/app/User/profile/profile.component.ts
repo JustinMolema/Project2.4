@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from 'src/app/app.service';
+import {Component, OnInit} from '@angular/core';
+import {AppService} from 'src/app/app.service';
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
     }
 }
-// TODO: change username inputveld + database query
+
+// TODO: change username inputveld needs styling
 
 @Component({
     selector: 'app-profile',
@@ -16,12 +17,14 @@ export class ProfileComponent implements OnInit {
 
     hasFileBeenSelected = false;
     selectedFile: ImageSnippet;
+    isEditEnable: boolean = false;
 
     User: any;
     Email: any;
     warningCount: any;
 
-    constructor(private appService: AppService) {}
+    constructor(private appService: AppService) {
+    }
 
     ngOnInit(): void {
         this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
@@ -29,6 +32,19 @@ export class ProfileComponent implements OnInit {
             this.Email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
         });
+    }
+
+    onEdit(){
+        if (this.isEditEnable){
+            this.submit();
+        }
+        this.isEditEnable =!this.isEditEnable;
+    }
+
+    submit(){
+        this.appService.changeUsername(this.appService.storedUserID, this.User).subscribe(res => {
+            console.log("Username changed")
+        })
     }
 
     processFile(imageInput: any): void {

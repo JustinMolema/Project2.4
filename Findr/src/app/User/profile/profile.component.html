@@ -16,10 +16,14 @@
         <div class="profile-settings">
             <div class="setting-container">
                 <div class="fieldname">
-                    <p>{{ User }}</p>
+                    <mat-form-field class="namechange" *ngIf="isEditEnable">
+                        <input matInput placeholder="Enter New Username" [(ngModel)]="User">
+                    </mat-form-field>
+                    <span *ngIf="!isEditEnable">{{User}}</span>
                 </div>
                 <div class="actions">
-                    <button>Change Username</button>
+                    <button *ngIf="!isEditEnable" (click)="onEdit()">Change Username</button>
+                    <button *ngIf="isEditEnable" (click)="onEdit()">Submit</button>
                 </div>
             </div>
             <div class="setting-container">
