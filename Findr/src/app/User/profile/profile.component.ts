@@ -5,6 +5,7 @@ class ImageSnippet {
     constructor(public src: string, public file: File) {
     }
 }
+// TODO: change username inputveld + database query
 
 @Component({
     selector: 'app-profile',
@@ -24,10 +25,9 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
-            console.log(res)
-            this.User = res.Username;
-            this.Email = res.Email;
-            this.warningCount = res.Warnings;
+            this.User = res[0].Username;
+            this.Email = decodeURIComponent(res[0].Email);
+            this.warningCount = res[0].Warnings;
         });
     }
 

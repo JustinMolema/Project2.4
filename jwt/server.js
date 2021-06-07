@@ -70,6 +70,7 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 	connection.query('SELECT * FROM users', function (err, result, fields) {
 		if (err) throw err;
 		res.send(result);
+		res.send(result);
 	})
 })
 
@@ -86,6 +87,21 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
 	connection.query('SELECT * FROM chats', function (err, result, fields) {
 		if (err) throw err;
 		res.send(JSON.stringify(result));
+	})
+})
+
+app.route('/api/passwordchange').post(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	const user_id = req.body.userID;
+	const new_pass = req.body.newPass;
+	const saltRounds = 10;
+	bcrypt.genSalt(saltRounds, function (err, salt) {
+		bcrypt.hash(new_pass, salt, function (err, hash) {
+			connection.query('UPDATE users SET Password = ? WHERE User_ID = ?', [hash, user_id], function (err, result, fields) {
+				if (err) return res.json({ status: "error" });
+				res.json({ status: "ok" });
+			})
+		})
 	})
 })
 
