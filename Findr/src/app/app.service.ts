@@ -44,4 +44,11 @@ export class AppService {
     params = params.set('userID', userID);
     return this.http.post('http://localhost:8001/api/getBlockedUsers', params);
   }
+
+  acceptFriendRequest(senderID:string): Observable<any>{
+    let params: HttpParams = new HttpParams();
+    params = params.set('accepterID', this.storedUserID);
+    params = params.set('senderID', senderID);
+    return this.http.post('http://localhost:8001/api/acceptFriendRequest', params);
+  }
 }

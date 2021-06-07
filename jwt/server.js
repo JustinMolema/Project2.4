@@ -102,6 +102,19 @@ app.route('/api/getFriends').post(authenticateToken, async (req, res) => {
 	})
 })
 
+app.route('/api/acceptFriendRequest').post(authenticateToken, async (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	const accepterID = req.body.accepterID;
+	const senderID = req.body.senderID;
+	connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + accepterID + ', ' + senderID + ');', function (err, result, fields){
+		console.log(err)
+	})
+	connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields){
+		console.log(err)
+	})
+	res.send({ status: "ok" })
+})
+
 app.route('/api/getFriendRequests').post(authenticateToken, async (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	const user_id = req.body.userID;

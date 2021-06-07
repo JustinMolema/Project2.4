@@ -10,7 +10,7 @@
         <div class="friend-request-container">
 
             <h2>Friend Requests</h2>
-            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username"></app-friendrequests>
+            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username" [friendID] = "friend.User_ID"></app-friendrequests>
         </div>
     </div>
 

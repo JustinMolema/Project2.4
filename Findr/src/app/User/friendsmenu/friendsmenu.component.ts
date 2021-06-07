@@ -22,37 +22,31 @@ export class FriendsmenuComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
-     combineLatest([
-       this.getFriendsFromServer(),
-       this.getFriendRequestsFromServer(),
-       this.getBlockedUsersFromServer()]
-     ).subscribe(([friendsFromServer, friendRequestsFromServer, blockedUsersFromServer]) => {
-      
-      friendsFromServer[0].forEach(element => {
-        this.friends.push(element)
-      });
+    this.setFriendInfo();
+     
+  }
 
-      friendRequestsFromServer[0].forEach(element => {
-        this.friendRequests.push(element)
-      });
+  setFriendInfo(){
+    combineLatest([
+      this.getFriendsFromServer(),
+      this.getFriendRequestsFromServer(),
+      this.getBlockedUsersFromServer()]
+    ).subscribe(([friendsFromServer, friendRequestsFromServer, blockedUsersFromServer]) => {
+     
+     friendsFromServer[0].forEach(element => {
+       this.friends.push(element)
+     });
 
-      blockedUsersFromServer[0].forEach(element => {
-        this.blockedUsers.push(element)
-      });
+     friendRequestsFromServer[0].forEach(element => {
+       console.log(element)
+       this.friendRequests.push(element)
+     });
 
-      this.friends.forEach(element =>{
-        console.log(element)
-      })
+     blockedUsersFromServer[0].forEach(element => {
+       this.blockedUsers.push(element)
+     });
 
-      this.friendRequests.forEach(element =>{
-        console.log(element)
-      })
-
-      this.blockedUsers.forEach(element =>{
-        console.log(element)
-      })
-     }) 
+    }) 
   }
   
   getFriendsFromServer()
