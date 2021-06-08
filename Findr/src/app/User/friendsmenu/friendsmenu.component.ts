@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
 import {TopbarService} from '../topbar/topbar.service';
 import {combineLatest} from 'rxjs';
@@ -24,7 +24,18 @@ export class FriendsmenuComponent implements OnInit {
         this.setFriendInfo();
     }
 
+    
+    @Input() refreshFriendInfo(event){
+        console.log("refreshed page")
+        this.setFriendInfo();
+    }
+
     setFriendInfo() {
+        
+        this.friends = [];
+        this.friendRequests = [];
+        this.blockedUsers = [];
+
         combineLatest([
             this.getFriendsFromServer(),
             this.getFriendRequestsFromServer(),

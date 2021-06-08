@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-friend',
@@ -8,8 +9,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FriendComponent implements OnInit {
 
   @Input() friend: string;
+  @Input() friendID: string;
 
-  constructor() {
+  @Output()
+  refresh: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private appService: AppService) {
   }
 
   ngOnInit(): void {
@@ -20,11 +25,15 @@ export class FriendComponent implements OnInit {
   }
 
   deleteFriend(): void {
-    console.log("delete friend");
+    this.appService.deleteFriend(this.friendID).subscribe(res =>{
+
+    })
   }
 
   blockFriend(): void {
-    console.log("block friend");
+    this.appService.blockFriend(this.friendID).subscribe(res =>{
+
+    })
   }
 
 }

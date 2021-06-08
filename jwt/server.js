@@ -138,8 +138,6 @@ app.route('/api/getFriends').post(authenticateToken, async (req, res) => {
     const user_id = req.body.userID;
     console.log(user_id)
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
-        console.log("Friends: ");
-        console.log(result);
         if (err) throw err;
         friendInfo = JSON.stringify(result);
         res.send([result]);
@@ -156,6 +154,59 @@ app.route('/api/acceptFriendRequest').post(authenticateToken, async (req, res) =
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields) {
         console.log(err)
     })
+	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
+        console.log(err)
+    })
+    res.send({status: "ok"})
+})
+
+app.route('/api/deleteFriendRequest').post(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const accepterID = req.body.accepterID;
+    const senderID = req.body.senderID;
+	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
+    })
+    res.send({status: "ok"})
+})
+
+app.route('/api/deleteFriend').post(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const UserOne = req.body.userOne;
+    const UserTwo = req.body.userTwo;
+	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+        console.log(err)
+    })
+
+	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+        console.log(err)
+    })
+    res.send({status: "ok"})
+})
+
+app.route('/api/blockFriend').post(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const UserOne = req.body.userOne;// blocker
+    const UserTwo = req.body.userTwo;// person getting blocked
+	connection.query('INSERT INTO user_blocked_user (user_blocker, user_blockee) VALUES (' + UserOne + ', ' + UserTwo + ');', function (err, result, fields) {
+        console.log(err)
+    })
+	
+	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+        console.log(err)
+    })
+
+	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+        console.log(err)
+    })
+
+	
+	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+        console.log(err)
+    })
+
+	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+        console.log(err)
+    })
     res.send({status: "ok"})
 })
 
@@ -163,8 +214,6 @@ app.route('/api/getFriendRequests').post(authenticateToken, async (req, res) => 
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
-        console.log("Friends Requests: ");
-        console.log(result);
         if (err) throw err;
         friendRequests = JSON.stringify(result);
         res.send([result]);
@@ -175,8 +224,6 @@ app.route('/api/getBlockedUsers').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
-        console.log("Blocked Users: ");
-        console.log(result);
         if (err) throw err;
         BlockedInfo = JSON.stringify(result);
         res.send([result]);
@@ -199,7 +246,7 @@ app.route('/api/getUserInformation').post(authenticateToken, (req, res) => {
 app.route('/api/profile').post(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const userID = req.body.userID;
-
+    
     connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
         console.log(result)
         if (err) throw err;
@@ -252,9 +299,7 @@ app.post('/api/login', (req, res) => {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
 
             const dbPassword = JSON.parse(JSON.stringify(result[0].password));
-            console.log(dbPassword)
             const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
-            console.log(User_ID)
             if (err) {
                 return res.json({status: "error"})
             }
