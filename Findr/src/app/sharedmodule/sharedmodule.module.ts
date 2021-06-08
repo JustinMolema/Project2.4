@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {A11yModule} from '@angular/cdk/a11y';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [HighlightSearchDirective, TablefilterPipe, DialogComponent],
@@ -17,6 +18,7 @@ import {A11yModule} from '@angular/cdk/a11y';
         MatFormFieldModule,
         MatButtonModule,
         MatDialogModule,
+        MatInputModule,
     ],
   exports: [HighlightSearchDirective, FormsModule, TablefilterPipe, DialogComponent],
 })

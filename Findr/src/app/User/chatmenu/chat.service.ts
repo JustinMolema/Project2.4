@@ -42,6 +42,35 @@ export class ChatService {
         });
     }
 
+    sendPrivateMessage(data): void {
+        this.socket.emit('private message', data);
+    }
+
+    receivedPrivateMessage(): Observable<any> {
+        return new Observable<{ user: string, message: string }>(observer => {
+            this.socket.on('private message', (data) => {
+                console.log("d");
+                observer.next(data);
+            });
+            return () => {
+                this.socket.disconnect();
+            };
+        });
+        // for (let i = 0; i < this.users.length; i++) {
+        //     const user = this.users[i];
+        //     if (user.userID === from) {
+        //         user.messages.push({
+        //             content,
+        //             fromSelf: false,
+        //         });
+        //         if (user !== this.selectedUser) {
+        //             user.hasNewMessages = true;
+        //         }
+        //         break;
+        //     }
+        // }
+    }
+
     sendMessage(data): void {
         this.socket.emit('message', data);
     }

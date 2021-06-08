@@ -56,15 +56,14 @@ export class LoginComponent implements OnInit {
         const hash = sha512.create();
         hash.update(val.password);
         const encryptedpassword = hash.hex();
-        console.log(encryptedpassword)
+
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
-            console.log(res);
-            if (res.status == "ok") // res = goed
+            if (res.status === "ok")
             {
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
             }
-            else if (res.status == "error") {
+            else if (res.status === "error") {
                 console.log("error");
             }
 

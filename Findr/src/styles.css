@@ -26,8 +26,6 @@ body{
     padding-left: 300px;
     display: flex;
     box-sizing: border-box;
-    /*padding-bottom: 125px;*/
-    /*overflow: auto;*/
 }
 
 .admincontent {
@@ -43,6 +41,10 @@ body{
     box-sizing: border-box;
     padding-bottom: 50px;
     overflow: auto;
+}
+
+.mat-tooltip{
+    font-size: 15px;
 }
 
 ::-webkit-scrollbar {

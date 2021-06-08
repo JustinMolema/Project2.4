@@ -52,7 +52,12 @@ io.on('connection', (socket) => {
 	socket.on('message', function (data) {
 		console.log(data);
 		socket.to(data.room).emit('new message', { user: data.user, message: data.message });
-	})
+	});
+
+	socket.on("private message", (data) => {
+		console.log(data);
+		socket.to(data.room).emit("private message", { user: socket.id, message: data.message });
+	});
 });
 
 server.listen(chatport);
@@ -152,17 +157,17 @@ app.post('/api/login', (req, res) => {
 
 	connection.connect(function (req, err) {
 		connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
-
+			
+			if (result.length == 0) return res.json({ status: "error" });
+			
 			const dbPassword = JSON.parse(JSON.stringify(result[0].password));
-			console.log(dbPassword)
 			const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
-			console.log(User_ID)
+
 			if (err) {
 				return res.json({ status: "error" })
 			}
-
+			
 			bcrypt.compare(pw, dbPassword, (err, result) =>{
-				console.log("compare: " + result)
 				if (err) {
 					return res.json({ status: "error" })
 				}
@@ -214,15 +219,9 @@ app.post('/api/login/signup', async (req, res) => {
 app.post('/api/token', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	const refreshToken = req.body.token;
-	/*console.log(refreshToken == null);
-	console.log(refreshToken);
-	console.log(typeof refreshToken);
-	console.log(refreshTokens.includes(refreshToken));
-	console.log(typeof refreshToken[0]);*/
 
 	if (refreshToken == null) return res.sendStatus(401)
 	if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-	//console.log("here");
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
 		if (err) return res.sendStatus(403)
 		const accessToken = generateAccessToken({ name: user.name })

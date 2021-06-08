@@ -1,36 +1,49 @@
-import {Component, OnInit, AfterViewChecked, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, AfterViewChecked, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import {ChatService} from './chat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-chatmenu',
     templateUrl: './chatmenu.component.html',
     styleUrls: ['./chatmenu.component.css']
 })
-export class ChatmenuComponent implements OnInit, AfterViewChecked {
+export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     username: string;
     roomName: string;
     form: FormGroup;
     messages = [];
     @ViewChild('chat') private scrollContainer: ElementRef;
+    names = ["Anne Pier", "Robbin", "Harald", "Merel", "Justin"];
 
-    constructor(private fb: FormBuilder, private chat: ChatService) {
+    constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute) {
         this.createForm();
-        this.tempRoomSettings();
+        this.joinRoom();
+        this.username = this.names[this.getRandomInt(this.names.length)];
         this.receiveMessageListener();
+        this.receivePrivateMessageListener();
     }
 
     ngOnInit(): void {
     }
 
-    ngAfterViewChecked(): void{
+    ngOnDestroy(): void{
+        this.chat.leaveRoom({user: this.username, room: this.roomName});
+    }
+
+    getRandomInt(max): number {
+        return Math.floor(Math.random() * max);
+    }
+
+    ngAfterViewChecked(): void {
         this.scrollToBottom();
     }
 
-    scrollToBottom(): void{
-        try{
+    scrollToBottom(): void {
+        try {
             this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
-        } catch (err){}
+        } catch (err) {
+        }
     }
 
     createForm(): void {
@@ -39,10 +52,11 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked {
         });
     }
 
-    tempRoomSettings(): void {
-        this.username = "a" //prompt('Type username here');
-        this.roomName = "b" //prompt('Type room here');
-        this.chat.joinRoom({user: this.username, room: this.roomName});
+    joinRoom(): void {
+        this.route.params.subscribe(params => {
+            this.roomName = params.room;
+            this.chat.joinRoom({user: this.username, room: this.roomName});
+        });
     }
 
     addMessage(message: string, received: boolean): void {
@@ -51,12 +65,19 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked {
         this.clearInputfield();
     }
 
-    sendMessage(text: string): void {
-        this.chat.sendMessage({user: this.username, message: text, room: this.roomName});
+    sendMessage(message: string): void {
+        // this.chat.sendPrivateMessage({user: this.username, message, room: 1});
+        this.chat.sendMessage({user: this.username, message, room: this.roomName});
     }
 
     receiveMessageListener(): void {
         this.chat.newMessageReceived().subscribe(res => {
+            this.messages.push({username: res.user, message: res.message, received: true});
+        });
+    }
+
+    receivePrivateMessageListener(): void {
+        this.chat.receivedPrivateMessage().subscribe(res => {
             this.messages.push({username: res.user, message: res.message, received: true});
         });
     }
