@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { sha512 } from 'js-sha512';
+import { AppService } from 'src/app/app.service';
 
 @Component({
     selector: 'app-login',
@@ -18,20 +19,16 @@ export class LoginComponent implements OnInit {
     vh = window.screen.height / 2;
     vw = window.screen.width;
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-        this.createForm();
-
-        for (let i = 0; i < 100; i++) {
-            this.stars.push({left: this.getLeft(), top: this.getTop()});
-        }
-    }
-
-    createForm(): void {
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appService: AppService) {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
             rememberme: [true]
         });
+
+        for (let i = 0; i < 100; i++) {
+            this.stars.push({ left: this.getLeft(), top: this.getTop() });
+        }
     }
 
     ngOnInit(): void {
@@ -60,6 +57,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === "ok")
             {
+                this.appService.storedUserID = res.userID
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
             }

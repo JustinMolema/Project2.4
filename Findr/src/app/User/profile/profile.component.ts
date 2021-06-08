@@ -25,8 +25,10 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.appService.getProfile(this.appService.storedUserID);
-    }
+        this.appService.getProfile(this.appService.storedUserID).subscribe(res =>{
+                console.log(res)
+            });
+          }
 
     processFile(imageInput: any): void {
         const file: File = imageInput.files[0];

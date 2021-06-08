@@ -67,7 +67,7 @@ const port = process.env.PORT || 8080;
 
 app.listen(8001, () => {
 	console.log('Server started!')
-	test()
+	// test()
 })
 
 app.route('/api/users').get(authenticateToken, (req, res) => {
@@ -94,18 +94,61 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
 	})
 })
 
-app.route('/api/friends').get(authenticateToken, (req, res) => {
+app.route('/api/getFriends').post(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	connection.query('SELECT * FROM friends WHERE '+ req.body.userID +' = User_ID', function (err, result, fields) {
+
+	const user_id = req.body.userID
+	var friendInfo;
+	var friendRequests;
+	var blockedInfo;
+
+	//Friends
+	connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], function (err, result, fields) {
+		console.log("Friends: ");
+		console.log(result);
 		if (err) throw err;
-		res.send(JSON.stringify(result));
+		friendInfo = JSON.stringify(result);
+		
+	})
+	
+	//Friend Requests
+	connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
+		console.log("Friends Requests: ");
+		console.log(result);
+			if (err) throw err;
+			friendRequests = JSON.stringify(result);
+		})
+	
+	//Blocked Users
+	connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
+		console.log("Blocked Users: ");
+		console.log(result);
+			if (err) throw err;
+			blockedInfo = JSON.stringify(result);
+		})
+
+	res.send(friendInfo, friendRequests, blockedInfo);
+})
+
+// for getting basic user information such as name and profile picture by ID
+app.route('/api/getUserInformation').post(authenticateToken, (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	const userID = req.body.userID
+
+	connection.query('SELECT Username FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
+		if (err) throw err;
+		username = JSON.stringify(result);
+		res.send(username)
+		//TODO PROFILE PICTURE
 	})
 })
 
-app.route('/api/profile').get(authenticateToken, (req, res) => {
+app.route('/api/profile').post(authenticateToken, (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
-	var sql = 'SELECT * FROM users WHERE ' + req.body.userID + ' = User_ID';
-	connection.query(sql, function (err, result, fields) {
+	const userID = req.body.userID;
+
+	connection.query('SELECT Username, Email, Warnings FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
+		console.log(result)
 		if (err) throw err;
 		res.send(JSON.stringify(result));
 	})
@@ -147,8 +190,6 @@ app.route('/api/deletegame/:name').delete((req, res) => {
 	})
 })
 
-
-
 let refreshTokens = []
 app.post('/api/login', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -166,24 +207,24 @@ app.post('/api/login', (req, res) => {
 			if (err) {
 				return res.json({ status: "error" })
 			}
-			
-			bcrypt.compare(pw, dbPassword, (err, result) =>{
+
+			bcrypt.compare(pw, dbPassword, (err, result) => {
 				if (err) {
 					return res.json({ status: "error" })
 				}
-				
-				if(result){
+
+				if (result) {
 					const user = { name: username }
 					const accessToken = generateAccessToken(user);
 					const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
 					refreshTokens.push(refreshToken)
 					res.json({ accessToken: accessToken, refreshToken: refreshToken, password: dbPassword, userID: User_ID, status: "ok" })
 				}
-				else{
+				else {
 					res.json({ status: "wrong password" })
 				}
 			})
-			
+
 		})
 	})
 
@@ -199,12 +240,12 @@ app.post('/api/login/signup', async (req, res) => {
 	const email = encodeURIComponent(req.body.email);
 
 	const saltRounds = 10;
-	bcrypt.genSalt(saltRounds, function(err, salt) {
-		bcrypt.hash(password, salt, function(err, hash) {
-			
+	bcrypt.genSalt(saltRounds, function (err, salt) {
+		bcrypt.hash(password, salt, function (err, hash) {
+
 			connection.connect(function (req, err) {
 				connection.query('INSERT INTO users (username, password, email) VALUES (?, ?, ?)', [username, hash, email], function (err, result, fields) {
-		
+
 					if (err) return res.json({ status: "error" });
 					res.json({ status: "ok" });
 				})
@@ -212,7 +253,7 @@ app.post('/api/login/signup', async (req, res) => {
 		});
 	});
 
-	
+
 })
 
 
