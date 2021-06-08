@@ -6,11 +6,11 @@
         </div>
 
         <h2>Friends</h2>
-        <app-friend *ngFor="let friend of friends" [friend]="friend"></app-friend>
+        <app-friend *ngFor="let friend of friends" [friend]="friend.Username"></app-friend>
         <div class="friend-request-container">
 
             <h2>Friend Requests</h2>
-            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend"></app-friendrequests>
+            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username" [friendID] = "friend.User_ID"></app-friendrequests>
         </div>
     </div>
 
@@ -20,6 +20,6 @@
             <button class="blocked-users blockedButton" #blockedUserButton>Blocked Users</button>
         </div>
         <h2>Blocked Users</h2>
-        <app-blockedusers *ngFor="let user of blockedUsers" [user]="user"></app-blockedusers>
+        <app-blockedusers *ngFor="let user of blockedUsers" [user]="user.Username"></app-blockedusers>
     </div>
 </div>

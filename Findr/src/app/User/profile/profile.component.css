@@ -29,6 +29,22 @@ img {
     border-radius: 50%;
 }
 
+::ng-deep.mat-form-field-underline {
+    background-color: #172131 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    background-color: #2a415f !important;;
+}
+::ng-deep .mat-form-field-label{
+    color: whitesmoke !important;
+}
+
+input {
+    color: whitesmoke;
+    caret-color: whitesmoke;
+}
+
 .uploadimage {
     display: flex;
     justify-content: center;

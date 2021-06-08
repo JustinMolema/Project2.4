@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-friendrequests',
@@ -7,8 +8,9 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FriendrequestsComponent implements OnInit {
   @Input() friend: string;
+  @Input() friendID: string;
 
-  constructor() {
+  constructor(private appService: AppService) {
   }
 
   ngOnInit(): void {
@@ -16,6 +18,10 @@ export class FriendrequestsComponent implements OnInit {
 
   addFriend(): void {
     console.log("new friend");
+    console.log("added: " + this.friend, + " " + this.friendID)
+    this.appService.acceptFriendRequest(this.friendID).subscribe(res =>{
+      
+    })
   }
 
   deleteRequest(): void {
