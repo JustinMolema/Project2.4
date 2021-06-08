@@ -233,7 +233,6 @@ app.post('/api/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;
-
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
 			if (err) {
@@ -300,7 +299,6 @@ app.post('/api/login/signup', async (req, res) => {
 
 
 app.post('/api/token', (req, res) => {
-<<<<<<< HEAD
 	res.header("Access-Control-Allow-Origin", "*");
 	const refreshToken = req.body.token;
 
@@ -311,24 +309,6 @@ app.post('/api/token', (req, res) => {
 		const accessToken = generateAccessToken({ name: user.name })
 		res.json({ accessToken: accessToken })
 	})
-=======
-    res.header("Access-Control-Allow-Origin", "*");
-    const refreshToken = req.body.token;
-    /*console.log(refreshToken == null);
-    console.log(refreshToken);
-    console.log(typeof refreshToken);
-    console.log(refreshTokens.includes(refreshToken));
-    console.log(typeof refreshToken[0]);*/
-
-    if (refreshToken == null) return res.sendStatus(401)
-    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
-    //console.log("here");
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403)
-        const accessToken = generateAccessToken({name: user.name})
-        res.json({accessToken: accessToken})
-    })
->>>>>>> backend_profile_friends
 })
 
 function generateAccessToken(user) {
