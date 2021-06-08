@@ -13,99 +13,100 @@ export class AppService {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('username', username);
-        params = params.set('password', password);
-        params = params.set('email', email);
+        let params: HttpParams = new HttpParams()
+            .set('username', username)
+            .set('password', password)
+            .set('email', email);
 
         return this.http.post('http://localhost:8001/api/login/signup', params);
     }
 
     changePassword(userID: string, newPass: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        params = params.set('newPass', newPass)
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID)
+            .set('newPass', newPass)
         return this.http.put('http://localhost:8001/api/passwordchange', params);
     }
 
     changeUsername(userID: string, newName: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        params = params.set('newName', newName);
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID)
+            .set('newName', newName);
         return this.http.put('http://localhost:8001/api/usernamechange', params);
     }
 
-    getBlob(file){
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Ocp-Apim-Subscription-Key': 'change this'
-        });
-
-        return this.http.post<Blob>(file,
-            {
-                "url": file.getSrc()
-            }, {headers: headers, responseType: 'blob' as 'json' });
-    }
+    // getBlob(file): Observable<Blob>{
+    //
+    //     const headers = new HttpHeaders({
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json',
+    //         'Ocp-Apim-Subscription-Key': 'change this'
+    //     });
+    //     console.log("Dit is getblob")
+    //     return this.http.post<Blob>(file,
+    //         {
+    //             "url": file.name
+    //         }, {headers: headers, responseType: 'blob' as 'json' });
+    // }
 
 
     changeProfilePicture(userID: string, newPic): Observable<any>{
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        params = params.set('newPic', newPic)
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID)
+            .set("newPic", encodeURIComponent(newPic));
         return this.http.put('http://localhost:8001/api/profilepicchange', params);
     }
 
     getProfile(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID);
 
         return this.http.post('http://localhost:8001/api/profile', params);
     }
 
     getFriends(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID);
         return this.http.post('http://localhost:8001/api/getFriends', params);
     }
 
     getFriendRequests(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID);
         return this.http.post('http://localhost:8001/api/getFriendRequests', params);
     }
 
     getBlockedUsers(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
+        let params: HttpParams = new HttpParams()
+            .set('userID', userID);
         return this.http.post('http://localhost:8001/api/getBlockedUsers', params);
     }
 
     acceptFriendRequest(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('accepterID', this.storedUserID);
-        params = params.set('senderID', senderID);
+        let params: HttpParams = new HttpParams()
+            .set('accepterID', this.storedUserID)
+            .set('senderID', senderID);
         return this.http.post('http://localhost:8001/api/acceptFriendRequest', params);
     }
 
     deleteFriendRequest(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('accepterID', this.storedUserID);
-        params = params.set('senderID', senderID);
+        let params: HttpParams = new HttpParams()
+            .set('accepterID', this.storedUserID)
+            .set('senderID', senderID);
         return this.http.post('http://localhost:8001/api/deleteFriendRequest', params);
     }
 
     deleteFriend(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userOne', this.storedUserID);
-        params = params.set('userTwo', senderID);
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', senderID);
         return this.http.post('http://localhost:8001/api/deleteFriend', params);
     }
 
     blockFriend(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userOne', this.storedUserID);
-        params = params.set('userTwo', senderID);
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', senderID);
         return this.http.post('http://localhost:8001/api/blockFriend', params);
     }
 }

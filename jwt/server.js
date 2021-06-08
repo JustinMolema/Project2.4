@@ -124,8 +124,9 @@ app.route('/api/usernamechange').put(authenticateToken, (req, res) => {
 
 app.route('/api/profilepicchange').put(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID;
+    const user_id = req.body.userID
     var new_profile_pic = req.body.newPic
+    console.log(new_profile_pic)
 
     connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
         if (err) return res.json({status: "error"});
@@ -249,6 +250,8 @@ app.route('/api/profile').post(authenticateToken, (req, res) => {
 
     connection.query('SELECT Username, Email, Warnings, Profile_picture AS pic FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
         if (err) throw err;
+        result[0].pic = result[0].pic.toString()
+        console.log(JSON.stringify(result))
         res.send(JSON.stringify(result));
     })
 })

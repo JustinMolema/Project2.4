@@ -8,8 +8,8 @@
                 <img class="current-profile-pic" src="../../../../assets/SVG/upload.svg"/>
             </label>
             <label *ngIf="hasFileBeenSelected;" for="upload">
-                <img class="current-profile-pic" *ngIf="!DBpicture" src="{{ selectedFile.src }}">
-                <img class="current-profile-pic" *ngIf="DBpicture" src="sanitise('data:image/jpg;base64, ' + arrayBufferToBase64({{DBpicture}}))">
+<!--                <img class="current-profile-pic" *ngIf="!dbPicture" src="{{ selectedFile.src }}">-->
+                <img class="current-profile-pic" [src]="dbPicture">
             </label>
             <label class="uploadimage" for="upload">Upload image</label>
         </div>
@@ -18,9 +18,9 @@
             <div class="setting-container">
                 <div class="fieldname">
                     <mat-form-field class="namechange" *ngIf="isEditEnable">
-                        <input matInput placeholder="Enter New Username" [(ngModel)]="User">
+                        <input matInput placeholder="Enter New Username" [(ngModel)]="user">
                     </mat-form-field>
-                    <span *ngIf="!isEditEnable">{{User}}</span>
+                    <span *ngIf="!isEditEnable">{{user}}</span>
                 </div>
                 <div class="actions">
                     <button *ngIf="!isEditEnable" (click)="onEdit()">Change Username</button>
@@ -29,7 +29,7 @@
             </div>
             <div class="setting-container">
                 <div class="fieldname">
-                    <p>{{ Email }}</p>
+                    <p>{{ email }}</p>
                 </div>
                 <div class="actions">
                     <button>Change E-mail</button>

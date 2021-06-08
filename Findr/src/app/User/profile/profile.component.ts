@@ -31,10 +31,10 @@ export class ProfileComponent implements OnInit {
     isEditEnable: boolean = false;
     reader = new FileReader();
 
-    User: any;
-    Email: any;
+    user: any;
+    email: any;
     warningCount: any;
-    DBpicture;
+    dbPicture;
 
     constructor(private appService: AppService, private sanitiser: DomSanitizer) {
     }
@@ -45,28 +45,17 @@ export class ProfileComponent implements OnInit {
 
     loadInData() {
         this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
-            this.User = res[0].Username;
-            this.Email = decodeURIComponent(res[0].Email);
+            this.user = res[0].Username;
+            this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
-            this.DBpicture = res[0].pic;
-
-            if (this.DBpicture != null) {
-
-                this.reader.onload = (e) => {
-                    if (typeof e.target.result === "string") {
-                        // var temp = this._arrayBufferToBase64(this.DBpicture)
-
-                        var file = new File([this.DBpicture.data], "pic0")
-                        this.DBpicture = new ImageSnippet(e.target.result, file);
-                    }
-                };
-                // this.reader.readAsDataURL(this.DBpicture);
+            this.dbPicture = this.sanitize(decodeURIComponent(res[0].pic));
+            if (this.dbPicture !== null){
                 this.hasFileBeenSelected = true;
             }
         });
     }
 
-    sanitse(url:string){
+    sanitize(url: string) {
         return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
@@ -88,46 +77,52 @@ export class ProfileComponent implements OnInit {
     }
 
     submitNewUserName() {
-        this.appService.changeUsername(this.appService.storedUserID, this.User)
+        this.appService.changeUsername(this.appService.storedUserID, this.user)
     }
 
     processFile(imageInput: any): void {
         const file: File = imageInput.files[0];
 
-        this.reader.addEventListener('load', (event: any) => {
-            this.selectedFile = new ImageSnippet(event.target.result, file);
-        });
+        // this.reader.addEventListener('load', (event: any) => {
+        //     this.selectedFile = new ImageSnippet(event.target.result, file);
+        // });
 
         this.reader.readAsDataURL(file);
 
         this.hasFileBeenSelected = true;
 
-        var prep = this.prepareImage(this.selectedFile)
-        this.submitNewProfilePicture(prep)
+        // var prep = this.prepareImage(this.selectedFile)
+        // console.log("hallooooooo")
+        // this.appService.getBlob(file).subscribe(res => {
+        //     console.log("hoera")
+        //     console.log(res)
+
+        this.reader.onload = () =>{
+            this.appService.changeProfilePicture(this.appService.storedUserID, this.reader.result).subscribe(res => {
+                console.log("Profile Pic Changed")
+                console.log(res)
+            }, error => {
+                console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                console.log(error)
+            })
+        }
+
+        // }, error => {
+        //     console.log("ik huil")
+        //     console.log(error)
+        // })
 
     }
+
+    // prepareImage(image) {
+    //     var temp;
     //
-    // _arrayBufferToBase64( buffer ) {
-    //     var binary = '';
-    //     var bytes = new Uint8Array( buffer );
-    //     var len = bytes.byteLength;
-    //     for (var i = 0; i < len; i++) {
-    //         binary += String.fromCharCode( bytes[ i ] );
-    //     }
-    //     return window.btoa( binary );
+    //     return temp
     // }
 
-    async prepareImage(image) {
-        var temp;
-        await this.appService.getBlob(image).subscribe(res => {
-            temp = res
-        })
-        return await temp
-    }
-
-    async submitNewProfilePicture(newProfilePicture) {
-        await this.appService.changeProfilePicture(this.appService.storedUserID, newProfilePicture).subscribe(res => {
-            console.log("Profile Pic Changed")
-        })
-    }
+    // async submitNewProfilePicture(newProfilePicture) {
+    //     await this.appService.changeProfilePicture(this.appService.storedUserID, newProfilePicture).subscribe(res => {
+    //         console.log("Profile Pic Changed")
+    //     })
+    // }
 }
