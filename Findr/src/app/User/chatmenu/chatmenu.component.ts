@@ -18,8 +18,8 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute) {
         this.createForm();
-        this.joinRoom();
         this.username = this.names[this.getRandomInt(this.names.length)];
+        this.joinRoom();
         this.receiveMessageListener();
         this.receivePrivateMessageListener();
     }
@@ -29,6 +29,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnDestroy(): void{
         this.chat.leaveRoom({user: this.username, room: this.roomName});
+        this.chat.closeSocket();
     }
 
     getRandomInt(max): number {
@@ -78,6 +79,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     receivePrivateMessageListener(): void {
         this.chat.receivedPrivateMessage().subscribe(res => {
+            console.log(res);
             this.messages.push({username: res.user, message: res.message, received: true});
         });
     }

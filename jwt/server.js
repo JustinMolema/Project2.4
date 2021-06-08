@@ -35,11 +35,36 @@ const io = require("socket.io")(server, {
     }
 });
 
+io.use((socket, next) => {
+	const username = socket.handshake.auth.username;
+	if (!username) {
+	  return next(new Error("invalid username"));
+	}
+	socket.username = username;
+	next();
+  });
 
 io.on('connection', (socket) => {
-	console.log("aaaa");
+	
+	const users = [];
+	for (let [id, socket] of io.of("/").sockets) {
+	  users.push({
+		userID: id,
+		username: socket.username,
+	  });
+	}
+	console.log(users);
+
+	socket.emit("users", users);
+	
+	socket.broadcast.emit("user connected", {
+		userID: socket.id,
+		username: socket.username,
+	});	
+
+
+
 	socket.on('join', function (data) {
-		console.log(data)
 		socket.join(data.room);
 		io.emit('new user joined', { user: data.user, message: 'has joined  room.' });
 	});
@@ -50,12 +75,10 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('message', function (data) {
-		console.log(data);
 		socket.to(data.room).emit('new message', { user: data.user, message: data.message });
 	});
 
 	socket.on("private message", (data) => {
-		console.log(data);
 		socket.to(data.room).emit("private message", { user: socket.id, message: data.message });
 	});
 });
@@ -122,10 +145,7 @@ app.route('/api/usernamechange').put(authenticateToken, (req, res) => {
 app.route('/api/getFriends').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
-    console.log(user_id)
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
-        console.log("Friends: ");
-        console.log(result);
         if (err) throw err;
         friendInfo = JSON.stringify(result);
         res.send([result]);
@@ -149,8 +169,7 @@ app.route('/api/getFriendRequests').post(authenticateToken, async (req, res) => 
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
-        console.log("Friends Requests: ");
-        console.log(result);
+        
         if (err) throw err;
         friendRequests = JSON.stringify(result);
         res.send([result]);
@@ -161,8 +180,7 @@ app.route('/api/getBlockedUsers').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
-        console.log("Blocked Users: ");
-        console.log(result);
+        
         if (err) throw err;
         BlockedInfo = JSON.stringify(result);
         res.send([result]);
