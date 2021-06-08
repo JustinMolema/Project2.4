@@ -6,11 +6,11 @@
         </div>
 
         <h2>Friends</h2>
-        <app-friend *ngFor="let friend of friends" [friend]="friend.Username"></app-friend>
+        <app-friend *ngFor="let friend of friends" [friend]="friend.Username" [friendID] = "friend.User_ID"></app-friend>
         <div class="friend-request-container">
 
             <h2>Friend Requests</h2>
-            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username" [friendID] = "friend.User_ID"></app-friendrequests>
+            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username" [friendID] = "friend.User_ID" (refresh)="refreshFriendInfo($event)"></app-friendrequests>
         </div>
     </div>
 

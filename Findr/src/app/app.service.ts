@@ -67,4 +67,25 @@ export class AppService {
         params = params.set('senderID', senderID);
         return this.http.post('http://localhost:8001/api/acceptFriendRequest', params);
     }
+
+    deleteFriendRequest(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams();
+        params = params.set('accepterID', this.storedUserID);
+        params = params.set('senderID', senderID);
+        return this.http.post('http://localhost:8001/api/deleteFriendRequest', params);
+    }
+
+    deleteFriend(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams();
+        params = params.set('userOne', this.storedUserID);
+        params = params.set('userTwo', senderID);
+        return this.http.post('http://localhost:8001/api/deleteFriend', params);
+    }
+
+    blockFriend(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams();
+        params = params.set('userOne', this.storedUserID);
+        params = params.set('userTwo', senderID);
+        return this.http.post('http://localhost:8001/api/blockFriend', params);
+    }
 }
