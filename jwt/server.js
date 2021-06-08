@@ -9,11 +9,19 @@ const http = require('http')
 const {Console} = require('console')
 const bcrypt = require('bcrypt')
 
+// var bodyParser = require('body-parser');
+
 // import {test} from './api'
 
 app.use(express.json());
 app.use(express.urlencoded());
-
+// app.use(bodyParser.json({
+//     limit:'50mb'
+// }))
+// app.use(bodyParser.urlencoded({
+//     limit: '50mb',
+//     extended:true
+// }))
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -114,6 +122,17 @@ app.route('/api/usernamechange').put(authenticateToken, (req, res) => {
     })
 })
 
+app.route('/api/profilepicchange').put(authenticateToken, (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const user_id = req.body.userID;
+    var new_profile_pic = req.body.newPic
+    console.log("picture"+new_profile_pic)
+    connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
+        if (err) return res.json({status: "error"});
+        res.json({status: "ok"});
+    });
+})
+
 app.route('/api/getFriends').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
@@ -181,7 +200,7 @@ app.route('/api/profile').post(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const userID = req.body.userID;
 
-    connection.query('SELECT Username, Email, Warnings FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
+    connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
         console.log(result)
         if (err) throw err;
         res.send(JSON.stringify(result));

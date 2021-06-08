@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -33,7 +33,27 @@ export class AppService {
         params = params.set('userID', userID);
         params = params.set('newName', newName);
         return this.http.put('http://localhost:8001/api/usernamechange', params);
+    }
 
+    getBlob(file){
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Ocp-Apim-Subscription-Key': 'change this'
+        });
+
+        return this.http.post<Blob>(file,
+            {
+                "url": file.getSrc()
+            }, {headers: headers, responseType: 'blob' as 'json' });
+    }
+
+
+    changeProfilePicture(userID: string, newPic): Observable<any>{
+        let params: HttpParams = new HttpParams();
+        params = params.set('userID', userID);
+        params = params.set('newPic', newPic)
+        return this.http.put('http://localhost:8001/api/profilepicchange', params);
     }
 
     getProfile(userID: string): Observable<any> {
