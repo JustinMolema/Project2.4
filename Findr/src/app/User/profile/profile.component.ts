@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
+import {DomSanitizer} from "@angular/platform-browser";
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -14,6 +15,7 @@ class ImageSnippet {
     }
 }
 
+
 // TODO: fix setting new profile picture (only works on second try)
 // TODO: fix displaying profile picture
 
@@ -27,35 +29,55 @@ export class ProfileComponent implements OnInit {
     hasFileBeenSelected = false;
     selectedFile: ImageSnippet;
     isEditEnable: boolean = false;
+    reader = new FileReader();
 
     User: any;
     Email: any;
     warningCount: any;
     DBpicture;
 
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private sanitiser: DomSanitizer) {
     }
 
     ngOnInit(): void {
         this.loadInData()
     }
 
-    async loadInData() {
-        await this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
+    loadInData() {
+        this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
             this.User = res[0].Username;
             this.Email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
-            this.DBpicture = res[0].Profile_picture;
+            this.DBpicture = res[0].pic;
+
             if (this.DBpicture != null) {
-                const reader = new FileReader();
 
-                reader.onload = (e) => this.DBpicture = e.target.result;
+                this.reader.onload = (e) => {
+                    if (typeof e.target.result === "string") {
+                        // var temp = this._arrayBufferToBase64(this.DBpicture)
 
-                reader.readAsDataURL(new Blob([this.DBpicture.data]));
-
+                        var file = new File([this.DBpicture.data], "pic0")
+                        this.DBpicture = new ImageSnippet(e.target.result, file);
+                    }
+                };
+                // this.reader.readAsDataURL(this.DBpicture);
                 this.hasFileBeenSelected = true;
             }
         });
+    }
+
+    sanitse(url:string){
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
+    }
+
+    arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
     }
 
     onEdit() {
@@ -71,13 +93,12 @@ export class ProfileComponent implements OnInit {
 
     processFile(imageInput: any): void {
         const file: File = imageInput.files[0];
-        const reader = new FileReader();
 
-        reader.addEventListener('load', (event: any) => {
+        this.reader.addEventListener('load', (event: any) => {
             this.selectedFile = new ImageSnippet(event.target.result, file);
         });
 
-        reader.readAsDataURL(file);
+        this.reader.readAsDataURL(file);
 
         this.hasFileBeenSelected = true;
 
@@ -85,6 +106,16 @@ export class ProfileComponent implements OnInit {
         this.submitNewProfilePicture(prep)
 
     }
+    //
+    // _arrayBufferToBase64( buffer ) {
+    //     var binary = '';
+    //     var bytes = new Uint8Array( buffer );
+    //     var len = bytes.byteLength;
+    //     for (var i = 0; i < len; i++) {
+    //         binary += String.fromCharCode( bytes[ i ] );
+    //     }
+    //     return window.btoa( binary );
+    // }
 
     async prepareImage(image) {
         var temp;

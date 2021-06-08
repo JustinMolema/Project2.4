@@ -8,7 +8,8 @@
                 <img class="current-profile-pic" src="../../../../assets/SVG/upload.svg"/>
             </label>
             <label *ngIf="hasFileBeenSelected;" for="upload">
-                <img class="current-profile-pic" src="{{ selectedFile.src }}">
+                <img class="current-profile-pic" *ngIf="!DBpicture" src="{{ selectedFile.src }}">
+                <img class="current-profile-pic" *ngIf="DBpicture" src="sanitise('data:image/jpg;base64, ' + arrayBufferToBase64({{DBpicture}}))">
             </label>
             <label class="uploadimage" for="upload">Upload image</label>
         </div>

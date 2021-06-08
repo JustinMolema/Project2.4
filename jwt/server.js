@@ -126,7 +126,7 @@ app.route('/api/profilepicchange').put(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     var new_profile_pic = req.body.newPic
-    console.log("picture"+new_profile_pic)
+
     connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
         if (err) return res.json({status: "error"});
         res.json({status: "ok"});
@@ -154,7 +154,7 @@ app.route('/api/acceptFriendRequest').post(authenticateToken, async (req, res) =
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields) {
         console.log(err)
     })
-	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
+    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         console.log(err)
     })
     res.send({status: "ok"})
@@ -164,7 +164,7 @@ app.route('/api/deleteFriendRequest').post(authenticateToken, async (req, res) =
     res.header("Access-Control-Allow-Origin", "*");
     const accepterID = req.body.accepterID;
     const senderID = req.body.senderID;
-	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
+    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
     })
     res.send({status: "ok"})
 })
@@ -173,11 +173,11 @@ app.route('/api/deleteFriend').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const UserOne = req.body.userOne;
     const UserTwo = req.body.userTwo;
-	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+    connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
         console.log(err)
     })
 
-	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+    connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
     res.send({status: "ok"})
@@ -187,24 +187,24 @@ app.route('/api/blockFriend').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const UserOne = req.body.userOne;// blocker
     const UserTwo = req.body.userTwo;// person getting blocked
-	connection.query('INSERT INTO user_blocked_user (user_blocker, user_blockee) VALUES (' + UserOne + ', ' + UserTwo + ');', function (err, result, fields) {
-        console.log(err)
-    })
-	
-	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+    connection.query('INSERT INTO user_blocked_user (user_blocker, user_blockee) VALUES (' + UserOne + ', ' + UserTwo + ');', function (err, result, fields) {
         console.log(err)
     })
 
-	connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+    connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
         console.log(err)
     })
 
-	
-	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+    connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
 
-	connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+
+    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+        console.log(err)
+    })
+
+    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
     res.send({status: "ok"})
@@ -246,9 +246,8 @@ app.route('/api/getUserInformation').post(authenticateToken, (req, res) => {
 app.route('/api/profile').post(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const userID = req.body.userID;
-    
-    connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
-        console.log(result)
+
+    connection.query('SELECT Username, Email, Warnings, Profile_picture AS pic FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
         if (err) throw err;
         res.send(JSON.stringify(result));
     })
