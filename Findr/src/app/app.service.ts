@@ -39,7 +39,7 @@ export class AppService {
         let params: HttpParams = new HttpParams()
             .set('userID', userID)
             .set("newPic", encodeURIComponent(newPic));
-        return this.http.put('http://localhost:8001/user/profile/picture', params);
+        return this.http.put('http://localhost:8001/user/profile/picture', params, {responseType: "text"});
     }
 
     getProfile(userID: string): Observable<any> {

@@ -63,13 +63,14 @@ export class ProfileComponent implements OnInit {
         this.hasFileBeenSelected = true;
 
         this.reader.onload = () => {
+            this.dbPicture = this.reader.result
             this.appService.changeProfilePicture(this.appService.storedUserID, this.reader.result).subscribe(res => {
-                this.dbPicture = this.reader.result
-                // console.log(res)
+
+                console.log(res)
+
+            }, error => {
+                console.log(error)
             })
-            // , error => {
-            //     console.log(error)
-            // })
         }
     }
 
