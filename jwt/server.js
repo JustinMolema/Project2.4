@@ -144,12 +144,11 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
 app.route('/user/friends').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
-    console.log(user_id)
+    console.log("???? " + user_id)
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
         if (err) return res.sendStatus(400);
         friendInfo = JSON.stringify(result);
         res.send([result]);
-        res.sendStatus(200)
     })
 })
 
@@ -166,7 +165,7 @@ app.route('/user/friend-requests/accept').post(authenticateToken, async (req, re
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         console.log(err)
     })
-    res.sendStatus(200)
+    res.send({status: "ok"})
 })
 
 app.route('/user/friends/friend-requests/remove').post(authenticateToken, async (req, res) => {
@@ -178,7 +177,7 @@ app.route('/user/friends/friend-requests/remove').post(authenticateToken, async 
     res.sendStatus(200)
 })
 
-app.route('user/friends/delete').post(authenticateToken, async (req, res) => {
+app.route('/user/friends/delete').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const UserOne = req.body.userOne;
     const UserTwo = req.body.userTwo;
@@ -196,7 +195,7 @@ app.route('user/friends/delete').post(authenticateToken, async (req, res) => {
     res.sendStatus(200)
 })
 
-app.route('user/friends/block').post(authenticateToken, async (req, res) => {
+app.route('/user/friends/block').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const UserOne = req.body.userOne;// blocker
     const UserTwo = req.body.userTwo;// person getting blocked

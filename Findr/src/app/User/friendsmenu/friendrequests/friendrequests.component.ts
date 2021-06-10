@@ -22,7 +22,8 @@ export class FriendrequestsComponent implements OnInit {
 
   addFriend(): void {
     this.appService.acceptFriendRequest(this.friendID).subscribe(res =>{
-    this.refresh.emit('hoi');
+      console.log("????????????")
+      this.refresh.emit('hoi');
     })
   }
 
