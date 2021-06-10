@@ -249,9 +249,12 @@ app.route('/api/profile').post(authenticateToken, (req, res) => {
     const userID = req.body.userID;
 
     connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
-        if (err) throw err;
-        result[0].Profile_picture = result[0].Profile_picture.toString()
-        res.send(JSON.stringify(result));
+        if (err){
+            throw err;
+        } else {
+            result[0].Profile_picture = result[0].Profile_picture.toString()
+            res.send(JSON.stringify(result));
+        }
     })
 })
 
