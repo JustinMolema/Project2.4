@@ -23,14 +23,14 @@ export class AdmindataService {
             set('category', category).
             set('description', description);
 
-        return this.http.post('http://localhost:8001/api/addgame/', params);
+        return this.http.post('http://localhost:8001/api/game/', params);
     }
 
     deleteGame(name: string): Observable<any> {
         console.log(name);
         let params: HttpParams = new HttpParams();
         params = params.set('name', name);
-        return this.http.delete('http://localhost:8001/api/deletegame/' + name);
+        return this.http.delete('http://localhost:8001/api/game/' + name);
     }
 
     getSupportTickets(): Observable<any> {

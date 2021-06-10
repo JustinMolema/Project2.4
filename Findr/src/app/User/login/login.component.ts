@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === "ok")
             {
-                this.appService.storedUserID = res.userID
+                this.appService.storedUserID = res.userID;
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
             }
