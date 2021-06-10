@@ -26,13 +26,13 @@ export class FriendComponent implements OnInit {
 
   deleteFriend(): void {
     this.appService.deleteFriend(this.friendID).subscribe(res =>{
-
+      this.refresh.emit('hoi');
     })
   }
 
   blockFriend(): void {
     this.appService.blockFriend(this.friendID).subscribe(res =>{
-
+      this.refresh.emit('hoi');
     })
   }
 

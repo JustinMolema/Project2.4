@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
+import {AppService} from '../../../app.service'
 import { TopbarService } from '../../topbar/topbar.service';
 
 @Component({
@@ -9,13 +9,13 @@ import { TopbarService } from '../../topbar/topbar.service';
 })
 export class FriendslistComponent implements OnInit {
 
-  friends = ["Anne Pier", "Robbin", "Justin", "Merel", "Wijmar", "Henk", "Anne Pier Alt Account", "Richard", "Jos", "Harald"];
+  friends = this.appService.friends;
   collapsed: boolean = true;
   showMoreText: string = "Show More ⬎";
   sliceAmount = 5;
   topbar: TopbarService
 
-  constructor(private topbarService: TopbarService) {
+  constructor(private topbarService: TopbarService, private appService: AppService) {
     this.topbar = topbarService;
   }
 
