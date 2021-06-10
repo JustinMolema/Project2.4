@@ -140,6 +140,7 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
         }
     });
 })
+
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 //                 USER FRIEND CALLS
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -265,16 +266,7 @@ app.route('/api/unblockuser').post(authenticateToken, async (req, res) => {
     })
 })
 
-app.route('/user/profile').post(authenticateToken, (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    const userID = req.body.userID;
 
-    connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
-        if (err) throw err;
-        result[0].Profile_picture = result[0].Profile_picture.toString()
-        res.send(JSON.stringify(result));
-    })
-})
 
 app.route('/api/supporttickets').get((req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -351,7 +343,6 @@ app.post('/user/login', (req, res) => {
                     res.send(err)
                 }
             })
-
         })
     })
 })
