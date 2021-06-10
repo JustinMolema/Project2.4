@@ -2,12 +2,12 @@
     <div class="profile-page">
         <div class="imagecontainer">
             <input #imageInput type="file" id="upload" hidden (change)="processFile(imageInput)"
-                   accept="image/x-png,image/gif,image/jpeg,image/jpg,image/">
+                   accept="image/x-png,image/jpeg,image/jpg,image/">
 
             <label *ngIf="!hasFileBeenSelected;" for="upload">
                 <img class="current-profile-pic" src="../../../../assets/SVG/upload.svg"/>
             </label>
-            
+
             <label *ngIf="hasFileBeenSelected;" for="upload">
                 <img class="current-profile-pic" [src]="dbPicture">
             </label>

@@ -87,7 +87,9 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
     })
 })
 
-// USER PROFILE CALLS
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+//                 USER PROFILE CALLS
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 app.route('/user/profile').post(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const userID = req.body.userID;
@@ -95,7 +97,6 @@ app.route('/user/profile').post(authenticateToken, (req, res) => {
     connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
         if (err) {
             throw err;
-
         } else {
             if (result.length > 0) {
                 result[0].Profile_picture = result[0].Profile_picture.toString();
@@ -113,8 +114,7 @@ app.route('/user/profile/password').put(authenticateToken, (req, res) => {
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(new_pass, salt, function (err, hash) {
             connection.query('UPDATE users SET Password = ? WHERE User_ID = ?', [hash, user_id], function (err, result, fields) {
-                if (err) return res.sendStatus(400);
-                res.sendStatus(400);
+                if (err) return res.send(err);
             })
         })
     })
@@ -125,8 +125,7 @@ app.route('/user/profile/username').put(authenticateToken, (req, res) => {
     const user_id = req.body.userID;
     const new_username = req.body.newName;
     connection.query('UPDATE users SET Username = ? WHERE users.User_ID = ?', [new_username, user_id], function (err, result, fields) {
-        if (err) return res.sendStatus(400);
-        res.sendStatus(200);
+        if (err) return res.send(err)
     })
 })
 
@@ -137,14 +136,13 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
 
     connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
         if (err) {
-            res.sendStatus(400);
-        } else {
-            res.sendStatus(200);
+            res.send(err);
         }
     });
 })
-
-// USER FRIEND CALLS
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+//                 USER FRIEND CALLS
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 app.route('/user/friends').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
@@ -169,7 +167,7 @@ app.route('/user/friend-requests/accept').post(authenticateToken, async (req, re
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         console.log(err)
     })
-    res.sendStatus(200)
+
 })
 
 app.route('/user/friends/friend-requests/remove').post(authenticateToken, async (req, res) => {
@@ -177,9 +175,9 @@ app.route('/user/friends/friend-requests/remove').post(authenticateToken, async 
     const accepterID = req.body.accepterID;
     const senderID = req.body.senderID;
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err);
     })
-    res.sendStatus(200)
+
 })
 
 app.route('/user/friends/delete').post(authenticateToken, async (req, res) => {
@@ -188,16 +186,14 @@ app.route('/user/friends/delete').post(authenticateToken, async (req, res) => {
     const UserTwo = req.body.userTwo;
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
         console.log(err)
-
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err)
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
-
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err);
     })
-    res.sendStatus(200)
+    res.json({status: "ok"})
 })
 
 app.route('/user/friends/block').post(authenticateToken, async (req, res) => {
@@ -205,38 +201,33 @@ app.route('/user/friends/block').post(authenticateToken, async (req, res) => {
     const UserOne = req.body.userOne;// blocker
     const UserTwo = req.body.userTwo;// person getting blocked
     connection.query('INSERT INTO user_blocked_user (user_blocker, user_blockee) VALUES (' + UserOne + ', ' + UserTwo + ');', function (err, result, fields) {
-
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err);
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
-
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err);
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
-
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err);
     })
 
-
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
-
-        if (err) return res.sendStatus(400);
+        if (err) return res.send(err);
     })
 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
-    res.sendStatus(200)
+    res.json({status: "ok"})
 })
 
 app.route('/user/friends/friend-requests').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
-        if (err) return res.sendStatus(400);
-        friendRequests = JSON.stringify(result);
+        if (err) return res.send(err);
+        let friendRequests = JSON.stringify(result);
         res.send([result]);
     })
 })
@@ -247,7 +238,7 @@ app.route('/api/sendfriendrequest').post(authenticateToken, async (req, res) => 
     const UserTwo = req.body.userTwo;// receiver
     connection.query('INSERT INTO user_befriends_user (UserOne, UserTwo) VALUES (' + UserTwo + ', ' + UserOne + ');', function (err, result, fields) {
         if (err) throw err;
-        friendRequests = JSON.stringify(result);
+        let friendRequests = JSON.stringify(result);
         res.send([result]);
     })
 })
@@ -257,19 +248,19 @@ app.route('/user/friends/blocked').post(authenticateToken, async (req, res) => {
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
         if (err) throw err;
-        BlockedInfo = JSON.stringify(result);
+        let BlockedInfo = JSON.stringify(result);
         res.send([result]);
     })
 })
 
 app.route('/api/unblockuser').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-    
+
     const UserOne = req.body.userOne;// blocker
     const UserTwo = req.body.userTwo;// person getting blocked
     connection.query('DELETE FROM user_blocked_user WHERE user_blocker = ' + UserOne + ' AND user_blockee = ' + UserTwo, function (err, result, fields) {
         if (err) throw err;
-        BlockedInfo = JSON.stringify(result);
+        let BlockedInfo = JSON.stringify(result);
         res.send([result]);
     })
 })
@@ -288,7 +279,7 @@ app.route('/user/profile').post(authenticateToken, (req, res) => {
 app.route('/api/supporttickets').get((req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
-        if (err) return res.sendStatus(400);
+        if (err) res.send(err);
         res.send(result);
     })
 })
@@ -298,9 +289,9 @@ app.route('/api/addgame').post((req, res) => {
     connection.connect(function (err) {
         connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
             if (err) {
-                return res.sendStatus(400)
+                res.send(err)
             } else {
-                return res.sendStatus(200);
+                res.json({status: "ok"})
             }
         })
     })
@@ -316,9 +307,9 @@ app.route('/api/deletegame/:name').delete((req, res) => {
     connection.connect(function (req, err) {
         connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
             if (err) {
-                return res.sendStatus(400);
+                res.sendStatus(400);
             } else {
-                res.sendStatus(200);
+                res.json({status: "ok"})
             }
         })
     })
@@ -335,7 +326,7 @@ app.post('/user/login', (req, res) => {
             const dbPassword = JSON.parse(JSON.stringify(result[0].password));
             const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
             if (err) {
-                res.sendStatus(400)
+                res.send(err)
             }
 
             bcrypt.compare(pw, dbPassword, (err, result) => {
@@ -357,7 +348,7 @@ app.post('/user/login', (req, res) => {
                         status: 200
                     })
                 } else {
-                    res.sendStatus(400)
+                    res.send(err)
                 }
             })
 
@@ -382,7 +373,7 @@ app.post('/user/login/signup', async (req, res) => {
                 connection.query('INSERT INTO users (username, password, email) VALUES (?, ?, ?)', [username, hash, email], function (err, result, fields) {
 
                     if (err) {
-                        return res.sendStatus(400);
+                        return res.send(err);
                     } else {
                         res.json({status: 200});
                     }
