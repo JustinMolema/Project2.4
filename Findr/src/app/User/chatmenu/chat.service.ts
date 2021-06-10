@@ -6,56 +6,66 @@ import {Observable} from 'rxjs';
     providedIn: 'root'
 })
 export class ChatService {
-    private socket;
-    private userArray = [];
+    private socket = io('http://localhost:8081', {autoConnect: false});
+    private users = [];
+    private = false;
 
     constructor() {
     }
 
-    joinRoom(data): void {
-        this.socket.emit('join', data);
-
-        this.currentUsers();
-        this.userJoined();
-    }
-
-    createAndOpenSocket(): void {
-        this.socket = io('http://localhost:8081');
-        console.log("A");
-        this.socket.auth = {username: "Meloen"};
+    openSocket(): void {
+        this.socket.auth = {username: 'Meloen'};
         this.socket.connect();
 
-        this.newUserJoined().subscribe(res => {
-            console.log(res);
-        });
-
-        this.userLeft().subscribe(res => {
-            console.log(res);
-        });
-
-        this.currentUsers();
-        this.userJoined();
+        this.getAllOnlineFriends();
+        this.friendLoggedIn();
+        this.connect();
+        this.disconnect();
+        this.friendLoggedOut();
     }
 
     closeSocket(): void {
         this.socket.disconnect();
+        this.socket.off("connect");
+        this.socket.off("disconnect");
+        this.socket.off("users");
+        this.socket.off("user connected");
+        this.socket.off("user disconnected");
+        this.socket.off("private message");
     }
 
-    newUserJoined(): Observable<any> {
-        return new Observable<{ user: any }>(observer => {
-            this.socket.on('connect', () => {
-                console.log('OEN');
+    connect(): void {
+        this.socket.on('connect', () => {
+            let a = true;
+            console.log(this.users);
+            console.log(a);
+
+            this.users.forEach((user) => {
+                if (user.self) {
+                    user.connected = true;
+                    a = false;
+                }
             });
         });
     }
 
-    currentUsers(): void {
+    disconnect(): void {
+        this.socket.on("disconnect", () => {
+            this.users.forEach((user) => {
+                if (user.self) {
+                    user.connected = false;
+                }
+            });
+        });
+    }
+
+    getAllOnlineFriends(): void {
         this.socket.on('users', (users) => {
             users.forEach((user) => {
                 user.self = user.userID === this.socket.id;
+                this.initReactiveProperties(user);
             });
-            console.log(users);
-            this.userArray = users.sort((a, b) => {
+            this.users = users.sort((a, b) => {
                 if (a.self) {
                     return -1;
                 }
@@ -70,28 +80,50 @@ export class ChatService {
         });
     }
 
-    userJoined(): void {
+    initReactiveProperties(user): void {
+        user.connected = true;
+        user.messages = [];
+        user.hasNewMessages = false;
+    }
+
+    friendLoggedIn(): void {
         this.socket.on('user connected', (user) => {
-            this.userArray.push(user);
-            console.log(this.userArray);
+            this.initReactiveProperties(user);
+            this.users.push(user);
         });
     }
 
-    userLeft(): Observable<any> {
-        return new Observable<{ user: any }>(observer => {
-            this.socket.on('disconnect', () => {
-                console.log('oun');
-            });
+    friendLoggedOut(): void {
+        this.socket.on('user disconnected', (id) => {
+            for (let i = 0; i < this.users.length; i++) {
+                const user = this.users[i];
+                if (user.userID === id) {
+                    user.connected = false;
+                    break;
+                }
+            }
         });
     }
 
-    leaveRoom(data): void {
+    /****************************** PUBLIC CHAT********************************************/
+
+    joinGameRoom(data): void {
+        this.socket.emit('join', data);
+        this.getAllOnlineFriends();
+        this.friendLoggedIn();
+    }
+
+    leaveGameRoom(data): void {
         this.socket.emit('leave', data);
     }
 
-    userLeftRoom(): Observable<any> {
+    sendMessageToGameChat(data): void {
+        this.socket.emit('message', data);
+    }
+
+    newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
-            this.socket.on('left room', (data) => {
+            this.socket.on('new message', (data) => {
                 observer.next(data);
             });
             return () => {
@@ -100,6 +132,8 @@ export class ChatService {
         });
     }
 
+    /****************************** PRIVATE CHAT********************************************/
+
     sendPrivateMessage(data): void {
         this.socket.emit('private message', data);
     }
@@ -107,7 +141,7 @@ export class ChatService {
     receivedPrivateMessage(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('private message', (data) => {
-                console.log("d");
+                console.log('d');
                 console.log(data.room);
                 observer.next(data);
             });
@@ -128,20 +162,5 @@ export class ChatService {
         //         break;
         //     }
         // }
-    }
-
-    sendMessage(data): void {
-        this.socket.emit('message', data);
-    }
-
-    newMessageReceived(): Observable<any> {
-        return new Observable<{ user: string, message: string }>(observer => {
-            this.socket.on('new message', (data) => {
-                observer.next(data);
-            });
-            return () => {
-                this.socket.disconnect();
-            };
-        });
     }
 }

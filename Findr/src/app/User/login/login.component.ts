@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
                 this.appService.storedUserID = res.userID;
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
-                this.chat.createAndOpenSocket();
+                this.chat.openSocket();
                 this.authService.setRefreshInterval();
             }
             else if (res.status === "error") {

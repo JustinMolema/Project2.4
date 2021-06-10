@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.stable = this.app.isStable.subscribe((isStable) => {
             if (isStable) {
                 this.authService.setRefreshInterval();
-                if (this.authService.userIsLoggedIn()) this.chat.createAndOpenSocket();
+                if (this.authService.userIsLoggedIn()) this.chat.openSocket();
                 this.stable.unsubscribe();
             }
         });

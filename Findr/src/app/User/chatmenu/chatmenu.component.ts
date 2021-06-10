@@ -19,18 +19,26 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute) {
         this.createForm();
         this.username = this.names[this.getRandomInt(this.names.length)];
-        this.joinRoom();
-        this.receiveMessageListener();
-        this.receivePrivateMessageListener();
+
+        if (chat.private) this.loadPrivateChat();
+        else this.loadPublicChat();
     }
 
     ngOnInit(): void {
     }
 
     ngOnDestroy(): void{
-        this.chat.leaveRoom({user: this.username, room: this.roomName});
+        this.chat.leaveGameRoom({user: this.username, room: this.roomName});
     }
 
+    loadPublicChat(): void {
+        this.joinRoom();
+        this.receiveMessageListener();
+    }
+
+    loadPrivateChat(): void {
+        this.receivePrivateMessageListener();
+    }
     getRandomInt(max): number {
         return Math.floor(Math.random() * max);
     }
@@ -55,7 +63,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     joinRoom(): void {
         this.route.params.subscribe(params => {
             this.roomName = params.room;
-            this.chat.joinRoom({user: this.username, room: this.roomName});
+            this.chat.joinGameRoom({user: this.username, room: this.roomName});
         });
     }
 
@@ -66,23 +74,23 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     sendMessage(message: string): void {
-        // this.chat.sendPrivateMessage({user: this.username, message, room: 1});
-        this.chat.sendMessage({user: this.username, message, room: this.roomName});
+        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: 1});
+        else this.chat.sendMessageToGameChat({user: this.username, message, room: this.roomName});
     }
 
     receiveMessageListener(): void {
-        this.chat.newMessageReceived().subscribe(res => {
+        this.chat.newMessageReceivedFromGameChat().subscribe(res => {
             this.messages.push({username: res.user, message: res.message, received: true});
         });
     }
 
     receivePrivateMessageListener(): void {
-        console.log("aa");
         this.chat.receivedPrivateMessage().subscribe(res => {
             console.log(res);
             this.messages.push({username: res.user, message: res.message, received: true});
         });
     }
+
 
     clearInputfield(): void {
         this.form.controls.message.reset();

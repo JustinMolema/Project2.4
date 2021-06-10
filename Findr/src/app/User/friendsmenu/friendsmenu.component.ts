@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
 import {TopbarService} from '../topbar/topbar.service';
-import {combineLatest} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 
 @Component({
     selector: 'app-friendsmenu',
@@ -9,9 +9,6 @@ import {combineLatest} from 'rxjs';
     styleUrls: ['./friendsmenu.component.css']
 })
 export class FriendsmenuComponent implements OnInit {
-    // friends = ["Harald", "Anne Pier", "Justin", "Robbin"];
-    // friendRequests = ["Simon", "Jos", "Wijmar"];
-    // blockedUsers = ["Richard", "Jeroen"];
 
     friends = [];
     friendRequests = [];
@@ -24,7 +21,7 @@ export class FriendsmenuComponent implements OnInit {
         this.setFriendInfo();
     }
 
-    setFriendInfo() {
+    setFriendInfo(): void {
         combineLatest([
             this.getFriendsFromServer(),
             this.getFriendRequestsFromServer(),
@@ -47,16 +44,16 @@ export class FriendsmenuComponent implements OnInit {
         })
     }
 
-    getFriendsFromServer() {
+    getFriendsFromServer(): Observable<any> {
         return this.appService.getFriends(this.appService.storedUserID);
     }
 
-    getFriendRequestsFromServer() {
-        return this.appService.getFriendRequests(this.appService.storedUserID)
+    getFriendRequestsFromServer(): Observable<any> {
+        return this.appService.getFriendRequests(this.appService.storedUserID);
     }
 
-    getBlockedUsersFromServer() {
-        return this.appService.getBlockedUsers(this.appService.storedUserID)
+    getBlockedUsersFromServer(): Observable<any> {
+        return this.appService.getBlockedUsers(this.appService.storedUserID);
     }
 
     showFriendTab(blockView: any, friendView: any): void {

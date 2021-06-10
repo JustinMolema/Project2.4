@@ -24,6 +24,7 @@ const routes: Routes = [
     {path: 'games', component: GamemenuComponent},
     {path: 'admin', component: AdminLoginComponent},
     {path: 'chats/:room', component: ChatmenuComponent},
+    {path: 'chats', component: ChatmenuComponent},
     {path: 'profile', component: ProfileComponent},
     {path: "friends", component: FriendsmenuComponent},
     {path: 'forgot-password', component: PasswordforgottenComponent},

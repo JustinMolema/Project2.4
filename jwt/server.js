@@ -35,6 +35,8 @@ const io = require("socket.io")(server, {
     }
 });
 
+
+
 io.use((socket, next) => {
 	const username = socket.handshake.auth.username;
 	if (!username) {
@@ -44,8 +46,8 @@ io.use((socket, next) => {
 	next();
   });
 
-io.on('connection', (socket) => {
-	
+
+io.on('connection', (socket) => {	
 	const users = [];
 	for (let [id, socket] of io.of("/").sockets) {
 	  users.push({
@@ -53,6 +55,11 @@ io.on('connection', (socket) => {
 		username: socket.username,
 	  });
 	}
+
+    socket.onAny((event, ...args) => {
+        console.log("Event: " + event + " Args: " + args)
+    })
+	
 	console.log("socket");
 	console.log(users);
 
@@ -63,15 +70,11 @@ io.on('connection', (socket) => {
 		username: socket.username,
 	});	
 
-
-
 	socket.on('join', function (data) {
 		socket.join(data.room);
-		io.emit('new user joined', { user: data.user, message: 'has joined  room.' });
 	});
 
 	socket.on('leave', function (data) {
-		io.emit('left room', { user: data.user, message: 'has left room.' });
 		socket.leave(data.room);
 	});
 
@@ -82,6 +85,11 @@ io.on('connection', (socket) => {
 	socket.on("private message", (data) => {
 		socket.to(data.room).emit("private message", { user: socket.id, message: data.message });
 	});
+
+    socket.on("disconnect", () => {
+        socket.broadcast.emit("user disconnected", socket.id);
+      });
+
 });
 
 server.listen(chatport);
@@ -137,6 +145,7 @@ app.route('/api/usernamechange').put(authenticateToken, (req, res) => {
 })
 
 app.route('/api/getFriends').post(authenticateToken, async (req, res) => {
+	console.log(req.body.userID)
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
