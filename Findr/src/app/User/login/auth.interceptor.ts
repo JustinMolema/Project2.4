@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        const idToken = this.getToken();
+        const idToken = this.authService.getJWTToken();
         if (!idToken) { return next.handle(request); }
 
         const cloned = this.requestCloneWithHeader(request, idToken);
@@ -23,9 +23,5 @@ export class AuthInterceptor implements HttpInterceptor {
             headers: request.headers.set('Authorization',
                 'Bearer ' + idToken)
         });
-    }
-
-    getToken(): string {
-        return this.authService.localstorage ? localStorage.getItem('jwt') : sessionStorage.getItem('jwt');
     }
 }

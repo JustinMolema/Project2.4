@@ -53,6 +53,7 @@ io.on('connection', (socket) => {
 		username: socket.username,
 	  });
 	}
+	console.log("socket");
 	console.log(users);
 
 	socket.emit("users", users);
@@ -263,7 +264,6 @@ app.post('/api/login', (req, res) => {
 			const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
 
             bcrypt.compare(pw, dbPassword, (err, result) => {
-                console.log("compare: " + result)
                 if (err) {
                     return res.json({status: "error"})
                 }

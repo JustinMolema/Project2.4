@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { sha512 } from 'js-sha512';
 import { AppService } from 'src/app/app.service';
+import {ChatService} from '../chatmenu/chat.service';
 
 @Component({
     selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
     vh = window.screen.height / 2;
     vw = window.screen.width;
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appService: AppService) {
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appService: AppService, private chat: ChatService) {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -44,9 +45,7 @@ export class LoginComponent implements OnInit {
 
     login(): void {
         const val = this.form.value;
-
         this.loginToServer(val);
-
     }
 
     loginToServer(val): void {
@@ -57,9 +56,11 @@ export class LoginComponent implements OnInit {
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === "ok")
             {
-                this.appService.storedUserID = res.userID
+                this.appService.storedUserID = res.userID;
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
+                this.chat.createAndOpenSocket();
+                this.authService.setRefreshInterval();
             }
             else if (res.status === "error") {
                 console.log("error");
@@ -69,15 +70,8 @@ export class LoginComponent implements OnInit {
     }
 
     setJWT(rememberme: boolean, response): void {
-        this.authService.localstorage = rememberme;
-
-        if (rememberme) {
-            localStorage.setItem('jwt', response.accessToken);
-            localStorage.setItem('refreshToken', response.refreshToken);
-        } else {
-            sessionStorage.setItem('jwt', response.accessToken);
-            sessionStorage.setItem('refreshToken', response.refreshToken);
-        }
+        if (!rememberme) this.authService.storage = sessionStorage;
+        this.authService.writeTokens(response);
     }
 
     getStyle(i: any): object {

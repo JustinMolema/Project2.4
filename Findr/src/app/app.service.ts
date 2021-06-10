@@ -24,7 +24,7 @@ export class AppService {
     changePassword(userID: string, newPass: string): Observable<any> {
         let params: HttpParams = new HttpParams();
         params = params.set('userID', userID);
-        params = params.set('newPass', newPass)
+        params = params.set('newPass', newPass);
         return this.http.put('http://localhost:8001/api/passwordchange', params);
     }
 

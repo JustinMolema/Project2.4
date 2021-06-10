@@ -29,7 +29,6 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnDestroy(): void{
         this.chat.leaveRoom({user: this.username, room: this.roomName});
-        this.chat.closeSocket();
     }
 
     getRandomInt(max): number {
@@ -78,6 +77,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     receivePrivateMessageListener(): void {
+        console.log("aa");
         this.chat.receivedPrivateMessage().subscribe(res => {
             console.log(res);
             this.messages.push({username: res.user, message: res.message, received: true});
