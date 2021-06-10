@@ -102,13 +102,6 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
     })
 })
 
-app.route('/api/games').get(authenticateToken, (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    connection.query('SELECT * FROM games', function (err, result, fields) {
-        if (err) throw err;
-        res.send(JSON.stringify(result));
-    })
-})
 
 app.route('/api/chats').get(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -220,18 +213,25 @@ app.route('/api/supporttickets').get((req, res) => {
     })
 })
 
-app.route('/api/addgame').post((req, res) => {
+app.route('/api/games').get(authenticateToken, (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    connection.query('SELECT * FROM games', function (err, result, fields) {
+        if (err) throw err;
+        res.send(JSON.stringify(result));
+    })
+})
+
+app.route('/api/game').post((req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     connection.connect(function (err) {
         connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
             if (err) return res.json({status: "error"});
-
             res.json({status: "ok"});
         })
     })
 })
 
-app.route('/api/deletegame/:name').delete((req, res) => {
+app.route('/api/game/:name').delete((req, res) => {
     let name = req.params['name']
 
     res.header("Access-Control-Allow-Origin", "*");
@@ -292,7 +292,6 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/login/signup', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-
     // encode so that special symbols dont destroy DB
     const username = encodeURIComponent(req.body.username);
     const password = encodeURIComponent(req.body.password);
