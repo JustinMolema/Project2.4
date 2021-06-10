@@ -76,4 +76,5 @@ export class ProfileComponent implements OnInit {
         return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
+    
 }

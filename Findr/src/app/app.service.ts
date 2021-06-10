@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class AppService {
 
+    friends = [];
     storedUserID;
 
     constructor(private http: HttpClient) {
@@ -67,6 +68,13 @@ export class AppService {
         return this.http.post('http://localhost:8001/api/getBlockedUsers', params);
     }
 
+    sendFriendRequest(receiver: string){
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', receiver);
+            return this.http.post('http://localhost:8001/api/sendfriendrequest', params);
+    }
+
     acceptFriendRequest(senderID: string): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('accepterID', this.storedUserID)
@@ -93,5 +101,12 @@ export class AppService {
             .set('userOne', this.storedUserID)
             .set('userTwo', senderID);
         return this.http.post('http://localhost:8001/api/blockFriend', params);
+    }
+
+    unblockUser(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', senderID);
+        return this.http.post('http://localhost:8001/api/unblockuser', params);
     }
 }

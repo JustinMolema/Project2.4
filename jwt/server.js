@@ -221,10 +221,33 @@ app.route('/api/getFriendRequests').post(authenticateToken, async (req, res) => 
     })
 })
 
+app.route('/api/sendfriendrequest').post(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const UserOne = req.body.userOne;// sender
+    const UserTwo = req.body.userTwo;// receiver
+    connection.query('INSERT INTO user_befriends_user (UserOne, UserTwo) VALUES (' + UserTwo + ', ' + UserOne + ');', function (err, result, fields) {
+        if (err) throw err;
+        friendRequests = JSON.stringify(result);
+        res.send([result]);
+    })
+})
+
 app.route('/api/getBlockedUsers').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
+        if (err) throw err;
+        BlockedInfo = JSON.stringify(result);
+        res.send([result]);
+    })
+})
+
+app.route('/api/unblockuser').post(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    
+    const UserOne = req.body.userOne;// blocker
+    const UserTwo = req.body.userTwo;// person getting blocked
+    connection.query('DELETE FROM user_blocked_user WHERE user_blocker = ' + UserOne + ' AND user_blockee = ' + UserTwo, function (err, result, fields) {
         if (err) throw err;
         BlockedInfo = JSON.stringify(result);
         res.send([result]);

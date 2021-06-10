@@ -44,10 +44,10 @@ export class FriendsmenuComponent implements OnInit {
 
             friendsFromServer[0].forEach(element => {
                 this.friends.push(element)
+                this.appService.friends.push();
             });
 
             friendRequestsFromServer[0].forEach(element => {
-                console.log(element)
                 this.friendRequests.push(element)
             });
 
@@ -78,5 +78,12 @@ export class FriendsmenuComponent implements OnInit {
     showBlockedUserTab(blockView: any, friendView: any): void {
         blockView.style.display = "flex";
         friendView.style.display = "none";
+    }
+
+    sendFriendRequest(){
+        var id = prompt("please enter the id you want to add");
+        this.appService.sendFriendRequest(id).subscribe(res =>{
+            this.setFriendInfo();
+            })
     }
 }
