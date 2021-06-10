@@ -15,8 +15,14 @@ export class ChatService {
 
     openSocket(): void {
         this.socket.auth = {username: 'Meloen'};
-        this.socket.connect();
+        const sessionID = localStorage.getItem("sessionID");
 
+        if (sessionID) {
+            this.socket.auth = { sessionID };
+        }
+
+        this.socket.connect();
+        this.createSession();
         this.getAllOnlineFriends();
         this.friendLoggedIn();
         this.connect();
@@ -24,9 +30,20 @@ export class ChatService {
         this.friendLoggedOut();
     }
 
+    createSession(): void {
+        this.socket.on("session", ({ sessionID, userID }) => {
+            // attach the session ID to the next reconnection attempts
+            this.socket.auth = { sessionID };
+            // store it in the localStorage
+            localStorage.setItem("sessionID", sessionID);
+            // save the ID of the user
+            this.socket.userID = userID;
+        });
+    }
     closeSocket(): void {
         this.socket.disconnect();
         this.socket.off("connect");
+        this.socket.off("session");
         this.socket.off("disconnect");
         this.socket.off("users");
         this.socket.off("user connected");
@@ -36,14 +53,9 @@ export class ChatService {
 
     connect(): void {
         this.socket.on('connect', () => {
-            let a = true;
-            console.log(this.users);
-            console.log(a);
-
             this.users.forEach((user) => {
                 if (user.self) {
                     user.connected = true;
-                    a = false;
                 }
             });
         });
@@ -95,8 +107,7 @@ export class ChatService {
 
     friendLoggedOut(): void {
         this.socket.on('user disconnected', (id) => {
-            for (let i = 0; i < this.users.length; i++) {
-                const user = this.users[i];
+            for (const user of this.users) {
                 if (user.userID === id) {
                     user.connected = false;
                     break;
@@ -135,6 +146,7 @@ export class ChatService {
     /****************************** PRIVATE CHAT********************************************/
 
     sendPrivateMessage(data): void {
+        console.log("a");
         this.socket.emit('private message', data);
     }
 

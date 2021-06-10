@@ -74,7 +74,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     sendMessage(message: string): void {
-        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: 1});
+        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: "58ac4a73feff8439"});
         else this.chat.sendMessageToGameChat({user: this.username, message, room: this.roomName});
     }
 
