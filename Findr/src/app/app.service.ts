@@ -35,21 +35,6 @@ export class AppService {
         return this.http.put('http://localhost:8001/api/usernamechange', params);
     }
 
-    // getBlob(file): Observable<Blob>{
-    //
-    //     const headers = new HttpHeaders({
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json',
-    //         'Ocp-Apim-Subscription-Key': 'change this'
-    //     });
-    //     console.log("Dit is getblob")
-    //     return this.http.post<Blob>(file,
-    //         {
-    //             "url": file.name
-    //         }, {headers: headers, responseType: 'blob' as 'json' });
-    // }
-
-
     changeProfilePicture(userID: string, newPic): Observable<any>{
         let params: HttpParams = new HttpParams()
             .set('userID', userID)

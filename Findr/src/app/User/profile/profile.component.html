@@ -8,9 +8,9 @@
                 <img class="current-profile-pic" src="../../../../assets/SVG/upload.svg"/>
             </label>
             <label *ngIf="hasFileBeenSelected;" for="upload">
-<!--                <img class="current-profile-pic" *ngIf="!dbPicture" src="{{ selectedFile.src }}">-->
                 <img class="current-profile-pic" [src]="dbPicture">
             </label>
+
             <label class="uploadimage" for="upload">Upload image</label>
         </div>
 
