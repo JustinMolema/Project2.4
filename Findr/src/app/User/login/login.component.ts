@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         console.log(encryptedpassword)
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             console.log(res);
-            if (res.status == "ok") // res = goed
+            if (res.status == 200) // res = goed
             {
                 this.appService.storedUserID = res.userID
                 this.setJWT(val.rememberme, res);
