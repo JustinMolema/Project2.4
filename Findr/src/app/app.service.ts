@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -18,14 +18,13 @@ export class AppService {
             .set('username', username)
             .set('password', password)
             .set('email', email);
-
         return this.http.post('http://localhost:8001/user/login/signup', params);
     }
 
     changePassword(newPass: string): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('userID', this.storedUserID)
-            .set('newPass', newPass)
+            .set('newPass', newPass);
         return this.http.put('http://localhost:8001/user/profile/password', params);
     }
 
@@ -36,7 +35,7 @@ export class AppService {
         return this.http.put('http://localhost:8001/user/profile/username', params);
     }
 
-    changeProfilePicture(newPic): Observable<any>{
+    changeProfilePicture(newPic): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('userID', this.storedUserID)
             .set("newPic", encodeURIComponent(newPic));
@@ -46,7 +45,6 @@ export class AppService {
     getProfile(): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('userID', this.storedUserID);
-
         return this.http.post('http://localhost:8001/user/profile', params);
     }
 
@@ -68,11 +66,11 @@ export class AppService {
         return this.http.post('http://localhost:8001/user/friends/blocked', params);
     }
 
-    sendFriendRequest(receiver: string){
+    sendFriendRequest(receiver: string) {
         let params: HttpParams = new HttpParams()
             .set('userOne', this.storedUserID)
             .set('userTwo', receiver);
-            return this.http.post('http://localhost:8001/api/sendfriendrequest', params);
+        return this.http.post('http://localhost:8001/api/sendfriendrequest', params);
     }
 
     acceptFriendRequest(senderID: string): Observable<any> {

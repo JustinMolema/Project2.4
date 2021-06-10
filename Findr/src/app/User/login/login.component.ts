@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
-import { sha512 } from 'js-sha512';
-import { AppService } from 'src/app/app.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from './auth.service';
+import {sha512} from 'js-sha512';
+import {AppService} from 'src/app/app.service';
 
 @Component({
     selector: 'app-login',
@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
-            rememberme: [true]
+            rememberMe: [true]
         });
 
         for (let i = 0; i < 100; i++) {
-            this.stars.push({ left: this.getLeft(), top: this.getTop() });
+            this.stars.push({left: this.getLeft(), top: this.getTop()});
         }
     }
 
@@ -61,18 +61,17 @@ export class LoginComponent implements OnInit {
                 this.appService.storedUserID = res.userID
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
-            }
-            else if (res.status == "error") {
+            } else if (res.status == "error") {
                 console.log("error");
             }
 
         });
     }
 
-    setJWT(rememberme: boolean, response): void {
-        this.authService.localstorage = rememberme;
+    setJWT(rememberMe: boolean, response): void {
+        this.authService.localStorage = rememberMe;
 
-        if (rememberme) {
+        if (rememberMe) {
             localStorage.setItem('jwt', response.accessToken);
             localStorage.setItem('refreshToken', response.refreshToken);
         } else {

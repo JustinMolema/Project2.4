@@ -11,14 +11,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         const idToken = this.getToken();
-        if (!idToken) { return next.handle(request); }
+        if (!idToken) {
+            return next.handle(request);
+        }
 
         const cloned = this.requestCloneWithHeader(request, idToken);
 
         return next.handle(cloned);
     }
 
-    requestCloneWithHeader(request: HttpRequest<unknown>, idToken: string): HttpRequest<unknown>{
+    requestCloneWithHeader(request: HttpRequest<unknown>, idToken: string): HttpRequest<unknown> {
         return request.clone({
             headers: request.headers.set('Authorization',
                 'Bearer ' + idToken)
@@ -26,6 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     getToken(): string {
-        return this.authService.localstorage ? localStorage.getItem('jwt') : sessionStorage.getItem('jwt');
+        return this.authService.localStorage ? localStorage.getItem('jwt') : sessionStorage.getItem('jwt');
     }
 }

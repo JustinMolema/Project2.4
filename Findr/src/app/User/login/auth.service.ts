@@ -9,23 +9,22 @@ import {Router} from '@angular/router';
 export class AuthService {
 
     refreshTokenInterval = true;
-    localstorage = true;
+    localStorage = true;
 
     constructor(private http: HttpClient, private router: Router) {
     }
 
     login(email: string, password: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('username', email);
-        params = params.set('password', password);
+        let params: HttpParams = new HttpParams()
+            .set('username', email)
+            .set('password', password);
         this.refreshTokenInterval = true;
-
         return this.http.post('http://localhost:8001/user/login/', params);
     }
 
     refreshToken(): Observable<any> {
         let params: HttpParams = new HttpParams();
-        if (this.localstorage) {
+        if (this.localStorage) {
             params = params.set('token', localStorage.getItem('refreshToken'));
         } else {
             params = params.set('token', sessionStorage.getItem('refreshToken'));

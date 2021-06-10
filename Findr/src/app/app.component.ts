@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     refreshToken(): void {
         this.authService.refreshToken().subscribe(res => {
             if (res != null) {
-                if (this.authService.localstorage) {
+                if (this.authService.localStorage) {
                     localStorage.setItem('jwt', res.accessToken);
                 } else {
                     sessionStorage.setItem('jwt', res.accessToken);

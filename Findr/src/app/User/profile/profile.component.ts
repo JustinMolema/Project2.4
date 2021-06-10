@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
             if (this.dbPicture !== null) {
                 this.hasFileBeenSelected = true;
             }
-        });
+        })
     }
 
     // To change input field to allow username change
