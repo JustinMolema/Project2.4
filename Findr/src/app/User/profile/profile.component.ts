@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
 import {DomSanitizer} from "@angular/platform-browser";
 
+// TODO: grotere plaatjes opsturen
+// TODO: cant find property profile_picture? ??
+
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
@@ -61,13 +64,12 @@ export class ProfileComponent implements OnInit {
 
         this.reader.onload = () => {
             this.appService.changeProfilePicture(this.appService.storedUserID, this.reader.result).subscribe(res => {
-                console.log("Profile Pic Changed")
                 this.dbPicture = this.reader.result
-                console.log(res)
-            }, error => {
-                console.log("Profile Pic err")
-                console.log(error)
+                // console.log(res)
             })
+            // , error => {
+            //     console.log(error)
+            // })
         }
     }
 
@@ -75,6 +77,4 @@ export class ProfileComponent implements OnInit {
     sanitize(url: string) {
         return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
-
-    
 }
