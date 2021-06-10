@@ -22,49 +22,49 @@ export class AppService {
         return this.http.post('http://localhost:8001/user/login/signup', params);
     }
 
-    changePassword(userID: string, newPass: string): Observable<any> {
+    changePassword(newPass: string): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', userID)
+            .set('userID', this.storedUserID)
             .set('newPass', newPass)
         return this.http.put('http://localhost:8001/user/profile/password', params);
     }
 
-    changeUsername(userID: string, newName: string): Observable<any> {
+    changeUsername(newName: string): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', userID)
+            .set('userID', this.storedUserID)
             .set('newName', newName);
         return this.http.put('http://localhost:8001/user/profile/username', params);
     }
 
-    changeProfilePicture(userID: string, newPic): Observable<any>{
+    changeProfilePicture(newPic): Observable<any>{
         let params: HttpParams = new HttpParams()
-            .set('userID', userID)
+            .set('userID', this.storedUserID)
             .set("newPic", encodeURIComponent(newPic));
         return this.http.put('http://localhost:8001/user/profile/picture', params);
     }
 
-    getProfile(userID: string): Observable<any> {
+    getProfile(): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', userID);
+            .set('userID', this.storedUserID);
 
         return this.http.post('http://localhost:8001/user/profile', params);
     }
 
-    getFriends(userID: string): Observable<any> {
+    getFriends(): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', userID);
+            .set('userID', this.storedUserID);
         return this.http.post('http://localhost:8001/user/friends', params);
     }
 
-    getFriendRequests(userID: string): Observable<any> {
+    getFriendRequests(): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', userID);
+            .set('userID', this.storedUserID);
         return this.http.post('http://localhost:8001/user/friends/friend-requests', params);
     }
 
-    getBlockedUsers(userID: string): Observable<any> {
+    getBlockedUsers(): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', userID);
+            .set('userID', this.storedUserID);
         return this.http.post('http://localhost:8001/user/friends/blocked', params);
     }
 

@@ -24,14 +24,14 @@ export class FriendsmenuComponent implements OnInit {
         this.setFriendInfo();
     }
 
-    
+
     @Input() refreshFriendInfo(event){
         console.log("refreshed page")
         this.setFriendInfo();
     }
 
     setFriendInfo() {
-        
+
         this.friends = [];
         this.friendRequests = [];
         this.blockedUsers = [];
@@ -59,15 +59,15 @@ export class FriendsmenuComponent implements OnInit {
     }
 
     getFriendsFromServer() {
-        return this.appService.getFriends(this.appService.storedUserID);
+        return this.appService.getFriends();
     }
 
     getFriendRequestsFromServer() {
-        return this.appService.getFriendRequests(this.appService.storedUserID)
+        return this.appService.getFriendRequests()
     }
 
     getBlockedUsersFromServer() {
-        return this.appService.getBlockedUsers(this.appService.storedUserID)
+        return this.appService.getBlockedUsers()
     }
 
     showFriendTab(blockView: any, friendView: any): void {

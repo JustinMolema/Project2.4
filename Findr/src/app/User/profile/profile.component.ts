@@ -2,9 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
 import {DomSanitizer} from "@angular/platform-browser";
 
-// TODO: grotere plaatjes opsturen
-// TODO: cant find property profile_picture? ??
-
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
@@ -30,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
     // Grab and store user information
     ngOnInit(): void {
-        this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
+        this.appService.getProfile().subscribe(res => {
             this.user = res[0].Username;
             this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
@@ -51,7 +48,7 @@ export class ProfileComponent implements OnInit {
 
     // Send username update to the server
     submitNewUserName() {
-        this.appService.changeUsername(this.appService.storedUserID, this.user)
+        this.appService.changeUsername(this.user)
     }
 
     // Prepare file for upload in server.
@@ -63,13 +60,8 @@ export class ProfileComponent implements OnInit {
         this.hasFileBeenSelected = true;
 
         this.reader.onload = () => {
-            this.appService.changeProfilePicture(this.appService.storedUserID, this.reader.result).subscribe(res => {
-                this.dbPicture = this.reader.result
-                // console.log(res)
-            })
-            // , error => {
-            //     console.log(error)
-            // })
+            this.dbPicture = this.sanitize(this.reader.result.toString())
+            this.appService.changeProfilePicture(this.reader.result).subscribe()
         }
     }
 
