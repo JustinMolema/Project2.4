@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {sha512} from 'js-sha512';
 import {AppService} from 'src/app/app.service';
+import {mustMatch} from '../../custom.validators'
 
 @Component({
     selector: 'app-signup',
@@ -26,7 +27,7 @@ export class SignupComponent implements OnInit {
             confirmPassword: ['', Validators.required],
             email: ['', Validators.compose([Validators.required, Validators.email])],
         }, {
-            validator: this.mustMatch('password', 'confirmPassword')
+            validator: mustMatch('password', 'confirmPassword')
         });
     }
 
@@ -39,25 +40,6 @@ export class SignupComponent implements OnInit {
         this.appService.signUp(val.username, encryptedpassword, val.email).subscribe(res => {
             this.appService.storedUserID = res.userID;
         });
-    }
-
-    mustMatch(controlName: string, matchingControlName: string): any {
-        return (formGroup: FormGroup) => {
-            const control = formGroup.controls[controlName];
-            const matchingControl = formGroup.controls[matchingControlName];
-
-            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-                // return if another validator has already found an error on the matchingControl
-                return;
-            }
-
-            // set error on matchingControl if validation fails
-            if (control.value !== matchingControl.value) {
-                matchingControl.setErrors({mustMatch: true});
-            } else {
-                matchingControl.setErrors(null);
-            }
-        };
     }
 
 }

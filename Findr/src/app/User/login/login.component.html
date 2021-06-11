@@ -8,14 +8,15 @@
     <div class="form-container">
         <div class="inputs">
 
-            <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo" />
+            <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo"/>
 
             <form [formGroup]="form">
                 <input name="username" class="inputfields" formControlName="username" placeholder="Username" autofocus>
-                <input name="password" class="inputfields" formControlName="password" type="password" placeholder="Password">
+                <input name="password" class="inputfields" formControlName="password" type="password"
+                       placeholder="Password">
                 <div class="actions">
                     <label class="remember_me" for="remember">
-                        <input type="checkbox" id="remember" class="remember" formControlName="rememberme" checked>
+                        <input type="checkbox" id="remember" class="remember" formControlName="rememberMe" checked>
                         Remember me
                     </label>
                     <a class="forgot" routerLink="/forgot-password">Forgot password</a>

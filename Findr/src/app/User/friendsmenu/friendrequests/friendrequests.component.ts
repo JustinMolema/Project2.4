@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { AppService } from 'src/app/app.service';
+//import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-friendrequests',
@@ -10,6 +11,9 @@ export class FriendrequestsComponent implements OnInit {
   @Input() friend: string;
   @Input() friendID: string;
 
+  @Output()
+  refresh: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private appService: AppService) {
   }
 
@@ -17,18 +21,21 @@ export class FriendrequestsComponent implements OnInit {
   }
 
   addFriend(): void {
-    console.log("new friend");
-    console.log("added: " + this.friend, + " " + this.friendID)
     this.appService.acceptFriendRequest(this.friendID).subscribe(res =>{
-      
+      console.log("????????????")
+      this.refresh.emit('hoi');
     })
   }
 
   deleteRequest(): void {
-    console.log("delete");
+    this.appService.deleteFriendRequest(this.friendID).subscribe(res =>{
+      this.refresh.emit('hoi');
+      })
   }
 
   blockUser(): void {
-    console.log("block");
+    this.appService.blockFriend(this.friendID).subscribe(res =>{
+      this.refresh.emit('hoi');
+    })
   }
 }

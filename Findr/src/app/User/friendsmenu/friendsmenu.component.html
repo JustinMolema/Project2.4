@@ -3,14 +3,15 @@
         <div class="tab-buttons">
             <button class="friends friendButton" #friendTabButton>Friends</button>
             <button class="blocked-users" (click)="showBlockedUserTab(blockedUserTab, friendTab)">Blocked Users</button>
+            <button (click) = "sendFriendRequest()" >send friend request</button> <!-- temporary -->
         </div>
 
         <h2>Friends</h2>
-        <app-friend *ngFor="let friend of friends" [friend]="friend.Username"></app-friend>
+        <app-friend *ngFor="let friend of friends" [friend]="friend.Username" [friendID] = "friend.User_ID" (refresh)="refreshFriendInfo($event)"></app-friend>
         <div class="friend-request-container">
 
             <h2>Friend Requests</h2>
-            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username" [friendID] = "friend.User_ID"></app-friendrequests>
+            <app-friendrequests *ngFor="let friend of friendRequests" [friend]="friend.Username" [friendID] = "friend.User_ID" (refresh)="refreshFriendInfo($event)"></app-friendrequests>
         </div>
     </div>
 
@@ -20,6 +21,6 @@
             <button class="blocked-users blockedButton" #blockedUserButton>Blocked Users</button>
         </div>
         <h2>Blocked Users</h2>
-        <app-blockedusers *ngFor="let user of blockedUsers" [user]="user.Username"></app-blockedusers>
+        <app-blockedusers *ngFor="let user of blockedUsers" [user]="user.Username" [userID] = "user.User_ID" (refresh)="refreshFriendInfo($event)"></app-blockedusers>
     </div>
 </div>

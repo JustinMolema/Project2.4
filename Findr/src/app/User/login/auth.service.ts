@@ -36,13 +36,12 @@ export class AuthService {
         let params: HttpParams = new HttpParams();
         params = params.set('username', email);
         params = params.set('password', password);
-        this.refreshTokenInterval = true;
-
         return this.http.post('http://localhost:8001/api/login/', params);
     }
 
     refreshToken(): Observable<any> {
         let params: HttpParams = new HttpParams();
+
         params = params.set('token', this.getRefreshToken());
 
         return this.http.post('http://localhost:8001/api/token/', params);

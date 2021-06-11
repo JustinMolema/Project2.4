@@ -7,64 +7,96 @@ import {Observable} from 'rxjs';
 })
 export class AppService {
 
+    friends = [];
     storedUserID;
 
     constructor(private http: HttpClient) {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('username', username);
-        params = params.set('password', password);
-        params = params.set('email', email);
-
-        return this.http.post('http://localhost:8001/api/login/signup', params);
+        let params: HttpParams = new HttpParams()
+            .set('username', username)
+            .set('password', password)
+            .set('email', email);
+        return this.http.post('http://localhost:8001/user/login/signup', params);
     }
 
-    changePassword(userID: string, newPass: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        params = params.set('newPass', newPass);
-        return this.http.put('http://localhost:8001/api/passwordchange', params);
+    changePassword(newPass: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userID', this.storedUserID)
+            .set('newPass', newPass);
+        return this.http.put('http://localhost:8001/user/profile/password', params);
     }
 
-    changeUsername(userID: string, newName: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        params = params.set('newName', newName);
-        return this.http.put('http://localhost:8001/api/usernamechange', params);
-
+    changeUsername(newName: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userID', this.storedUserID)
+            .set('newName', newName);
+        return this.http.put('http://localhost:8001/user/profile/username', params);
     }
 
-    getProfile(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-
-        return this.http.post('http://localhost:8001/api/profile', params);
+    changeProfilePicture(newPic): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userID', this.storedUserID)
+            .set("newPic", encodeURIComponent(newPic));
+        return this.http.put('http://localhost:8001/user/profile/picture', params);
     }
 
-    getFriends(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        return this.http.post('http://localhost:8001/api/getFriends', params);
+    getProfile(): Observable<any> {
+        return this.http.get('http://localhost:8001/user/profile/' + this.storedUserID);
     }
 
-    getFriendRequests(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        return this.http.post('http://localhost:8001/api/getFriendRequests', params);
+    getFriends(): Observable<any> {
+        return this.http.get('http://localhost:8001/user/friends/' + this.storedUserID);
     }
 
-    getBlockedUsers(userID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('userID', userID);
-        return this.http.post('http://localhost:8001/api/getBlockedUsers', params);
+    getFriendRequests(): Observable<any> {
+        return this.http.get('http://localhost:8001/user/friends/friend-requests/' + this.storedUserID);
+    }
+
+    getBlockedUsers(): Observable<any> {
+        return this.http.get('http://localhost:8001/user/friends/blocked/' + this.storedUserID);
+    }
+
+    sendFriendRequest(receiver: string) {
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', receiver);
+        return this.http.post('http://localhost:8001/api/sendfriendrequest', params);
     }
 
     acceptFriendRequest(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('accepterID', this.storedUserID);
-        params = params.set('senderID', senderID);
-        return this.http.post('http://localhost:8001/api/acceptFriendRequest', params);
+        let params: HttpParams = new HttpParams()
+            .set('accepterID', this.storedUserID)
+            .set('senderID', senderID);
+        return this.http.post('http://localhost:8001/user/friend-requests/accept', params);
+    }
+
+    deleteFriendRequest(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('accepterID', this.storedUserID)
+            .set('senderID', senderID);
+        return this.http.post('http://localhost:8001/user/friends/friend-requests/remove', params);
+    }
+
+    deleteFriend(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', senderID);
+        return this.http.post('http://localhost:8001/user/friends/delete', params);
+    }
+
+    blockFriend(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', senderID);
+        return this.http.post('http://localhost:8001/user/friends/block', params);
+    }
+
+    unblockUser(senderID: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('userOne', this.storedUserID)
+            .set('userTwo', senderID);
+        return this.http.post('http://localhost:8001/user/friends/blocked/unblock', params);
     }
 }

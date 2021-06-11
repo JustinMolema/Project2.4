@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppService} from "../../app.service";
 import {sha512} from "js-sha512";
+import {mustMatch} from '../../custom.validators'
 
 @Component({
     selector: 'app-passwordforgotten',
@@ -17,7 +18,7 @@ export class PasswordforgottenComponent implements OnInit {
             password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
             confirm: ['', Validators.required]
         }, {
-            validator: this.mustMatch('password', 'confirm')
+            validator: mustMatch('password', 'confirm')
         })
     }
 
@@ -25,33 +26,13 @@ export class PasswordforgottenComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log("hey man")
         const val = this.form.value;
         const hash = sha512.create();
         hash.update(val.password);
         const encryptedpassword = hash.hex();
-        this.appService.changePassword(this.appService.storedUserID, encryptedpassword).subscribe(res => {
+        this.appService.changePassword(encryptedpassword).subscribe(res => {
             console.log("Password changed")
         })
     }
 
-    // TODO extract this method here and in signup component
-    mustMatch(controlName: string, matchingControlName: string): any {
-        return (formGroup: FormGroup) => {
-            const control = formGroup.controls[controlName];
-            const matchingControl = formGroup.controls[matchingControlName];
-
-            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-                // return if another validator has already found an error on the matchingControl
-                return;
-            }
-
-            // set error on matchingControl if validation fails
-            if (control.value !== matchingControl.value) {
-                matchingControl.setErrors({mustMatch: true});
-            } else {
-                matchingControl.setErrors(null);
-            }
-        };
-    }
 }

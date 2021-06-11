@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
-            rememberme: [true]
+            rememberMe: [true]
         });
 
         for (let i = 0; i < 100; i++) {
-            this.stars.push({ left: this.getLeft(), top: this.getTop() });
+            this.stars.push({left: this.getLeft(), top: this.getTop()});
         }
     }
 
@@ -54,8 +54,7 @@ export class LoginComponent implements OnInit {
         const encryptedpassword = hash.hex();
 
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
-            if (res.status === "ok")
-            {
+            if (res.status === 200) {
                 this.appService.storedUserID = res.userID;
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);

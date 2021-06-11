@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-
-class ImageSnippet {
-    constructor(public src: string, public file: File) {
-    }
-}
-
-// TODO: change username inputveld needs styling
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-profile',
@@ -15,48 +9,64 @@ class ImageSnippet {
 })
 export class ProfileComponent implements OnInit {
 
-    hasFileBeenSelected = false;
-    selectedFile: ImageSnippet;
+    // Username input field
     isEditEnable: boolean = false;
 
-    User: any;
-    Email: any;
+    // Profile picture
+    hasFileBeenSelected = false;
+    reader = new FileReader();
+
+    // Variables to store user information in
+    dbPicture: any;
+    user: any;
+    email: any;
     warningCount: any;
 
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private sanitiser: DomSanitizer) {
     }
 
+    // Grab and store user information
     ngOnInit(): void {
-        this.appService.getProfile(this.appService.storedUserID).subscribe(res => {
-            this.User = res[0].Username;
-            this.Email = decodeURIComponent(res[0].Email);
+        this.appService.getProfile().subscribe(res => {
+            this.user = res[0].Username;
+            this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
-        });
-    }
-
-    onEdit(){
-        if (this.isEditEnable){
-            this.submit();
-        }
-        this.isEditEnable =!this.isEditEnable;
-    }
-
-    submit(){
-        this.appService.changeUsername(this.appService.storedUserID, this.User).subscribe(res => {
-            console.log("Username changed")
+            this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
+            if (this.dbPicture !== null) {
+                this.hasFileBeenSelected = true;
+            }
         })
     }
 
+    // To change input field to allow username change
+    onEdit() {
+        if (this.isEditEnable) {
+            this.submitNewUserName();
+        }
+        this.isEditEnable = !this.isEditEnable;
+    }
+
+    // Send username update to the server
+    submitNewUserName() {
+        this.appService.changeUsername(this.user)
+    }
+
+    // Prepare file for upload in server.
     processFile(imageInput: any): void {
         const file: File = imageInput.files[0];
-        const reader = new FileReader();
 
-        reader.addEventListener('load', (event: any) => {
-            this.selectedFile = new ImageSnippet(event.target.result, file);
-        });
-
-        reader.readAsDataURL(file);
+        this.reader.readAsDataURL(file);
 
         this.hasFileBeenSelected = true;
+
+        this.reader.onload = () => {
+            this.dbPicture = this.sanitize(this.reader.result.toString())
+            this.appService.changeProfilePicture(this.reader.result).subscribe()
+        }
+    }
+
+    // allow retrieved URL to get displayed on page
+    sanitize(url: string) {
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 }

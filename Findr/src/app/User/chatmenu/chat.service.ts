@@ -37,7 +37,7 @@ export class ChatService {
             // store it in the localStorage
             localStorage.setItem("sessionID", sessionID);
             // save the ID of the user
-            this.socket.userID = userID;
+            // this.socket.userID = userID;
         });
     }
     closeSocket(): void {

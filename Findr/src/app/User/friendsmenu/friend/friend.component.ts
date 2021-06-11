@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+
 import {Router} from '@angular/router';
+import { AppService } from 'src/app/app.service';
 import {ChatService} from '../../chatmenu/chat.service';
 
 @Component({
@@ -10,9 +12,12 @@ import {ChatService} from '../../chatmenu/chat.service';
 export class FriendComponent implements OnInit {
 
   @Input() friend: string;
+  @Input() friendID: string;
 
-  constructor(private router: Router, private chat: ChatService) {
-  }
+  constructor(private router: Router, private chat: ChatService, private appService: AppService) {}
+  @Output()
+  refresh: EventEmitter<string> = new EventEmitter<string>();
+
 
   ngOnInit(): void {
   }
@@ -20,16 +25,18 @@ export class FriendComponent implements OnInit {
   startChat(): void {
       this.chat.private = true;
       this.router.navigate(["chats/"]);
-
-      console.log("start chat");
   }
 
   deleteFriend(): void {
-    console.log("delete friend");
+    this.appService.deleteFriend(this.friendID).subscribe(res => {
+      this.refresh.emit('hoi');
+    });
   }
 
   blockFriend(): void {
-    console.log("block friend");
+    this.appService.blockFriend(this.friendID).subscribe(res =>{
+      this.refresh.emit('hoi');
+    });
   }
 
 }
