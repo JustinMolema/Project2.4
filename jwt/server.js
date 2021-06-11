@@ -163,7 +163,9 @@ app.route('/user/profile/:userID').get(authenticateToken, (req, res) => {
             throw err;
         } else {
             if (result.length > 0) {
-                result[0].Profile_picture = result[0].Profile_picture.toString();
+                if (result[0].Profile_picture) {
+                    result[0].Profile_picture = result[0].Profile_picture.toString();
+                }
                 res.send(JSON.stringify(result));
             }
         }
@@ -381,37 +383,40 @@ app.post('/user/login', (req, res) => {
 
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
-            const dbPassword = JSON.parse(JSON.stringify(result[0].password));
-            const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
-            if (err) {
-                res.send(err)
-            }
+            if (result.length > 0) {
+                const dbPassword = JSON.parse(JSON.stringify(result[0].password));
+                const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
 
-            bcrypt.compare(pw, dbPassword, (err, result) => {
-                // console.log("compare: " + result)
                 if (err) {
-                    res.sendStatus(403).send("Wrong password")
+                    res.send(err)
                 }
 
-                if (result) {
-                    const user = {name: username}
-                    const accessToken = generateAccessToken(user);
-                    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-                    refreshTokens.push(refreshToken)
-                    res.json({
-                        accessToken: accessToken,
-                        refreshToken: refreshToken,
-                        password: dbPassword,
-                        userID: User_ID,
-                        status: 200
-                    })
-                } else {
-                    res.json({
-                        status: 403,
-                        message: err
-                    })
-                }
-            })
+                bcrypt.compare(pw, dbPassword, (err, result) => {
+                    // console.log("compare: " + result)
+                    if (err) {
+                        res.sendStatus(403).send("Wrong password")
+                    }
+
+                    if (result) {
+                        const user = {name: username}
+                        const accessToken = generateAccessToken(user);
+                        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+                        refreshTokens.push(refreshToken)
+                        res.json({
+                            accessToken: accessToken,
+                            refreshToken: refreshToken,
+                            password: dbPassword,
+                            userID: User_ID,
+                            status: 200
+                        })
+                    } else {
+                        res.json({
+                            status: 403,
+                            message: err
+                        })
+                    }
+                })
+            }
         })
     })
 })

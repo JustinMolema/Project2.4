@@ -4,6 +4,8 @@ import {sha512} from 'js-sha512';
 import {AppService} from 'src/app/app.service';
 import {mustMatch} from '../../custom.validators'
 
+//TODO on submit, go to login page.
+
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
