@@ -22,23 +22,20 @@ export class AppService {
 
     changePassword(newPass: string): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', localStorage.getItem('userID'))
             .set('newPass', newPass);
-        return this.http.put('http://localhost:8001/user/profile/password', params);
+        return this.http.put('http://localhost:8001/user/profile/password/' + localStorage.getItem('userID'), params);
     }
 
     changeUsername(newName: string): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', localStorage.getItem('userID'))
             .set('newName', newName);
-        return this.http.put('http://localhost:8001/user/profile/username', params);
+        return this.http.put('http://localhost:8001/user/profile/name/'+ localStorage.getItem('userID'), params);
     }
 
     changeProfilePicture(newPic): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userID', localStorage.getItem('userID'))
             .set("newPic", encodeURIComponent(newPic));
-        return this.http.put('http://localhost:8001/user/profile/picture', params);
+        return this.http.put('http://localhost:8001/user/profile/picture/' +localStorage.getItem('userID'), params);
     }
 
     getProfile(): Observable<any> {

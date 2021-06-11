@@ -172,9 +172,9 @@ app.route('/user/profile/:userID').get(authenticateToken, (req, res) => {
     })
 })
 
-app.route('/user/profile/password').put(authenticateToken, (req, res) => {
+app.route('/user/profile/password/:userID').put(authenticateToken, (req, res) => {
+    let user_id = req.params['userID'];
     res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID;
     const new_pass = req.body.newPass;
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -186,18 +186,9 @@ app.route('/user/profile/password').put(authenticateToken, (req, res) => {
     })
 })
 
-app.route('/user/profile/username').put(authenticateToken, (req, res) => {
+app.route('/user/profile/picture/:userID').put(authenticateToken, (req, res) => {
+    let user_id = req.params['userID'];
     res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID;
-    const new_username = req.body.newName;
-    connection.query('UPDATE users SET Username = ? WHERE users.User_ID = ?', [new_username, user_id], function (err, result, fields) {
-        if (err) return res.send(err)
-    })
-})
-
-app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID
     const new_profile_pic = req.body.newPic
 
     connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
@@ -205,6 +196,19 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
             res.send(err);
         }
     });
+})
+
+// BROKE AS FUCK????? WHY
+app.route('/user/profile/name/:userID').put(authenticateToken, (req, res) => {
+
+    let user_id = req.params['userID'];
+    res.header("Access-Control-Allow-Origin", "*");
+    console.log("new username pls")
+
+    const new_username = req.body.newName;
+    connection.query('UPDATE users SET Username = ? WHERE users.User_ID = ?', [new_username, user_id], function (err, result, fields) {
+        if (err) return res.send(err)
+    })
 })
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -442,11 +446,11 @@ app.post('/user/login/signup', async (req, res) => {
                     } else {
                         res.json({status: 200});
                     }
-                })
-            })
+                });
+            });
         });
     });
-})
+});
 
 app.post('/api/token', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -484,9 +488,9 @@ app.listen(port, () => {
 });
 
 app.use((req, res, next) => {
-    res.setHeader('Acces-Control-Allow-Origin', '*');
-    res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-    res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'Authorization');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
     next();
 })
 app.use(cors())
