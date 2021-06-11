@@ -71,7 +71,9 @@ export class AuthService {
     }
 
     retrieveStorageType() {
-        if (!(localStorage.getItem('rememberme') == 'true')) this.storage = sessionStorage;
+        if (!(localStorage.getItem('rememberme') == 'true')) {
+            this.storage = sessionStorage;
+        }
     }
 
     logout(): void {

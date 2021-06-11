@@ -388,7 +388,7 @@ app.post('/user/login', (req, res) => {
             }
 
             bcrypt.compare(pw, dbPassword, (err, result) => {
-                console.log("compare: " + result)
+                // console.log("compare: " + result)
                 if (err) {
                     res.sendStatus(403).send("Wrong password")
                 }
