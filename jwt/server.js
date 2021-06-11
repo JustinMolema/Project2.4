@@ -90,11 +90,11 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 //                 USER PROFILE CALLS
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-app.route('/user/profile').post(authenticateToken, (req, res) => {
+app.route('/user/profile/:userID').get(authenticateToken, (req, res) => {
+    let user_id = req.params['userID'];
     res.header("Access-Control-Allow-Origin", "*");
-    const userID = req.body.userID;
 
-    connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [userID], function (err, result, fields) {
+    connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [user_id], function (err, result, fields) {
         if (err) {
             throw err;
         } else {
@@ -144,9 +144,9 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 //                 USER FRIEND CALLS
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-app.route('/user/friends').post(authenticateToken, async (req, res) => {
+app.route('/user/friends/:userID').get(authenticateToken, async (req, res) => {
+    let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID;
     console.log(user_id)
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
         if (err) return res.sendStatus(400);
@@ -223,9 +223,9 @@ app.route('/user/friends/block').post(authenticateToken, async (req, res) => {
     res.json({status: "ok"})
 })
 
-app.route('/user/friends/friend-requests').post(authenticateToken, async (req, res) => {
+app.route('/user/friends/friend-requests/:userID').get(authenticateToken, async (req, res) => {
+    let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
         if (err) return res.send(err);
         let friendRequests = JSON.stringify(result);
@@ -244,9 +244,9 @@ app.route('/api/sendfriendrequest').post(authenticateToken, async (req, res) => 
     })
 })
 
-app.route('/user/friends/blocked').post(authenticateToken, async (req, res) => {
+app.route('/user/friends/blocked/:userID').get(authenticateToken, async (req, res) => {
+    let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    const user_id = req.body.userID;
     connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
         if (err) throw err;
         let BlockedInfo = JSON.stringify(result);
@@ -254,7 +254,7 @@ app.route('/user/friends/blocked').post(authenticateToken, async (req, res) => {
     })
 })
 
-app.route('/api/unblockuser').post(authenticateToken, async (req, res) => {
+app.route('/user/friends/blocked/unblock').post(authenticateToken, async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     const UserOne = req.body.userOne;// blocker
@@ -265,7 +265,6 @@ app.route('/api/unblockuser').post(authenticateToken, async (req, res) => {
         res.send([result]);
     })
 })
-
 
 
 app.route('/api/supporttickets').get((req, res) => {

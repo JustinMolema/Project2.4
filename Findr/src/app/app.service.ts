@@ -43,27 +43,19 @@ export class AppService {
     }
 
     getProfile(): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('userID', this.storedUserID);
-        return this.http.post('http://localhost:8001/user/profile', params);
+        return this.http.get('http://localhost:8001/user/profile/' + this.storedUserID);
     }
 
     getFriends(): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('userID', this.storedUserID);
-        return this.http.post('http://localhost:8001/user/friends', params);
+        return this.http.get('http://localhost:8001/user/friends/' + this.storedUserID);
     }
 
     getFriendRequests(): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('userID', this.storedUserID);
-        return this.http.post('http://localhost:8001/user/friends/friend-requests', params);
+        return this.http.get('http://localhost:8001/user/friends/friend-requests/' + this.storedUserID);
     }
 
     getBlockedUsers(): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('userID', this.storedUserID);
-        return this.http.post('http://localhost:8001/user/friends/blocked', params);
+        return this.http.get('http://localhost:8001/user/friends/blocked/' + this.storedUserID);
     }
 
     sendFriendRequest(receiver: string) {
@@ -105,6 +97,6 @@ export class AppService {
         let params: HttpParams = new HttpParams()
             .set('userOne', this.storedUserID)
             .set('userTwo', senderID);
-        return this.http.post('http://localhost:8001/api/unblockuser', params);
+        return this.http.post('http://localhost:8001/user/friends/blocked/unblock', params);
     }
 }
