@@ -62,7 +62,7 @@ export class AuthService {
     eraseTokens(): void {
         this.storage.removeItem('jwt');
         this.storage.removeItem('refreshToken');
-        this.storage.removeItem('userID');
+        localStorage.removeItem('userID');
     }
 
     logout(): void {

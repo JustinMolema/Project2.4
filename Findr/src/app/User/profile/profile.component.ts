@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
 
     // Grab and store user information
     ngOnInit(): void {
+        console.log(localStorage.getItem('userID'))
         this.appService.getProfile().subscribe(res => {
             this.user = res[0].Username;
             this.email = decodeURIComponent(res[0].Email);

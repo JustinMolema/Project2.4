@@ -211,7 +211,6 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
 app.route('/user/friends/:userID').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    console.log(user_id)
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
         if (err) return res.sendStatus(400);
         friendInfo = JSON.stringify(result);
@@ -382,7 +381,6 @@ app.post('/user/login', (req, res) => {
 
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
-            console.log(result)
             const dbPassword = JSON.parse(JSON.stringify(result[0].password));
             const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
             if (err) {
@@ -408,7 +406,10 @@ app.post('/user/login', (req, res) => {
                         status: 200
                     })
                 } else {
-                    res.send(err)
+                    res.json({
+                        status: 403,
+                        message: err
+                    })
                 }
             })
         })

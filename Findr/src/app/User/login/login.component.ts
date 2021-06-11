@@ -55,12 +55,14 @@ export class LoginComponent implements OnInit {
 
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
-                this.setUserIDStorage(val.rememberme, res.userID);
+                localStorage.setItem('userID', res.userID)
+                // localStorage.setItem('rememberme', res.rememberme)
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
                 this.chat.openSocket();
                 this.authService.setRefreshInterval();
-            } else if (res.status === "error") {
+            } else if (res.status === 403) {
+                //TODO give user proper feedback
                 console.log("error");
             }
 
@@ -70,16 +72,6 @@ export class LoginComponent implements OnInit {
     setJWT(rememberme: boolean, response): void {
         if (!rememberme) this.authService.storage = sessionStorage;
         this.authService.writeTokens(response);
-    }
-
-    setUserIDStorage(rememberme: boolean, userID): void {
-        if (!rememberme) {
-            sessionStorage.setItem("userID", userID);
-            this.appService.storage = sessionStorage;
-        } else {
-            localStorage.setItem("userID", userID);
-            this.appService.storage = localStorage;
-        }
     }
 
     getStyle(i: any): object {
