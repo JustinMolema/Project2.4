@@ -376,7 +376,7 @@ app.route('/api/game/:name').delete((req, res) => {
     })
 })
 
-app.post('/user/login', (req, res) => {
+app.post('/api/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;

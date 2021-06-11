@@ -135,6 +135,7 @@ export class ChatService {
     newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('new message', (data) => {
+                console.log("M");
                 observer.next(data);
             });
             return () => {
