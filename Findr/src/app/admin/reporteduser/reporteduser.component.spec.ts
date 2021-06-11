@@ -57,7 +57,6 @@ describe('ReporteduserComponent', () => {
     //     { date: new Date("December 30, 2018 11:20:25"), naam: 'Anne Pier', reason: 'a' },
     //     { date: new Date("December 30, 2019 11:20:25"), naam: 'Merel', reason: 'b' },]);
     //     sortedList = component.sortByDate(sortedList);
-    //     console.log(sortedList[0].date);
     //     expect(sortedList[0].date == "Mon Dec 30 2019 11:20:25 GMT+0100 (Central European Standard Time)").toBeTrue();
     // });
 
@@ -74,8 +73,6 @@ describe('ReporteduserComponent', () => {
     //     sortedList = component.sortByName(sortedList);
     //     sortedList = component.sortByName(sortedList);
     //     sortedList = component.sortByDate(sortedList);
-
-    //     console.log(sortedList[0].date);
     //     expect(sortedList[0].date == "Sat Dec 30 2017 11:20:25 GMT+0100 (Central European Standard Time)").toBeTrue();
     // });
 });

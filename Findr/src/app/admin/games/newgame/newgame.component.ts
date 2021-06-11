@@ -20,7 +20,6 @@ export class NewgameComponent implements OnInit {
     @Input() returnToGames: Function
 
     constructor(private admindataService: AdmindataService, private fb: FormBuilder) {
-        console.log("dfdfdf");
         this.form = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
@@ -31,7 +30,7 @@ export class NewgameComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    processFile(imageInput: any) {
+    processFile(imageInput: any): void {
         const file: File = imageInput.files[0];
         const reader = new FileReader();
 
@@ -43,24 +42,24 @@ export class NewgameComponent implements OnInit {
         this.hasFileBeenSelected = true;
     }
 
-    addGame() {
+    addGame(): void {
         const val = this.form.value;
         this.admindataService.addGame(val.name, val.description, val.category).subscribe(response => {
             if (this.gameAlreadyExists(response))
-                alert("Game already exists")
+                alert("Game already exists");
             else {
                 this.returnToGame("Game has been added");
             }
         });
     }
 
-    returnToGame(alertText) {
+    returnToGame(alertText): void {
         if (confirm(alertText)) {
             this.returnToGames();
         }
     }
 
-    gameAlreadyExists(response) {
-        return response["status"] == "error";
+    gameAlreadyExists(response): boolean {
+        return response.status === "error";
     }
 }

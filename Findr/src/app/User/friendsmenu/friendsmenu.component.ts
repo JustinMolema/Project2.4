@@ -21,49 +21,42 @@ export class FriendsmenuComponent implements OnInit {
         this.setFriendInfo();
     }
 
-    @Input() refreshFriendInfo(event){
-        console.log("refreshed page")
+    @Input() refreshFriendInfo(event): void {
         this.setFriendInfo();
     }
 
     setFriendInfo(): void {
+        this.getFriendsFromServer();
+        this.getFriendRequestsFromServer();
+        this.getBlockedUsersFromServer();
+    }
 
+    getFriendsFromServer(): void {
         this.friends = [];
-        this.friendRequests = [];
-        this.blockedUsers = [];
-
-        combineLatest([
-            this.getFriendsFromServer(),
-            this.getFriendRequestsFromServer(),
-            this.getBlockedUsersFromServer()]
-        ).subscribe(([friendsFromServer, friendRequestsFromServer, blockedUsersFromServer]) => {
-
+        this.appService.getFriends().subscribe(friendsFromServer => {
             friendsFromServer[0].forEach(element => {
-                this.friends.push(element)
+                this.friends.push(element);
                 this.appService.friends.push();
             });
-
-            friendRequestsFromServer[0].forEach(element => {
-                this.friendRequests.push(element)
-            });
-
-            blockedUsersFromServer[0].forEach(element => {
-                this.blockedUsers.push(element)
-            });
-
         });
     }
 
-    getFriendsFromServer(): Observable<any> {
-        return this.appService.getFriends();
+    getFriendRequestsFromServer(): void {
+        this.friendRequests = [];
+        this.appService.getFriendRequests().subscribe(friendRequestsFromServer => {
+            friendRequestsFromServer[0].forEach(element => {
+                this.friendRequests.push(element);
+            });
+        });
     }
 
-    getFriendRequestsFromServer(): Observable<any> {
-        return this.appService.getFriendRequests();
-    }
-
-    getBlockedUsersFromServer(): Observable<any> {
-        return this.appService.getBlockedUsers();
+    getBlockedUsersFromServer(): void {
+        this.blockedUsers = [];
+        this.appService.getBlockedUsers().subscribe(([blockedUsersFromServer]) => {
+            blockedUsersFromServer[0].forEach(element => {
+                this.blockedUsers.push(element);
+            });
+        });
     }
 
     showFriendTab(blockView: any, friendView: any): void {
@@ -77,9 +70,9 @@ export class FriendsmenuComponent implements OnInit {
     }
 
     sendFriendRequest(): void{
-        var id = prompt("please enter the id you want to add");
+        const id = prompt("please enter the id you want to add");
         this.appService.sendFriendRequest(id).subscribe(res => {
             this.setFriendInfo();
-            })
+            });
     }
 }

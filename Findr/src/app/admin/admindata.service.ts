@@ -17,7 +17,6 @@ export class AdmindataService {
     }
 
     addGame(name: string, description: string, category: string): Observable<any> {
-        console.log('data');
         let params: HttpParams = new HttpParams();
         params = params.set('name', name).
             set('category', category).
@@ -27,7 +26,6 @@ export class AdmindataService {
     }
 
     deleteGame(name: string): Observable<any> {
-        console.log(name);
         let params: HttpParams = new HttpParams();
         params = params.set('name', name);
         return this.http.delete('http://localhost:8001/api/game/' + name);

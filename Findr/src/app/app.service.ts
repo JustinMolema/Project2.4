@@ -58,7 +58,7 @@ export class AppService {
         return this.http.get('http://localhost:8001/user/friends/blocked/' + this.storedUserID);
     }
 
-    sendFriendRequest(receiver: string) {
+    sendFriendRequest(receiver: string): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('userOne', this.storedUserID)
             .set('userTwo', receiver);

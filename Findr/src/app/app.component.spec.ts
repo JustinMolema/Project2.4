@@ -26,7 +26,6 @@ describe('AppComponent', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.nativeElement;
-        console.log(compiled);
         expect(compiled.querySelector('.content span').textContent).toContain(
             'Findr app is running!'
         );

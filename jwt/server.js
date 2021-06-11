@@ -42,51 +42,24 @@ const io = require("socket.io")(server, {
 
 
 io.use((socket, next) => {
-
-	const sessionID = socket.handshake.auth.sessionID;
-	if (sessionID) {
-		const session = sessionStore.findSession(sessionID);
-		if (session) {
-			socket.sessionID = sessionID;
-			socket.userID = session.userID;
-			socket.username = session.username;
-			return next();
-		}
-	}
-
 	const username = socket.handshake.auth.username;
-	if (!username) {
-		return next(new Error("invalid username"));
-	}
 
 	socket.username = username;
-	socket.sessionID = randomId();
-	socket.userID = randomId();
-	console.log("aaaaaa" + socket.userID);
+	socket.sessionID = socket.handshake.auth.sessionID;
 	next();
 });
 
 
 io.on('connection', (socket) => {
-	sessionStore.saveSession(socket.sessionID, {
-		userID: socket.userID,
-		username: socket.username,
-		connected: true,
-	});
-	
-	
 	socket.emit("session", {
 		sessionID: socket.sessionID,
-		userID: socket.userID,
 	});
 
-	socket.join(socket.userID);
-	console.log(socket.userID);
+	socket.join(socket.sessionID);
 
 	const users = [];
 	sessionStore.findAllSessions().forEach((session) => {
 		users.push({
-			userID: session.userID,
 			username: session.username,
 			connected: session.connected,
 		});
@@ -116,8 +89,7 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on("private message", (data) => {
-		console.log(data.room);
-		socket.to(data.room).emit("private message", { user: socket.id, message: data.message });
+		socket.to(data.room.toString()).emit("private message", { id: socket.sessionID, user: data.user, message: data.message });
 	});
 
 	socket.on("disconnect", () => {
@@ -212,7 +184,6 @@ app.route('/user/profile/picture').put(authenticateToken, (req, res) => {
 app.route('/user/friends/:userID').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    console.log(user_id)
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
         if (err) return res.sendStatus(400);
         friendInfo = JSON.stringify(result);
@@ -225,13 +196,16 @@ app.route('/user/friend-requests/accept').post(authenticateToken, async (req, re
     const accepterID = req.body.accepterID;
     const senderID = req.body.senderID;
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + accepterID + ', ' + senderID + ');', function (err, result, fields) {
-        console.log(err)
+		if (err) return res.send(err);
+
     })
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields) {
-        console.log(err)
+		if (err) return res.send(err);
+
     })
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
-        console.log(err)
+		if (err) return res.send(err);
+
     })
 
 })
@@ -251,12 +225,10 @@ app.route('/user/friends/delete').post(authenticateToken, async (req, res) => {
     const UserOne = req.body.userOne;
     const UserTwo = req.body.userTwo;
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
-        console.log(err)
         if (err) return res.send(err)
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
-        console.log(err)
         if (err) return res.send(err);
     })
     res.json({status: "ok"})
@@ -283,7 +255,7 @@ app.route('/user/friends/block').post(authenticateToken, async (req, res) => {
     })
 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
-        console.log(err)
+		if (err) return res.send(err);
     })
     res.json({status: "ok"})
 })
@@ -383,15 +355,15 @@ app.post('/api/user/login', (req, res) => {
 
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
-
-            const dbPassword = JSON.parse(JSON.stringify(result[0].password));
-            const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
-            if (err) {
+			if (err) {
                 res.send(err)
             }
 
+            const dbPassword = JSON.parse(JSON.stringify(result[0].password));
+            const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
+            
+
             bcrypt.compare(pw, dbPassword, (err, result) => {
-                console.log("compare: " + result)
                 if (err) {
                     res.sendStatus(403).send("Wrong password")
                 }

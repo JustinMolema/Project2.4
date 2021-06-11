@@ -14,7 +14,7 @@ export class GameslistComponent implements OnInit {
   sliceAmount: number = 5;
   topbar: TopbarService
 
-  constructor(private topbarService: TopbarService) { 
+  constructor(private topbarService: TopbarService) {
     this.topbar = topbarService;
   }
 
@@ -35,7 +35,6 @@ export class GameslistComponent implements OnInit {
     }
 
     this.collapsed = !this.collapsed;
-    console.log(this.collapsed);
   }
 
 }

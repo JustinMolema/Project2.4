@@ -9,46 +9,53 @@ export class ChatService {
     private socket = io('http://localhost:8081', {autoConnect: false});
     private users = [];
     private = false;
+    privateMessages = [{id: "7208", messages: []}, {id: "7211", messages: []}, {id: "7209", messages: []}];
+    to;
 
     constructor() {
     }
 
-    openSocket(): void {
-        this.socket.auth = {username: 'Meloen'};
-        const sessionID = localStorage.getItem("sessionID");
+    // TODO create json with array so all messages can be put and retrieved from certain users depending on the view.
 
-        if (sessionID) {
-            this.socket.auth = { sessionID };
-        }
+    openSocket(): void {
+        this.socket.auth = {username: 'Meloen', sessionID: localStorage.getItem('USERID')};
 
         this.socket.connect();
         this.createSession();
         this.getAllOnlineFriends();
         this.friendLoggedIn();
+        this.receivePrivateMessageListener();
         this.connect();
         this.disconnect();
         this.friendLoggedOut();
     }
 
     createSession(): void {
-        this.socket.on("session", ({ sessionID, userID }) => {
+        this.socket.on('session', ({sessionID}) => {
             // attach the session ID to the next reconnection attempts
-            this.socket.auth = { sessionID };
+            this.socket.auth = {sessionID};
             // store it in the localStorage
-            localStorage.setItem("sessionID", sessionID);
+            localStorage.setItem('sessionID', sessionID);
             // save the ID of the user
             // this.socket.userID = userID;
         });
     }
+
     closeSocket(): void {
         this.socket.disconnect();
-        this.socket.off("connect");
-        this.socket.off("session");
-        this.socket.off("disconnect");
-        this.socket.off("users");
-        this.socket.off("user connected");
-        this.socket.off("user disconnected");
-        this.socket.off("private message");
+        this.socket.off('connect');
+        this.socket.off('session');
+        this.socket.off('disconnect');
+        this.socket.off('users');
+        this.socket.off('user connected');
+        this.socket.off('user disconnected');
+        this.socket.off('private message');
+        this.socket.off('new message');
+    }
+
+    clearChatListeners(): void {
+        this.socket.off('private message');
+        this.socket.off('new message');
     }
 
     connect(): void {
@@ -62,7 +69,7 @@ export class ChatService {
     }
 
     disconnect(): void {
-        this.socket.on("disconnect", () => {
+        this.socket.on('disconnect', () => {
             this.users.forEach((user) => {
                 if (user.self) {
                     user.connected = false;
@@ -135,7 +142,6 @@ export class ChatService {
     newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('new message', (data) => {
-                console.log("M");
                 observer.next(data);
             });
             return () => {
@@ -146,34 +152,27 @@ export class ChatService {
 
     /****************************** PRIVATE CHAT********************************************/
 
+    receivePrivateMessageListener(): void {
+        this.receivedPrivateMessage().subscribe(res => {
+            for (const message of this.privateMessages) {
+                if (message.id === res.id) {
+                    message.messages.push({username: res.user, message: res.message, received: true});
+                }
+            }
+        });
+    }
     sendPrivateMessage(data): void {
-        console.log("a");
         this.socket.emit('private message', data);
     }
 
     receivedPrivateMessage(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('private message', (data) => {
-                console.log('d');
-                console.log(data.room);
                 observer.next(data);
             });
             return () => {
                 this.socket.disconnect();
             };
         });
-        // for (let i = 0; i < this.users.length; i++) {
-        //     const user = this.users[i];
-        //     if (user.userID === from) {
-        //         user.messages.push({
-        //             content,
-        //             fromSelf: false,
-        //         });
-        //         if (user !== this.selectedUser) {
-        //             user.hasNewMessages = true;
-        //         }
-        //         break;
-        //     }
-        // }
     }
 }

@@ -62,9 +62,8 @@ export class LoginComponent implements OnInit {
                 this.authService.setRefreshInterval();
             }
             else if (res.status === "error") {
-                console.log("error");
+                // TODO show error
             }
-
         });
     }
 

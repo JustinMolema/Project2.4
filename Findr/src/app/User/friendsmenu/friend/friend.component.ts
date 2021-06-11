@@ -10,7 +10,6 @@ import {ChatService} from '../../chatmenu/chat.service';
   styleUrls: ['./friend.component.css']
 })
 export class FriendComponent implements OnInit {
-
   @Input() friend: string;
   @Input() friendID: string;
 
@@ -24,6 +23,7 @@ export class FriendComponent implements OnInit {
 
   startChat(): void {
       this.chat.private = true;
+      this.chat.to = this.friendID;
       this.router.navigate(["chats/"]);
   }
 
@@ -34,7 +34,7 @@ export class FriendComponent implements OnInit {
   }
 
   blockFriend(): void {
-    this.appService.blockFriend(this.friendID).subscribe(res =>{
+    this.appService.blockFriend(this.friendID).subscribe(res => {
       this.refresh.emit('hoi');
     });
   }

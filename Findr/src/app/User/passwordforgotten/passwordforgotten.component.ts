@@ -19,20 +19,20 @@ export class PasswordforgottenComponent implements OnInit {
             confirm: ['', Validators.required]
         }, {
             validator: mustMatch('password', 'confirm')
-        })
+        });
     }
 
     ngOnInit(): void {
     }
 
-    onSubmit() {
+    onSubmit(): void {
         const val = this.form.value;
         const hash = sha512.create();
         hash.update(val.password);
         const encryptedpassword = hash.hex();
         this.appService.changePassword(encryptedpassword).subscribe(res => {
-            console.log("Password changed")
-        })
+            console.log("Password changed");
+        });
     }
 
 }

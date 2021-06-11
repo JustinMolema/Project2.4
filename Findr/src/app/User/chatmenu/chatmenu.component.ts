@@ -25,10 +25,17 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     ngOnInit(): void {
+        for (const message of this.chat.privateMessages) {
+            if (message.id === this.chat.to.toString()) {
+                this.messages = message.messages;
+                break;
+            }
+        }
     }
 
-    ngOnDestroy(): void{
+    ngOnDestroy(): void {
         this.chat.leaveGameRoom({user: this.username, room: this.roomName});
+        this.chat.clearChatListeners();
     }
 
     loadPublicChat(): void {
@@ -37,8 +44,9 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     loadPrivateChat(): void {
-        this.receivePrivateMessageListener();
+        // this.receivePrivateMessageListener();
     }
+
     getRandomInt(max): number {
         return Math.floor(Math.random() * max);
     }
@@ -74,7 +82,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     sendMessage(message: string): void {
-        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: "58ac4a73feff8439"});
+        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: this.chat.to});
         else this.chat.sendMessageToGameChat({user: this.username, message, room: this.roomName});
     }
 
@@ -83,14 +91,6 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.messages.push({username: res.user, message: res.message, received: true});
         });
     }
-
-    receivePrivateMessageListener(): void {
-        this.chat.receivedPrivateMessage().subscribe(res => {
-            console.log(res);
-            this.messages.push({username: res.user, message: res.message, received: true});
-        });
-    }
-
 
     clearInputfield(): void {
         this.form.controls.message.reset();

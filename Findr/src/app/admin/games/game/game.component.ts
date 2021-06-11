@@ -19,7 +19,6 @@ export class GameComponent implements OnInit {
     delete(name: string): void {
         if (confirm('Are you sure you want to delete game: ' + name)) {
             alert('Item deleted');
-            console.log(typeof(name));
             this.admindataService.deleteGame(name).subscribe(response => console.log(response));
         }
     }
