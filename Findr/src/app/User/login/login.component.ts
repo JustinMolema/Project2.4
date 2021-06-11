@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     vh = window.screen.height / 2;
     vw = window.screen.width;
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appService: AppService, private chat: ChatService) {
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private chat: ChatService) {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
                 localStorage.setItem('userID', res.userID)
-                // localStorage.setItem('rememberme', res.rememberme)
+                localStorage.setItem('rememberme', val.rememberme)
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
                 this.chat.openSocket();

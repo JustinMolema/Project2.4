@@ -47,22 +47,31 @@ export class AuthService {
     }
 
     writeTokens(tokens): void {
+        this.retrieveStorageType();
         this.storage.setItem('jwt', tokens.accessToken);
         if (tokens.refreshToken) this.storage.setItem('refreshToken', tokens.refreshToken);
     }
 
     getJWTToken(): string {
+        this.retrieveStorageType();
         return this.storage.getItem('jwt');
     }
 
     getRefreshToken(): string {
+        this.retrieveStorageType();
         return this.storage.getItem('refreshToken');
     }
 
     eraseTokens(): void {
+        this.retrieveStorageType();
         this.storage.removeItem('jwt');
         this.storage.removeItem('refreshToken');
         localStorage.removeItem('userID');
+        localStorage.removeItem('rememberme')
+    }
+
+    retrieveStorageType() {
+        if (!(localStorage.getItem('rememberme') == 'true')) this.storage = sessionStorage;
     }
 
     logout(): void {
