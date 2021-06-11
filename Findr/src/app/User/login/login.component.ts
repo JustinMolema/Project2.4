@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
-import { sha512 } from 'js-sha512';
-import { AppService } from 'src/app/app.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from './auth.service';
+import {sha512} from 'js-sha512';
+import {AppService} from 'src/app/app.service';
 import {ChatService} from '../chatmenu/chat.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
-            rememberMe: [true]
+            rememberme: [true]
         });
 
         for (let i = 0; i < 100; i++) {
@@ -55,13 +55,12 @@ export class LoginComponent implements OnInit {
 
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
-                this.appService.storedUserID = res.userID;
+                this.setUserIDStorage(val.rememberme, res.userID);
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
                 this.chat.openSocket();
                 this.authService.setRefreshInterval();
-            }
-            else if (res.status === "error") {
+            } else if (res.status === "error") {
                 console.log("error");
             }
 
@@ -71,6 +70,16 @@ export class LoginComponent implements OnInit {
     setJWT(rememberme: boolean, response): void {
         if (!rememberme) this.authService.storage = sessionStorage;
         this.authService.writeTokens(response);
+    }
+
+    setUserIDStorage(rememberme: boolean, userID): void {
+        if (!rememberme) {
+            sessionStorage.setItem("userID", userID);
+            this.appService.storage = sessionStorage;
+        } else {
+            localStorage.setItem("userID", userID);
+            this.appService.storage = localStorage;
+        }
     }
 
     getStyle(i: any): object {

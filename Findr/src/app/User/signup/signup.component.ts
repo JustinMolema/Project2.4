@@ -37,9 +37,7 @@ export class SignupComponent implements OnInit {
         hash.update(val.password);
         const encryptedpassword = hash.hex();
 
-        this.appService.signUp(val.username, encryptedpassword, val.email).subscribe(res => {
-            this.appService.storedUserID = res.userID;
-        });
+        this.appService.signUp(val.username, encryptedpassword, val.email).subscribe();
     }
 
 }

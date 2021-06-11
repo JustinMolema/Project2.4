@@ -32,17 +32,16 @@ export class AuthService {
         });
     }
 
-    login(email: string, password: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('username', email);
-        params = params.set('password', password);
-        return this.http.post('http://localhost:8001/api/login/', params);
+    login(username: string, password: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('username', username)
+            .set('password', password);
+        return this.http.post('http://localhost:8001/user/login/', params);
     }
 
     refreshToken(): Observable<any> {
-        let params: HttpParams = new HttpParams();
-
-        params = params.set('token', this.getRefreshToken());
+        let params: HttpParams = new HttpParams()
+            .set('token', this.getRefreshToken());
 
         return this.http.post('http://localhost:8001/api/token/', params);
     }
@@ -63,6 +62,7 @@ export class AuthService {
     eraseTokens(): void {
         this.storage.removeItem('jwt');
         this.storage.removeItem('refreshToken');
+        this.storage.removeItem('userID');
     }
 
     logout(): void {
