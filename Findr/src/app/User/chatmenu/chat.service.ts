@@ -22,7 +22,7 @@ export class ChatService {
     // TODO create json with array so all messages can be put and retrieved from certain users depending on the view.
 
     openSocket(): void {
-        this.socket.auth = {username: 'Meloen', sessionID: Number(localStorage.getItem('USERID'))};
+        this.socket.auth = {username: 'Meloen', sessionID: Number(localStorage.getItem('userID'))};
 
         this.socket.connect();
         this.createSession();
@@ -199,6 +199,7 @@ export class ChatService {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('private message', (data) => {
                 observer.next(data);
+                console.log("AAAAAAA");
             });
             return () => {
                 this.socket.disconnect();

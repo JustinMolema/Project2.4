@@ -60,19 +60,19 @@ export class FriendsmenuComponent implements OnInit {
     }
 
     showFriendTab(blockView: any, friendView: any): void {
-        blockView.style.display = "none";
-        friendView.style.display = "flex";
+        blockView.style.display = 'none';
+        friendView.style.display = 'flex';
     }
 
     showBlockedUserTab(blockView: any, friendView: any): void {
-        blockView.style.display = "flex";
-        friendView.style.display = "none";
+        blockView.style.display = 'flex';
+        friendView.style.display = 'none';
     }
 
-    sendFriendRequest(): void{
-        const id = prompt("please enter the id you want to add");
+    sendFriendRequest(): void {
+        const id = prompt('please enter the id you want to add');
         this.appService.sendFriendRequest(id).subscribe(res => {
             this.setFriendInfo();
-            });
+        });
     }
 }

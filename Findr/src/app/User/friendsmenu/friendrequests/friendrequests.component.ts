@@ -1,40 +1,43 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import { AppService } from 'src/app/app.service';
-//import {combineLatest} from 'rxjs';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AppService} from 'src/app/app.service';
 
 @Component({
-  selector: 'app-friendrequests',
-  templateUrl: './friendrequests.component.html',
-  styleUrls: ['./friendrequests.component.css']
+    selector: 'app-friendrequests',
+    templateUrl: './friendrequests.component.html',
+    styleUrls: ['./friendrequests.component.css']
 })
 export class FriendrequestsComponent implements OnInit {
-  @Input() friend: string;
-  @Input() friendID: string;
 
-  @Output()
-  refresh: EventEmitter<string> = new EventEmitter<string>();
+    @Input() friend: string;
+    @Input() friendID: string;
 
-  constructor(private appService: AppService) {
-  }
+    @Output()
+    refresh: EventEmitter<string> = new EventEmitter<string>();
 
-  ngOnInit(): void {
-  }
+    constructor(private appService: AppService) {
+    }
 
-  addFriend(): void {
-    this.appService.acceptFriendRequest(this.friendID).subscribe(res => {
-      this.refresh.emit('hoi');
-    });
-  }
+    ngOnInit(): void {
+    }
 
-  deleteRequest(): void {
-    this.appService.deleteFriendRequest(this.friendID).subscribe(res => {
-      this.refresh.emit('hoi');
-      });
-  }
+    addFriend(): void {
+        this.appService.acceptFriendRequest(this.friendID).subscribe(res => {
+            console.log("????????????");
+            this.refresh.emit('add');
+        });
 
-  blockUser(): void {
-    this.appService.blockFriend(this.friendID).subscribe(res => {
-      this.refresh.emit('hoi');
-    });
-  }
+    }
+
+    deleteRequest(): void {
+        this.appService.deleteFriendRequest(this.friendID).subscribe(res => {
+            this.refresh.emit('delete');
+        });
+
+    }
+
+    blockUser(): void {
+        this.appService.blockFriend(this.friendID).subscribe(res => {
+            this.refresh.emit('bloqq');
+        });
+    }
 }

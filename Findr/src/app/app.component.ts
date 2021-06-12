@@ -14,12 +14,6 @@ export class AppComponent implements OnInit, OnDestroy {
     stable;
 
     constructor(public router: Router, private appService: AppService, private authService: AuthService, public chat: ChatService, private app: ApplicationRef) {
-        if (!localStorage.getItem('USERID')) {
-            const a = prompt();
-            localStorage.setItem('USERID', a);
-        }
-
-        this.appService.storedUserID = localStorage.getItem('USERID');
     }
 
     ngOnInit(): void {

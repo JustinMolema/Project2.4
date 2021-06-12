@@ -31,8 +31,8 @@ export class ProfileComponent implements OnInit {
             this.user = res[0].Username;
             this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
-            this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
-            if (this.dbPicture !== null) {
+            if (res[0].Profile_picture) {
+                this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
                 this.hasFileBeenSelected = true;
             }
         })
@@ -48,7 +48,9 @@ export class ProfileComponent implements OnInit {
 
     // Send username update to the server
     submitNewUserName() {
-        this.appService.changeUsername(this.user)
+        this.appService.changeUsername(this.user).subscribe( res =>{
+            console.log(res)
+        })
     }
 
     // Prepare file for upload in server.

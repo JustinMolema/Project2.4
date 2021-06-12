@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
-import { sha512 } from 'js-sha512';
-import { AppService } from 'src/app/app.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthService} from './auth.service';
+import {sha512} from 'js-sha512';
+import {AppService} from 'src/app/app.service';
 import {ChatService} from '../chatmenu/chat.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     vh = window.screen.height / 2;
     vw = window.screen.width;
 
-    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appService: AppService, private chat: ChatService) {
+    constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private chat: ChatService) {
         this.form = this.fb.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -55,15 +55,16 @@ export class LoginComponent implements OnInit {
 
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
-                this.appService.storedUserID = res.userID;
+                localStorage.setItem('userID', res.userID);
+                localStorage.setItem('rememberme', val.rememberme);
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
                 this.chat.getAllFriends();
                 this.chat.openSocket();
                 this.authService.setRefreshInterval();
-            }
-            else if (res.status === "error") {
-                // TODO show error
+            } else if (res.status === 403) {
+                // TODO give user proper feedback
+                console.log("error");
             }
         });
     }

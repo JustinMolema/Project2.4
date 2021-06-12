@@ -13,7 +13,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
     @Input() friend: string;
     @Input() friendID: string;
     stable;
-    status = "Offline";
+    status = 'Offline';
 
     constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef) {
     }
@@ -42,21 +42,21 @@ export class FriendComponent implements OnInit, AfterViewInit {
     }
 
     setStatusListeners(): void {
-        this.status = "Offline";
+        this.status = 'Offline';
         for (const friend of this.chat.onlineFriends) {
             if (friend.userID === this.friendID) {
-                this.status = "Online";
+                this.status = 'Online';
                 break;
             }
         }
 
         this.chat.friendLoggedIn().subscribe(res => {
-            this.changeStatus(res, "Online");
+            this.changeStatus(res, 'Online');
 
         });
 
         this.chat.friendLoggedOut().subscribe(res => {
-            this.changeStatus(res, "Offline");
+            this.changeStatus(res, 'Offline');
         });
     }
 
@@ -83,5 +83,4 @@ export class FriendComponent implements OnInit, AfterViewInit {
             this.refresh.emit('hoi');
         });
     }
-
 }

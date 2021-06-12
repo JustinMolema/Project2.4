@@ -32,37 +32,50 @@ export class AuthService {
         });
     }
 
-    login(email: string, password: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('username', email);
-        params = params.set('password', password);
-        return this.http.post('http://localhost:8001/api/user/login/', params);
+    login(username: string, password: string): Observable<any> {
+        let params: HttpParams = new HttpParams()
+            .set('username', username)
+            .set('password', password);
+        return this.http.post('http://localhost:8001/user/login/', params);
     }
 
     refreshToken(): Observable<any> {
-        let params: HttpParams = new HttpParams();
-
-        params = params.set('token', this.getRefreshToken());
+        let params: HttpParams = new HttpParams()
+            .set('token', this.getRefreshToken());
 
         return this.http.post('http://localhost:8001/api/token/', params);
     }
 
     writeTokens(tokens): void {
+        this.retrieveStorageType();
         this.storage.setItem('jwt', tokens.accessToken);
         if (tokens.refreshToken) this.storage.setItem('refreshToken', tokens.refreshToken);
     }
 
     getJWTToken(): string {
+        this.retrieveStorageType();
         return this.storage.getItem('jwt');
     }
 
     getRefreshToken(): string {
+        this.retrieveStorageType();
         return this.storage.getItem('refreshToken');
     }
 
     eraseTokens(): void {
+        this.retrieveStorageType();
         this.storage.removeItem('jwt');
         this.storage.removeItem('refreshToken');
+        localStorage.removeItem('userID');
+        localStorage.removeItem('rememberme');
+    }
+
+    retrieveStorageType(): void {
+        if (localStorage.getItem('rememberme') === 'true') {
+            this.storage = localStorage;
+        } else{
+            this.storage = sessionStorage;
+        }
     }
 
     logout(): void {
