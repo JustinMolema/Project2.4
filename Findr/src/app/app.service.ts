@@ -61,7 +61,7 @@ export class AppService {
 
     acceptFriendRequest(senderID: string): Observable<any> {
         let params: HttpParams = new HttpParams();
-        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + 'friend-requests/' + senderID, params);
+        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + senderID, params);
     }
 
     deleteFriendRequest(senderID: string): Observable<any> {

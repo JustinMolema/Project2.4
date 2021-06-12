@@ -21,13 +21,12 @@ export class FriendsmenuComponent implements OnInit {
         this.setFriendInfo();
     }
 
-    @Input() refreshFriendInfo(event){
+    @Input() refreshFriendInfo(event) {
         console.log("refreshed page")
         this.setFriendInfo();
     }
 
     setFriendInfo(): void {
-
         this.friends = [];
         this.friendRequests = [];
         this.blockedUsers = [];
@@ -76,10 +75,9 @@ export class FriendsmenuComponent implements OnInit {
         friendView.style.display = "none";
     }
 
-    sendFriendRequest(): void{
+    sendFriendRequest(): void {
         var id = prompt("please enter the id you want to add");
-        if(!id)
-        {
+        if (id) {
             this.appService.sendFriendRequest(id).subscribe(res => {
                 this.setFriendInfo();
             })

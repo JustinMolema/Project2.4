@@ -20,7 +20,8 @@ export class BlockedusersComponent implements OnInit {
 
   unblock(): void {
     this.appService.unblockUser(this.userID).subscribe(res =>{
-      this.refresh.emit('hoi');
+
     })
+      this.refresh.emit('hoi');
   }
 }
