@@ -235,7 +235,7 @@ app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         console.log(err)
     })
-
+    res.send({status: 200})
 })
 
 // delete friendrequest
@@ -245,6 +245,7 @@ app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateT
     const senderID = req.params['requesterID'];
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         if (err) return res.send(err);
+        res.send({status: 200})
     })
 
 })
@@ -263,7 +264,7 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
         console.log(err)
         if (err) return res.send(err);
     })
-    res.json({status: "ok"})
+    res.json({status: 200})
 })
 
 // block user
@@ -290,7 +291,7 @@ app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
-    res.json({status: "ok"})
+    res.json({status: 200})
 })
 
 // get friendrequests
@@ -379,7 +380,7 @@ app.route('/api/game/:name').delete((req, res) => {
             if (err) {
                 res.sendStatus(400);
             } else {
-                res.json({status: "ok"})
+                res.json({status: 200})
             }
         })
     })
