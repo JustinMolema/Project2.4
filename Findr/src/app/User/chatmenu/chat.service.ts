@@ -72,10 +72,10 @@ export class ChatService {
     }
 
     clearChatListeners(): void {
-        this.socket.off('private message');
-        this.socket.off('new message');
-        this.socket.off('user connected');
-        this.socket.off('user disconnected');
+        // this.socket.off('private message');
+        // this.socket.off('new message');
+        // this.socket.off('user connected');
+        // this.socket.off('user disconnected');
     }
 
     connect(): void {
@@ -184,6 +184,8 @@ export class ChatService {
     receivePrivateMessageListener(): void {
         this.receivedPrivateMessage().subscribe(res => {
             for (const message of this.privateMessages) {
+                console.log("ddddddddd");
+
                 if (message.id === res.id) {
                     message.messages.push({username: res.user, message: res.message, received: true});
                 }
