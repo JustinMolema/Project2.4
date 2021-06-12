@@ -48,7 +48,9 @@ export class ProfileComponent implements OnInit {
 
     // Send username update to the server
     submitNewUserName() {
-        this.appService.changeUsername(this.user)
+        this.appService.changeUsername(this.user).subscribe( res =>{
+            console.log(res)
+        })
     }
 
     // Prepare file for upload in server.

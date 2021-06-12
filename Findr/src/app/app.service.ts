@@ -23,76 +23,61 @@ export class AppService {
     changePassword(newPass: string): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('newPass', newPass);
-        return this.http.put('http://localhost:8001/user/profile/password/' + localStorage.getItem('userID'), params);
+        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/password', params);
     }
 
     changeUsername(newName: string): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set('newName', newName);
-        return this.http.put('http://localhost:8001/user/profile/name/'+ localStorage.getItem('userID'), params);
+        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/username', params);
     }
 
     changeProfilePicture(newPic): Observable<any> {
         let params: HttpParams = new HttpParams()
             .set("newPic", encodeURIComponent(newPic));
-        return this.http.put('http://localhost:8001/user/profile/picture/' +localStorage.getItem('userID'), params);
+        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/picture', params);
     }
 
     getProfile(): Observable<any> {
-        return this.http.get('http://localhost:8001/user/profile/' + localStorage.getItem('userID'));
+        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/profile');
     }
 
     getFriends(): Observable<any> {
-        return this.http.get('http://localhost:8001/user/friends/' + localStorage.getItem('userID'));
+        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friends/');
     }
 
     getFriendRequests(): Observable<any> {
-        return this.http.get('http://localhost:8001/user/friends/friend-requests/' + localStorage.getItem('userID'));
+        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests');
     }
 
     getBlockedUsers(): Observable<any> {
-        return this.http.get('http://localhost:8001/user/friends/blocked/' + localStorage.getItem('userID'));
+        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked');
     }
 
     sendFriendRequest(receiver: string) {
         let params: HttpParams = new HttpParams()
-            .set('userOne', localStorage.getItem('userID'))
-            .set('userTwo', receiver);
-        return this.http.post('http://localhost:8001/api/sendfriendrequest', params);
+        return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + receiver, params);
     }
 
     acceptFriendRequest(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('accepterID', localStorage.getItem('userID'))
-            .set('senderID', senderID);
-        return this.http.post('http://localhost:8001/user/friend-requests/accept', params);
+        let params: HttpParams = new HttpParams();
+        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + 'friend-requests/' + senderID, params);
     }
 
     deleteFriendRequest(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('accepterID', localStorage.getItem('userID'))
-            .set('senderID', senderID);
-        return this.http.post('http://localhost:8001/user/friends/friend-requests/remove', params);
+        return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + senderID);
     }
 
     deleteFriend(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('userOne', localStorage.getItem('userID'))
-            .set('userTwo', senderID);
-        return this.http.post('http://localhost:8001/user/friends/delete', params);
+        return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friends/' + senderID);
     }
 
     blockFriend(senderID: string): Observable<any> {
         let params: HttpParams = new HttpParams()
-            .set('userOne', localStorage.getItem('userID'))
-            .set('userTwo', senderID);
-        return this.http.post('http://localhost:8001/user/friends/block', params);
+        return this.http.post('http://localhost:8001/api/user/'+ localStorage.getItem('userID') +'/block/' + senderID, params);
     }
 
     unblockUser(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
-            .set('userOne', localStorage.getItem('userID'))
-            .set('userTwo', senderID);
-        return this.http.post('http://localhost:8001/user/friends/blocked/unblock', params);
+        return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked/' + senderID);
     }
 }

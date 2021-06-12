@@ -78,8 +78,12 @@ export class FriendsmenuComponent implements OnInit {
 
     sendFriendRequest(): void{
         var id = prompt("please enter the id you want to add");
-        this.appService.sendFriendRequest(id).subscribe(res => {
-            this.setFriendInfo();
+        if(!id)
+        {
+            this.appService.sendFriendRequest(id).subscribe(res => {
+                this.setFriendInfo();
             })
+        }
+
     }
 }
