@@ -1,29 +1,33 @@
 import {Injectable} from '@angular/core';
 import {io} from 'socket.io-client';
 import {Observable} from 'rxjs';
+import {AppService} from '../../app.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService {
     private socket = io('http://localhost:8081', {autoConnect: false});
-    private users = [];
+    public onlineFriends = [];
     private = false;
-    privateMessages = [{id: "7208", messages: []}, {id: "7211", messages: []}, {id: "7209", messages: []}];
+    privateMessages = [];
     to;
+    friends = [];
 
-    constructor() {
+    constructor(private appService: AppService) {
     }
 
     // TODO create json with array so all messages can be put and retrieved from certain users depending on the view.
 
     openSocket(): void {
-        this.socket.auth = {username: 'Meloen', sessionID: localStorage.getItem('USERID')};
+        this.socket.auth = {username: 'Meloen', sessionID: Number(localStorage.getItem('USERID'))};
 
         this.socket.connect();
         this.createSession();
         this.getAllOnlineFriends();
-        this.friendLoggedIn();
+        this.friendLoggedIn().subscribe(res => {
+            console.log(res);
+        });
         this.receivePrivateMessageListener();
         this.connect();
         this.disconnect();
@@ -53,6 +57,16 @@ export class ChatService {
         this.socket.off('new message');
     }
 
+    getAllFriends(): void {
+        this.friends = [];
+        this.appService.getFriends().subscribe(friendsFromServer => {
+            friendsFromServer[0].forEach(element => {
+                this.friends.push(element);
+                this.privateMessages.push({id: element.User_ID, messages: []});
+            });
+        });
+    }
+
     clearChatListeners(): void {
         this.socket.off('private message');
         this.socket.off('new message');
@@ -60,7 +74,7 @@ export class ChatService {
 
     connect(): void {
         this.socket.on('connect', () => {
-            this.users.forEach((user) => {
+            this.onlineFriends.forEach((user) => {
                 if (user.self) {
                     user.connected = true;
                 }
@@ -70,7 +84,7 @@ export class ChatService {
 
     disconnect(): void {
         this.socket.on('disconnect', () => {
-            this.users.forEach((user) => {
+            this.onlineFriends.forEach((user) => {
                 if (user.self) {
                     user.connected = false;
                 }
@@ -80,11 +94,14 @@ export class ChatService {
 
     getAllOnlineFriends(): void {
         this.socket.on('users', (users) => {
+            console.log(this.friends);
+
+            console.log(users);
             users.forEach((user) => {
                 user.self = user.userID === this.socket.id;
                 this.initReactiveProperties(user);
             });
-            this.users = users.sort((a, b) => {
+            this.onlineFriends = users.sort((a, b) => {
                 if (a.self) {
                     return -1;
                 }
@@ -105,16 +122,20 @@ export class ChatService {
         user.hasNewMessages = false;
     }
 
-    friendLoggedIn(): void {
-        this.socket.on('user connected', (user) => {
-            this.initReactiveProperties(user);
-            this.users.push(user);
+    friendLoggedIn(): Observable<any> {
+        return new Observable<any>(observer => {
+            this.socket.on('user connected', (user) => {
+                this.initReactiveProperties(user);
+                this.onlineFriends.push(user);
+                observer.next(user);
+            });
         });
+
     }
 
     friendLoggedOut(): void {
         this.socket.on('user disconnected', (id) => {
-            for (const user of this.users) {
+            for (const user of this.onlineFriends) {
                 if (user.userID === id) {
                     user.connected = false;
                     break;
@@ -161,6 +182,7 @@ export class ChatService {
             }
         });
     }
+
     sendPrivateMessage(data): void {
         this.socket.emit('private message', data);
     }

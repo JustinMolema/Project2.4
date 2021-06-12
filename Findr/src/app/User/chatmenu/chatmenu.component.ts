@@ -26,7 +26,8 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnInit(): void {
         for (const message of this.chat.privateMessages) {
-            if (message.id === this.chat.to.toString()) {
+            if (message.id === this.chat.to) {
+                console.log(this.chat.privateMessages);
                 this.messages = message.messages;
                 break;
             }

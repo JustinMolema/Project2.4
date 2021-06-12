@@ -36,7 +36,7 @@ export class FriendsmenuComponent implements OnInit {
         this.appService.getFriends().subscribe(friendsFromServer => {
             friendsFromServer[0].forEach(element => {
                 this.friends.push(element);
-                this.appService.friends.push();
+                this.appService.friends.push(element);
             });
         });
     }

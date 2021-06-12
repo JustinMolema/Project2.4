@@ -56,15 +56,16 @@ io.on('connection', (socket) => {
 	});
 
 	socket.join(socket.sessionID);
-
+	console.log(socket.sessionID);
 	const users = [];
-	sessionStore.findAllSessions().forEach((session) => {
+	for (let [id, socket] of io.of("/").sockets) {
 		users.push({
-			username: session.username,
-			connected: session.connected,
+		  userID: socket.sessionID,
+		  username: socket.username,
 		});
-	});
+	  }
 
+	console.log(socket.sessionID);
 	socket.emit("users", users);
 
 	socket.onAny((event, ...args) => {
@@ -72,7 +73,7 @@ io.on('connection', (socket) => {
 	})
 
 	socket.broadcast.emit("user connected", {
-		userID: socket.id,
+		userID: socket.sessionID,
 		username: socket.username,
 	});
 
@@ -89,7 +90,7 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on("private message", (data) => {
-		socket.to(data.room.toString()).emit("private message", { id: socket.sessionID, user: data.user, message: data.message });
+		socket.to(data.room).emit("private message", { id: socket.sessionID, user: data.user, message: data.message });
 	});
 
 	socket.on("disconnect", () => {
