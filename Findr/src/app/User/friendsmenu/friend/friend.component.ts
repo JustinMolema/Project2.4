@@ -23,7 +23,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
 
 
     ngOnInit(): void {
-        this.setStatus();
+        this.setStatusListeners();
         this.stabilizeListener();
     }
 
@@ -34,32 +34,41 @@ export class FriendComponent implements OnInit, AfterViewInit {
         this.stable = this.app.isStable.subscribe((isStable) => {
             if (isStable) {
                 setTimeout(() => {
-                    this.setStatus();
+                    this.setStatusListeners();
                 }, 500);
                 this.stable.unsubscribe();
             }
         });
     }
 
-    setStatus(): void {
+    setStatusListeners(): void {
+        this.status = "Offline";
         for (const friend of this.chat.onlineFriends) {
             if (friend.userID === this.friendID) {
                 this.status = "Online";
+                break;
             }
         }
 
         this.chat.friendLoggedIn().subscribe(res => {
-            console.log(this.friendID, res.userID);
-            if (this.friendID === res.userID) {
-                console.log("d");
-                this.status = "Online";
-            }
+            this.changeStatus(res, "Online");
+
         });
+
+        this.chat.friendLoggedOut().subscribe(res => {
+            this.changeStatus(res, "Offline");
+        });
+    }
+
+    changeStatus(res, status): void {
+        if (this.friendID === res.userID) {
+            this.status = status;
+        }
     }
 
     startChat(): void {
         this.chat.private = true;
-        this.chat.to = this.friendID;
+        this.chat.receiverID = this.friendID;
         this.router.navigate(['chats/']);
     }
 

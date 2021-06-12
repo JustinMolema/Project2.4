@@ -13,20 +13,18 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     roomName: string;
     form: FormGroup;
     messages = [];
-    @ViewChild('chat') private scrollContainer: ElementRef;
     names = ["Anne Pier", "Robbin", "Harald", "Merel", "Justin"];
 
+    @ViewChild('chat') private scrollContainer: ElementRef;
     constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute) {
         this.createForm();
         this.username = this.names[this.getRandomInt(this.names.length)];
-
-        if (chat.private) this.loadPrivateChat();
-        else this.loadPublicChat();
+        if (!chat.private) this.loadPublicChat();
     }
 
     ngOnInit(): void {
         for (const message of this.chat.privateMessages) {
-            if (message.id === this.chat.to) {
+            if (message.id === this.chat.receiverID) {
                 console.log(this.chat.privateMessages);
                 this.messages = message.messages;
                 break;
@@ -35,6 +33,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.chat.saveChat(this.messages);
         this.chat.leaveGameRoom({user: this.username, room: this.roomName});
         this.chat.clearChatListeners();
     }
@@ -42,10 +41,6 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     loadPublicChat(): void {
         this.joinRoom();
         this.receiveMessageListener();
-    }
-
-    loadPrivateChat(): void {
-        // this.receivePrivateMessageListener();
     }
 
     getRandomInt(max): number {
@@ -83,7 +78,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     sendMessage(message: string): void {
-        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: this.chat.to});
+        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: this.chat.receiverID});
         else this.chat.sendMessageToGameChat({user: this.username, message, room: this.roomName});
     }
 

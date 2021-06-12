@@ -2,19 +2,21 @@ import {Injectable} from '@angular/core';
 import {io} from 'socket.io-client';
 import {Observable} from 'rxjs';
 import {AppService} from '../../app.service';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService {
     private socket = io('http://localhost:8081', {autoConnect: false});
-    public onlineFriends = [];
     private = false;
     privateMessages = [];
-    to;
+    receiverID;
+
+    public onlineFriends = [];
     friends = [];
 
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private http: HttpClient) {
     }
 
     // TODO create json with array so all messages can be put and retrieved from certain users depending on the view.
@@ -31,7 +33,9 @@ export class ChatService {
         this.receivePrivateMessageListener();
         this.connect();
         this.disconnect();
-        this.friendLoggedOut();
+        this.friendLoggedOut().subscribe(res => {
+            console.log(res);
+        });
     }
 
     createSession(): void {
@@ -70,6 +74,8 @@ export class ChatService {
     clearChatListeners(): void {
         this.socket.off('private message');
         this.socket.off('new message');
+        this.socket.off('user connected');
+        this.socket.off('user disconnected');
     }
 
     connect(): void {
@@ -94,9 +100,6 @@ export class ChatService {
 
     getAllOnlineFriends(): void {
         this.socket.on('users', (users) => {
-            console.log(this.friends);
-
-            console.log(users);
             users.forEach((user) => {
                 user.self = user.userID === this.socket.id;
                 this.initReactiveProperties(user);
@@ -130,18 +133,23 @@ export class ChatService {
                 observer.next(user);
             });
         });
-
     }
 
-    friendLoggedOut(): void {
-        this.socket.on('user disconnected', (id) => {
-            for (const user of this.onlineFriends) {
-                if (user.userID === id) {
-                    user.connected = false;
-                    break;
-                }
-            }
+    friendLoggedOut(): Observable<any> {
+        console.log("listener");
+        return new Observable<any>(observer => {
+            this.socket.on('user disconnected', (user) => {
+                observer.next(user);
+                this.onlineFriends = this.onlineFriends.filter(item => item.userID !== user.userID);
+                console.log(this.onlineFriends);
+            });
         });
+    }
+
+    saveChat(messages): void {
+        let params: HttpParams = new HttpParams();
+        params = params.set('messages', JSON.stringify(messages));
+        this.http.post('http://localhost:8001/api/chat/private/messages', params).subscribe(res => console.log(res));
     }
 
     /****************************** PUBLIC CHAT********************************************/
