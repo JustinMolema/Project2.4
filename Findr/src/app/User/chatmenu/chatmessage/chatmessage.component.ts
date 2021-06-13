@@ -7,13 +7,14 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class ChatmessageComponent implements OnInit {
 
-  @Input() received: boolean;
-  @Input() message: string;
-  @Input() userName: string;
+  // @Input() received: boolean;
+  @Input() message;
+  // @Input() userName: string;
 
     constructor() {
     }
 
     ngOnInit(): void {
+        console.log(this.message);
     }
 }

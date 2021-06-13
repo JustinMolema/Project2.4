@@ -187,7 +187,7 @@ export class ChatService {
                 console.log("ddddddddd");
 
                 if (message.id === res.id) {
-                    message.messages.push({username: res.user, message: res.message, received: true});
+                    message.messages.push({ datetime: Date.now(), username: res.user, message: res.message, received: true});
                 }
             }
         });

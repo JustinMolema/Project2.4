@@ -35,6 +35,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
     declarations: [AppComponent],
@@ -63,6 +65,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         ProfileModule,
         MatSnackBarModule,
         MatDialogModule,
+        MatMenuModule,
+        MatButtonModule,
         GamesModule,
         UsersModule,
         TableheaderModule,

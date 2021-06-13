@@ -1,7 +1,7 @@
 <div class="content">
     <div class="chat-tab">
         <div class="chat-message" #chat>
-            <app-chatmessage *ngFor="let message of messages" [message]="message.message" [userName]="message.username" [received]="message.received"></app-chatmessage>
+            <app-chatmessage *ngFor="let message of messages" [message]="message" ></app-chatmessage>
         </div>
         <form [formGroup]="form" class="chat-container">
             <input type="text" class="chat-inputfield" #inputvalue (keydown.enter)="addMessage(inputvalue.value, false)" formControlName="message" placeholder="Type a message">
