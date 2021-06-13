@@ -154,6 +154,8 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 //                 USER PROFILE CALLS
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+// get profile
 app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
     res.header("Access-Control-Allow-Origin", "*");
@@ -172,6 +174,7 @@ app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
     })
 })
 
+// change password
 app.route('/api/user/:userID/password').put(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
     res.header("Access-Control-Allow-Origin", "*");
@@ -186,6 +189,7 @@ app.route('/api/user/:userID/password').put(authenticateToken, (req, res) => {
     })
 })
 
+// change profile picture
 app.route('/api/user/:userID/picture').put(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
     console.log("hey new picture")
@@ -199,6 +203,7 @@ app.route('/api/user/:userID/picture').put(authenticateToken, (req, res) => {
     });
 })
 
+// change username
 app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
     res.header("Access-Control-Allow-Origin", "*");
@@ -212,6 +217,8 @@ app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 //                 USER FRIEND CALLS
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+// get friends
 app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
@@ -221,34 +228,20 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
         res.send([result]);
     })
 })
-// accept friendrequest
-app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, async (req, res) => {
+// get a single friend
+app.route('/api/user/:userID/friend/:friendID').get(authenticateToken, async (req, res) => {
+    let user_id = req.params['userID']
+    let friend_id = req.params['friendID']
     res.header("Access-Control-Allow-Origin", "*");
-    const accepterID = req.params['userID'];
-    const senderID = req.params['senderID'];
-    connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + accepterID + ', ' + senderID + ');', function (err, result, fields) {
-        console.log(err)
+    connection.query('SELECT User_ID, Username FROM user_friends_with_user WHERE UserTwo = ' + friend_id + " AND UserOne = " + user_id, await function (err, result, fields) {
+        if (err) return res.sendStatus(400);
+        friendInfo = JSON.stringify(result);
+        res.send([result]);
     })
-    connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields) {
-        console.log(err)
-    })
-    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
-        console.log(err)
-    })
-    res.send({status: 200})
 })
 
-// delete friendrequest
-app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateToken, async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    const accepterID = req.params['userID'];
-    const senderID = req.params['requesterID'];
-    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
-        if (err) return res.send(err);
-        res.send({status: 200})
-    })
 
-})
+
 
 // delete friend
 app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async (req, res) => {
@@ -292,6 +285,35 @@ app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async 
         console.log(err)
     })
     res.json({status: 200})
+})
+
+// accept friendrequest
+app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const accepterID = req.params['userID'];
+    const senderID = req.params['senderID'];
+    connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + accepterID + ', ' + senderID + ');', function (err, result, fields) {
+        console.log(err)
+    })
+    connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields) {
+        console.log(err)
+    })
+    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
+        console.log(err)
+    })
+    res.send({status: 200})
+})
+
+// delete friendrequest
+app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateToken, async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const accepterID = req.params['userID'];
+    const senderID = req.params['requesterID'];
+    connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
+        if (err) return res.send(err);
+        res.send({status: 200})
+    })
+
 })
 
 // get friendrequests
@@ -341,7 +363,7 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
     })
 })
 
-
+// get support tickets
 app.route('/api/supporttickets').get((req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
@@ -350,6 +372,7 @@ app.route('/api/supporttickets').get((req, res) => {
     })
 })
 
+// get games
 app.route('/api/games').get(authenticateToken, (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM games', function (err, result, fields) {
@@ -358,6 +381,7 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
     })
 })
 
+// create new game
 app.route('/api/game').post((req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     connection.connect(function (err) {
@@ -368,6 +392,7 @@ app.route('/api/game').post((req, res) => {
     })
 })
 
+// delete game
 app.route('/api/game/:name').delete((req, res) => {
     let name = req.params['name']
 
@@ -386,6 +411,7 @@ app.route('/api/game/:name').delete((req, res) => {
     })
 })
 
+// user login
 app.post('/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
@@ -458,6 +484,7 @@ app.post('/user/login/signup', async (req, res) => {
     });
 });
 
+// check token
 app.post('/api/token', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const refreshToken = req.body.token;

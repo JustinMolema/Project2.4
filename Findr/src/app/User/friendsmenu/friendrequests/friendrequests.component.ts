@@ -40,6 +40,6 @@ export class FriendrequestsComponent implements OnInit {
         this.appService.blockFriend(this.friendID).subscribe(res => {
             this.refresh.emit('bloqq');
         })
-       
+
     }
 }
