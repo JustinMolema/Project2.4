@@ -368,14 +368,15 @@ app.post('/user/login', (req, res) => {
 
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
-            if (result.length > 0) {
+			if (err) {
+				res.send(err)
+			}
+
+            if (result) {
                 const dbPassword = JSON.parse(JSON.stringify(result[0].password));
                 const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
 
-                if (err) {
-                    res.send(err)
-                }
-
+            
                 bcrypt.compare(pw, dbPassword, (err, result) => {
                     // console.log("compare: " + result)
                     if (err) {
