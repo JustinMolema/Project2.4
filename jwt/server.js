@@ -229,7 +229,7 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
     })
 })
 // get a single friend
-app.route('/api/user/:userID/friend/:friendID').get(authenticateToken, async (req, res) => {
+app.route('/api/user/:userID/friends/:friendID').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     let friend_id = req.params['friendID']
     res.header("Access-Control-Allow-Origin", "*");
@@ -412,7 +412,7 @@ app.route('/api/game/:name').delete((req, res) => {
 })
 
 // user login
-app.post('/user/login', (req, res) => {
+app.post('api/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;
@@ -458,7 +458,7 @@ app.post('/user/login', (req, res) => {
 })
 
 // api call to create user in database
-app.post('/user/login/signup', async (req, res) => {
+app.post('api/user/', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     // encode so that special symbols dont destroy DB

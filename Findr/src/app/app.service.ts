@@ -17,7 +17,7 @@ export class AppService {
             .set('username', username)
             .set('password', password)
             .set('email', email);
-        return this.http.post('http://localhost:8001/user/login/signup', params);
+        return this.http.post('http://localhost:8001/api/user', params);
     }
 
     changePassword(newPass: string): Observable<any> {
@@ -43,7 +43,7 @@ export class AppService {
     }
 
     getFriends(): Observable<any> {
-        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friends/');
+        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friends');
     }
 
     getFriendRequests(): Observable<any> {
