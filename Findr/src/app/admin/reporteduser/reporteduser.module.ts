@@ -11,7 +11,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
 
 
 @NgModule({
-    providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
+    providers: [{provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 3500}}],
     declarations: [ReporteduserComponent, UserComponent, LogComponent],
     imports: [
         CommonModule,

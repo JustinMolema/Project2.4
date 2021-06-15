@@ -31,6 +31,10 @@ export class AdmindataService {
         return this.http.delete('http://localhost:8001/api/game/' + name);
     }
 
+    getReportedUsers(): Observable<any> {
+        return this.http.get('http://localhost:8001/api/users/reported');
+    }
+
     getSupportTickets(): Observable<any> {
         return this.http.get('http://localhost:8001/api/supporttickets');
     }

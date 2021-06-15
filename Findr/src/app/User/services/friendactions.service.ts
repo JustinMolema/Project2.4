@@ -15,9 +15,14 @@ export class FriendactionsService {
         return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + receiver, params);
     }
 
-    reportUser(message: any): Observable<any>  {
+    reportUser(message: any): Observable<any> {
         console.log(message);
-        const params: HttpParams = new HttpParams();
+        const params: HttpParams = new HttpParams()
+            .set('userID', message.userID)
+            .set('username', "admin")
+            .set('date', message.datetime)
+            .set('reason', "Harassment")
+            .set('message', message.message);
         return this.http.post('http://localhost:8001/api/users/reported', params);
     }
 

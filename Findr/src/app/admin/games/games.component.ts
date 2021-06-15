@@ -39,7 +39,7 @@ export class GamesComponent implements OnInit, Admindata {
     }
 
     allowViewToLoad(): void {
-        this.keys = ["Name", "Category", "subscribercount"] //Object.keys(this.games[0]);
+        this.keys = ["Name", "Category", "subscribercount"]; // Object.keys(this.games[0]);
         this.isLoaded = true;
     }
 

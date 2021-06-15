@@ -13,19 +13,17 @@ export class ChatmessageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.message);
     }
 
     sendFriendRequest(): void {
-        this.friendActionService.sendFriendRequest(this.message.userID).subscribe(res => console.log(res));
+        this.friendActionService.sendFriendRequest(this.message.userID).subscribe();
     }
 
     reportUser(): void {
-        this.friendActionService.reportUser(this.message).subscribe(res => console.log(res));
-
+        this.friendActionService.reportUser(this.message).subscribe();
     }
 
     blockUser(): void {
-        this.friendActionService.blockUser(this.message.userID).subscribe(res => console.log(res));
+        this.friendActionService.blockUser(this.message.userID).subscribe();
     }
 }

@@ -13,7 +13,9 @@ let refreshTokens = []
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
-
+app.use(cors({
+	origin: "*"
+}))
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -104,7 +106,6 @@ app.listen(8001, () => {
 })
 
 app.route('/api/users').get(authenticateToken, (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM users', function (err, result, fields) {
         if (err) throw err;
         res.send(result);
@@ -114,7 +115,6 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 
 
 app.route('/api/chats').get(authenticateToken, (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM chats', function (err, result, fields) {
         if (err) throw err;
         res.send(JSON.stringify(result));
@@ -126,7 +126,6 @@ app.route('/api/chats').get(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
-    res.header("Access-Control-Allow-Origin", "*");
 
     connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [user_id], function (err, result, fields) {
         if (err) {
@@ -144,7 +143,6 @@ app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
 
 app.route('/api/user/:userID/password').put(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
-    res.header("Access-Control-Allow-Origin", "*");
     const new_pass = req.body.newPass;
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -158,8 +156,6 @@ app.route('/api/user/:userID/password').put(authenticateToken, (req, res) => {
 
 app.route('/api/user/:userID/picture').put(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
-    console.log("hey new picture")
-    res.header("Access-Control-Allow-Origin", "*");
     const new_profile_pic = req.body.newPic
 
     connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
@@ -171,7 +167,6 @@ app.route('/api/user/:userID/picture').put(authenticateToken, (req, res) => {
 
 app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
     let user_id = req.params['userID'];
-    res.header("Access-Control-Allow-Origin", "*");
 
     const new_username = req.body.newName;
     connection.query('UPDATE users SET Username = ? WHERE users.User_ID = ?', [new_username, user_id], function (err, result, fields) {
@@ -184,7 +179,6 @@ app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
         if (err) return res.sendStatus(400);
         friendInfo = JSON.stringify(result);
@@ -193,7 +187,6 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
 })
 // accept friendrequest
 app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const accepterID = req.params['userID'];
     const senderID = req.params['senderID'];
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + accepterID + ', ' + senderID + ');', function (err, result, fields) {
@@ -210,7 +203,6 @@ app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, 
 
 // delete friendrequest
 app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateToken, async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const accepterID = req.params['userID'];
     const senderID = req.params['requesterID'];
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
@@ -223,7 +215,6 @@ app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateT
 // delete friend
 app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async (req, res) => {
     let UserOne = req.params['userID']
-    res.header("Access-Control-Allow-Origin", "*");
     const UserTwo = req.params['friendID']
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
         console.log(err)
@@ -240,7 +231,6 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
 // block user
 app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async (req, res) => {
     let UserOne = req.params['userID']
-    res.header("Access-Control-Allow-Origin", "*");
     const UserTwo = req.params['blockeduser'];// person getting blocked
     connection.query('INSERT INTO user_blocked_user (user_blocker, user_blockee) VALUES (' + UserOne + ', ' + UserTwo + ');', function (err, result, fields) {
         if (err) return res.send(err);
@@ -267,7 +257,6 @@ app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async 
 // get friendrequests
 app.route('/api/user/:userID/friend-requests').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
         if (err) return res.send(err);
         let friendRequests = JSON.stringify(result);
@@ -279,8 +268,6 @@ app.route('/api/user/:userID/friend-requests').get(authenticateToken, async (req
 app.route('/api/user/:userID/friend-requests/:reqID').post(authenticateToken, async (req, res) => {
     let UserOne = req.params['userID']
     let UserTwo = req.params['reqID'];// receiver
-    res.header("Access-Control-Allow-Origin", "*");
-    // const UserOne = req.body.userOne;// sender
 
     connection.query('INSERT INTO user_befriends_user (UserOne, UserTwo) VALUES (' + UserTwo + ', ' + UserOne + ');', function (err, result, fields) {
         if (err) throw err;
@@ -291,7 +278,6 @@ app.route('/api/user/:userID/friend-requests/:reqID').post(authenticateToken, as
 // get blocked users
 app.route('/api/user/:userID/blocked').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
         if (err) throw err;
         let BlockedInfo = JSON.stringify(result);
@@ -302,7 +288,6 @@ app.route('/api/user/:userID/blocked').get(authenticateToken, async (req, res) =
 app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, async (req, res) => {
     let UserOne = req.params['userID']
     let UserTwo = req.params['unblockeeID'];// person getting blocked
-    res.header("Access-Control-Allow-Origin", "*");
 
     connection.query('DELETE FROM user_blocked_user WHERE user_blocker = ' + UserOne + ' AND user_blockee = ' + UserTwo, function (err, result, fields) {
         if (err) throw err;
@@ -313,7 +298,6 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
 
 
 app.route('/api/supporttickets').get((req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
         if (err) throw err;
         res.send(result);
@@ -321,7 +305,6 @@ app.route('/api/supporttickets').get((req, res) => {
 })
 
 app.route('/api/games').get(authenticateToken, (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT * FROM games', function (err, result, fields) {
         if (err) throw err;
         res.send(JSON.stringify(result));
@@ -329,9 +312,8 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 })
 
 app.route('/api/game').post((req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     connection.connect(function (err) {
-        connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
+        connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
             if (err) return res.json({status: "error"});
             res.json({status: "ok"});
         })
@@ -340,11 +322,6 @@ app.route('/api/game').post((req, res) => {
 
 app.route('/api/game/:name').delete((req, res) => {
     let name = req.params['name']
-
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "*");
-    res.header("Access-Control-Allow-Headers", "*");
-
     connection.connect(function (req, err) {
         connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
             if (err) {
@@ -357,7 +334,34 @@ app.route('/api/game/:name').delete((req, res) => {
 })
 
 app.post('/api/users/reported', (req, res) => {
-	console.log("AAAAAAA");
+    connection.query('INSERT INTO reported_users (UserID, Username, Date, Reason, Message) VALUES (?,?,?,?,?)', 
+		[req.body.userID, req.body.username, new Date(new Date().toUTCString()), req.body.reason, req.body.message], function(err, result, fields) {
+            if (err) res.sendStatus(400);
+			else res.sendStatus(200);
+        })
+})
+
+app.get('/api/users/reported',authenticateToken, (req, res) => {
+    connection.query('SELECT * FROM reported_users', function(err, result, field) {
+        if(err) res.sendStatus(418);
+        res.send(JSON.stringify(result));
+    })
+})
+
+app.get('/api/users/reported/:id', authenticateToken, (req, rest) => {
+    let name = req.params['id'];
+    connection.query('SELECT * FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
+        if(err) res.send(418);
+        res.send(JSON.stringify(result));
+    })
+})
+
+app.delete('/api/users/reported/:id', authenticateToken, (req, rest) => {
+    let name = req.params['id'];
+    connection.query('DELETE FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
+        if(err) res.send(418);
+        res.send(JSON.stringify(result));
+    })
 })
 
 
@@ -365,9 +369,7 @@ app.post('/api/users/reported', (req, res) => {
 
 
 
-
 app.post('/user/login', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;
 
@@ -470,11 +472,3 @@ function authenticateToken(req, res, next) {
 app.listen(port, () => {
     console.log(`Express server listening on port ${port}`);
 });
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-    res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
-    next();
-})
-app.use(cors())

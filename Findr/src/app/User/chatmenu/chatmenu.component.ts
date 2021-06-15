@@ -25,7 +25,6 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngOnInit(): void {
         for (const message of this.chat.privateMessages) {
             if (message.userID === this.chat.receiverID) {
-                console.log(this.chat.privateMessages);
                 this.messages = message.messages;
                 break;
             }
@@ -33,7 +32,6 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.chat.saveChat(this.messages);
         this.chat.leaveGameRoom({user: this.username, room: this.roomName});
         this.chat.clearChatListeners();
     }

@@ -136,20 +136,12 @@ export class ChatService {
     }
 
     friendLoggedOut(): Observable<any> {
-        console.log("listener");
         return new Observable<any>(observer => {
             this.socket.on('user disconnected', (user) => {
                 observer.next(user);
                 this.onlineFriends = this.onlineFriends.filter(item => item.userID !== user.userID);
-                console.log(this.onlineFriends);
             });
         });
-    }
-
-    saveChat(messages): void {
-        let params: HttpParams = new HttpParams();
-        params = params.set('messages', JSON.stringify(messages));
-        this.http.post('http://localhost:8001/api/chat/private/messages', params).subscribe(res => console.log(res));
     }
 
     /****************************** PUBLIC CHAT********************************************/
@@ -171,8 +163,6 @@ export class ChatService {
     newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('new message', (data) => {
-                console.log(data);
-
                 observer.next(data);
             });
             return () => {
@@ -203,7 +193,6 @@ export class ChatService {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('private message', (data) => {
                 observer.next(data);
-                console.log("AAAAAAA");
             });
             return () => {
                 this.socket.disconnect();
