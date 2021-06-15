@@ -9,11 +9,6 @@ const http = require('http')
 const {Console} = require('console')
 const bcrypt = require('bcrypt')
 const crypto = require("crypto");
-
-const {InMemorySessionStore} = require("./sessionStore");
-const sessionStore = new InMemorySessionStore();
-
-const randomId = () => crypto.randomBytes(8).toString("hex");
 let refreshTokens = []
 
 app.use(express.json({ limit: '50mb' }));
@@ -84,11 +79,12 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('message', function (data) {
-		socket.to(data.room).emit('new message', { user: data.user, message: data.message });
+		console.log(data);
+		socket.to(data.room).emit('new message', { userID: data.userID, user: data.user, message: data.message });
 	});
 
 	socket.on("private message", (data) => {
-		socket.to(data.room).emit("private message", { id: socket.sessionID, user: data.user, message: data.message });
+		socket.to(data.room).emit("private message", { userID: socket.sessionID, user: data.user, message: data.message });
 	});
 
 	socket.on("disconnect", () => {
@@ -97,7 +93,6 @@ io.on('connection', (socket) => {
 			username: socket.username,
 		});
 	});
-
 });
 
 server.listen(chatport);
@@ -355,11 +350,21 @@ app.route('/api/game/:name').delete((req, res) => {
             if (err) {
                 res.sendStatus(400);
             } else {
-                res.json({status: 200})
+                res.json({status: 200});
             }
         })
     })
 })
+
+app.post('/api/users/reported', (req, res) => {
+	console.log("AAAAAAA");
+})
+
+
+
+
+
+
 
 app.post('/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -378,7 +383,6 @@ app.post('/user/login', (req, res) => {
 
             
                 bcrypt.compare(pw, dbPassword, (err, result) => {
-                    // console.log("compare: " + result)
                     if (err) {
                         res.sendStatus(403).send("Wrong password")
                     }
@@ -434,23 +438,6 @@ app.post('/user/login/signup', async (req, res) => {
     });
 });
 
-
-// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-//                 USER PRIVATE CHAT CALLS
-// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-
-
-app.post('/api/chat/private/messages', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-	const messages = JSON.parse(req.body.messages);
-	for (const message of messages){
-		console.log(message);
-	}
-	console.log("Private  messages: " + typeof req.body.messages)
-
-})
-
-
 app.post('/api/token', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const refreshToken = req.body.token;
@@ -478,9 +465,7 @@ function authenticateToken(req, res, next) {
         req.user = user;
         next()
     })
-    // Bearer TOKEN
 }
-
 
 app.listen(port, () => {
     console.log(`Express server listening on port ${port}`);

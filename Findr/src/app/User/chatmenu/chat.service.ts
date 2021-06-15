@@ -66,7 +66,7 @@ export class ChatService {
         this.appService.getFriends().subscribe(friendsFromServer => {
             friendsFromServer[0].forEach(element => {
                 this.friends.push(element);
-                this.privateMessages.push({id: element.User_ID, messages: []});
+                this.privateMessages.push({userID: element.User_ID, messages: []});
             });
         });
     }
@@ -171,6 +171,8 @@ export class ChatService {
     newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('new message', (data) => {
+                console.log(data);
+
                 observer.next(data);
             });
             return () => {
@@ -184,10 +186,10 @@ export class ChatService {
     receivePrivateMessageListener(): void {
         this.receivedPrivateMessage().subscribe(res => {
             for (const message of this.privateMessages) {
-                console.log("ddddddddd");
 
-                if (message.id === res.id) {
-                    message.messages.push({ datetime: Date.now(), username: res.user, message: res.message, received: true});
+                if (message.userID === res.userID) {
+                    message.messages.push({ userID: res.userID, datetime: Date.now(),
+                        username: res.user, message: res.message, received: true});
                 }
             }
         });

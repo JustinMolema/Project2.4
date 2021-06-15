@@ -15,9 +15,9 @@
             <div class="timestamp">{{message.datetime | date: 'HH:mm'}}</div>
 
             <mat-menu #actions="matMenu">
-                <button mat-menu-item>Send friend request</button>
-                <button mat-menu-item>Report user</button>
-                <button mat-menu-item>Block user</button>
+                <button mat-menu-item (click)="sendFriendRequest()">Send friend request</button>
+                <button mat-menu-item (click)="reportUser()">Report user</button>
+                <button mat-menu-item (click)="blockUser()">Block user</button>
             </mat-menu>
 
             <mat-menu #actionsself="matMenu">

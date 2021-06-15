@@ -12,7 +12,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     username: string;
     roomName: string;
     form: FormGroup;
-    messages = [{datetime: Date.now(), username: 'Jos', message: 'asdasdfadsfsadfsdafsadfdsafasdfsadfdsafasdfsadfsadfasdfdsafasfasfasdfasfasfasdfasdfasfsdafasfdasdfasdfasdfasdad', received: true}];
+    messages = [{userID: "1234", datetime: Date.now(), username: 'Jos', message: 'asdasdfadsfsadfsdafsadfdsafasdfsadfdsafasdfsadfsadfasdfdsafasfasfasdfasfasfasdfasdfasfsdafasfdasdfasdfasdfasdad', received: true}];
     names = ["Anne Pier", "Robbin", "Harald", "Merel", "Justin"];
 
     @ViewChild('chat') private scrollContainer: ElementRef;
@@ -24,7 +24,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnInit(): void {
         for (const message of this.chat.privateMessages) {
-            if (message.id === this.chat.receiverID) {
+            if (message.userID === this.chat.receiverID) {
                 console.log(this.chat.privateMessages);
                 this.messages = message.messages;
                 break;
@@ -72,19 +72,19 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     addMessage(message: string, received: boolean): void {
-        this.messages.push({datetime: Date.now(), username: this.username, message, received});
+        this.messages.push({userID: localStorage.getItem("userID"), datetime: Date.now(), username: this.username, message, received});
         this.sendMessage(message);
         this.clearInputfield();
     }
 
     sendMessage(message: string): void {
         if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: this.chat.receiverID});
-        else this.chat.sendMessageToGameChat({user: this.username, message, room: this.roomName});
+        else this.chat.sendMessageToGameChat({userID: localStorage.getItem("userID"), user: this.username, message, room: this.roomName});
     }
 
     receiveMessageListener(): void {
         this.chat.newMessageReceivedFromGameChat().subscribe(res => {
-            this.messages.push({datetime: Date.now(), username: res.user, message: res.message, received: true});
+            this.messages.push({userID: res.userID, datetime: Date.now(), username: res.user, message: res.message, received: true});
         });
     }
 

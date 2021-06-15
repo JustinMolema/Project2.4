@@ -55,7 +55,7 @@ export class AppService {
     }
 
     sendFriendRequest(receiver: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        let params: HttpParams = new HttpParams();
         return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + receiver, params);
     }
 
