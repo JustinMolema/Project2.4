@@ -1,0 +1,251 @@
+#%RAML 1.0
+title: Mobile Order API
+baseUri: http://localhost:8081/api
+version: 1.0
+
+uses:
+  assets: assets.lib.raml
+
+annotationTypes:
+  monitoringInterval:
+    type: integer
+
+/user:
+    displayName: Users
+    post:
+        description: Create a user (on signup)
+        queryParameters:
+            username:
+                description: the username to give this user upon creation
+                required: true
+                minLength: 5
+                maxLength: 25
+                type: string
+                example: "Ernesto"
+            password:
+                description: the password to give this user upon creation
+                required: true
+                minLength: 16
+                type: string
+                example: supersecretpassword
+            email:
+                description: User's email
+                required: true
+                type: string
+                example: example@email.com
+    /{userID}
+        /profile:
+            get:
+                description: Get user profile with 'userID = {userID}'
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                example:
+                                    {
+                                        "data":
+                                        {
+                                            "Username": "Karel",
+                                            "Email": "Karel@Karel.com",
+                                            "Warnings": 4,
+                                            "Profile_Picture": user picture represented by base64 encoded string
+                                        }
+                                    }
+
+        /username:
+            put:
+                description: Change username
+                queryParameters:
+                    userID:
+                        displayName: userID
+                        type: string
+                        description: The userID associated with the username to change
+                        required: true
+        /password:
+            put:
+                description: Change password
+                queryParameters:
+                    userID:
+                        displayName: userID
+                        type: string
+                        description: The userID associated with the password to change
+                        required: true
+        /picture:
+            put:
+                description: Change Picture
+                queryParameters:
+                    userID:
+                        displayName: userID
+                        type: string
+                        description: The userID associated with the profile picture to change
+                        required: true
+        /friends
+            get:
+                description: Get all of this users' friends
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                example:
+                                    {
+                                        "data":
+                                        {
+                                            0: {
+                                                "UserID": 1234
+                                                "Username": "Joopie"
+                                                "Profile_Picture": user picture represented by base64 encoded string
+                                            }
+                                            1: {
+                                                "UserID": 4321
+                                                "Username": "Peter"
+                                                "Profile_Picture": user picture represented by base64 encoded string
+                                            }
+                                        }
+                                    }
+                queryParameters:
+                    userID:
+                        displayName: userID
+                        type: string
+                        description: The userID of the user whose friends you want to get
+                        required: true
+            /{friendsID}
+                get:
+                    description: Get a friend with by their ID
+                    responses:
+                    200:
+                        body:
+                            application/json:
+                                example:
+                                    {
+                                        "data":
+                                        {
+                                           
+                                            "UserID": 1234
+                                            "Username": "Joopie"
+                                            
+                                        }
+                                    }
+                    queryParameters:
+                    userID:
+                        displayName: userID
+                        type: string
+                        description: The userID associated with the user whose friend you want to get
+                        required: true
+                    friendID:
+                        displayName: friendID
+                        type: string
+                        description: The userID associated with the friend you want to get
+                        required: true
+                delete:
+                    description: Delete a friend from this users friendlist by their ID
+                    queryParameters:
+                        userID:
+                            displayName: userID
+                            type: string
+                            description: The userID associated with the user whose friend you want to delete
+                            required: true
+                        friendID:
+                            displayName: friendID
+                            type: string
+                            description: The userID associated with the friend you want to delete
+                            required: true
+        /blocked:
+            get:
+                description: Get all users this user blocked
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                example:
+                                    {
+                                        "data":
+                                        {
+                                           
+                                            "UserID": 1234
+                                            "Username": "Joopie"
+                                            "Profile_Picture": user picture represented by base64 encoded string
+                                        }
+                                    }
+                queryParameters:
+                    userID:
+                        displayName: userID
+                        type: string
+                        description: The userID associated with the user whose blocked users you want to get
+                        required: true 
+            /{blockedUserID}
+                post:
+                    description: Block a new user
+                    queryParameters:
+                        userID:
+                            displayName: userID
+                            type: string
+                            description: The userID associated with the user that wants to block another user
+                            required: true
+                        blockeduser:
+                            displayName: blockeduser
+                            type: string
+                            description: The userID associated with the person getting blocked
+                            required: true
+                delete:
+                    description: Delete a user from the blocked list aka unblocking someone
+                    queryParameters:
+                        userID:
+                            displayName: userID
+                            type: string
+                            description: The userID associated with the user that wants to unblock another user
+                            required: true
+                        blockeduser:
+                            displayName: blockeduser
+                            type: string
+                            description: The userID associated with the person getting unblocked
+                            required: true
+        /friend-requests
+            get:
+                description: Get friend requests
+                responses:
+                    200:
+                        body:
+                            application/json:
+                                example:
+                                    {
+                                        "data":
+                                        {
+                                           
+                                            "UserID": 1234
+                                            "Username": "Joopie"
+                                            "Profile_Picture": user picture represented by base64 encoded string
+                                        }
+                                    }
+                queryParameters:
+                        userID:
+                            displayName: userID
+                            type: string
+                            description: The userID associated with the user which friend-requests you want to get
+                            required: true
+            /{reqID}
+                post:
+                    description: Send a new friend request
+                queryParameters:
+                        senderID:
+                            displayName: senderID
+                            type: string
+                            description: the userID associated with the person sending the friend request
+                            required: true
+                        receiverID:
+                            displayName: receiverID
+                            type: string
+                            description: the userID associated with the person recieving the friend request
+                            required: true
+                delete:
+                    description: delete a friend request
+                queryParameters:
+                        senderID:
+                            displayName: senderID
+                            type: string
+                            description: the userID associated with the person sending the friend request you want to delete
+                            required: true
+                        receiverID:
+                            displayName: receiverID
+                            type: string
+                            description: the userID associated with the person recieving the friend request you want to delete
+                            required: true

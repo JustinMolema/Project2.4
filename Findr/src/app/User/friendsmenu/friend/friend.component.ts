@@ -1,5 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter, AfterViewInit, ApplicationRef} from '@angular/core';
 
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+
 import {Router} from '@angular/router';
 import {AppService} from 'src/app/app.service';
 import {ChatService} from '../../chatmenu/chat.service';
@@ -12,10 +14,12 @@ import {ChatService} from '../../chatmenu/chat.service';
 export class FriendComponent implements OnInit, AfterViewInit {
     @Input() friend: string;
     @Input() friendID: string;
+    @Input() pic;
+
     stable;
     status = 'Offline';
 
-    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef) {
+    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef, private sanitiser: DomSanitizer) {
     }
 
     @Output()
@@ -23,6 +27,10 @@ export class FriendComponent implements OnInit, AfterViewInit {
 
 
     ngOnInit(): void {
+        if (this.pic) {
+            this.pic = this.sanitize(decodeURIComponent(this.pic));
+        }
+
         this.setStatusListeners();
         this.stabilizeListener();
     }
@@ -41,6 +49,10 @@ export class FriendComponent implements OnInit, AfterViewInit {
         });
     }
 
+    sanitize(url: string): SafeResourceUrl {
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
+    }
+
     setStatusListeners(): void {
         this.status = 'Offline';
         for (const friend of this.chat.onlineFriends) {
@@ -52,7 +64,6 @@ export class FriendComponent implements OnInit, AfterViewInit {
 
         this.chat.friendLoggedIn().subscribe(res => {
             this.changeStatus(res, 'Online');
-
         });
 
         this.chat.friendLoggedOut().subscribe(res => {

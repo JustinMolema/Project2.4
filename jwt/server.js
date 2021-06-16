@@ -6,9 +6,8 @@ const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 const test = require('./api.js');
 const http = require('http');
-const {Console} = require('console');
-const bcrypt = require('bcrypt');
-const crypto = require("crypto");
+const { Console } = require('console');
+const bcrypt = require('bcrypt')
 let refreshTokens = [];
 
 app.use(express.json({ limit: '50mb' }));
@@ -16,12 +15,99 @@ app.use(express.urlencoded({ limit: '50mb' }));
 app.use(cors({
 	origin: "*"
 }));
+
+const { Model } = require('objection');
+const Knex = require('knex');
+
+let refreshTokens = []
+
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'Findr'
 });
+
+const knex = Knex({
+    client: 'mysql',
+    useNullAsDefault: true,
+    connection: {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'Findr'
+    }
+});
+
+Model.knex(knex);
+
+class User extends Model {
+
+    static get tableName() {
+        return 'users'
+    }
+
+    static get idColumn() {
+        return 'User_ID'
+    }
+
+    static get usernameColumn() {
+        return 'Username';
+    }
+
+    static get passwordColumn() {
+        return 'Password';
+    }
+
+    static get emailColumn() {
+        return 'Email';
+    }
+
+    static get warningsColumn() {
+        return 'Warnings';
+    }
+
+    static get bannedColumn() {
+        return 'Banned';
+    }
+
+    static get profPicColumn() {
+        return 'Profile_picture';
+    }
+}
+
+class user_friends_with_user extends Model {
+
+    static relationMappings() {
+        return {
+            User_One: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: 'user_friends_with_user.UserOne',
+                    to: 'users.User_ID'
+                }
+            },
+            User_Two: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: 'user_friends_with_user.UserTwo',
+                    to: 'users.User_ID'
+                }
+            }
+        }
+    }
+
+    static get UserOne() {
+        return 'UserOne'
+    }
+
+    static get UserTwo() {
+        return 'UserTwo';
+    }
+}
 
 // connection.connect(function (err) {
 // 	if (err) throw err;
@@ -121,9 +207,9 @@ app.put('/api/users/warn/:userID', authenticateToken, (req, res) => {
 });
 
 
-// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
-//                 USER PROFILE CALLS
-// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\\
+//                 USER PROFILE CALLS                     \\
+// ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\\
 
 // get profile
 app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
@@ -184,13 +270,47 @@ app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
 // get friends
+/*
+app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) => {
+   let user_id = req.params['userID']
+   res.header("Access-Control-Allow-Origin", "*");
+   connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
+       if (err) return res.sendStatus(400);
+       friendInfo = JSON.stringify(result);
+       res.send([result]);
+   })
+})*/
+
+// get friends but ORM
 app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
-    connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
+    res.header("Access-Control-Allow-Origin", "*");
+    /*connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
         if (err) return res.sendStatus(400);
         friendInfo = JSON.stringify(result);
         res.send([result]);
-    })
+    })*/
+    try {
+        const friends = await User.query()
+            .select('User_ID', 'Username', "Profile_picture")
+            .from('user_friends_with_user')
+            .innerJoin('users AS user', 'user.User_ID', 'user_friends_with_user.UserTwo')
+            .where('UserOne', '=', user_id)
+        console.log(friends)
+        if (friends.length > 0) {
+            friends.forEach(element => {
+                element.Profile_picture = element.Profile_picture.toString();
+            });
+            res.send(friends)
+        }
+        else{
+            res.send(friends)
+        }
+    } catch (error) {
+        console.log(error)
+        res.send({ status: 403 })
+    }
+
 })
 
 // get a single friend
@@ -198,10 +318,14 @@ app.route('/api/user/:userID/friends/:friendID').get(authenticateToken, async (r
     let user_id = req.params['userID']
     let friend_id = req.params['friendID']
     res.header("Access-Control-Allow-Origin", "*");
-    connection.query('SELECT User_ID, Username FROM user_friends_with_user WHERE UserTwo = ' + friend_id + " AND UserOne = " + user_id, await function (err, result, fields) {
+    connection.query('SELECT User_ID, Username, Profile_picture FROM user_friends_with_user WHERE UserTwo = ' + friend_id + " AND UserOne = " + user_id, await function (err, result, fields) {
         if (err) return res.sendStatus(400);
-        friendInfo = JSON.stringify(result);
-        res.send([result]);
+        if (result.length > 0) {
+            if (result[0].Profile_picture) {
+                result[0].Profile_picture = result[0].Profile_picture.toString();
+            }
+            res.send([result]);
+        }
     })
 })
 
@@ -220,11 +344,11 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
         console.log(err)
         if (err) return res.send(err);
     })
-    res.json({status: 200})
+    res.json({ status: 200 })
 })
 
 // block user
-app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async (req, res) => {
+app.route('/api/user/:userID/blocked/:blockeduser').post(authenticateToken, async (req, res) => {
     let UserOne = req.params['userID']
     const UserTwo = req.params['blockeduser'];// person getting blocked
     connection.query('INSERT INTO user_blocked_user (user_blocker, user_blockee) VALUES (' + UserOne + ', ' + UserTwo + ');', function (err, result, fields) {
@@ -246,7 +370,7 @@ app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
-    res.json({status: 200})
+    res.json({ status: 200 })
 })
 
 // accept friendrequest
@@ -263,7 +387,7 @@ app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         console.log(err)
     })
-    res.send({status: 200})
+    res.send({ status: 200 })
 })
 
 // delete friendrequest
@@ -273,7 +397,7 @@ app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateT
     const senderID = req.params['requesterID'];
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         if (err) return res.send(err);
-        res.send({status: 200})
+        res.send({ status: 200 })
     })
 
 })
@@ -281,10 +405,22 @@ app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateT
 // get friendrequests
 app.route('/api/user/:userID/friend-requests').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
-    connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
-        if (err) return res.send(err);
-        let friendRequests = JSON.stringify(result);
-        res.send([result]);
+    res.header("Access-Control-Allow-Origin", "*");
+    connection.query('SELECT User_ID, Username, Profile_picture FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
+        if (err) {
+            console.log(err)
+            return res.send(err);
+        }
+        if (result.length > 0) {
+            result.forEach(element => {
+                element.Profile_picture = element.Profile_picture.toString();
+            });
+            res.send([result]);
+        }
+        else {
+            res.send(result);
+        }
+
     })
 })
 
@@ -295,18 +431,32 @@ app.route('/api/user/:userID/friend-requests/:reqID').post(authenticateToken, as
 
     connection.query('INSERT INTO user_befriends_user (UserOne, UserTwo) VALUES (' + UserTwo + ', ' + UserOne + ');', function (err, result, fields) {
         if (err) throw err;
-        let friendRequests = JSON.stringify(result);
-        res.send([result]);
+        if (result.length > 0) {
+            result.forEach(element => {
+                element.Profile_picture = element.Profile_picture.toString();
+            });
+            res.send([result]);
+        }
+        else {
+            res.send({ status: 403 });
+        }
     })
 })
 
 // get blocked users
 app.route('/api/user/:userID/blocked').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
-    connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
+    connection.query('SELECT User_ID, Username, Profile_picture FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
         if (err) throw err;
-        let BlockedInfo = JSON.stringify(result);
-        res.send([result]);
+        if (result.length > 0) {
+            result.forEach(element => {
+                element.Profile_picture = element.Profile_picture.toString();
+            });
+            res.send([result]);
+        }
+        else {
+            res.send(result);
+        }
     })
 })
 
@@ -317,7 +467,6 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
 
     connection.query('DELETE FROM user_blocked_user WHERE user_blocker = ' + UserOne + ' AND user_blockee = ' + UserTwo, function (err, result, fields) {
         if (err) throw err;
-        let BlockedInfo = JSON.stringify(result);
         res.send([result]);
     })
 })
@@ -334,8 +483,8 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 app.route('/api/games').post((req, res) => {
     connection.connect(function (err) {
         connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
-            if (err) return res.json({status: "error"});
-            res.json({status: "ok"});
+            if (err) return res.json({ status: "error" });
+            res.json({ status: "ok" });
         })
     })
 })
@@ -348,7 +497,7 @@ app.route('/api/games/:name').delete((req, res) => {
             if (err) {
                 res.sendStatus(400);
             } else {
-                res.json({status: 200});
+                res.json({ status: 200 })
             }
         })
     })
@@ -425,7 +574,7 @@ app.post('/api/user/login', (req, res) => {
                     }
 
                     if (result) {
-                        const user = {name: username}
+                        const user = { name: username }
                         const accessToken = generateAccessToken(user);
                         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
                         refreshTokens.push(refreshToken)
@@ -467,7 +616,7 @@ app.post('api/user/signup', async (req, res) => {
                     if (err) {
                         return res.send(err);
                     } else {
-                        res.json({status: 200});
+                        res.json({ status: 200 });
                     }
                 });
             });
@@ -484,13 +633,13 @@ app.post('/api/token/refresh', (req, res) => {
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403)
-        const accessToken = generateAccessToken({name: user.name})
-        res.json({accessToken: accessToken})
+        const accessToken = generateAccessToken({ name: user.name })
+        res.json({ accessToken: accessToken })
     })
 })
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '25m'});
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
 }
 
 function authenticateToken(req, res, next) {

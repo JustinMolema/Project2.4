@@ -13,7 +13,7 @@ export class AppService {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        const params: HttpParams = new HttpParams()
             .set('username', username)
             .set('password', password)
             .set('email', email);
@@ -21,19 +21,19 @@ export class AppService {
     }
 
     changePassword(newPass: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        const params: HttpParams = new HttpParams()
             .set('newPass', newPass);
         return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/password', params);
     }
 
     changeUsername(newName: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        const params: HttpParams = new HttpParams()
             .set('newName', newName);
         return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/username', params);
     }
 
     changeProfilePicture(newPic): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        const params: HttpParams = new HttpParams()
             .set("newPic", encodeURIComponent(newPic));
         return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/picture', params);
     }
@@ -55,12 +55,12 @@ export class AppService {
     }
 
     sendFriendRequest(receiver: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
+        const params: HttpParams = new HttpParams();
         return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + receiver, params);
     }
 
     acceptFriendRequest(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
+        const params: HttpParams = new HttpParams();
         return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + senderID, params);
     }
 
@@ -73,7 +73,7 @@ export class AppService {
     }
 
     blockFriend(senderID: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
+        const params: HttpParams = new HttpParams();
         return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/block/' + senderID, params);
     }
 

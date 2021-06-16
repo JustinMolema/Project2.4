@@ -20,9 +20,12 @@
     "jshint": "^2.13.0",
     "jslint": "^0.12.1",
     "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.6",
     "mysql": "2.17.1",
+    "objection": "^2.2.15",
     "socket.io": "^4.1.2",
-    "socket.io-client": "^4.1.2"
+    "socket.io-client": "^4.1.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
