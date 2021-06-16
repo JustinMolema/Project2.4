@@ -14,7 +14,7 @@
             <div class="records-and-search">
                 <div class="recordsperpage">
                     <p>Records per page:</p>
-                    <select #waarde name="" id="" class="record_amount" (change)="changeEvent(waarde.value)">
+                    <select #waarde class="record_amount" (change)="changeEvent(waarde.value)">
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="20" selected>20</option>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <hr class="line headerline">
-            <app-tableheader *ngIf="isLoaded" [items]="items" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
+            <app-tableheader *ngIf="isLoaded" [items]="items" [keys]="keys" [actionSize]='12' [infoSize]='22'></app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let item of items | tablefilter:keys:searchText |  slice:0:max; index as i">

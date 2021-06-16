@@ -1,11 +1,11 @@
 @import "../../../../adminrowview.css";
 
 app-tabledata {
-    width: 17%;
+    width: 22%;
 }
 
 .actions {
-    width: 32%;
+    width: 12%;
 }
 
 @media (max-width: 850px) {

@@ -38,7 +38,6 @@ export class NewgameComponent implements OnInit {
         this.form.controls.category.setValue(this.game.Category);
         this.form.controls.description.setValue(this.game.Description);
         this.name = this.game.Name;
-        this.header = "EDIT";
     }
 
     processFile(imageInput: any): void {
