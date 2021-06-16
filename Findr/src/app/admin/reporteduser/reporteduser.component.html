@@ -5,7 +5,7 @@
         <app-admintopbar [title]="'REPORTED USERS &#8674; VIEW LOGS'"></app-admintopbar>
 
         <div class="admin-view-container">
-            <app-log></app-log>
+            <app-log [reportedUserInfo]="selectedUser" [returnToViewLog]="getCloseViewLog"></app-log>
         </div>
     </div>
     <div class="admintab" *ngIf="!viewingLogs">

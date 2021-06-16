@@ -34,6 +34,8 @@ export class GamesComponent extends Admindata implements OnInit {
         this.keys = [];
         this.items = [];
         this.isLoaded = false;
+        this.game = null;
+        this.header = "NEW";
     }
 
     get getReturnToGames(): any {
@@ -43,8 +45,7 @@ export class GamesComponent extends Admindata implements OnInit {
     returnToGames(): void {
         this.clearGames();
         this.getData();
-        this.game = null;
-        this.header = "NEW";
+
         this.addingNewGame = false;
     }
 

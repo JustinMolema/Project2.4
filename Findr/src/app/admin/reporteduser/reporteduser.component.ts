@@ -10,7 +10,7 @@ import {AdmindataService} from '../admindata.service';
 })
 export class ReporteduserComponent extends Admindata implements OnInit {
     viewingLogs = false;
-
+    selectedUser;
     constructor(public datepipe: DatePipe, public admindataService: AdmindataService) {
         super(datepipe, admindataService);
     }
@@ -22,8 +22,18 @@ export class ReporteduserComponent extends Admindata implements OnInit {
         return this.openViewLog.bind(this);
     }
 
-    openViewLog(): void {
+    openViewLog(user): void {
+        this.selectedUser = user;
         this.viewingLogs = true;
+    }
+
+    get getCloseViewLog(): any {
+        return this.closeViewLog.bind(this);
+    }
+
+    closeViewLog(): void {
+        this.selectedUser = null;
+        this.viewingLogs = false;
     }
 
     getData(): void {

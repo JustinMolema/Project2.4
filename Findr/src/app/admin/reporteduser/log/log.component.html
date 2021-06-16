@@ -1,41 +1,101 @@
-<div class="field">
+<div class="fieldcontainer">
     <div class="fieldnamecontainer">
         <span class=fieldnamecontainer>Name:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" disabled="disabled">
+        <input class="inputfield" type="text" placeholder="" value="{{reportedUserInfo.Username}}" disabled="disabled">
     </div>
 </div>
-<div class="field">
+<div class="fieldcontainer">
     <div class="fieldnamecontainer">
         <span class=fieldnamecontainer>Date:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" disabled="disabled">
+        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.Date}}"
+               disabled="disabled">
     </div>
 </div>
-<div class="field">
+<div class="fieldcontainer">
     <div class="fieldnamecontainer">
         <span class=fieldnamecontainer>Offense:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" disabled="disabled">
+        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.Reason}}"
+               disabled="disabled">
     </div>
 </div>
-
-<div class="field">
+<div class="fieldcontainer">
     <div class="fieldnamecontainer">
         <span class=fieldnamecontainer>Message:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" disabled="disabled">
+        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.Message}}"
+               disabled="disabled">
     </div>
 </div>
-<hr class="line">
+<div class="fieldcontainer">
+    <div class="fieldnamecontainer">
+        <span class=fieldnamecontainer>Actions:</span>
+    </div>
+    <div class="buttons">
+        <div class="buttonview">
+            <button (click)="returnToReportedUsers()">
+                <div>
+                    &#x2715;
+                    <span>Cancel</span>
+                </div>
+            </button>
+        </div>
+        <div class="buttonview">
+            <button>
+                <div style="font-size: 18px; color: yellow;">
+                    &#9888;
+                    <span>Warning</span>
+                </div>
+            </button>
+        </div>
+        <div class="buttonview">
+            <button>
+                <div style="font-size: 18px; color: red;">
+                    &#8856;
+                    <span>Ban</span>
+                </div>
+            </button>
+        </div>
+        <div class="buttonview">
+            <button>
+                <div class="buttonimage"style="font-size: 18px; color: lightgray;">
+                    <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
+                    <span>Dismiss</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+<!--<div class="field button-container">-->
+<!--    <div class="buttonview">-->
+<!--        <button>-->
+<!--            <div style="font-size: 18px; color: yellow;">-->
+<!--                &#9888;-->
+<!--                <span>Warning</span>-->
+<!--            </div>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    <div class="buttonview">-->
+<!--        <button>-->
+<!--            <div style="font-size: 18px; color: red;">-->
+<!--                &#8856;-->
+<!--                <span>Ban</span>-->
+<!--            </div>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--    <div class="buttonview">-->
+<!--        <button >-->
+<!--            <div style="font-size: 18px; color: lightgray;">-->
+<!--                <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>-->
+<!--                <span>Dismiss</span>-->
+<!--            </div>-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="textareafield">
-    <div class="username">
-        <span>Username:</span>
-    </div>
-    <textarea class="usernameText" type="text" placeholder="Pietje" disabled="disabled">{{username}}</textarea>
-</div>
