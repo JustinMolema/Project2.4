@@ -43,14 +43,21 @@ export class FriendsmenuComponent implements OnInit {
                 this.appService.friends.push();
             });
 
-            friendRequestsFromServer[0].forEach(element => {
-                this.friendRequests.push(element)
-            });
-
-            blockedUsersFromServer[0].forEach(element => {
-                this.blockedUsers.push(element)
-            });
-
+            if(friendRequestsFromServer.length > 0)
+            {
+                friendRequestsFromServer[0].forEach(element => {
+                    console.log(element)
+                    this.friendRequests.push(element)
+                });
+            }
+            
+            if(blockedUsersFromServer.length > 0)
+            {
+                blockedUsersFromServer[0].forEach(element => {
+                    this.blockedUsers.push(element)
+                });
+            }
+            
         });
     }
 
@@ -77,7 +84,7 @@ export class FriendsmenuComponent implements OnInit {
     }
 
     sendFriendRequest(): void {
-        var id = prompt("please enter the id you want to add");
+        var id = prompt("Please enter the ID you want to add");
         if (id) {
             this.appService.sendFriendRequest(id).subscribe(res => {
                 this.setFriendInfo();
