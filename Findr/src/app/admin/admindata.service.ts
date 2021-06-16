@@ -41,13 +41,13 @@ export class AdmindataService {
         let params: HttpParams = new HttpParams();
         params = params.set('name', name).set('category', category).set('description', description);
 
-        return this.http.post('http://localhost:8001/api/game/', params);
+        return this.http.post('http://localhost:8001/api/games/', params);
     }
 
     deleteGame(name: string): Observable<any> {
         let params: HttpParams = new HttpParams();
         params = params.set('name', name);
-        return this.http.delete('http://localhost:8001/api/game/' + name);
+        return this.http.delete('http://localhost:8001/api/games/' + name);
     }
 
     deleteReportedUser(id: number): Observable<any> {

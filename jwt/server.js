@@ -113,13 +113,6 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 })
 
 
-app.route('/api/chats').get(authenticateToken, (req, res) => {
-    connection.query('SELECT * FROM chats', function (err, result, fields) {
-        if (err) throw err;
-        res.send(JSON.stringify(result));
-    })
-})
-
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 //                 USER PROFILE CALLS
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -337,7 +330,7 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 })
 
 // create new game
-app.route('/api/game').post((req, res) => {
+app.route('/api/games').post((req, res) => {
     connection.connect(function (err) {
         connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
             if (err) return res.json({status: "error"});
@@ -347,7 +340,7 @@ app.route('/api/game').post((req, res) => {
 })
 
 // delete game
-app.route('/api/game/:name').delete((req, res) => {
+app.route('/api/games/:name').delete((req, res) => {
     let name = req.params['name']
     connection.connect(function (req, err) {
         connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
@@ -387,7 +380,7 @@ app.delete('/api/users/reported/:id', authenticateToken, (req, res) => {
 app.get('/api/support/tickets', authenticateToken, (req, res) => {
     connection.query('SELECT * FROM support_tickets', function(err, result, fields){
         if(err) res.sendStatus(418);
-        res.send(JSON.stringify(result));
+        res.send(result);
     })
 })
 
@@ -400,7 +393,7 @@ app.delete('/api/support/tickets/:id', authenticateToken, (req, res) => {
 })
 
 // user login
-app.post('api/user/login', (req, res) => {
+app.post('/api/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;
@@ -446,7 +439,7 @@ app.post('api/user/login', (req, res) => {
 })
 
 // api call to create user in database
-app.post('api/user/', async (req, res) => {
+app.post('api/user/signup', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
 	// encode so that special symbols dont destroy DB
