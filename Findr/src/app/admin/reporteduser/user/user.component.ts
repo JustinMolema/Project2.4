@@ -2,40 +2,27 @@ import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../../../sharedmodule/dialog/dialog.component';
+import {AdmindataService} from '../../admindata.service';
+import {AdminRow} from '../../AdminRow';
 
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
-    @Input() name: string;
-    @Input() offense: string;
-    @Input() date: Date;
-    @Input() time: Date;
+export class UserComponent extends AdminRow implements OnInit {
+    @Input() item;
 
-    constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {
+    constructor(public snackBar: MatSnackBar, public dialog: MatDialog, public admindataService: AdmindataService) {
+        super(snackBar, dialog, admindataService);
     }
 
     ngOnInit(): void {
-
     }
 
-    openDialogAndListenForClose(name: string, offense: string): void {
-        this.snackBar.dismiss();
-        const dialogRef = this.dialog.open(DialogComponent, {
-            width: '300px',
-        });
-
-        dialogRef.afterClosed().subscribe(res => {
-            this.handleDialogResponse(res);
-        });
-    }
-
-    handleDialogResponse(res: string): void {
-        if (res === "Cancel" || res === undefined) return;
-
-        // TODO Delete item from database and list.
-        this.snackBar.open('Item deleted', 'undo');
+    setUndoTimer(): void {
+        this.undoTimer = setTimeout(() => {
+            this.admindataService.deleteReportedUser(this.item.ReportedUserID).subscribe();
+        }, 4000);
     }
 }

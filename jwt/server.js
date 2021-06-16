@@ -109,7 +109,6 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
     connection.query('SELECT * FROM users', function (err, result, fields) {
         if (err) throw err;
         res.send(result);
-        res.send(result);
     })
 })
 
@@ -348,19 +347,27 @@ app.get('/api/users/reported',authenticateToken, (req, res) => {
     })
 })
 
-app.get('/api/users/reported/:id', authenticateToken, (req, rest) => {
+app.delete('/api/users/reported/:id', authenticateToken, (req, res) => {
+	console.log("peter");
     let name = req.params['id'];
-    connection.query('SELECT * FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
-        if(err) res.send(418);
+    connection.query('DELETE FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
+        if(err) res.sendStatus(418);
+        res.sendStatus(200);
+    })
+})
+
+app.get('/api/support/tickets', authenticateToken, (req, res) => {
+    connection.query('SELECT * FROM support_tickets', function(err, result, fields){
+        if(err) res.sendStatus(418);
         res.send(JSON.stringify(result));
     })
 })
 
-app.delete('/api/users/reported/:id', authenticateToken, (req, rest) => {
-    let name = req.params['id'];
-    connection.query('DELETE FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
-        if(err) res.send(418);
-        res.send(JSON.stringify(result));
+app.delete('/api/support/tickets/:id', authenticateToken, (req, res) => {
+    let id = req.params['id']
+    connection.query('DELETE FROM support_tickets WHERE TicketID = ?', [id], function(err, result, fields){
+        if(err) res.sendStatus(418);
+        res.sendStatus(200);
     })
 })
 

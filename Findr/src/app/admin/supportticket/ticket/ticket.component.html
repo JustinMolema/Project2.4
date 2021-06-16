@@ -1,13 +1,13 @@
 <div class="adminrow">
-    <app-tabledata [game]="date" [key]="'date'"></app-tabledata>
-    <app-tabledata [game]="time" [key]="'time'"></app-tabledata>
-    <app-tabledata [game]="tag" [key]="'name'"></app-tabledata>
-    <app-tabledata [game]="status" [key]="'reason'"></app-tabledata>
+    <app-tabledata [data]="item.Date" [key]="'Date'"></app-tabledata>
+    <app-tabledata [data]="item.Time" [key]="'Time'"></app-tabledata>
+    <app-tabledata [data]="item.Category" [key]="'Category'"></app-tabledata>
+    <app-tabledata [data]="item.Status" [key]="'Reason'"></app-tabledata>
     <div class="actions">
         <div class="field button-container">
             <div class="buttonview">
 
-                <button (click)=closeTicket()>
+                <button (click)=openDialogAndListenForClose()>
                     <div style="font-size: 18px;">
                         &#9776;
                         <span>View ticket</span>
@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="buttonview">
-                <button (click)="closeTicket()">
+                <button (click)="openDialogAndListenForClose()">
                     <div style="font-size: 18px; color: lightgray;">
                         <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
                         <span>Close ticket</span>

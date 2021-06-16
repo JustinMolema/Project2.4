@@ -1,12 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AdmindataService {
-    constructor(private http: HttpClient) { }
+    itemDeleted: Subject<string> = new Subject<string>();
+    undoItemDeleted: Subject<string> = new Subject<string>();
+
+    constructor(private http: HttpClient) {
+    }
+
+    deleteItemListener(): Observable<any> {
+        return this.itemDeleted.asObservable();
+    }
+
+    undoDeleteItemListener(): Observable<any> {
+        return this.undoItemDeleted.asObservable();
+    }
+
+    deleteItem(item): void {
+        console.log(item);
+        this.itemDeleted.next(item);
+    }
+
+    undoDeleteItem(): void {
+        this.undoItemDeleted.next();
+    }
 
     getUsers(): Observable<any> {
         return this.http.get('http://localhost:8001/api/users');
@@ -18,9 +39,7 @@ export class AdmindataService {
 
     addGame(name: string, description: string, category: string): Observable<any> {
         let params: HttpParams = new HttpParams();
-        params = params.set('name', name).
-            set('category', category).
-            set('description', description);
+        params = params.set('name', name).set('category', category).set('description', description);
 
         return this.http.post('http://localhost:8001/api/game/', params);
     }
@@ -31,12 +50,21 @@ export class AdmindataService {
         return this.http.delete('http://localhost:8001/api/game/' + name);
     }
 
+    deleteReportedUser(id: number): Observable<any> {
+        console.log("pp");
+        return this.http.delete('http://localhost:8001/api/users/reported/' + id);
+    }
+
     getReportedUsers(): Observable<any> {
         return this.http.get('http://localhost:8001/api/users/reported');
     }
 
     getSupportTickets(): Observable<any> {
-        return this.http.get('http://localhost:8001/api/supporttickets');
+        return this.http.get('http://localhost:8001/api/support/tickets');
+    }
+
+    deleteSupportTicket(id: number): Observable<any> {
+        return this.http.delete('http://localhost:8001/api/support/tickets/' + id);
     }
 
 }

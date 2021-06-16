@@ -31,13 +31,12 @@
                 </div>
             </div>
             <hr class="line headerline">
-            <app-tableheader [items]="reportedUsers" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
+            <app-tableheader [items]="items" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
 
             <hr class="line">
-            <ng-container *ngFor="let user of reportedUsers | tablefilter:keys:searchText |  slice:0:max; index as i">
-                <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [date]=user.date [name]=user.name [offense]=user.reason [time]=user.time appHighlightSearch
-                    [searchedWord]="searchText" [content]="user" [keys]="keys"></app-user>
+            <ng-container *ngFor="let item of items | tablefilter:keys:searchText |  slice:0:max; index as i">
+                <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }" [item]=item
+                    appHighlightSearch [searchedWord]="searchText" [content]="item" [keys]="keys"></app-user>
                 <hr class="line">
                 <br class="mobileBreak">
             </ng-container>

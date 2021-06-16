@@ -1,12 +1,12 @@
 <div class="adminrow">
-    <app-tabledata [game]="game" [key]="keys[0]"></app-tabledata>
-    <app-tabledata [game]="game" [key]="keys[1]"></app-tabledata>
-    <app-tabledata [game]="game" [key]="keys[2]"></app-tabledata>
+    <app-tabledata [data]="item.Name" [key]="keys[0]"></app-tabledata>
+    <app-tabledata [data]="item.Category" [key]="keys[1]"></app-tabledata>
+    <app-tabledata [data]="item.Description" [key]="keys[2]"></app-tabledata>
 
 	<div class="actions">
 		<div class="field button-container">
 			<div class="buttonview">
-				<button (click)="editGame(game)">
+				<button (click)="editGame(item)">
 					<div style="font-size: 18px; display: flex">
 						<img src="../../../../assets/SVG/edit.svg" style="width: 20px; height: 20px;" alt="Edit"/>
 						<span style="margin-left: 5px">Edit</span>
@@ -14,7 +14,7 @@
 				</button>
 			</div>
 			<div class="buttonview">
-				<button (click)="delete(game.Name)">
+				<button (click)="openDialogAndListenForClose()">
 					<div style="font-size: 18px; display: flex; color: lightgray;">
 						<img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete"/>
 						<span style="margin-left: 5px">Delete</span>

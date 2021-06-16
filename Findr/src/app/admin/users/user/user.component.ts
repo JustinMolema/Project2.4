@@ -1,61 +1,30 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {AdminRow} from '../../AdminRow';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {AdmindataService} from '../../admindata.service';
 
 @Component({
-  selector: 'all-user',
+  selector: 'app-adminuser',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
-export class UserComponent implements OnInit {
-    _name: String;
-    _email: String;
-    _warning: Number;
-    _ban: string;
+export class UserComponent extends AdminRow implements OnInit {
+    @Input() item: any;
+    @Input() keys = [];
 
-    constructor() {
+    constructor(public snackBar: MatSnackBar, public dialog: MatDialog,
+                public admindataService: AdmindataService) {
+        super(snackBar, dialog, admindataService);
     }
 
     ngOnInit(): void {
     }
 
-    @Input()
-    set name(name: String) {
-        this._name = name;
-    }
-
-    get name() {
-        return this._name;
-    }
-
-    @Input()
-    set email(email: String) {
-        this._email = email;
-    }
-
-    get email() {
-        return this._email;
-    }
-
-    @Input()
-    set warning(warning: Number) {
-        this._warning = warning;
-    }
-
-    get warning() {
-        return this._warning;
-    }
-
-    @Input()
-    set ban(ban: string) {
-        this._ban = ban;
-    }
-
-    get ban() {
-        return this._ban;
-    }
-
-    delete(name: String, offense: String): void {
-        if (confirm("Are you sure you want to delete this: Name: " + name + " Offense: " + offense)) {
-            alert("Item deleted");
-        }
+    setUndoTimer(): void {
+        this.undoTimer = setTimeout(() => {
+            // Ban/Warn user.
+            // this.admindataService.deleteGame(this.item.GameID).subscribe();
+        }, 4000);
     }
 }

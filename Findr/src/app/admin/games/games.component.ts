@@ -8,18 +8,12 @@ import { Admindata } from '../admindata';
     templateUrl: './games.component.html',
     styleUrls: ['./games.component.css']
 })
-export class GamesComponent implements OnInit, Admindata {
-    searchText: string;
-    max: number;
-    isLoaded: boolean;
+export class GamesComponent extends Admindata implements OnInit {
     addingNewGame = false;
 
-    keys = [];
-    games = [];
-
-    constructor(private admindataService: AdmindataService, private gamesService: GamesService) {
+    constructor(public admindataService: AdmindataService, private gamesService: GamesService) {
+        super(null, admindataService);
         this.gamesService.setGameComponent(this);
-        this.getData();
     }
 
     ngOnInit(): void {
@@ -28,31 +22,14 @@ export class GamesComponent implements OnInit, Admindata {
     getData(): void {
         this.admindataService.getGames().subscribe(response => {
             this.fillData(response);
-            this.allowViewToLoad();
+            this.allowViewToLoad(["Name", "Category", "subscribercount"]);
         });
-    }
-
-    fillData(response: any): void {
-        for (let game of response) {
-            this.games.push(game);
-        }
-    }
-
-    allowViewToLoad(): void {
-        this.keys = ["Name", "Category", "subscribercount"]; // Object.keys(this.games[0]);
-        this.isLoaded = true;
     }
 
     clearGames(): void {
         this.keys = [];
-        this.games = [];
+        this.items = [];
         this.isLoaded = false;
-    }
-
-    changeEvent(max: number): any {
-        if (max > 1) return this.max = max;
-
-        this.max = this.games.length;
     }
 
     get getReturnToGames(): any {

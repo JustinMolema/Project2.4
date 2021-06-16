@@ -7,10 +7,11 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class TabledataComponent implements OnInit {
     @Input() key: string;
-    @Input() game = [];
+    @Input() data;
 
     constructor() { }
 
     ngOnInit(): void {
     }
+
 }

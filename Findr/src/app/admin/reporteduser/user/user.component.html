@@ -1,8 +1,8 @@
 <div class="adminrow">
-    <app-tabledata [game]="date" [key]="'date'"></app-tabledata>
-    <app-tabledata [game]="time" [key]="'time'"></app-tabledata>
-    <app-tabledata [game]="name" [key]="'name'"></app-tabledata>
-    <app-tabledata [game]="offense" [key]="'reason'"></app-tabledata>
+    <app-tabledata [data]="item.date" [key]="'date'"></app-tabledata>
+    <app-tabledata [data]="item.time" [key]="'time'"></app-tabledata>
+    <app-tabledata [data]="item.name" [key]="'name'"></app-tabledata>
+    <app-tabledata [data]="item.offense" [key]="'reason'"></app-tabledata>
 
     <div class="actions">
         <div class="field button-container">
@@ -31,7 +31,7 @@
                 </button>
             </div>
             <div class="buttonview">
-                <button (click)="openDialogAndListenForClose(name, offense)">
+                <button (click)="openDialogAndListenForClose()">
                     <div style="font-size: 18px; color: lightgray;">
                         <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
                         <span>Dismiss</span>

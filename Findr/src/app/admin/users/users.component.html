@@ -22,15 +22,15 @@
             </div>
             <hr class="line headerline">
 
-            <app-tableheader  [keys]="keys" [items]="users" [actionSize]='20' [infoSize]='20'></app-tableheader>
+            <app-tableheader  [keys]="keys" [items]="items" [actionSize]='20' [infoSize]='20'></app-tableheader>
 
             <hr class="line">
-            <ng-container *ngFor="let user of users | tablefilter:keys:searchText |  slice:0:max; index as i" >
-                <all-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [name]=user.name [email]=user.email [warning]=user.warning [ban]=user.ban
+            <ng-container *ngFor="let item of items | tablefilter:keys:searchText |  slice:0:max; index as i" >
+                <app-adminuser [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
+                               [item]="item"
 
-                    appHighlightSearch [searchedWord]="searchText" [content]="user" [keys]="keys"
-                    ></all-user>
+                               appHighlightSearch [searchedWord]="searchText" [content]="item" [keys]="keys"
+                    ></app-adminuser>
                 <hr class="line">
                 <br class="mobileBreak">
             </ng-container>

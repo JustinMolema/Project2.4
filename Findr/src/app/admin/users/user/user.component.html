@@ -1,8 +1,8 @@
 <div class="adminrow">
-    <app-tabledata [game]="name" [key]="'date'"></app-tabledata>
-    <app-tabledata [game]="email" [key]="'time'"></app-tabledata>
-    <app-tabledata [game]="warning" [key]="'name'"></app-tabledata>
-    <app-tabledata [game]="ban" [key]="'reason'"></app-tabledata>
+    <app-tabledata [data]="item.Username" [key]="'Username'"></app-tabledata>
+    <app-tabledata [data]="item.Email" [key]="'Email'"></app-tabledata>
+    <app-tabledata [data]="item.Warnings" [key]="'Warnings'"></app-tabledata>
+    <app-tabledata [data]="item.Banned" [key]="'Banned'"></app-tabledata>
     <div class="actions">
         <div class="button-container">
             <div class="buttonview">
@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="buttonview">
-                <button class="delete-view" (click)="delete(name, email)">
+                <button class="delete-view" (click)="openDialogAndListenForClose()">
                     <div style="font-size: 18px; display: flex; color: lightgray;">
                         <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;" alt="Delete"/>
                         <span style="margin-left: 5px">Delete</span>

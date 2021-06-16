@@ -22,14 +22,13 @@
             </div>
             <hr class="line">
 
-            <app-tableheader [items]="tickets"></app-tableheader>
+            <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="items" [actionSize]='20' [infoSize]='20'></app-tableheader>
+
 
             <hr class="line">
-            <ng-container *ngFor="let ticket of tickets | tablefilter:keys:searchText | slice:0:max; index as i">
+            <ng-container *ngFor="let item of items | tablefilter:keys:searchText | slice:0:max; index as i">
                 <app-ticket [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [tag]=ticket.tag [status]=ticket.status [date]=ticket.date [time]=ticket.time
-
-                    appHighlightSearch [searchedWord]="searchText" [content]="ticket" [keys]="keys"
+                    [item]=item appHighlightSearch [searchedWord]="searchText" [content]="items" [keys]="keys"
                     ></app-ticket>
                 <hr class="line">
                 <br class="mobileBreak">

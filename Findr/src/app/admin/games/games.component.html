@@ -35,13 +35,13 @@
             </div>
             <hr class="line">
 
-            <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="games" [actionSize]='20' [infoSize]='26.6666666667'>
+            <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="items" [actionSize]='20' [infoSize]='26.6666666667'>
             </app-tableheader>
 
             <hr class="line">
-            <ng-container *ngFor="let game of games | tablefilter:keys:searchText |  slice:0:max; index as i">
+            <ng-container *ngFor="let game of items | tablefilter:keys:searchText |  slice:0:max; index as i">
                 <app-game [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
-                    [game]=game [keys]="keys"
+                          [item]="game" [keys]="keys"
                     appHighlightSearch [searchedWord]="searchText" [content]="game" [keys]="keys"></app-game>
                 <hr class="line">
 				<br class="mobileBreak">
