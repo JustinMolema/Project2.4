@@ -36,8 +36,9 @@ export class FriendsmenuComponent implements OnInit {
             this.getFriendRequestsFromServer(),
             this.getBlockedUsersFromServer()]
         ).subscribe(([friendsFromServer, friendRequestsFromServer, blockedUsersFromServer]) => {
-
-            friendsFromServer[0].forEach(element => {
+            
+            friendsFromServer.forEach(element => {
+                console.log(friendsFromServer[0])
                 this.friends.push(element)
                 this.appService.friends.push();
             });

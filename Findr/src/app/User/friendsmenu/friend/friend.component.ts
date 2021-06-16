@@ -13,6 +13,7 @@ export class FriendComponent implements OnInit {
 
   @Input() friend: string;
   @Input() friendID: string;
+  //@Input() pic: string;
 
   constructor(private router: Router, private chat: ChatService, private appService: AppService) {}
   @Output()

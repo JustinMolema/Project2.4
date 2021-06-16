@@ -10,6 +10,11 @@ const {Console} = require('console')
 const bcrypt = require('bcrypt')
 const crypto = require("crypto");
 
+const { Model } = require('objection');
+const Knex = require('knex');
+
+
+
 const {InMemorySessionStore} = require("./sessionStore");
 const sessionStore = new InMemorySessionStore();
 
@@ -25,6 +30,86 @@ const connection = mysql.createConnection({
     password: '',
     database: 'Findr'
 });
+
+const knex = Knex({
+    client: 'mysql',
+    useNullAsDefault: true,
+    connection: {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'Findr'
+    }
+  });
+
+Model.knex(knex);
+
+class User extends Model {
+
+    static get tableName(){
+        return 'users'
+    }
+
+    static get idColumn(){
+        return 'User_ID'
+    }
+
+    static get usernameColumn(){
+        return 'Username';
+    }
+
+    static get passwordColumn(){
+        return 'Password';
+    }
+
+    static get emailColumn(){
+        return 'Email';
+    }
+
+    static get warningsColumn(){
+        return 'Warnings';
+    }
+
+    static get bannedColumn(){
+        return 'Banned';
+    }
+
+    static get profPicColumn(){
+        return 'Profile_picture';
+    }
+}
+
+class user_friends_with_user extends Model{
+
+    static relationMappings() {
+        return {
+            User_One: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: 'user_friends_with_user.UserOne',
+                    to: 'users.User_ID'
+                }
+            },
+            User_Two: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: 'user_friends_with_user.UserTwo',
+                    to: 'users.User_ID'
+                }
+            }
+        }
+    }
+
+    static get UserOne(){
+        return 'UserOne'
+    }
+
+    static get UserTwo(){
+        return 'UserTwo';
+    }
+}
 
 // connection.connect(function (err) {
 // 	if (err) throw err;
@@ -219,6 +304,7 @@ app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
 
 // get friends
+ /*
 app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
@@ -227,15 +313,46 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
         friendInfo = JSON.stringify(result);
         res.send([result]);
     })
+})*/
+
+// get friends but ORM
+app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) => {
+    let user_id = req.params['userID']
+    res.header("Access-Control-Allow-Origin", "*");
+    /*connection.query('SELECT User_ID, Username FROM user_friends_with_user JOIN users ON users.User_ID = user_friends_with_user.UserTwo WHERE UserOne = ?', [user_id], await function (err, result, fields) {
+        if (err) return res.sendStatus(400);
+        friendInfo = JSON.stringify(result);
+        res.send([result]);
+    })*/
+    try {
+        const friends = await User.query()
+        .select('User_ID', 'Username', "Profile_picture")
+        .from('user_friends_with_user')
+        .innerJoin('users AS user', 'user.User_ID', 'user_friends_with_user.UserTwo' )
+        .where('UserOne', '=', user_id)
+        console.log(friends)
+        if (friends[0].Profile_picture) {
+            friends[0].Profile_picture = friends[0].Profile_picture.toString();
+        }
+        res.send(friends)
+    } catch (error) {
+        console.log(error)
+        res.send({status: 403})
+    }
+    
 })
+
+
 // get a single friend
 app.route('/api/user/:userID/friends/:friendID').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     let friend_id = req.params['friendID']
     res.header("Access-Control-Allow-Origin", "*");
-    connection.query('SELECT User_ID, Username FROM user_friends_with_user WHERE UserTwo = ' + friend_id + " AND UserOne = " + user_id, await function (err, result, fields) {
+    connection.query('SELECT User_ID, Username, Profile_picture FROM user_friends_with_user WHERE UserTwo = ' + friend_id + " AND UserOne = " + user_id, await function (err, result, fields) {
         if (err) return res.sendStatus(400);
-        friendInfo = JSON.stringify(result);
+        if (result[0].Profile_picture) {
+            result[0].Profile_picture = result[0].Profile_picture.toString();
+        }
         res.send([result]);
     })
 })
@@ -261,7 +378,7 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
 })
 
 // block user
-app.route('/api/user/:userID/block/:blockeduser').post(authenticateToken, async (req, res) => {
+app.route('/api/user/:userID/blocked/:blockeduser').post(authenticateToken, async (req, res) => {
     let UserOne = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
     const UserTwo = req.params['blockeduser'];// person getting blocked
@@ -320,9 +437,11 @@ app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateT
 app.route('/api/user/:userID/friend-requests').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    connection.query('SELECT User_ID, Username FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
+    connection.query('SELECT User_ID, Username, Profile_picture FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
         if (err) return res.send(err);
-        let friendRequests = JSON.stringify(result);
+        if (result[0].Profile_picture) {
+            result[0].Profile_picture = result[0].Profile_picture.toString();
+        }
         res.send([result]);
     })
 })
@@ -336,7 +455,9 @@ app.route('/api/user/:userID/friend-requests/:reqID').post(authenticateToken, as
 
     connection.query('INSERT INTO user_befriends_user (UserOne, UserTwo) VALUES (' + UserTwo + ', ' + UserOne + ');', function (err, result, fields) {
         if (err) throw err;
-        let friendRequests = JSON.stringify(result);
+        if (result[0].Profile_picture) {
+            result[0].Profile_picture = result[0].Profile_picture.toString();
+        }
         res.send([result]);
     })
 })
@@ -344,9 +465,11 @@ app.route('/api/user/:userID/friend-requests/:reqID').post(authenticateToken, as
 app.route('/api/user/:userID/blocked').get(authenticateToken, async (req, res) => {
     let user_id = req.params['userID']
     res.header("Access-Control-Allow-Origin", "*");
-    connection.query('SELECT User_ID, Username FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
+    connection.query('SELECT User_ID, Username, Profile_picture FROM user_blocked_user AS BU JOIN users ON users.User_ID = BU.user_blockee WHERE BU.user_blocker = ?', [user_id], function (err, result, fields) {
         if (err) throw err;
-        let BlockedInfo = JSON.stringify(result);
+        if (result[0].Profile_picture) {
+            result[0].Profile_picture = result[0].Profile_picture.toString();
+        }
         res.send([result]);
     })
 })
@@ -358,7 +481,6 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
 
     connection.query('DELETE FROM user_blocked_user WHERE user_blocker = ' + UserOne + ' AND user_blockee = ' + UserTwo, function (err, result, fields) {
         if (err) throw err;
-        let BlockedInfo = JSON.stringify(result);
         res.send([result]);
     })
 })
@@ -385,7 +507,7 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 app.route('/api/game').post((req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     connection.connect(function (err) {
-        connection.query('insert into games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
+        connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
             if (err) return res.json({status: "error"});
             res.json({status: "ok"});
         })
@@ -412,7 +534,7 @@ app.route('/api/game/:name').delete((req, res) => {
 })
 
 // user login
-app.post('api/user/login', (req, res) => {
+app.post('/api/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;
@@ -458,7 +580,7 @@ app.post('api/user/login', (req, res) => {
 })
 
 // api call to create user in database
-app.post('api/user/', async (req, res) => {
+app.post('/api/user/', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
     // encode so that special symbols dont destroy DB
