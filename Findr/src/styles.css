@@ -4,6 +4,10 @@ html, body {
     padding: 0;
 }
 
+.mat-snack-bar-container {
+    color: white;
+}
+
 body{
     background-color: #131c28;
 }

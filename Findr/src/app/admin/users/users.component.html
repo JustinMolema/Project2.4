@@ -22,7 +22,7 @@
             </div>
             <hr class="line headerline">
 
-            <app-tableheader  [keys]="keys" [items]="items" [actionSize]='20' [infoSize]='20'></app-tableheader>
+            <app-tableheader *ngIf="isLoaded" [keys]="keys" [items]="items" [actionSize]='20' [infoSize]='20'></app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let item of items | tablefilter:keys:searchText |  slice:0:max; index as i" >

@@ -1,12 +1,12 @@
 <div class="adminrow">
-    <app-tabledata [data]="item.date" [key]="'date'"></app-tabledata>
-    <app-tabledata [data]="item.time" [key]="'time'"></app-tabledata>
-    <app-tabledata [data]="item.name" [key]="'name'"></app-tabledata>
-    <app-tabledata [data]="item.offense" [key]="'reason'"></app-tabledata>
+    <app-tabledata [data]="item.Date" [key]="'Date'"></app-tabledata>
+    <app-tabledata [data]="item.Time" [key]="'Time'"></app-tabledata>
+    <app-tabledata [data]="item.Name" [key]="'Username'"></app-tabledata>
+    <app-tabledata [data]="item.Offense" [key]="'Reason'"></app-tabledata>
 
     <div class="actions">
         <div class="field button-container">
-            <div class="buttonview">
+            <div class="buttonview" (click)="openViewLog()">
                 <button>
                     <div style="font-size: 18px;">
                         &#9776;

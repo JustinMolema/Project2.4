@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
+import {MatSnackBar, MatSnackBarRef} from "@angular/material/snack-bar";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,11 @@ export class AdmindataService {
     itemDeleted: Subject<string> = new Subject<string>();
     undoItemDeleted: Subject<string> = new Subject<string>();
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, public snackBar: MatSnackBar) {
+    }
+
+    openSnackbar(message: string, action?: string): MatSnackBarRef<any> {
+        return this.snackBar.open(message, action);
     }
 
     deleteItemListener(): Observable<any> {
@@ -44,14 +49,21 @@ export class AdmindataService {
         return this.http.post('http://localhost:8001/api/games/', params);
     }
 
+    editGame(name: string, description: string, category: string, newname: string): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set('name', name)
+            .set('category', category)
+            .set('description', description)
+            .set('newname', newname);
+
+        return this.http.put('http://localhost:8001/api/games/', params);
+    }
+
     deleteGame(name: string): Observable<any> {
-        let params: HttpParams = new HttpParams();
-        params = params.set('name', name);
         return this.http.delete('http://localhost:8001/api/games/' + name);
     }
 
     deleteReportedUser(id: number): Observable<any> {
-        console.log("pp");
         return this.http.delete('http://localhost:8001/api/users/reported/' + id);
     }
 

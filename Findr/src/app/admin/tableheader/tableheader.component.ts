@@ -38,8 +38,8 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
         if (this.isColumnNumeric(columnName)) this.sortByNumbers(columnName);
         else this.sortByString(columnName);
 
-        // Sorting by date does NOT ascend the first time, so reverse the list after sorting it by date (descending default)
         // Don't remove this line thinking the first if statement can replace it.
+        // Sorting by date does NOT ascend the first time, so reverse the list after sorting it by date (descending default)
         if (columnName === "Date") this.items.reverse();
     }
 

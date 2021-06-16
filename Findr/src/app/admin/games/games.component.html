@@ -1,9 +1,9 @@
 <meta name="Description" content="This page is for displaying games">
 <div class="admincontent">
     <div class="new-game-tab" *ngIf="addingNewGame">
-        <app-admintopbar [title]="'GAMES &#8674; NEW'"></app-admintopbar>
+        <app-admintopbar [title]="'GAMES &#8674; ' + header"></app-admintopbar>
         <div class="admin-view-container">
-            <app-newgame [returnToGames]="getReturnToGames"></app-newgame>
+            <app-newgame [returnToGames]="getReturnToGames" [game]="game"></app-newgame>
         </div>
     </div>
     <div class="admintab" *ngIf="!addingNewGame">

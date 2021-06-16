@@ -12,7 +12,7 @@
             </label>
         </div>
         <label class="uploadimage" for="upload">Upload image</label>
-       
+
     </div>
     <div class="field">
         <div class="fieldnamecontainer">
@@ -41,17 +41,23 @@
         <div class="fieldnamecontainer">
             <span>Description:</span>
         </div>
-        <textarea class="inputfieldcontainer" type="text" placeholder="Game Name" formControlName="description"></textarea>
+        <textarea class="inputfieldcontainer" type="text" placeholder="Game Name" formControlName="description">llllllllldassadaasd</textarea>
     </div>
     <div style="width: 100%;display: flex; justify-content: flex-end;">
-        <button class="cancel" (click)="returnToGame('Are you sure you want to cancel?')">
+        <button class="cancel" (click)="returnToGames()">
             <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
                 Cancel
             </div>
         </button>
-        <button class="addgame" (click)="addGame()">
+        <button *ngIf="!game" class="addgame" (click)="addGame()">
             <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
                 Add game
+            </div>
+        </button>
+
+        <button *ngIf="game" class="addgame" (click)="editGame()">
+            <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
+                Edit game
             </div>
         </button>
     </div>

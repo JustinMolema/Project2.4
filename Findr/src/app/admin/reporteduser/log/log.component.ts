@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogComponent implements OnInit {
 
-  username= "Wijmar"
+  username = "Wijmar";
   constructor() { }
 
   ngOnInit(): void {

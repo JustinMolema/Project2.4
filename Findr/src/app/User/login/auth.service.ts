@@ -23,7 +23,7 @@ export class AuthService {
 
         this.refreshTokenInterval = setInterval(() => {
             this.refreshInterval();
-        }, 1000);
+        }, 10000);
     }
 
     refreshInterval(): void {
@@ -33,17 +33,17 @@ export class AuthService {
     }
 
     login(username: string, password: string): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        const params: HttpParams = new HttpParams()
             .set('username', username)
             .set('password', password);
         return this.http.post('http://localhost:8001/api/user/login/', params);
     }
 
     refreshToken(): Observable<any> {
-        let params: HttpParams = new HttpParams()
+        const params: HttpParams = new HttpParams()
             .set('token', this.getRefreshToken());
 
-        return this.http.post('http://localhost:8001/api/token/', params);
+        return this.http.post('http://localhost:8001/api/token/refresh', params);
     }
 
     writeTokens(tokens): void {

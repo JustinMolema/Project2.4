@@ -1,21 +1,21 @@
 require('dotenv').config()
-const express = require('express')
-const cors = require('cors')
-const app = express()
-const jwt = require('jsonwebtoken')
-const mysql = require('mysql')
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const jwt = require('jsonwebtoken');
+const mysql = require('mysql');
 const test = require('./api.js');
-const http = require('http')
-const {Console} = require('console')
-const bcrypt = require('bcrypt')
+const http = require('http');
+const {Console} = require('console');
+const bcrypt = require('bcrypt');
 const crypto = require("crypto");
-let refreshTokens = []
+let refreshTokens = [];
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
 app.use(cors({
 	origin: "*"
-}))
+}));
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -102,15 +102,23 @@ server.listen(chatport);
 const port = process.env.PORT || 8080;
 
 app.listen(8001, () => {
-    console.log('Server started!')
-})
+    console.log('Server started!');
+});
 
 app.route('/api/users').get(authenticateToken, (req, res) => {
     connection.query('SELECT * FROM users', function (err, result, fields) {
         if (err) throw err;
         res.send(result);
-    })
-})
+    });
+});
+
+app.put('/api/users/warn/:userID', authenticateToken, (req, res) => {
+    const user_ID = req.params.userID;
+    connection.query('UPDATE users SET Warnings = Warnings+1 WHERE User_ID = ?', [user_ID], function(err, result, fields) {
+        if (err) res.sendStatus(400);
+        res.sendStatus(200);
+    });
+});
 
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -119,7 +127,7 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 
 // get profile
 app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
-    let user_id = req.params['userID'];
+    let user_id = req.params.userID;
 
     connection.query('SELECT Username, Email, Warnings, Profile_picture FROM users WHERE User_ID = ?', [user_id], function (err, result, fields) {
         if (err) {
@@ -132,43 +140,43 @@ app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
                 res.send(JSON.stringify(result));
             }
         }
-    })
-})
+    });
+});
 
 // change password
 app.route('/api/user/:userID/password').put(authenticateToken, (req, res) => {
-    let user_id = req.params['userID'];
+    let user_id = req.params.userID;
     const new_pass = req.body.newPass;
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(new_pass, salt, function (err, hash) {
             connection.query('UPDATE users SET Password = ? WHERE User_ID = ?', [hash, user_id], function (err, result, fields) {
                 if (err) return res.send(err);
-            })
-        })
-    })
-})
+            });
+        });
+    });
+});
 
 // change profile picture
 app.route('/api/user/:userID/picture').put(authenticateToken, (req, res) => {
-    let user_id = req.params['userID'];
-    const new_profile_pic = req.body.newPic
+    const user_id = req.params.userID;
+    const new_profile_pic = req.body.newPic;
 
     connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
-        if (err) {
-            res.send(err);
-        }
+        if (err) return res.send(err);
+        res.sendStatus(200);
     });
 })
 
 // change username
 app.route('/api/user/:userID/username').put(authenticateToken, (req, res) => {
-    let user_id = req.params['userID'];
+    let user_id = req.params.userID;
 
     const new_username = req.body.newName;
     connection.query('UPDATE users SET Username = ? WHERE users.User_ID = ?', [new_username, user_id], function (err, result, fields) {
-        if (err) return res.send(err)
-    })
+        if (err) return res.send(err);
+        res.sendStatus(200);
+    });
 })
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
@@ -205,6 +213,7 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
         console.log(err)
         if (err) return res.send(err)
+        res.sendStatus(200);
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
@@ -313,14 +322,6 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
     })
 })
 
-// get support tickets
-app.route('/api/supporttickets').get((req, res) => {
-    connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
-        if (err) throw err;
-        res.send(result);
-    })
-})
-
 // get games
 app.route('/api/games').get(authenticateToken, (req, res) => {
     connection.query('SELECT * FROM games', function (err, result, fields) {
@@ -353,11 +354,20 @@ app.route('/api/games/:name').delete((req, res) => {
     })
 })
 
+app.put('/api/games/', authenticateToken, (req, res) => {
+    connection.query('UPDATE games SET Name = ?, Category = ?, Description = ? WHERE Name = ?', [req.body.newname, req.body.category, req.body.description, req.body.name], function(err, result, fields) {
+        if (err) return res.json({status: "error"});
+        res.json({status: "ok"});
+    })
+})
+
+
 app.post('/api/users/reported', (req, res) => {
     connection.query('INSERT INTO reported_users (UserID, Username, Date, Reason, Message) VALUES (?,?,?,?,?)', 
 		[req.body.userID, req.body.username, new Date(new Date().toUTCString()), req.body.reason, req.body.message], function(err, result, fields) {
-            if (err) res.sendStatus(400);
-			else res.sendStatus(200);
+            if (err) return res.sendStatus(400);
+			
+            res.json({status: 200});
         })
 })
 
@@ -466,7 +476,7 @@ app.post('api/user/signup', async (req, res) => {
 });
 
 // check token
-app.post('/api/token', (req, res) => {
+app.post('/api/token/refresh', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const refreshToken = req.body.token;
 

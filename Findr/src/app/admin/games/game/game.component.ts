@@ -20,12 +20,11 @@ export class GameComponent extends AdminRow implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.item);
     }
 
     setUndoTimer(): void {
         this.undoTimer = setTimeout(() => {
-            this.admindataService.deleteGame(this.item.GameID).subscribe();
+            this.admindataService.deleteGame(this.item.Name).subscribe(res => console.log(res));
         }, 4000);
     }
 

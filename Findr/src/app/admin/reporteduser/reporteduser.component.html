@@ -1,19 +1,16 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <div class="admincontent">
-    <div class="admintab">
-        <!-- <div class="view-log-tab">
-            <div class="header_text">
-                <h1> REPORTED USERS
-                    &#8674; LOG
-                </h1>
-            </div>
-            <div class="reported-users-content">
-                <app-log></app-log>
-            </div>
-        </div> -->
-        <app-admintopbar [title]="'REPORTED USERS'"></app-admintopbar>
+
+    <div class="view-log-tab" *ngIf="viewingLogs">
+        <app-admintopbar [title]="'REPORTED USERS &#8674; VIEW LOGS'"></app-admintopbar>
 
         <div class="admin-view-container">
+            <app-log></app-log>
+        </div>
+    </div>
+    <div class="admintab" *ngIf="!viewingLogs">
+        <app-admintopbar [title]="'REPORTED USERS'"></app-admintopbar>
+        <div class="admin-view-container" >
             <div class="records-and-search">
                 <div class="recordsperpage">
                     <p>Records per page:</p>
@@ -31,11 +28,12 @@
                 </div>
             </div>
             <hr class="line headerline">
-            <app-tableheader [items]="items" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
+            <app-tableheader *ngIf="isLoaded" [items]="items" [keys]="keys" [actionSize]='32' [infoSize]='17'></app-tableheader>
 
             <hr class="line">
             <ng-container *ngFor="let item of items | tablefilter:keys:searchText |  slice:0:max; index as i">
                 <app-user [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }" [item]=item
+                    [openViewLog]="getOpenViewLog"
                     appHighlightSearch [searchedWord]="searchText" [content]="item" [keys]="keys"></app-user>
                 <hr class="line">
                 <br class="mobileBreak">

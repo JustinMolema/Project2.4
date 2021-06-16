@@ -9,11 +9,21 @@ import {AdmindataService} from '../admindata.service';
     styleUrls: ['./reporteduser.component.css'],
 })
 export class ReporteduserComponent extends Admindata implements OnInit {
+    viewingLogs = false;
+
     constructor(public datepipe: DatePipe, public admindataService: AdmindataService) {
         super(datepipe, admindataService);
     }
 
     ngOnInit(): void {
+    }
+
+    get getOpenViewLog(): any {
+        return this.openViewLog.bind(this);
+    }
+
+    openViewLog(): void {
+        this.viewingLogs = true;
     }
 
     getData(): void {

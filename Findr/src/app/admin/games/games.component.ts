@@ -10,6 +10,8 @@ import { Admindata } from '../admindata';
 })
 export class GamesComponent extends Admindata implements OnInit {
     addingNewGame = false;
+    game;
+    header = "NEW";
 
     constructor(public admindataService: AdmindataService, private gamesService: GamesService) {
         super(null, admindataService);
@@ -21,8 +23,10 @@ export class GamesComponent extends Admindata implements OnInit {
 
     getData(): void {
         this.admindataService.getGames().subscribe(response => {
+            console.log(typeof response);
+
             this.fillData(response);
-            this.allowViewToLoad(["Name", "Category", "subscribercount"]);
+            this.allowViewToLoad(["Name", "Category", "Description"]);
         });
     }
 
@@ -39,10 +43,14 @@ export class GamesComponent extends Admindata implements OnInit {
     returnToGames(): void {
         this.clearGames();
         this.getData();
+        this.game = null;
+        this.header = "NEW";
         this.addingNewGame = false;
     }
 
-    editGame(game): any{
+    editGame(game): any {
+        this.header = "EDIT";
+        this.game = game;
         this.addingNewGame = true;
     }
 }

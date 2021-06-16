@@ -13,11 +13,13 @@ class ImageSnippet {
     styleUrls: ['./newgame.component.css']
 })
 export class NewgameComponent implements OnInit {
-    hasFileBeenSelected: boolean = false;
+    hasFileBeenSelected = false;
     selectedFile: ImageSnippet;
     form: FormGroup;
 
-    @Input() returnToGames: Function
+    @Input() returnToGames: Function;
+    @Input() game;
+    name: string;
 
     constructor(private admindataService: AdmindataService, private fb: FormBuilder) {
         this.form = this.fb.group({
@@ -28,6 +30,15 @@ export class NewgameComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        if (this.game) this.setEditValues();
+    }
+
+    setEditValues(): void {
+        this.form.controls.name.setValue(this.game.Name);
+        this.form.controls.category.setValue(this.game.Category);
+        this.form.controls.description.setValue(this.game.Description);
+        this.name = this.game.Name;
+        this.header = "EDIT";
     }
 
     processFile(imageInput: any): void {
@@ -45,16 +56,22 @@ export class NewgameComponent implements OnInit {
     addGame(): void {
         const val = this.form.value;
         this.admindataService.addGame(val.name, val.description, val.category).subscribe(response => {
-            if (this.gameAlreadyExists(response))
-                alert("Game already exists");
-            else {
-                this.returnToGame("Game has been added");
-            }
+            this.submitGameForm(response, "Game has been added!");
         });
     }
 
-    returnToGame(alertText): void {
-        if (confirm(alertText)) {
+    editGame(): void {
+        const val = this.form.value;
+        this.admindataService.editGame(this.name, val.description, val.category, val.name).subscribe(response => {
+            this.submitGameForm(response, "Game has been modified!");
+        });
+    }
+
+    submitGameForm(response, message): void {
+        if (this.gameAlreadyExists(response))
+            this.admindataService.openSnackbar("Game already exists");
+        else {
+            this.admindataService.openSnackbar(message);
             this.returnToGames();
         }
     }

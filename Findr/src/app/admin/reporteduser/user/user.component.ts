@@ -12,6 +12,7 @@ import {AdminRow} from '../../AdminRow';
 })
 export class UserComponent extends AdminRow implements OnInit {
     @Input() item;
+    @Input() openViewLog: Function;
 
     constructor(public snackBar: MatSnackBar, public dialog: MatDialog, public admindataService: AdmindataService) {
         super(snackBar, dialog, admindataService);

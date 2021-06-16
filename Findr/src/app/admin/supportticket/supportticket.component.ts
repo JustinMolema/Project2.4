@@ -22,5 +22,6 @@ export class SupportticketComponent extends Admindata implements OnInit {
             this.fillDataWithDateTime(response);
             this.allowViewToLoad(['Date', 'Time', 'Category', 'Status']);
         });
+
     }
 }
