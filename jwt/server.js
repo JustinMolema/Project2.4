@@ -197,13 +197,22 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
     });
 });
 
-app.put('/api/users/warn/:userID', authenticateToken, (req, res) => {
-    const user_ID = req.params.userID;
+app.put('/api/users/warn/', authenticateToken, (req, res) => {
+    const user_ID = req.body.userID;
     connection.query('UPDATE users SET Warnings = Warnings+1 WHERE User_ID = ?', [user_ID], function(err, result, fields) {
-        if (err) res.sendStatus(400);
+        if (err) console.log(err);
         res.sendStatus(200);
     });
 });
+
+
+app.put('/api/users/ban', authenticateToken, (req, res) => {
+    const user_ID = req.body.userID;
+    connection.query('UPDATE users SET Banned = 1 WHERE User_ID = ?', [user_ID], function(err, result, fields) {
+        if (err) return res.json({status: "error"});
+        return res.sendStatus(200);
+    })
+})
 
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\\
@@ -295,7 +304,6 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
             .from('user_friends_with_user')
             .innerJoin('users AS user', 'user.User_ID', 'user_friends_with_user.UserTwo')
             .where('UserOne', '=', user_id)
-        console.log(friends)
         if (friends.length > 0) {
             friends.forEach(element => {
                 element.Profile_picture = element.Profile_picture.toString();
@@ -527,7 +535,6 @@ app.get('/api/users/reported',authenticateToken, (req, res) => {
 })
 
 app.delete('/api/users/reported/:id', authenticateToken, (req, res) => {
-	console.log("peter");
     let name = req.params['id'];
     connection.query('DELETE FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
         if(err) res.sendStatus(418);
@@ -629,7 +636,7 @@ app.post('/api/token/refresh', (req, res) => {
     const refreshToken = req.body.token;
 
     if (refreshToken == null) return res.sendStatus(401)
-    if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+    // if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403)
         const accessToken = generateAccessToken({ name: user.name })

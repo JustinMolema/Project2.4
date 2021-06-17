@@ -41,7 +41,6 @@ export abstract class Admindata {
     deleteItem(item): void {
         Object.assign(this.itemsHolderAfterDelete, this.items);
         this.items = this.items.filter(obj => obj !== item);
-
     }
 
     undoDeleteItem(): void {

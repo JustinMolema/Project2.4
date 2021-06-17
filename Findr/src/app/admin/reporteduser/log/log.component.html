@@ -3,7 +3,7 @@
         <span class=fieldnamecontainer>Name:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="" value="{{reportedUserInfo.Username}}" disabled="disabled">
+        <input class="inputfield" type="text" placeholder="" value="{{reportedUserInfo.item.Username}}" disabled="disabled">
     </div>
 </div>
 <div class="fieldcontainer">
@@ -11,7 +11,7 @@
         <span class=fieldnamecontainer>Date:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.Date}}"
+        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.item.Date}}"
                disabled="disabled">
     </div>
 </div>
@@ -20,7 +20,7 @@
         <span class=fieldnamecontainer>Offense:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.Reason}}"
+        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.item.Reason}}"
                disabled="disabled">
     </div>
 </div>
@@ -29,7 +29,7 @@
         <span class=fieldnamecontainer>Message:</span>
     </div>
     <div class="inputfieldcontainer">
-        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.Message}}"
+        <input class="inputfield" type="text" placeholder="Game Name" value="{{reportedUserInfo.item.Message}}"
                disabled="disabled">
     </div>
 </div>
@@ -47,7 +47,7 @@
             </button>
         </div>
         <div class="buttonview">
-            <button>
+            <button (click)="warnUser()">
                 <div style="font-size: 18px; color: yellow;">
                     &#9888;
                     <span>Warning</span>
@@ -55,7 +55,7 @@
             </button>
         </div>
         <div class="buttonview">
-            <button>
+            <button (click)="banUser()">
                 <div style="font-size: 18px; color: red;">
                     &#8856;
                     <span>Ban</span>
@@ -63,7 +63,7 @@
             </button>
         </div>
         <div class="buttonview">
-            <button>
+            <button (click)="dismiss()">
                 <div class="buttonimage"style="font-size: 18px; color: lightgray;">
                     <img src="../../../../assets/SVG/delete.svg" style="width: 20px; height: 20px;"/>
                     <span>Dismiss</span>

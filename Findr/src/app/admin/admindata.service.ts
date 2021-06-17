@@ -79,4 +79,16 @@ export class AdmindataService {
         return this.http.delete('http://localhost:8001/api/support/tickets/' + id);
     }
 
+    warnUser(id: string): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set('userID', id);
+        return this.http.put('http://localhost:8001/api/users/warn/', params);
+    }
+
+    banUser(id: string): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set('userID', id);
+        return this.http.put('http://localhost:8001/api/users/ban/', params);
+    }
+
 }
