@@ -8,7 +8,6 @@ const test = require('./api.js');
 const http = require('http');
 const { Console } = require('console');
 const bcrypt = require('bcrypt')
-let refreshTokens = [];
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
