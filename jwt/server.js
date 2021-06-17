@@ -6,16 +6,16 @@ const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
 const test = require('./api.js');
 const http = require('http');
-const { Console } = require('console');
+const {Console} = require('console');
 const bcrypt = require('bcrypt')
 
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb' }));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors({
-	origin: "*"
+    origin: "*"
 }));
 
-const { Model } = require('objection');
+const {Model} = require('objection');
 const Knex = require('knex');
 
 let refreshTokens = []
@@ -123,63 +123,67 @@ const io = require("socket.io")(server, {
 
 
 io.use((socket, next) => {
-	const username = socket.handshake.auth.username;
+    const username = socket.handshake.auth.username;
 
-	socket.username = username;
-	socket.sessionID = socket.handshake.auth.sessionID;
-	next();
+    socket.username = username;
+    socket.sessionID = socket.handshake.auth.sessionID;
+    next();
 });
 
 
 io.on('connection', (socket) => {
-	socket.emit("session", {
-		sessionID: socket.sessionID,
-	});
+    socket.emit("session", {
+        sessionID: socket.sessionID,
+    });
 
-	socket.join(socket.sessionID);
+    socket.join(socket.sessionID);
 
-	const users = [];
-	for (let [id, socket] of io.of("/").sockets) {
-		users.push({
-			userID: socket.sessionID,
-			username: socket.username,
-		});
-	}
+    const users = [];
+    for (let [id, socket] of io.of("/").sockets) {
+        users.push({
+            userID: socket.sessionID,
+            username: socket.username,
+        });
+    }
 
-	socket.emit("users", users);
+    socket.emit("users", users);
 
-	socket.onAny((event, ...args) => {
-		console.log("Event: " + event + " Args: " + args)
-	})
+    socket.onAny((event, ...args) => {
+        console.log("Event: " + event + " Args: " + args)
+    })
 
-	socket.broadcast.emit("user connected", {
-		userID: socket.sessionID,
-		username: socket.username,
-	});
+    socket.broadcast.emit("user connected", {
+        userID: socket.sessionID,
+        username: socket.username,
+    });
 
-	socket.on('join', function (data) {
-		socket.join(data.room);
-	});
+    socket.on('join', function (data) {
+        socket.join(data.room);
+    });
 
-	socket.on('leave', function (data) {
-		socket.leave(data.room);
-	});
+    socket.on('leave', function (data) {
+        socket.leave(data.room);
+    });
 
-	socket.on('message', function (data) {
-		console.log(data);
-		socket.to(data.room).emit('new message', { userID: data.userID, user: data.user, message: data.message });
-	});
+    socket.on('message', function (data) {
+        console.log(data);
+        socket.to(data.room).emit('new message', {userID: data.userID, user: data.user, message: data.message});
+    });
 
-	socket.on("private message", (data) => {
-		socket.to(data.room).emit("private message", { userID: socket.sessionID, user: data.user, message: data.message });
-	});
+    socket.on("private message", (data) => {
+        socket.to(data.room).emit("private message", {
+            userID: socket.sessionID,
+            user: data.user,
+            message: data.message
+        });
+    });
 
-	socket.on("disconnect", () => {
-		socket.broadcast.emit("user disconnected", {
-			userID: socket.sessionID,
-			username: socket.username,
-		});
-	});
+    socket.on("disconnect", () => {
+        socket.broadcast.emit("user disconnected", {
+            userID: socket.sessionID,
+            username: socket.username,
+        });
+    });
 });
 
 server.listen(chatport);
@@ -199,7 +203,7 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 
 app.put('/api/users/warn/:userID', authenticateToken, (req, res) => {
     const user_ID = req.params.userID;
-    connection.query('UPDATE users SET Warnings = Warnings+1 WHERE User_ID = ?', [user_ID], function(err, result, fields) {
+    connection.query('UPDATE users SET Warnings = Warnings+1 WHERE User_ID = ?', [user_ID], function (err, result, fields) {
         if (err) res.sendStatus(400);
         res.sendStatus(200);
     });
@@ -295,19 +299,19 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
             .from('user_friends_with_user')
             .innerJoin('users AS user', 'user.User_ID', 'user_friends_with_user.UserTwo')
             .where('UserOne', '=', user_id)
-        console.log(friends)
         if (friends.length > 0) {
             friends.forEach(element => {
-                element.Profile_picture = element.Profile_picture.toString();
+                if (element.Profile_picture) {
+                    element.Profile_picture = element.Profile_picture.toString();
+                }
             });
             res.send(friends)
-        }
-        else{
+        } else {
             res.send(friends)
         }
     } catch (error) {
         console.log(error)
-        res.send({ status: 403 })
+        res.send({status: 403})
     }
 
 })
@@ -342,7 +346,7 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
         console.log(err)
         if (err) return res.send(err);
     })
-    res.json({ status: 200 })
+    res.json({status: 200})
 })
 
 // block user
@@ -368,7 +372,7 @@ app.route('/api/user/:userID/blocked/:blockeduser').post(authenticateToken, asyn
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
         console.log(err)
     })
-    res.json({ status: 200 })
+    res.json({status: 200})
 })
 
 // accept friendrequest
@@ -385,7 +389,7 @@ app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         console.log(err)
     })
-    res.send({ status: 200 })
+    res.send({status: 200})
 })
 
 // delete friendrequest
@@ -395,7 +399,7 @@ app.route('/api/user/:userID/friend-requests/:requesterID').delete(authenticateT
     const senderID = req.params['requesterID'];
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
         if (err) return res.send(err);
-        res.send({ status: 200 })
+        res.send({status: 200})
     })
 
 })
@@ -411,11 +415,12 @@ app.route('/api/user/:userID/friend-requests').get(authenticateToken, async (req
         }
         if (result.length > 0) {
             result.forEach(element => {
-                element.Profile_picture = element.Profile_picture.toString();
+                if (element.Profile_picture) {
+                    element.Profile_picture = element.Profile_picture.toString();
+                }
             });
             res.send([result]);
-        }
-        else {
+        } else {
             res.send(result);
         }
 
@@ -434,9 +439,8 @@ app.route('/api/user/:userID/friend-requests/:reqID').post(authenticateToken, as
                 element.Profile_picture = element.Profile_picture.toString();
             });
             res.send([result]);
-        }
-        else {
-            res.send({ status: 403 });
+        } else {
+            res.send({status: 403});
         }
     })
 })
@@ -448,11 +452,12 @@ app.route('/api/user/:userID/blocked').get(authenticateToken, async (req, res) =
         if (err) throw err;
         if (result.length > 0) {
             result.forEach(element => {
-                element.Profile_picture = element.Profile_picture.toString();
+                if (element.Profile_picture) {
+                    element.Profile_picture = element.Profile_picture.toString();
+                }
             });
             res.send([result]);
-        }
-        else {
+        } else {
             res.send(result);
         }
     })
@@ -481,8 +486,8 @@ app.route('/api/games').get(authenticateToken, (req, res) => {
 app.route('/api/games').post((req, res) => {
     connection.connect(function (err) {
         connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
-            if (err) return res.json({ status: "error" });
-            res.json({ status: "ok" });
+            if (err) return res.json({status: "error"});
+            res.json({status: "ok"});
         })
     })
 })
@@ -495,14 +500,14 @@ app.route('/api/games/:name').delete((req, res) => {
             if (err) {
                 res.sendStatus(400);
             } else {
-                res.json({ status: 200 })
+                res.json({status: 200})
             }
         })
     })
 })
 
 app.put('/api/games/', authenticateToken, (req, res) => {
-    connection.query('UPDATE games SET Name = ?, Category = ?, Description = ? WHERE Name = ?', [req.body.newname, req.body.category, req.body.description, req.body.name], function(err, result, fields) {
+    connection.query('UPDATE games SET Name = ?, Category = ?, Description = ? WHERE Name = ?', [req.body.newname, req.body.category, req.body.description, req.body.name], function (err, result, fields) {
         if (err) return res.json({status: "error"});
         res.json({status: "ok"});
     })
@@ -510,41 +515,41 @@ app.put('/api/games/', authenticateToken, (req, res) => {
 
 
 app.post('/api/users/reported', (req, res) => {
-    connection.query('INSERT INTO reported_users (UserID, Username, Date, Reason, Message) VALUES (?,?,?,?,?)', 
-		[req.body.userID, req.body.username, new Date(new Date().toUTCString()), req.body.reason, req.body.message], function(err, result, fields) {
+    connection.query('INSERT INTO reported_users (UserID, Username, Date, Reason, Message) VALUES (?,?,?,?,?)',
+        [req.body.userID, req.body.username, new Date(new Date().toUTCString()), req.body.reason, req.body.message], function (err, result, fields) {
             if (err) return res.sendStatus(400);
-			
+
             res.json({status: 200});
         })
 })
 
-app.get('/api/users/reported',authenticateToken, (req, res) => {
-    connection.query('SELECT * FROM reported_users', function(err, result, field) {
-        if(err) res.sendStatus(418);
+app.get('/api/users/reported', authenticateToken, (req, res) => {
+    connection.query('SELECT * FROM reported_users', function (err, result, field) {
+        if (err) res.sendStatus(418);
         res.send(JSON.stringify(result));
     })
 })
 
 app.delete('/api/users/reported/:id', authenticateToken, (req, res) => {
-	console.log("peter");
+    console.log("peter");
     let name = req.params['id'];
-    connection.query('DELETE FROM reported_users WHERE ReportedUserID = ?', [name], function(err, result, fields){
-        if(err) res.sendStatus(418);
+    connection.query('DELETE FROM reported_users WHERE ReportedUserID = ?', [name], function (err, result, fields) {
+        if (err) res.sendStatus(418);
         res.sendStatus(200);
     })
 })
 
 app.get('/api/support/tickets', authenticateToken, (req, res) => {
-    connection.query('SELECT * FROM support_tickets', function(err, result, fields){
-        if(err) res.sendStatus(418);
+    connection.query('SELECT * FROM support_tickets', function (err, result, fields) {
+        if (err) res.sendStatus(418);
         res.send(result);
     })
 })
 
 app.delete('/api/support/tickets/:id', authenticateToken, (req, res) => {
     let id = req.params['id']
-    connection.query('DELETE FROM support_tickets WHERE TicketID = ?', [id], function(err, result, fields){
-        if(err) res.sendStatus(418);
+    connection.query('DELETE FROM support_tickets WHERE TicketID = ?', [id], function (err, result, fields) {
+        if (err) res.sendStatus(418);
         res.sendStatus(200);
     })
 })
@@ -557,22 +562,22 @@ app.post('/api/user/login', (req, res) => {
 
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
-			if (err) {
-				res.send(err)
-			}
+            if (err) {
+                res.send(err)
+            }
 
             if (result) {
                 const dbPassword = JSON.parse(JSON.stringify(result[0].password));
                 const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
 
-            
+
                 bcrypt.compare(pw, dbPassword, (err, result) => {
                     if (err) {
                         res.sendStatus(403).send("Wrong password")
                     }
 
                     if (result) {
-                        const user = { name: username }
+                        const user = {name: username}
                         const accessToken = generateAccessToken(user);
                         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
                         refreshTokens.push(refreshToken)
@@ -596,13 +601,13 @@ app.post('/api/user/login', (req, res) => {
 })
 
 // api call to create user in database
-app.post('api/user/signup', async (req, res) => {
+app.post('/api/user', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
-	// encode so that special symbols dont destroy DB
-	const username = encodeURIComponent(req.body.username);
-	const password = encodeURIComponent(req.body.password);
-	const email = encodeURIComponent(req.body.email);
+    // encode so that special symbols dont destroy DB
+    const username = encodeURIComponent(req.body.username);
+    const password = encodeURIComponent(req.body.password);
+    const email = encodeURIComponent(req.body.email);
 
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -614,7 +619,7 @@ app.post('api/user/signup', async (req, res) => {
                     if (err) {
                         return res.send(err);
                     } else {
-                        res.json({ status: 200 });
+                        res.json({status: 200});
                     }
                 });
             });
@@ -631,13 +636,13 @@ app.post('/api/token/refresh', (req, res) => {
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403)
-        const accessToken = generateAccessToken({ name: user.name })
-        res.json({ accessToken: accessToken })
+        const accessToken = generateAccessToken({name: user.name})
+        res.json({accessToken: accessToken})
     })
 })
 
 function generateAccessToken(user) {
-    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '25m' });
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '25m'});
 }
 
 function authenticateToken(req, res, next) {

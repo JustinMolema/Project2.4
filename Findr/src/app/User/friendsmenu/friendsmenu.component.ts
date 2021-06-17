@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {AppService} from 'src/app/app.service';
 import {TopbarService} from '../topbar/topbar.service';
 
@@ -30,6 +30,7 @@ export class FriendsmenuComponent implements OnInit {
     }
 
     setFriendInfo(): void {
+        this.appService.friends = [];
         this.getFriendsFromServer();
         this.getFriendRequestsFromServer();
         this.getBlockedUsersFromServer();
@@ -38,47 +39,45 @@ export class FriendsmenuComponent implements OnInit {
     getFriendsFromServer(): void {
         this.friends = [];
         this.appService.getFriends().subscribe(friendsFromServer => {
-            if(friendsFromServer.length > 0)
-            {
+            if (friendsFromServer.length > 0) {
                 friendsFromServer.forEach(element => {
-                    if(element.Profile_picture){
-                        console.log(element.Profile_picture)
+                    if (element.Profile_picture) {
                         element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
                     }
                     this.friends.push(element);
                     this.appService.friends.push(element);
                 });
             }
-            
         });
     }
 
     getFriendRequestsFromServer(): void {
         this.friendRequests = [];
         this.appService.getFriendRequests().subscribe(friendRequestsFromServer => {
-            if(friendRequestsFromServer[0].length > 0)
-            {
+            if (friendRequestsFromServer[0].length > 0) {
                 friendRequestsFromServer[0].forEach(element => {
-                    this.friendRequests.push(element);
+                    if (element.Profile_picture) {
+                        element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
+                    }
+                    this.friendRequests.push(element)
                 });
             }
         });
     }
 
     getBlockedUsersFromServer(): void {
-        
+
         this.blockedUsers = [];
         this.appService.getBlockedUsers().subscribe(blockedUsersFromServer => {
-            if(blockedUsersFromServer[0].length > 0){
+            if (blockedUsersFromServer[0].length > 0) {
                 blockedUsersFromServer[0].forEach(element => {
-                    
-                    if(element.Profile_picture){
+                    if (element.Profile_picture) {
                         element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
                     }
                     this.blockedUsers.push(element);
                 });
             }
-            
+
         });
     }
 

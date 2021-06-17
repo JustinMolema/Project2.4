@@ -1,36 +1,28 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AppService } from 'src/app/app.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AppService} from 'src/app/app.service';
 
 @Component({
-  selector: 'app-blockedusers',
-  templateUrl: './blockedusers.component.html',
-  styleUrls: ['./blockedusers.component.css']
+    selector: 'app-blockedusers',
+    templateUrl: './blockedusers.component.html',
+    styleUrls: ['./blockedusers.component.css']
 })
 export class BlockedusersComponent implements OnInit {
-  @Input() user: string;
-  @Input() userID: string;
-  @Input() pic;
+    @Input() user: string;
+    @Input() userID: string;
+    @Input() pic;
 
-  @Output()
-  refresh: EventEmitter<string> = new EventEmitter<string>();
+    @Output()
+    refresh: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private appService: AppService, private sanitiser: DomSanitizer) { }
-
-  ngOnInit(): void {
-    if (this.pic) {
-      this.pic = this.sanitize(decodeURIComponent(this.pic));
+    constructor(private appService: AppService) {
     }
-  }
 
-  sanitize(url: string) {
-    return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-  }
+    ngOnInit(): void {
+    }
 
-  unblock(): void {
-    this.appService.unblockUser(this.userID).subscribe(res => {
-
-    })
-    this.refresh.emit('hoi');
-  }
+    unblock(): void {
+        this.appService.unblockUser(this.userID).subscribe(res => {
+            this.refresh.emit('hoi');
+        })
+    }
 }

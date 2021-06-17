@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-friendrequests',
@@ -16,18 +15,11 @@ export class FriendrequestsComponent implements OnInit {
     @Output()
     refresh: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(private appService: AppService, private sanitiser: DomSanitizer) {
+    constructor(private appService: AppService) {
     }
 
     ngOnInit(): void {
-        if (this.pic) {
-            this.pic = this.sanitize(decodeURIComponent(this.pic));
-          }
     }
-
-    sanitize(url: string) {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-      }
 
     addFriend(): void {
         this.appService.acceptFriendRequest(this.friendID).subscribe(res => {
