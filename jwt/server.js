@@ -336,7 +336,6 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
         console.log(err)
         if (err) return res.send(err)
-        res.sendStatus(200);
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {

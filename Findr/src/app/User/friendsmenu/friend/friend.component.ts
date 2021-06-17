@@ -28,6 +28,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         if (this.pic) {
+            console.log(this.pic)
             this.pic = this.sanitize(decodeURIComponent(this.pic));
         }
 
