@@ -19,7 +19,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
     stable;
     status = 'Offline';
 
-    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef, private sanitiser: DomSanitizer) {
+    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef) {
     }
 
     @Output()
@@ -27,10 +27,10 @@ export class FriendComponent implements OnInit, AfterViewInit {
 
 
     ngOnInit(): void {
-        if (this.pic) {
-            console.log(this.pic)
-            this.pic = this.sanitize(decodeURIComponent(this.pic));
-        }
+        // if (this.pic) {
+        //     console.log(this.pic)
+        //     this.pic = this.sanitize(decodeURIComponent(this.pic));
+        // }
 
         this.setStatusListeners();
         this.stabilizeListener();
@@ -50,9 +50,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
         });
     }
 
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-    }
+
 
     setStatusListeners(): void {
         this.status = 'Offline';

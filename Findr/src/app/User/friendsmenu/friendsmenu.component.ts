@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {AppService} from 'src/app/app.service';
 import {TopbarService} from '../topbar/topbar.service';
 
@@ -13,7 +14,7 @@ export class FriendsmenuComponent implements OnInit {
     friendRequests = [];
     blockedUsers = [];
 
-    constructor(private topbarService: TopbarService, private appService: AppService) {
+    constructor(private topbarService: TopbarService, private appService: AppService, private sanitiser: DomSanitizer) {
     }
 
     ngOnInit(): void {
@@ -22,6 +23,10 @@ export class FriendsmenuComponent implements OnInit {
 
     @Input() refreshFriendInfo(event): void {
         this.setFriendInfo();
+    }
+
+    sanitize(url: string): SafeResourceUrl {
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
     setFriendInfo(): void {
@@ -36,6 +41,10 @@ export class FriendsmenuComponent implements OnInit {
             if(friendsFromServer.length > 0)
             {
                 friendsFromServer.forEach(element => {
+                    if(element.Profile_picture){
+                        console.log(element.Profile_picture)
+                        element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
+                    }
                     this.friends.push(element);
                     this.appService.friends.push(element);
                 });
@@ -62,6 +71,10 @@ export class FriendsmenuComponent implements OnInit {
         this.appService.getBlockedUsers().subscribe(blockedUsersFromServer => {
             if(blockedUsersFromServer[0].length > 0){
                 blockedUsersFromServer[0].forEach(element => {
+                    
+                    if(element.Profile_picture){
+                        element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
+                    }
                     this.blockedUsers.push(element);
                 });
             }
