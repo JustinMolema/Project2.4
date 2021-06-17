@@ -39,7 +39,10 @@ export class LogComponent implements OnInit {
     }
 
     dismiss(): void {
-        this.reportedUserInfo.openDialogAndListenForClose();
-        this.returnToViewLog();
+        const dialogRef = this.reportedUserInfo.openDialogAndListenForClose();
+        dialogRef.afterClosed().subscribe(res => {
+            if (res === "Cancel" || res === undefined) return;
+            this.returnToViewLog();
+        });
     }
 }
