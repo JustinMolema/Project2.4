@@ -67,6 +67,7 @@ img {
 }
 
 .inputfield {
+    background: red;
     color: white;
     width: 100%;
     background: rgba(53, 63, 119, 0);
@@ -74,6 +75,13 @@ img {
     height: 100%;
 }
 
+textarea {
+    padding-left: 5px;
+}
+
+.inputfield:focus, .inputfieldcontainer:focus, .category {
+    outline: none;
+}
 .category {
     width: 100%;
     background: rgba(53, 63, 119);
