@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AdmindataService} from '../../admindata.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -17,11 +18,12 @@ export class NewgameComponent implements OnInit {
     selectedFile: ImageSnippet;
     form: FormGroup;
 
+    reader = new FileReader();
     @Input() returnToGames: Function;
     @Input() game;
     name: string;
-
-    constructor(private admindataService: AdmindataService, private fb: FormBuilder) {
+    dbPicture: any;
+    constructor(private admindataService: AdmindataService, private fb: FormBuilder, private sanitiser: DomSanitizer) {
         this.form = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
@@ -30,6 +32,7 @@ export class NewgameComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
         if (this.game) this.setEditValues();
     }
 
@@ -37,31 +40,42 @@ export class NewgameComponent implements OnInit {
         this.form.controls.name.setValue(this.game.Name);
         this.form.controls.category.setValue(this.game.Category);
         this.form.controls.description.setValue(this.game.Description);
+        console.log(this.game.Image.data);
+
+        this.dbPicture = this.sanitize(decodeURIComponent(this.game.Image));
+        this.hasFileBeenSelected = true;
+
         this.name = this.game.Name;
     }
 
     processFile(imageInput: any): void {
         const file: File = imageInput.files[0];
-        const reader = new FileReader();
+        this.reader = new FileReader();
 
-        reader.addEventListener('load', (event: any) => {
-            this.selectedFile = new ImageSnippet(event.target.result, file);
-        });
-
-        reader.readAsDataURL(file);
+        this.reader.readAsDataURL(file);
         this.hasFileBeenSelected = true;
+
+        this.reader.onload = () => {
+            this.dbPicture = this.sanitize(this.reader.result.toString());
+            // this.appService.changeProfilePicture(this.reader.result).subscribe();
+        };
+    }
+
+    // Allow retrieved URL to be displayed on page
+    sanitize(url: string): SafeResourceUrl {
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
     addGame(): void {
         const val = this.form.value;
-        this.admindataService.addGame(val.name, val.description, val.category).subscribe(response => {
+        this.admindataService.addGame(val.name, val.description, val.category, this.reader.result).subscribe(response => {
             this.submitGameForm(response, "Game has been added!");
         });
     }
 
     editGame(): void {
         const val = this.form.value;
-        this.admindataService.editGame(this.name, val.description, val.category, val.name).subscribe(response => {
+        this.admindataService.editGame(this.name, val.description, val.category, this.reader.result, val.name).subscribe(response => {
             this.submitGameForm(response, "Game has been modified!");
         });
     }

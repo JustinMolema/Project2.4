@@ -165,7 +165,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('message', function (data) {
-        console.log(data);
         socket.to(data.room).emit('new message', {userID: data.userID, user: data.user, message: data.message});
     });
 
@@ -241,7 +240,7 @@ app.route('/api/user/:userID/profile').get(authenticateToken, (req, res) => {
                 if (result[0].Profile_picture) {
                     result[0].Profile_picture = result[0].Profile_picture.toString();
                 }
-                res.send(JSON.stringify(result));
+                res.send(result);
             }
         }
     });
@@ -325,7 +324,6 @@ app.route('/api/user/:userID/friends').get(authenticateToken, async (req, res) =
             res.send(friends)
         }
     } catch (error) {
-        console.log(error)
         res.send({status: 403})
     }
 
@@ -353,12 +351,10 @@ app.route('/api/user/:userID/friends/:friendID').delete(authenticateToken, async
     let UserOne = req.params['userID']
     const UserTwo = req.params['friendID']
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
-        console.log(err)
         if (err) return res.send(err)
     })
 
     connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
-        console.log(err)
         if (err) return res.send(err);
     })
     res.json({status: 200})
@@ -385,7 +381,7 @@ app.route('/api/user/:userID/blocked/:blockeduser').post(authenticateToken, asyn
     })
 
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
-        console.log(err)
+        if (err) return res.send(err);
     })
     res.json({status: 200})
 })
@@ -396,13 +392,13 @@ app.route('/api/user/:userID/friend-requests/:senderID').put(authenticateToken, 
     const accepterID = req.params['userID'];
     const senderID = req.params['senderID'];
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + accepterID + ', ' + senderID + ');', function (err, result, fields) {
-        console.log(err)
+        if (err) return res.send(err);
     })
     connection.query('INSERT INTO user_friends_with_user (UserOne, UserTwo) VALUES (' + senderID + ', ' + accepterID + ');', function (err, result, fields) {
-        console.log(err)
+        if (err) return res.send(err);
     })
     connection.query('DELETE FROM user_befriends_user WHERE UserOne = ' + accepterID + ' AND UserTwo = ' + senderID, function (err, result, fields) {
-        console.log(err)
+        if (err) return res.send(err);
     })
     res.send({status: 200})
 })
@@ -425,7 +421,6 @@ app.route('/api/user/:userID/friend-requests').get(authenticateToken, async (req
     res.header("Access-Control-Allow-Origin", "*");
     connection.query('SELECT User_ID, Username, Profile_picture FROM user_befriends_user AS FR JOIN users ON users.User_ID = FR.UserTwo WHERE FR.UserOne = ?', [user_id], function (err, result, fields) {
         if (err) {
-            console.log(err)
             return res.send(err);
         }
         if (result.length > 0) {
@@ -493,14 +488,17 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
 app.route('/api/games').get(authenticateToken, (req, res) => {
     connection.query('SELECT * FROM games', function (err, result, fields) {
         if (err) throw err;
-        res.send(JSON.stringify(result));
+        for (let item of result) {
+            item.Image = item.Image.toString();
+        }
+        res.send(result);
     })
 })
 
 // create new game
 app.route('/api/games').post((req, res) => {
     connection.connect(function (err) {
-        connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, "imagedestroyed2"], function (err, result, fields) {
+        connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, req.body.image], function (err, result, fields) {
             if (err) return res.json({status: "error"});
             res.json({status: "ok"});
         })
@@ -522,8 +520,8 @@ app.route('/api/games/:name').delete((req, res) => {
 })
 
 app.put('/api/games/', authenticateToken, (req, res) => {
-    connection.query('UPDATE games SET Name = ?, Category = ?, Description = ? WHERE Name = ?', [req.body.newname, req.body.category, req.body.description, req.body.name], function (err, result, fields) {
-        if (err) return res.json({status: "error"});
+    connection.query('UPDATE games SET Name = ?, Category = ?, Description = ?, Image = ? WHERE Name = ?', [req.body.newname, req.body.category, req.body.description, req.body.image, req.body.name], function (err, result, fields) {
+        if (err) return res.sendStatus(400);
         res.json({status: "ok"});
     })
 })

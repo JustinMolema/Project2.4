@@ -4,13 +4,12 @@
             accept="image/x-png,image/gif,image/jpeg,image/jpg,image/">
 
         <label *ngIf="!hasFileBeenSelected;" for="upload">
-            <img class="current-profile-pic" src="../../../../assets/SVG/upload.svg" />
+            <img class="current-profile-pic" src="../../../../assets/SVG/upload.svg" alt="Default profile picture"/>
         </label>
-        <div class="current-profile-pic">
-            <label *ngIf="hasFileBeenSelected;" class="current-profile-pic" for="upload">
-                <img src="{{ selectedFile.src }}">
-            </label>
-        </div>
+
+        <label *ngIf="hasFileBeenSelected;" for="upload">
+            <img class="current-profile-pic" [src]="dbPicture" alt="Your profile picture">
+        </label>
         <label class="uploadimage" for="upload">Upload image</label>
 
     </div>

@@ -8,13 +8,15 @@
 }
 
 img {
+    object-fit: cover;
+    object-position: 50% 50%;
     cursor: pointer;
-    /*background: rgb(53, 63, 119);*/
+    background: rgb(53, 63, 119);
     width: 200px;
+    height: 200px;
 }
 
 .current-profile-pic {
-    background: rgb(53, 63, 119);
     border-radius: 50%;
 }
 

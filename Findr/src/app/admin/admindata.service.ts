@@ -41,19 +41,21 @@ export class AdmindataService {
         return this.http.get('http://localhost:8001/api/games');
     }
 
-    addGame(name: string, description: string, category: string): Observable<any> {
+    addGame(name: string, description: string, category: string, image: any): Observable<any> {
         let params: HttpParams = new HttpParams();
-        params = params.set('name', name).set('category', category).set('description', description);
+        params = params.set('name', name).set('category', category).set('description', description)
+            .set('image', encodeURIComponent(image));
 
         return this.http.post('http://localhost:8001/api/games/', params);
     }
 
-    editGame(name: string, description: string, category: string, newname: string): Observable<any> {
+    editGame(name: string, description: string, category: string, image: any, newname: string): Observable<any> {
         const params: HttpParams = new HttpParams()
             .set('name', name)
             .set('category', category)
             .set('description', description)
-            .set('newname', newname);
+            .set('newname', newname)
+            .set('image', encodeURIComponent(image));
 
         return this.http.put('http://localhost:8001/api/games/', params);
     }

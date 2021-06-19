@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
             this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
             if (res[0].Profile_picture) {
+                console.log(res[0]);
                 this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
                 this.hasFileBeenSelected = true;
             }
@@ -48,9 +49,7 @@ export class ProfileComponent implements OnInit {
 
     // Send username update to the server
     submitNewUserName(): void {
-        this.appService.changeUsername(this.user).subscribe( res =>{
-            console.log(res);
-        });
+        this.appService.changeUsername(this.user).subscribe();
     }
 
     // Prepare file for upload in server.
@@ -67,7 +66,7 @@ export class ProfileComponent implements OnInit {
         };
     }
 
-    // allow retrieved URL to get displayed on page
+    // Allow retrieved URL to be displayed on page
     sanitize(url: string): SafeResourceUrl {
         return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
