@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-profile',
@@ -10,7 +10,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class ProfileComponent implements OnInit {
 
     // Username input field
-    isEditEnable: boolean = false;
+    isEditEnable = false;
 
     // Profile picture
     hasFileBeenSelected = false;
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
                 this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
                 this.hasFileBeenSelected = true;
             }
-        })
+        });
     }
 
     // To change input field to allow username change
@@ -47,10 +47,10 @@ export class ProfileComponent implements OnInit {
     }
 
     // Send username update to the server
-    submitNewUserName() {
+    submitNewUserName(): void {
         this.appService.changeUsername(this.user).subscribe( res =>{
-            console.log(res)
-        })
+            console.log(res);
+        });
     }
 
     // Prepare file for upload in server.
@@ -62,13 +62,13 @@ export class ProfileComponent implements OnInit {
         this.hasFileBeenSelected = true;
 
         this.reader.onload = () => {
-            this.dbPicture = this.sanitize(this.reader.result.toString())
-            this.appService.changeProfilePicture(this.reader.result).subscribe()
-        }
+            this.dbPicture = this.sanitize(this.reader.result.toString());
+            this.appService.changeProfilePicture(this.reader.result).subscribe();
+        };
     }
 
     // allow retrieved URL to get displayed on page
-    sanitize(url: string) {
+    sanitize(url: string): SafeResourceUrl {
         return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 }

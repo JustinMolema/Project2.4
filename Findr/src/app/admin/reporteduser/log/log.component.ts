@@ -13,7 +13,7 @@ export class LogComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.reportedUserInfo);
+        console.log(typeof this.reportedUserInfo);
     }
 
     returnToReportedUsers(): void {

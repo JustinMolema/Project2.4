@@ -19,6 +19,7 @@ export class UserComponent extends AdminRow implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.item.Banned);
     }
 
     setUndoTimer(): void {
