@@ -74,7 +74,7 @@ export class AppService {
 
     blockFriend(senderID: string): Observable<any> {
         const params: HttpParams = new HttpParams();
-        return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/block/' + senderID, params);
+        return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked/' + senderID, params);
     }
 
     unblockUser(senderID: string): Observable<any> {

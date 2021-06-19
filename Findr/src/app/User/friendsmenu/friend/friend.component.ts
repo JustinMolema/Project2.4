@@ -1,6 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter, AfterViewInit, ApplicationRef} from '@angular/core';
-
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {AfterViewInit, ApplicationRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {AppService} from 'src/app/app.service';
@@ -19,7 +17,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
     stable;
     status = 'Offline';
 
-    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef, private sanitiser: DomSanitizer) {
+    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef) {
     }
 
     @Output()
@@ -27,10 +25,6 @@ export class FriendComponent implements OnInit, AfterViewInit {
 
 
     ngOnInit(): void {
-        if (this.pic) {
-            this.pic = this.sanitize(decodeURIComponent(this.pic));
-        }
-
         this.setStatusListeners();
         this.stabilizeListener();
     }
@@ -49,9 +43,6 @@ export class FriendComponent implements OnInit, AfterViewInit {
         });
     }
 
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-    }
 
     setStatusListeners(): void {
         this.status = 'Offline';

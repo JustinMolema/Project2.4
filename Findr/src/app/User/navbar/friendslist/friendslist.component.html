@@ -1,19 +1,21 @@
 <hr class="friends-list-line">
 <div class="friendslist-title">
-  Recent Friends
+    Recent Friends
 </div>
 <hr class="friends-list-line">
 
-<button [ngClass]="(topbar.collapseNavbar == false) ? 'friends-list-button' : 'friends-list-button-collapsed'" *ngFor="let friend of friends.slice(0, sliceAmount)">
-  <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondiv-collapsed'">
-    <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbaricon-collapsed'"
-         src="https://cdn.discordapp.com/attachments/833684306462507011/841030625955676160/image.png">
-  </div>
-  <div [ngClass]="(topbar.collapseNavbar == false) ? 'friendname' : 'friends-title-collapsed'">
-    {{friend}}
-  </div>
+<button [ngClass]="(topbar.collapseNavbar == false) ? 'friends-list-button' : 'friends-list-button-collapsed'"
+        *ngFor="let friend of friends.slice(0, sliceAmount)">
+    <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondiv-collapsed'">
+        <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbaricon-collapsed'"
+             [src]=friend.Profile_picture>
+    </div>
+    <div [ngClass]="(topbar.collapseNavbar == false) ? 'friendname' : 'friends-title-collapsed'">
+        {{friend.Username}}
+    </div>
 </button>
 
 <div>
-  <button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'" (click)="toggleList()">{{ showMoreText }}</button>
+    <button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
+            (click)="toggleList()">{{ showMoreText }}</button>
 </div>
