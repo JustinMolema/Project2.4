@@ -217,6 +217,13 @@ app.put('/api/users/ban', authenticateToken, (req, res) => {
     })
 })
 
+app.put('/api/users/unban', authenticateToken, (req, res) => {
+    const user_ID = req.body.userID;
+    connection.query('UPDATE users SET Banned = 0 WHERE User_ID = ?', [user_ID], function(err, result, fields) {
+        if (err) return res.json({status: "error"});
+        return res.sendStatus(200);
+    })
+})
 
 // ~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~\\
 //                 USER PROFILE CALLS                     \\

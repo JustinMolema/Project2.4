@@ -40,6 +40,15 @@ export class UserComponent extends AdminRow implements OnInit {
         });
     }
 
+    unbanUser(): void {
+        const dialogRef = this.openDialogAndListenForClose();
+        dialogRef.afterClosed().subscribe(res => {
+            if (res === "Cancel" || res === undefined) return;
+            this.item.Banned--;
+            this.admindataService.unbanUser(this.item.User_ID).subscribe();
+        });
+    }
+
     handleDialogResponse(res: string): void {
         console.log("A");
     }

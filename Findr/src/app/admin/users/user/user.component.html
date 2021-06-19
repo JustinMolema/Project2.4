@@ -5,8 +5,8 @@
     <app-tabledata [data]="item.Banned" [key]="'Banned'"></app-tabledata>
     <div class="actions">
         <div class="button-container">
-            <div class="buttonview">
-                <button (click)="warnUser()">
+            <div *ngIf="!item.Banned" class="buttonview">
+                <button  (click)="warnUser()">
                     <div style="font-size: 18px; color: yellow;">
                         &#9888;
                         <span>Warning</span>
@@ -18,6 +18,14 @@
                     <div style="font-size: 18px; color: red;">
                         &#8856;
                         <span>Ban</span>
+                    </div>
+                </button>
+            </div>
+            <div *ngIf="item.Banned" class="buttonview">
+                <button (click)="unbanUser()">
+                    <div style="font-size: 18px; color: green;">
+                        &#8856;
+                        <span>Unban</span>
                     </div>
                 </button>
             </div>
