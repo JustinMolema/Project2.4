@@ -200,7 +200,7 @@ app.route('/api/users').get(authenticateToken, (req, res) => {
 app.put('/api/users/warn/', authenticateToken, (req, res) => {
     const user_ID = req.body.userID;
     connection.query('UPDATE users SET Warnings = Warnings+1 WHERE User_ID = ?', [user_ID], function(err, result, fields) {
-        if (err) console.log(err);
+        if (err) throw err;
         res.sendStatus(200);
     });
 });

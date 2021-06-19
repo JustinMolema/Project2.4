@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
     }
 
     // To change input field to allow username change
-    onEdit() {
+    onEdit(): void {
         if (this.isEditEnable) {
             this.submitNewUserName();
         }
