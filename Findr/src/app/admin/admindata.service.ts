@@ -26,7 +26,6 @@ export class AdmindataService {
     }
 
     deleteItem(item): void {
-        console.log(item);
         this.itemDeleted.next(item);
     }
 

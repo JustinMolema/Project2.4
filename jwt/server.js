@@ -20,7 +20,6 @@ const Knex = require('knex');
 
 let refreshTokens = []
 
-
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',

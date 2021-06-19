@@ -27,6 +27,7 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
     }
 
     sortItems(columnName: string): any {
+        console.log(this.items);
         if (this.alreadySortingByThisColumn(columnName)) {
             this.ascending = !this.ascending;
             return this.items.reverse();

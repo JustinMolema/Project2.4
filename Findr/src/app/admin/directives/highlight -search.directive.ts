@@ -1,10 +1,10 @@
 import { DatePipe, formatDate } from '@angular/common';
-import { Directive, Input, SimpleChanges, Renderer2, ElementRef, OnChanges } from '@angular/core';
+import {Directive, Input, SimpleChanges, Renderer2, ElementRef, OnChanges, DoCheck} from '@angular/core';
 
 @Directive({
     selector: '[appHighlightSearch]'
 })
-export class HighlightSearchDirective implements OnChanges{
+export class HighlightSearchDirective implements OnChanges, DoCheck {
     @Input() searchedWord: string;
     @Input() content: any;
     @Input() keys: [];
@@ -14,6 +14,10 @@ export class HighlightSearchDirective implements OnChanges{
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!this.content) return;
+        this.setHighlights();
+    }
+
+    ngDoCheck(): void {
         this.setHighlights();
     }
 

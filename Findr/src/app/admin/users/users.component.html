@@ -28,9 +28,7 @@
             <ng-container *ngFor="let item of items | tablefilter:keys:searchText |  slice:0:max; index as i" >
                 <app-adminuser [ngStyle]="{'background-color': i % 2 == 1 ? 'rgba(23,27,49,0.3)' : '#212b46' }"
                                [item]="item"
-
-                               appHighlightSearch [searchedWord]="searchText" [content]="item" [keys]="keys"
-                    ></app-adminuser>
+                               appHighlightSearch [searchedWord]="searchText" [content]="item" [keys]="keys"></app-adminuser>
                 <hr class="line">
                 <br class="mobileBreak">
             </ng-container>

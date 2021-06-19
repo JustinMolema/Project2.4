@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {Admindata} from '../admindata';
 import {AdmindataService} from '../admindata.service';
 import {GamesService} from '../games/games.service';
+import {GamesComponent} from "../games/games.component";
 
 @Component({
   selector: 'app-users',
@@ -9,7 +10,7 @@ import {GamesService} from '../games/games.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent extends Admindata implements OnInit {
-    constructor(public admindataService: AdmindataService) {
+    constructor(public admindataService: AdmindataService, private cdref: ChangeDetectorRef) {
         super(null, admindataService);
     }
 
@@ -18,7 +19,6 @@ export class UsersComponent extends Admindata implements OnInit {
 
     getData(): void {
         this.admindataService.getUsers().subscribe(response => {
-            console.log(response);
             this.fillData(response);
             this.allowViewToLoad(["Username", "Email", "Warnings", "Banned"]);
         });

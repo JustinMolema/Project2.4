@@ -6,7 +6,7 @@
     <div class="actions">
         <div class="button-container">
             <div class="buttonview">
-                <button >
+                <button (click)="warnUser()">
                     <div style="font-size: 18px; color: yellow;">
                         &#9888;
                         <span>Warning</span>
@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div *ngIf="!item.Banned" class="buttonview">
-                <button>
+                <button (click)="banUser()">
                     <div style="font-size: 18px; color: red;">
                         &#8856;
                         <span>Ban</span>
