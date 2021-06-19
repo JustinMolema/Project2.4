@@ -20,6 +20,7 @@ export class FriendslistComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.friends = this.appService.friends;
     }
 
     toggleList(): void {
@@ -32,6 +33,15 @@ export class FriendslistComponent implements OnInit {
         }
 
         this.collapsed = !this.collapsed;
+
+        if (this.collapsed){
+
+        }
+    }
+
+    @Input() refreshFriendInfo(event): void {
+        console.log("refreshed friendslist")
+        this.friends = this.appService.friends;
     }
 
 }

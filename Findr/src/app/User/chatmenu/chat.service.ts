@@ -64,10 +64,13 @@ export class ChatService {
     getAllFriends(): void {
         this.friends = [];
         this.appService.getFriends().subscribe(friendsFromServer => {
-            friendsFromServer[0].forEach(element => {
-                this.friends.push(element);
-                this.privateMessages.push({userID: element.User_ID, messages: []});
-            });
+            if(friendsFromServer[0].length > 0){
+                friendsFromServer[0].forEach(element => {
+                    this.friends.push(element);
+                    this.privateMessages.push({userID: element.User_ID, messages: []});
+                });
+            }
+
         });
     }
 
