@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TopbarService} from '../topbar/topbar.service';
+import {AppService} from 'src/app/app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,10 +10,11 @@ import {TopbarService} from '../topbar/topbar.service';
 export class NavbarComponent implements OnInit {
   topbar: TopbarService;
 
-  constructor(private topbarService: TopbarService) {
+  constructor(private topbarService: TopbarService, private appService: AppService) {
     this.topbar = topbarService;
   }
 
   ngOnInit(): void {
+      this.appService.setFriendInfo();
   }
 }
