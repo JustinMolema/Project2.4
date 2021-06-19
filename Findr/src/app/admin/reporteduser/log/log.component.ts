@@ -21,7 +21,7 @@ export class LogComponent implements OnInit {
     }
 
     warnUser(): void {
-        const dialogRef = this.reportedUserInfo.openDialogAndListenForClose();
+        const dialogRef = this.reportedUserInfo.openDialogAndListenForClose("Are you sure you want to give this user a warning?");
         dialogRef.afterClosed().subscribe(res => {
             if (res === "Cancel" || res === undefined) return;
             this.admindataService.warnUser(this.reportedUserInfo.item.UserID).subscribe();
@@ -30,7 +30,7 @@ export class LogComponent implements OnInit {
     }
 
     banUser(): void {
-        const dialogRef = this.reportedUserInfo.openDialogAndListenForClose();
+        const dialogRef = this.reportedUserInfo.openDialogAndListenForClose("Are you sure you want to ban this user?");
         dialogRef.afterClosed().subscribe(res => {
             if (res === "Cancel" || res === undefined) return;
             this.admindataService.banUser(this.reportedUserInfo.item.UserID).subscribe();

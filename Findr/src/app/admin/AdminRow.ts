@@ -13,10 +13,11 @@ export abstract class AdminRow {
     protected constructor(public snackBar: MatSnackBar, public dialog: MatDialog, public admindataService: AdmindataService) {
     }
 
-    openDialogAndListenForClose(): MatDialogRef<any> {
+    openDialogAndListenForClose(message = "Are you sure you want to delete this item?"): MatDialogRef<any> {
         this.snackBar.dismiss();
         const dialogRef = this.dialog.open(DialogComponent, {
             width: '300px',
+            data: {message}
         });
 
         dialogRef.afterClosed().subscribe(res =>  this.handleDialogResponse(res));

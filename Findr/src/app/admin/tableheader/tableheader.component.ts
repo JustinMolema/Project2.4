@@ -27,7 +27,6 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
     }
 
     sortItems(columnName: string): any {
-        console.log(this.items);
         if (this.alreadySortingByThisColumn(columnName)) {
             this.ascending = !this.ascending;
             return this.items.reverse();
@@ -38,10 +37,6 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
 
         if (this.isColumnNumeric(columnName)) this.sortByNumbers(columnName);
         else this.sortByString(columnName);
-
-        // Don't remove this line thinking the first if statement can replace it.
-        // Sorting by date does NOT ascend the first time, so reverse the list after sorting it by date (descending default)
-        if (columnName === "Date") this.items.reverse();
     }
 
     alreadySortingByThisColumn(columnName: string): boolean {
@@ -49,11 +44,11 @@ export class TableheaderComponent implements OnInit, AfterViewInit {
     }
 
     isColumnNumeric(columnName: string): boolean {
-        return columnName === "Warning" || columnName === "Subscribercount";
+        return columnName === "Warnings" || columnName === "Subscribercount" || columnName === "Banned";
     }
 
     sortByNumbers(columnName: string): void {
-        this.items.sort((a, b) => a[columnName].toString().localeCompare(b[columnName].toString(), undefined, { 'numeric': true }));
+        this.items.sort((a, b) => a[columnName].toString().localeCompare(b[columnName].toString(), undefined, { numeric: true }));
     }
 
     sortByString(columnName: string): void {

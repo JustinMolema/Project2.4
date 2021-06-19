@@ -17,7 +17,9 @@ export class AppService {
             .set('username', username)
             .set('password', password)
             .set('email', email);
-        return this.http.post('http://localhost:8001/api/user', params);
+
+        console.log(email);
+        return this.http.post('http://localhost:8001/api/user/signup', params);
     }
 
     changePassword(newPass: string): Observable<any> {

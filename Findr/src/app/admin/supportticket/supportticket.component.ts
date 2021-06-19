@@ -20,7 +20,7 @@ export class SupportticketComponent extends Admindata implements OnInit {
     getData(): void {
         this.admindataService.getSupportTickets().subscribe(response => {
             this.fillDataWithDateTime(response);
-            this.allowViewToLoad(['Date', 'Time', 'Category', 'Status']);
+            this.allowViewToLoad(['Date', 'Time', 'Category', 'Description']);
         });
 
     }

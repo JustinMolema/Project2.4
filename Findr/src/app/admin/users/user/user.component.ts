@@ -23,7 +23,7 @@ export class UserComponent extends AdminRow implements OnInit {
     }
 
     warnUser(): void {
-        const dialogRef = this.openDialogAndListenForClose();
+        const dialogRef = this.openDialogAndListenForClose("Are you sure you want to give this user a warning?");
         dialogRef.afterClosed().subscribe(res => {
             if (res === "Cancel" || res === undefined) return;
             this.item.Warnings++;
@@ -32,7 +32,7 @@ export class UserComponent extends AdminRow implements OnInit {
     }
 
     banUser(): void {
-        const dialogRef = this.openDialogAndListenForClose();
+        const dialogRef = this.openDialogAndListenForClose("Are you sure you want to ban this user?");
         dialogRef.afterClosed().subscribe(res => {
             if (res === "Cancel" || res === undefined) return;
             this.item.Banned++;
@@ -41,7 +41,7 @@ export class UserComponent extends AdminRow implements OnInit {
     }
 
     unbanUser(): void {
-        const dialogRef = this.openDialogAndListenForClose();
+        const dialogRef = this.openDialogAndListenForClose("Are you sure you want to unban this user?");
         dialogRef.afterClosed().subscribe(res => {
             if (res === "Cancel" || res === undefined) return;
             this.item.Banned--;
@@ -50,13 +50,8 @@ export class UserComponent extends AdminRow implements OnInit {
     }
 
     handleDialogResponse(res: string): void {
-        console.log("A");
     }
 
     setUndoTimer(): void {
-        this.undoTimer = setTimeout(() => {
-            // Ban/Warn user.
-            // this.admindataService.deleteGame(this.item.GameID).subscribe();
-        }, 4000);
     }
 }

@@ -20,6 +20,7 @@ export abstract class Admindata {
 
     fillData(response: any): void {
         for (const item of response) {
+            if (item.Email) item.Email = decodeURIComponent(item.Email);
             this.items.push(item);
         }
     }
