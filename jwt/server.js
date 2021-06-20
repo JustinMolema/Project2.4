@@ -8,6 +8,7 @@ const test = require('./api.js');
 const http = require('http');
 const {Console} = require('console');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
@@ -613,18 +614,28 @@ app.post('/api/user/login', (req, res) => {
 })
 
 // api call to create user in database
+
 app.post('/api/user/signup', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     // encode so that special symbols dont destroy DB
+
+    var pic;
     const username = encodeURIComponent(req.body.username);
     const password = encodeURIComponent(req.body.password);
     const email = encodeURIComponent(req.body.email);
+    try {
+        pic = fs.readFileSync('default-user.jpg', 'base64')
+        pic = encodeURIComponent("data:image/jpg;base64,"+pic)
+    } catch (err) {
+        pic = null;
+    }
+    // const pic = encodeURIComponent('default-user-icon.svg')
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(password, salt, function (err, hash) {
 
             connection.connect(function (req, err) {
-                connection.query('INSERT INTO users (username, password, email) VALUES (?, ?, ?)', [username, hash, email], function (err, result, fields) {
+                connection.query('INSERT INTO users (username, password, email, Profile_picture) VALUES (?, ?, ?, ?)', [username, hash, email, pic], function (err, result, fields) {
 
                     if (err) {
                         return res.send(err);
