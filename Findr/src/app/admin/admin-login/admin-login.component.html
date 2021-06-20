@@ -5,11 +5,11 @@
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175">
             <h2 style="color: white">Admin Login</h2>
 
-            <form>
+            <form [formGroup]="form">
                 <input class="inputfields" type="text" placeholder="Username" />
                 <input class="inputfields" type="password" placeholder="Password" />
                 <div class="loginbuttons">
-                    <button>Login</button>
+                    <button (click)="login()">Login</button>
                 </div>
             </form>
         </div>

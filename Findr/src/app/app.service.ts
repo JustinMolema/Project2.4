@@ -22,7 +22,6 @@ export class AppService {
             .set('password', password)
             .set('email', email);
 
-        console.log(email);
         return this.http.post('http://localhost:8001/api/user/signup', params);
     }
 
@@ -89,10 +88,10 @@ export class AppService {
 
 
     setFriendInfo(): void {
-        this.getFriendsFromServer();
-        this.getFriendRequestsFromServer();
-        this.getBlockedUsersFromServer();
-        this.navbarService.refreshFriends();
+        // this.getFriendsFromServer();
+        // this.getFriendRequestsFromServer();
+        // this.getBlockedUsersFromServer();
+        // this.navbarService.refreshFriends();
     }
 
     getFriendsFromServer(): void {

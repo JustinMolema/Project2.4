@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminLoginComponent } from './admin-login.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from '../../app-routing.module';
 import {RouterModule, Router} from "@angular/router";
 import { ProviderAstType } from '@angular/compiler';
@@ -13,18 +13,19 @@ import { LoginModule } from '../../User/login/login.module';
     AdminLoginComponent,
   ],
   providers: [{ provide: ErrorHandler, useClass: WrongPasswordHandler }],
-  imports: [
-    CommonModule,
-    FormsModule,
-    AppRoutingModule,
-    RouterModule,
-    LoginModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        AppRoutingModule,
+        RouterModule,
+        LoginModule,
+        ReactiveFormsModule
+    ]
 })
 export class AdminLoginModule {
 
     constructor(){
-        
+
     }
 
  }
