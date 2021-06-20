@@ -88,10 +88,9 @@ export class AppService {
 
 
     setFriendInfo(): void {
-        // this.getFriendsFromServer();
-        // this.getFriendRequestsFromServer();
-        // this.getBlockedUsersFromServer();
-        // this.navbarService.refreshFriends();
+        this.getFriendsFromServer();
+        this.getFriendRequestsFromServer();
+        this.getBlockedUsersFromServer();
     }
 
     getFriendsFromServer(): void {
@@ -105,6 +104,7 @@ export class AppService {
                     this.friends.push(element);
                 });
             }
+            // this.navbarService.callComponentMethod();
         });
     }
 
@@ -116,7 +116,7 @@ export class AppService {
                     if (element.Profile_picture) {
                         element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
                     }
-                    this.friendRequests.push(element)
+                    this.friendRequests.push(element);
                 });
             }
         });

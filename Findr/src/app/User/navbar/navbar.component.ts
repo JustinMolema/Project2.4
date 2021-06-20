@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.appService.setFriendInfo();
+      console.log("navbar init")
+      //this.appService.setFriendInfo();
   }
 }

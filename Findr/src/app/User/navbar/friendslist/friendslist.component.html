@@ -5,7 +5,7 @@
 <hr class="friends-list-line">
 
 <button [ngClass]="(topbar.collapseNavbar == false) ? 'friends-list-button' : 'friends-list-button-collapsed'"
-        *ngFor="let friend of friends.slice(0, sliceAmount)">
+        *ngFor="let friend of appService.friends.slice(0, sliceAmount)">
     <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondiv-collapsed'">
         <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbaricon-collapsed' "
              [src]=friend.Profile_picture>
