@@ -4,16 +4,17 @@ const cors = require('cors');
 const app = express();
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
-const test = require('./api.js');
 const http = require('http');
 const {Console} = require('console');
 const bcrypt = require('bcrypt');
+
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use(cors({
     origin: "*"
 }));
+
 
 const {Model} = require('objection');
 const Knex = require('knex');
@@ -26,6 +27,9 @@ const connection = mysql.createConnection({
     password: '',
     database: 'Findr'
 });
+
+const games = require('./games')(express, authenticateToken, connection);
+app.use(games)
 
 const knex = Knex({
     client: 'mysql',
@@ -484,49 +488,6 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
     })
 })
 
-// get games
-app.route('/api/games').get(authenticateToken, (req, res) => {
-    connection.query('SELECT * FROM games', function (err, result, fields) {
-        if (err) console.log(err);
-        for (let item of result) {
-            item.Image = item.Image.toString();
-        }
-        res.send(result);
-    })
-})
-
-// create new game
-app.route('/api/games').post((req, res) => {
-    connection.connect(function (err) {
-        connection.query('INSERT INTO games (Name, Category, Description, Image) VALUES (?,?,?,?)', [req.body.name, req.body.category, req.body.description, req.body.image], function (err, result, fields) {
-            if (err) return res.json({status: "error"});
-            res.json({status: "ok"});
-        })
-    })
-})
-
-// delete game
-app.route('/api/games/:name').delete((req, res) => {
-    let name = req.params['name']
-    connection.connect(function (req, err) {
-        connection.query('DELETE FROM games WHERE Name = ?', [name], function (err, result, fields) {
-            if (err) {
-                res.sendStatus(400);
-            } else {
-                res.json({status: 200})
-            }
-        })
-    })
-})
-
-app.put('/api/games/', authenticateToken, (req, res) => {
-    connection.query('UPDATE games SET Name = ?, Category = ?, Description = ?, Image = ? WHERE Name = ?', [req.body.newname, req.body.category, req.body.description, req.body.image, req.body.name], function (err, result, fields) {
-        if (err) return res.sendStatus(400);
-        res.json({status: "ok"});
-    })
-})
-
-
 app.post('/api/users/reported', (req, res) => {
     connection.query('INSERT INTO reported_users (UserID, Username, Date, Reason, Message) VALUES (?,?,?,?,?)',
         [req.body.userID, req.body.username, new Date(new Date().toUTCString()), req.body.reason, req.body.message], function (err, result, fields) {
@@ -571,7 +532,7 @@ app.post('/api/user/login', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const username = req.body.username;
     const pw = req.body.password;
-
+    console.log(pw);
     connection.connect(function (req, err) {
         connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
             if (err) {
@@ -622,7 +583,7 @@ app.post('/api/user/signup', async (req, res) => {
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(password, salt, function (err, hash) {
-
+            console.log(hash);
             connection.connect(function (req, err) {
                 connection.query('INSERT INTO users (username, password, email) VALUES (?, ?, ?)', [username, hash, email], function (err, result, fields) {
 
@@ -636,6 +597,77 @@ app.post('/api/user/signup', async (req, res) => {
         });
     });
 });
+
+app.post('/api/admin/login', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    const username = req.body.username;
+    const pw = req.body.password;
+    console.log(pw);
+    connection.connect(function (req, err) {
+        connection.query('SELECT AdminID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
+            if (err) {
+                res.send(err)
+            }
+
+            if (result) {
+                const dbPassword = JSON.parse(JSON.stringify(result[0].password));
+                const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
+
+
+                bcrypt.compare(pw, dbPassword, (err, result) => {
+                    if (err) {
+                        res.sendStatus(403).send("Wrong password")
+                    }
+
+                    if (result) {
+                        const user = {name: username}
+                        const accessToken = generateAccessToken(user);
+                        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+                        refreshTokens.push(refreshToken)
+                        res.json({
+                            accessToken: accessToken,
+                            refreshToken: refreshToken,
+                            password: dbPassword,
+                            userID: User_ID,
+                            status: 200
+                        })
+                    } else {
+                        res.json({
+                            status: 403,
+                            message: err
+                        })
+                    }
+                })
+            }
+        })
+    })
+})
+
+app.post('/api/admin/signup', async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    // encode so that special symbols dont destroy DB
+    const username = encodeURIComponent(req.body.username);
+    const password = encodeURIComponent(req.body.password);
+    const email = encodeURIComponent(req.body.email);
+    const saltRounds = 10;
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(password, salt, function (err, hash) {
+            console.log(hash);
+            connection.connect(function (req, err) {
+                connection.query('INSERT INTO admins (username, password, email) VALUES (?, ?, ?)', [username, hash, email], function (err, result, fields) {
+
+                    if (err) {
+                        console.log(err)
+                        return res.send(err);
+                    } else {
+                        res.json({status: 200});
+                    }
+                });
+            });
+        });
+    });
+});
+
 
 // check token
 app.post('/api/token/refresh', (req, res) => {
@@ -656,6 +688,7 @@ function generateAccessToken(user) {
 }
 
 function authenticateToken(req, res, next) {
+    console.log("OEN")
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]
     if (token == null) return res.sendStatus(401)
