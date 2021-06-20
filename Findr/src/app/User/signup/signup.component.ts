@@ -41,5 +41,4 @@ export class SignupComponent implements OnInit {
 
         this.appService.signUp(val.username, encryptedpassword, val.email).subscribe();
     }
-
 }

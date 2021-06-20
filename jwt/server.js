@@ -615,7 +615,6 @@ app.post('/api/user/login', (req, res) => {
 // api call to create user in database
 app.post('/api/user/signup', async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
-
     // encode so that special symbols dont destroy DB
     const username = encodeURIComponent(req.body.username);
     const password = encodeURIComponent(req.body.password);

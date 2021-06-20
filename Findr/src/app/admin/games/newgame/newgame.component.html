@@ -29,7 +29,7 @@
         <div class="inputfieldcontainer">
             <select class="category" formControlName="category">
                 <option value="RPG">RPG</option>
-                <option value="Shooter">Shooter</option>
+                <option value="Shooter" selected>Shooter</option>
                 <option value="BR">BR</option>
             </select>
             <!-- <input class="inputfield" type="text" placeholder="Game Name"> -->
@@ -48,13 +48,13 @@
                 Cancel
             </div>
         </button>
-        <button *ngIf="!game" class="addgame" (click)="addGame()">
+        <button *ngIf="!game" type="submit" [disabled]="form.pristine || form.invalid" class="addgame" (click)="addGame()">
             <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
                 Add game
             </div>
         </button>
 
-        <button *ngIf="game" class="addgame" (click)="editGame()">
+        <button *ngIf="game" [disabled]="form.pristine || form.invalid" class="addgame" (click)="editGame()">
             <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
                 Edit game
             </div>

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AdmindataService} from '../../admindata.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {sha512} from 'js-sha512';
 
 class ImageSnippet {
     constructor(public src: string, public file: File) {
@@ -27,12 +28,11 @@ export class NewgameComponent implements OnInit {
         this.form = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
-            category: ['', Validators.required]
+            category: [Validators.required],
         });
     }
 
     ngOnInit(): void {
-
         if (this.game) this.setEditValues();
     }
 
@@ -73,6 +73,7 @@ export class NewgameComponent implements OnInit {
     }
 
     editGame(): void {
+        console.log("aaaaa");
         const val = this.form.value;
         this.admindataService.editGame(this.name, val.description, val.category, this.reader.result, val.name).subscribe(response => {
             this.submitGameForm(response, "Game has been modified!");
