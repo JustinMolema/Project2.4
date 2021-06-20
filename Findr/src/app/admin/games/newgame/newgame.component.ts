@@ -2,8 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AdmindataService} from '../../admindata.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {sha512} from 'js-sha512';
-
 class ImageSnippet {
     constructor(public src: string, public file: File) {
     }
@@ -19,16 +17,16 @@ export class NewgameComponent implements OnInit {
     selectedFile: ImageSnippet;
     form: FormGroup;
 
-    reader = new FileReader();
     @Input() returnToGames: Function;
     @Input() game;
     name: string;
     dbPicture: any;
+    picture: string;
     constructor(private admindataService: AdmindataService, private fb: FormBuilder, private sanitiser: DomSanitizer) {
         this.form = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
-            category: [Validators.required],
+            category: ['', Validators.required],
         });
     }
 
@@ -41,7 +39,8 @@ export class NewgameComponent implements OnInit {
         this.form.controls.category.setValue(this.game.Category);
         this.form.controls.description.setValue(this.game.Description);
 
-        this.dbPicture = this.sanitize(decodeURIComponent(this.game.Image));
+        this.picture = decodeURIComponent(this.game.Image);
+        this.dbPicture = this.sanitize(this.picture);
         this.hasFileBeenSelected = true;
 
         this.name = this.game.Name;
@@ -49,13 +48,14 @@ export class NewgameComponent implements OnInit {
 
     processFile(imageInput: any): void {
         const file: File = imageInput.files[0];
-        this.reader = new FileReader();
+        const reader = new FileReader();
 
-        this.reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
         this.hasFileBeenSelected = true;
 
-        this.reader.onload = () => {
-            this.dbPicture = this.sanitize(this.reader.result.toString());
+        reader.onload = () => {
+            this.picture = reader.result.toString();
+            this.dbPicture = this.sanitize(reader.result.toString());
             // this.appService.changeProfilePicture(this.reader.result).subscribe();
         };
     }
@@ -66,16 +66,18 @@ export class NewgameComponent implements OnInit {
     }
 
     addGame(): void {
+        if (!this.hasFileBeenSelected) return;
+
         const val = this.form.value;
-        this.admindataService.addGame(val.name, val.description, val.category, this.reader.result).subscribe(response => {
+
+        this.admindataService.addGame(val.name, val.description, val.category, this.picture).subscribe(response => {
             this.submitGameForm(response, "Game has been added!");
         });
     }
 
     editGame(): void {
-        console.log("aaaaa");
         const val = this.form.value;
-        this.admindataService.editGame(this.name, val.description, val.category, this.reader.result, val.name).subscribe(response => {
+        this.admindataService.editGame(this.name, val.description, val.category, this.picture, val.name).subscribe(response => {
             this.submitGameForm(response, "Game has been modified!");
         });
     }

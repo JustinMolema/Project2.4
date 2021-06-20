@@ -8,7 +8,7 @@
         </label>
 
         <label *ngIf="hasFileBeenSelected;" for="upload">
-            <img class="current-profile-pic" [src]="dbPicture" alt="This game picture">
+            <img class="current-profile-pic" [src]="dbPicture" formControlName="image" alt="This game picture">
         </label>
         <label class="uploadimage" for="upload">Upload image</label>
 
@@ -27,9 +27,9 @@
             <span>Category:</span>
         </div>
         <div class="inputfieldcontainer">
-            <select class="category" formControlName="category">
+            <select required class="category" formControlName="category">
                 <option value="RPG">RPG</option>
-                <option value="Shooter" selected>Shooter</option>
+                <option value="Shooter">Shooter</option>
                 <option value="BR">BR</option>
             </select>
             <!-- <input class="inputfield" type="text" placeholder="Game Name"> -->
@@ -54,7 +54,7 @@
             </div>
         </button>
 
-        <button *ngIf="game" [disabled]="form.pristine || form.invalid" class="addgame" (click)="editGame()">
+        <button *ngIf="game" [disabled]="form.invalid" class="addgame" (click)="editGame()">
             <div style="font-size: 15px; display: flex; justify-content: center; width: 100%">
                 Edit game
             </div>

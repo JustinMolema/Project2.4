@@ -487,7 +487,7 @@ app.route('/api/user/:userID/blocked/:unblockeeID').delete(authenticateToken, as
 // get games
 app.route('/api/games').get(authenticateToken, (req, res) => {
     connection.query('SELECT * FROM games', function (err, result, fields) {
-        if (err) throw err;
+        if (err) console.log(err);
         for (let item of result) {
             item.Image = item.Image.toString();
         }
