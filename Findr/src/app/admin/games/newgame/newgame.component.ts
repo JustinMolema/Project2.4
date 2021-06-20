@@ -40,7 +40,6 @@ export class NewgameComponent implements OnInit {
         this.form.controls.name.setValue(this.game.Name);
         this.form.controls.category.setValue(this.game.Category);
         this.form.controls.description.setValue(this.game.Description);
-        console.log(this.game.Image.data);
 
         this.dbPicture = this.sanitize(decodeURIComponent(this.game.Image));
         this.hasFileBeenSelected = true;

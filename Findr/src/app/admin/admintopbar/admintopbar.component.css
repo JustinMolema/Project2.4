@@ -4,16 +4,10 @@
     width: 100%;
 }
 
-
-.showmenu:checked ~ label {
-}
-
 .showmenu {
     display: none;
 }
 
-label{
-}
 .showmenu:checked ~ nav button {
     opacity: 1;
     transition: opacity 250ms ease-in-out;
@@ -21,6 +15,5 @@ label{
 
 .showmenulabel {
     margin-right: 2em;
-    display: flex;
 }
 

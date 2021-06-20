@@ -1,5 +1,10 @@
 
 <div class="adminbar" [@show]="state">
+    <input type="checkbox" id="showmenu" class="showmenu" (click)="this.collapse()">
+
+    <label for="showmenu" class="showmenulabel">
+        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+    </label>
     <div class="logoholder" [@showchild]="state">
         <img class="logo" src="../../../assets/SVG/Logo-white.svg" alt="Logo">
     </div>

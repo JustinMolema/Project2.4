@@ -12,8 +12,13 @@
 * {
     box-sizing: border-box;
 }
+.description {
+    text-align: left;
+    margin-left: 5%;
+    overflow-wrap: break-word;
+}
 
-p {
+.datatext {
     text-align: left;
     margin-left: 5%;
     white-space: nowrap;
@@ -49,7 +54,7 @@ p {
         width: 60%;
     }
 
-    p {
+    .datatext {
         margin-left: 10px;
     }
 

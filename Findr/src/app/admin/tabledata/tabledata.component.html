@@ -1,9 +1,9 @@
 <div class="column-view">
-    <p class="field">{{data}}
+    <p [ngClass]="key === 'Description' ? 'description' : 'datatext'" class="field">{{data}}
 <!--    <p class="field">{{game[key]}}-->
     </p>
     <div class="mobileHeader">
-        <p><b>{{key}}: </b></p>
+        <p class="datatext"><b>{{key}}: </b></p>
     </div>
 </div>
 
