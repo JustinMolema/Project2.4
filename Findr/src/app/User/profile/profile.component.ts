@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
             this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
             if (res[0].Profile_picture) {
-                console.log(res[0]);
                 this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
                 this.hasFileBeenSelected = true;
             }

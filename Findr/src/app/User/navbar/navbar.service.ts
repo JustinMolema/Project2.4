@@ -1,17 +1,24 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Subject} from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class NavbarService {
 
-    @Output()
-    refresh: EventEmitter<string> = new EventEmitter<string>();
+    /*// Observable string sources
+    private componentMethodCallSource = new Subject<any>();
 
-  constructor() { }
+    // Observable string streams
+    componentMethodCalled$ = this.componentMethodCallSource.asObservable();
 
-    refreshFriends(){
-        this.refresh.emit('refreshfriendlist');
+    // Service message commands
+    callComponentMethod() {
+        this.componentMethodCallSource.next();
     }
+
+    constructor() {
+    }
+*/
 
 }

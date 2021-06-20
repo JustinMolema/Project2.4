@@ -92,20 +92,24 @@ export class AppService {
         this.getFriendsFromServer();
         this.getFriendRequestsFromServer();
         this.getBlockedUsersFromServer();
-        this.navbarService.refreshFriends();
+
+
     }
 
     getFriendsFromServer(): void {
         this.friends = [];
         this.getFriends().subscribe(friendsFromServer => {
             if (friendsFromServer.length > 0) {
+                console.log(friendsFromServer)
                 friendsFromServer.forEach(element => {
+                    console.log(element)
                     if (element.Profile_picture) {
                         element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
                     }
                     this.friends.push(element);
                 });
             }
+            //this.navbarService.callComponentMethod();
         });
     }
 

@@ -11,17 +11,11 @@ import {TopbarService} from '../topbar/topbar.service';
 export class FriendsmenuComponent implements OnInit {
 
 
-    friends = this.appService.friends;
-    friendRequests = this.appService.friendRequests;
-    blockedUsers = this.appService.blockedUsers;
 
     constructor(private topbarService: TopbarService, private appService: AppService) {
     }
 
     ngOnInit(): void {
-        this.friends = this.appService.friends;
-        this.friendRequests = this.appService.friendRequests;
-        this.blockedUsers = this.appService.blockedUsers;
         this.appService.setFriendInfo();
     }
 
