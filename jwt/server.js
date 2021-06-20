@@ -629,7 +629,7 @@ app.post('/api/user/signup', async (req, res) => {
     } catch (err) {
         pic = null;
     }
-    // const pic = encodeURIComponent('default-user-icon.svg')
+
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(password, salt, function (err, hash) {

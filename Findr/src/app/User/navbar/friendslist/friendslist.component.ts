@@ -15,7 +15,7 @@ export class FriendslistComponent implements OnInit {
     sliceAmount = 5;
     topbar: TopbarService;
 
-    constructor(private topbarService: TopbarService, private appService: AppService, private navbarService: NavbarService) {
+    constructor(private topbarService: TopbarService, public appService: AppService, private navbarService: NavbarService) {
         this.topbar = topbarService;
     }
 
