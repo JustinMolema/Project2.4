@@ -1,8 +1,10 @@
-import {ApplicationRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {AfterViewInit, ApplicationRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from './User/login/auth.service';
 import {ChatService} from './User/chatmenu/chat.service';
 import {AppService} from './app.service';
+import {PromiseType} from "protractor/built/plugins";
+import {UserGuard} from "./User/user.guard";
 
 @Component({
     selector: 'app-root',
@@ -13,22 +15,24 @@ export class AppComponent implements OnInit, OnDestroy {
     title = 'Findr';
     stable;
 
-    constructor(public router: Router, private appService: AppService, private authService: AuthService, public chat: ChatService, private app: ApplicationRef) {
+    constructor(public router: Router, private appService: AppService,
+                private authService: AuthService, public chat: ChatService, private app: ApplicationRef, public route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.rerouteIfLoggedIn();
+        console.log(window.location.pathname);
+        if (this.authService.userIsLoggedIn()) this.router.navigate(['/games']);
+        else if (!window.location.pathname.startsWith("/admin")) this.router.navigate(['/login']);
+        // this.router.events.subscribe((e) => {
+        //     if (e instanceof NavigationEnd) {
+        //         console.log(e.url);
+        //     }
+        // });
         this.stabilizeListener();
     }
 
     ngOnDestroy(): void {
         this.chat.closeSocket();
-    }
-
-    rerouteIfLoggedIn(): void {
-        if (this.authService.userIsLoggedIn()) this.router.navigate(['/games']);
-        else this.router.navigate(['/login']);
-
     }
 
     stabilizeListener(): void {
@@ -39,6 +43,9 @@ export class AppComponent implements OnInit, OnDestroy {
                     this.chat.getAllFriends();
                     this.chat.openSocket();
                 }
+                //
+
+
                 this.stable.unsubscribe();
             }
         });
