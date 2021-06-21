@@ -3,11 +3,12 @@
     <div class="form-container">
         <div class="inputs">
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175">
-            <h2 style="color: white">Admin Login</h2>
+
+            <h3 *ngIf="error" style="color: red; display: flex; text-align: center;">Incorrect username or password.</h3>
 
             <form [formGroup]="form">
-                <input class="inputfields" type="text" placeholder="Username" />
-                <input class="inputfields" type="password" placeholder="Password" />
+                <input class="inputfields" type="text" placeholder="Username" formControlName="username"/>
+                <input class="inputfields" type="password" placeholder="Password" formControlName="password"/>
                 <div class="loginbuttons">
                     <button (click)="login()">Login</button>
                 </div>

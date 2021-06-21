@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {animate, animateChild, group, query, stagger, state, style, transition, trigger} from '@angular/animations';
 import {AdminBarService} from "./admin-bar.service";
 import {delay} from "rxjs/operators";
+import {AdminauthService} from "../admin-login/adminauth.service";
 
 @Component({
     selector: 'app-admin-bar',
@@ -45,7 +46,7 @@ import {delay} from "rxjs/operators";
 export class AdminBarComponent implements OnInit, OnDestroy {
     state = "right";
 
-    constructor(private renderer: Renderer2, private adminbarService: AdminBarService) {
+    constructor(private renderer: Renderer2, private adminbarService: AdminBarService, private adminAuth: AdminauthService) {
         this.renderer.addClass(document.body, 'adminBody');
         this.adminbarService.setNavbarComponent(this);
     }
@@ -59,5 +60,9 @@ export class AdminBarComponent implements OnInit, OnDestroy {
 
     collapse(): void {
         this.state = this.state === "left" ? "right" : "left";
+    }
+
+    ereaseTokens(): void {
+        this.adminAuth.logout();
     }
 }

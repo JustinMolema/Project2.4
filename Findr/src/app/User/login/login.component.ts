@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     numbers: number[];
     s = ['0deg', '45deg', '90deg', '135deg', '180deg', '225deg', '270deg'];
     stars = [];
+    error = false;
+
 
     vh = window.screen.height / 2;
     vw = window.screen.width;
@@ -62,9 +64,8 @@ export class LoginComponent implements OnInit {
                 this.chat.getAllFriends();
                 this.chat.openSocket();
                 this.authService.setRefreshInterval();
-            } else if (res.status === 403) {
-                // TODO give user proper feedback
-                console.log("error");
+            } else if (res.status === "error") {
+                this.error = true;
             }
         });
     }

@@ -11,39 +11,36 @@ module.exports = function (express, generateAccessToken, connection) {
 		connection.connect(function (req, err) {
 			connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
 				if (err) {
-					res.send(err)
+					return res.send({status: "error"});
 				}
 	
-				if (result) {
-					const dbPassword = JSON.parse(JSON.stringify(result[0].password));
-					const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
-	
-	
-					bcrypt.compare(pw, dbPassword, (err, result) => {
-						if (err) {
-							res.sendStatus(403).send("Wrong password")
-						}
-	
-						if (result) {
-							const user = {name: username}
-							const accessToken = generateAccessToken(user);
-							const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-							// refreshTokens.push(refreshToken)
-							res.json({
-								accessToken: accessToken,
-								refreshToken: refreshToken,
-								password: dbPassword,
-								userID: User_ID,
-								status: 200
-							})
-						} else {
-							res.json({
-								status: 403,
-								message: err
-							})
-						}
-					})
-				}
+				if (result.length === 0) return res.send({status: "error"});
+
+				const dbPassword = JSON.parse(JSON.stringify(result[0].password));
+				const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
+
+
+				bcrypt.compare(pw, dbPassword, (err, result) => {
+					if (err) {
+						return res.send({status: "error"});
+					}
+
+					if (result) {
+						const user = {name: username}
+						const accessToken = generateAccessToken(user);
+						const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+						res.json({
+							accessToken: accessToken,
+							refreshToken: refreshToken,
+							password: dbPassword,
+							userID: User_ID,
+							status: 200
+						})
+					} else {
+						return res.send({status: "error"});
+					}
+				})
+				
 			})
 		})
 	})

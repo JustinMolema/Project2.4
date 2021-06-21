@@ -40,12 +40,7 @@ export class ChatService {
 
     createSession(): void {
         this.socket.on('session', ({sessionID}) => {
-            // attach the session ID to the next reconnection attempts
             this.socket.auth = {sessionID};
-            // store it in the localStorage
-            localStorage.setItem('sessionID', sessionID);
-            // save the ID of the user
-            // this.socket.userID = userID;
         });
     }
 

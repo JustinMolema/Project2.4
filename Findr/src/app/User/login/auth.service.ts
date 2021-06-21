@@ -15,6 +15,7 @@ export class AuthService {
     }
 
     userIsLoggedIn(): string {
+        if (this.router.url.startsWith("/admin")) return "";
         return this.getJWTToken();
     }
 
@@ -23,7 +24,7 @@ export class AuthService {
 
         this.refreshTokenInterval = setInterval(() => {
             this.refreshInterval();
-        }, 10000);
+        }, 1000);
     }
 
     refreshInterval(): void {
@@ -53,12 +54,11 @@ export class AuthService {
     }
 
     getJWTToken(): string {
-        this.retrieveStorageType();
+        if (this.router.url.startsWith("/admin")) return sessionStorage.getItem("admin-jwt");
         return this.storage.getItem('jwt');
     }
 
     getRefreshToken(): string {
-        this.retrieveStorageType();
         return this.storage.getItem('refreshToken');
     }
 

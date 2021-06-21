@@ -12,11 +12,8 @@ import {AdminauthService} from "./adminauth.service";
     styleUrls: ['./admin-login.component.css']
 })
 export class AdminLoginComponent implements OnInit {
-    username = '';
-    password = '';
-    authorized: boolean;
     form: FormGroup;
-
+    error = false;
 
     constructor(private router: Router, private fb: FormBuilder, private adminauth: AdminauthService) {
         this.createForm();
@@ -30,16 +27,6 @@ export class AdminLoginComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authorized = true;
-    }
-
-    checkUserNamePassword(): void {
-        if (this.username === "admin" && this.password === "admin") {
-            this.router.navigate(['admin/reportedusers']);
-        }
-        else {
-            throw new WrongPasswordHandler();
-        }
     }
 
     login(): void {
@@ -54,14 +41,10 @@ export class AdminLoginComponent implements OnInit {
 
         this.adminauth.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
-                localStorage.setItem('userID', res.userID);
-                localStorage.setItem('rememberme', val.rememberme);
                 this.setJWT(res);
-                this.router.navigate(['/admin/games']);
-                this.adminauth.setRefreshInterval();
-            } else if (res.status === 403) {
-                // TODO give user proper feedback
-                console.log("error");
+                this.router.navigate(['/admin/reportedusers']);
+            } else if (res.status === "error") {
+                this.error = true;
             }
         });
     }
