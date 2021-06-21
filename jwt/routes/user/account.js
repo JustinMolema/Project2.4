@@ -63,12 +63,10 @@ module.exports = function (express, generateAccessToken, connection) {
 		const saltRounds = 10;
 		bcrypt.genSalt(saltRounds, function (err, salt) {
 			bcrypt.hash(password, salt, function (err, hash) {
-				console.log(hash);
 				connection.connect(function (req, err) {
 					connection.query('INSERT INTO users (username, password, email, Profile_picture) VALUES (?, ?, ?, ?)', [username, hash, email, pic], function (err, result, fields) {
-	
 						if (err) {
-							return res.send(err);
+							return res.send({status: 400});
 						} else {
 							res.json({status: 200});
 						}

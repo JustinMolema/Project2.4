@@ -4,6 +4,7 @@
         <div class="inputs">
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" routerLink="/login" alt="Site Logo">
             <h2>Welcome {{username}}!</h2>
+            <h3 *ngIf="error">The username you chose already exists</h3>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
                 <input name="username" class="inputfields" formControlName="username" [(ngModel)]='username' type="text" placeholder="Username" autofocus/>

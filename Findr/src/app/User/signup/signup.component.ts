@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {sha512} from 'js-sha512';
 import {AppService} from 'src/app/app.service';
 import {mustMatch} from '../../custom.validators'
+import {Router} from "@angular/router";
 
 //TODO on submit, go to login page.
 
@@ -14,8 +15,8 @@ import {mustMatch} from '../../custom.validators'
 export class SignupComponent implements OnInit {
     form: FormGroup;
     username: '';
-
-    constructor(private appService: AppService, private fb: FormBuilder) {
+    error = false;
+    constructor(private appService: AppService, private fb: FormBuilder, private router: Router) {
         this.createForm();
     }
 
@@ -39,6 +40,12 @@ export class SignupComponent implements OnInit {
         hash.update(val.password);
         const encryptedpassword = hash.hex();
 
-        this.appService.signUp(val.username, encryptedpassword, val.email).subscribe();
+        this.appService.signUp(val.username, encryptedpassword, val.email).subscribe(res => {
+            if (res.status === 200) {
+                this.router.navigate(['/login']);
+            } else if (res.status === 400) {
+                this.error = true;
+            }
+        });
     }
 }
