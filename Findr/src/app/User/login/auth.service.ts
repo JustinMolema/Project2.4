@@ -16,6 +16,7 @@ export class AuthService {
 
     userIsLoggedIn(): string {
         if (this.router.url.startsWith("/admin")) return "";
+        this.retrieveStorageType();
         return this.getJWTToken();
     }
 
@@ -48,7 +49,6 @@ export class AuthService {
     }
 
     writeTokens(tokens): void {
-        this.retrieveStorageType();
         this.storage.setItem('jwt', tokens.accessToken);
         if (tokens.refreshToken) this.storage.setItem('refreshToken', tokens.refreshToken);
     }
@@ -63,7 +63,6 @@ export class AuthService {
     }
 
     eraseTokens(): void {
-        this.retrieveStorageType();
         this.storage.removeItem('jwt');
         this.storage.removeItem('refreshToken');
         localStorage.removeItem('userID');
@@ -71,11 +70,7 @@ export class AuthService {
     }
 
     retrieveStorageType(): void {
-        if (localStorage.getItem('rememberme') === 'true') {
-            this.storage = localStorage;
-        } else{
-            this.storage = sessionStorage;
-        }
+        this.storage = localStorage.getItem('rememberme') === 'true' ? localStorage : sessionStorage;
     }
 
     logout(): void {

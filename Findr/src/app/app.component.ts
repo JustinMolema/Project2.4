@@ -17,11 +17,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.rerouteIfLoggedIn();
         this.stabilizeListener();
     }
 
     ngOnDestroy(): void {
         this.chat.closeSocket();
+    }
+
+    rerouteIfLoggedIn(): void {
+        if (this.authService.userIsLoggedIn()) this.router.navigate(['/games']);
+        else this.router.navigate(['/login']);
+
     }
 
     stabilizeListener(): void {
