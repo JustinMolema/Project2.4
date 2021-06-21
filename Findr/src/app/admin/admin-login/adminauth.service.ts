@@ -69,5 +69,4 @@ export class AdminauthService {
         this.eraseTokens();
         clearInterval(this.refreshTokenInterval);
     }
-
 }

@@ -16,18 +16,16 @@ const io = require("socket.io")(server, {
 module.exports = function () {
 	io.use((socket, next) => {
 		const username = socket.handshake.auth.username;
-		console.log("dddd");
 		socket.username = username;
 		socket.sessionID = socket.handshake.auth.sessionID;
 		next();
 	});
 
 	io.on('connection', (socket) => {
-		console.log("aaa");
 		socket.emit("session", {
 			sessionID: socket.sessionID,
 		});
-
+		console.log(socket.sessionID)
 		socket.join(socket.sessionID);
 
 		const users = [];
@@ -62,6 +60,7 @@ module.exports = function () {
 		});
 
 		socket.on("private message", (data) => {
+			console.log(data);
 			socket.to(data.room).emit("private message", {
 				userID: socket.sessionID,
 				user: data.user,
