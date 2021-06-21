@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppService} from "../../app.service";
 import {sha512} from "js-sha512";
-import {mustMatch} from '../../custom.validators'
+import {mustMatch} from '../../sharedmodule/global.findr.methods'
 
 @Component({
     selector: 'app-passwordforgotten',

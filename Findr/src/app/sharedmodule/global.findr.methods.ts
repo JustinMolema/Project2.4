@@ -1,4 +1,5 @@
 import {FormGroup} from "@angular/forms";
+import {SafeResourceUrl} from "@angular/platform-browser";
 
 export function mustMatch(controlName: string, matchingControlName: string): any {
     return (formGroup: FormGroup) => {
@@ -17,4 +18,8 @@ export function mustMatch(controlName: string, matchingControlName: string): any
             matchingControl.setErrors(null);
         }
     };
+}
+
+export function sanitize(url: string): SafeResourceUrl {
+    return this.sanitiser.bypassSecurityTrustResourceUrl(url);
 }

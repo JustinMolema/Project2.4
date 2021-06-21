@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {sha512} from 'js-sha512';
 import {AppService} from 'src/app/app.service';
-import {mustMatch} from '../../custom.validators'
+import {mustMatch} from '../../sharedmodule/global.findr.methods'
 import {Router} from "@angular/router";
 
 //TODO on submit, go to login page.

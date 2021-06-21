@@ -12,7 +12,7 @@ export class FriendsmenuComponent implements OnInit {
 
 
 
-    constructor(private topbarService: TopbarService, public appService: AppService) {
+    constructor(public appService: AppService) {
     }
 
     ngOnInit(): void {

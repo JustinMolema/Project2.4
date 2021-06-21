@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {sanitize} from "../../sharedmodule/global.findr.methods";
 
 @Component({
     selector: 'app-profile',
@@ -9,20 +9,15 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 })
 export class ProfileComponent implements OnInit {
 
-    // Username input field
-    isEditEnable = false;
-
-    // Profile picture
-    hasFileBeenSelected = false;
+    usernameIsEditable = false;
     reader = new FileReader();
 
-    // Variables to store user information in
     dbPicture: any;
     user: any;
     email: any;
     warningCount: any;
 
-    constructor(private appService: AppService, private sanitiser: DomSanitizer) {
+    constructor(private appService: AppService) {
     }
 
     // Grab and store user information
@@ -31,19 +26,16 @@ export class ProfileComponent implements OnInit {
             this.user = res[0].Username;
             this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
-            if (res[0].Profile_picture) {
-                this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
-                this.hasFileBeenSelected = true;
-            }
+            this.dbPicture = sanitize(decodeURIComponent(res[0].Profile_picture));
         });
     }
 
     // To change input field to allow username change
     onEdit(): void {
-        if (this.isEditEnable) {
+        if (this.usernameIsEditable) {
             this.submitNewUserName();
         }
-        this.isEditEnable = !this.isEditEnable;
+        this.usernameIsEditable = !this.usernameIsEditable;
     }
 
     // Send username update to the server
@@ -57,16 +49,11 @@ export class ProfileComponent implements OnInit {
 
         this.reader.readAsDataURL(file);
 
-        this.hasFileBeenSelected = true;
+        // this.hasFileBeenSelected = true;
 
         this.reader.onload = () => {
-            this.dbPicture = this.sanitize(this.reader.result.toString());
+            this.dbPicture = sanitize(this.reader.result.toString());
             this.appService.changeProfilePicture(this.reader.result).subscribe();
         };
-    }
-
-    // Allow retrieved URL to be displayed on page
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 }

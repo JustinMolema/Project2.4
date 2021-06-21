@@ -1,11 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AdmindataService} from '../../admindata.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-class ImageSnippet {
-    constructor(public src: string, public file: File) {
-    }
-}
+import {sanitize} from "../../../sharedmodule/global.findr.methods";
 
 @Component({
     selector: 'app-newgame',
@@ -14,7 +10,6 @@ class ImageSnippet {
 })
 export class NewgameComponent implements OnInit {
     hasFileBeenSelected = false;
-    selectedFile: ImageSnippet;
     form: FormGroup;
 
     @Input() returnToGames: Function;
@@ -22,7 +17,7 @@ export class NewgameComponent implements OnInit {
     name: string;
     dbPicture: any;
     picture: string;
-    constructor(private admindataService: AdmindataService, private fb: FormBuilder, private sanitiser: DomSanitizer) {
+    constructor(private admindataService: AdmindataService, private fb: FormBuilder) {
         this.form = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
@@ -40,7 +35,7 @@ export class NewgameComponent implements OnInit {
         this.form.controls.description.setValue(this.game.Description);
 
         this.picture = decodeURIComponent(this.game.Image);
-        this.dbPicture = this.sanitize(this.picture);
+        this.dbPicture = sanitize(this.picture);
         this.hasFileBeenSelected = true;
 
         this.name = this.game.Name;
@@ -55,14 +50,9 @@ export class NewgameComponent implements OnInit {
 
         reader.onload = () => {
             this.picture = reader.result.toString();
-            this.dbPicture = this.sanitize(reader.result.toString());
+            this.dbPicture = sanitize(reader.result.toString());
             // this.appService.changeProfilePicture(this.reader.result).subscribe();
         };
-    }
-
-    // Allow retrieved URL to be displayed on page
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
     addGame(): void {
