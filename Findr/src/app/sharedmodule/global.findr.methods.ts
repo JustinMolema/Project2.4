@@ -1,5 +1,7 @@
 import {FormGroup} from "@angular/forms";
-import {SafeResourceUrl} from "@angular/platform-browser";
+import {SafeResourceUrl, DomSanitizer} from "@angular/platform-browser";
+
+
 
 export function mustMatch(controlName: string, matchingControlName: string): any {
     return (formGroup: FormGroup) => {
@@ -21,5 +23,5 @@ export function mustMatch(controlName: string, matchingControlName: string): any
 }
 
 export function sanitize(url: string): SafeResourceUrl {
-    return this.sanitiser.bypassSecurityTrustResourceUrl(url);
+    return this.bypassSecurityTrustResourceUrl(url);
 }
