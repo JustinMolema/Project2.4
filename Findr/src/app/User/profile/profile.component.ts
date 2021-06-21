@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-import {sanitize} from "../../sharedmodule/global.findr.methods";
+import {globalFindrMethods} from "../../sharedmodule/global.findr.methods";
 
 @Component({
     selector: 'app-profile',
@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
     email: any;
     warningCount: any;
 
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private findrMethods: globalFindrMethods) {
     }
 
     // Grab and store user information
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
             this.user = res[0].Username;
             this.email = decodeURIComponent(res[0].Email);
             this.warningCount = res[0].Warnings;
-            this.dbPicture = sanitize(decodeURIComponent(res[0].Profile_picture));
+            this.dbPicture = this.findrMethods.sanitize(decodeURIComponent(res[0].Profile_picture));
         });
     }
 
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
         // this.hasFileBeenSelected = true;
 
         this.reader.onload = () => {
-            this.dbPicture = sanitize(this.reader.result.toString());
+            this.dbPicture = this.findrMethods.sanitize(this.reader.result.toString());
             this.appService.changeProfilePicture(this.reader.result).subscribe();
         };
     }

@@ -14,7 +14,6 @@ import {SignupModule} from './User/signup/signup.module';
 import {PasswordforgottenModule} from './User/passwordforgotten/passwordforgotten.module';
 import {GamemenuModule} from './User/gamemenu/gamemenu.module';
 import {NavbarModule} from './User/navbar/navbar.module';
-import {Routes, RouterModule} from '@angular/router';
 import {TopbarModule} from './User/topbar/topbar.module';
 import {ChatmenuModule} from './User/chatmenu/chatmenu.module';
 import {FriendsmenuModule} from './User/friendsmenu/friendsmenu.module';
@@ -37,6 +36,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 
 @NgModule({
     declarations: [AppComponent],
@@ -83,7 +83,7 @@ import {MatButtonModule} from '@angular/material/button';
           registrationStrategy: 'registerWhenStable:30000'
         }),
     ],
-    providers: [DatePipe, HttpClient, [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]],
+    providers: [DatePipe, HttpClient, globalFindrMethods, [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]],
     bootstrap: [AppComponent],
 })
 export class AppModule {

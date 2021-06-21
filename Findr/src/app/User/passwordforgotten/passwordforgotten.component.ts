@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AppService} from "../../app.service";
 import {sha512} from "js-sha512";
-import {mustMatch} from '../../sharedmodule/global.findr.methods'
+import {globalFindrMethods} from '../../sharedmodule/global.findr.methods'
 
 @Component({
     selector: 'app-passwordforgotten',
@@ -13,12 +13,12 @@ export class PasswordforgottenComponent implements OnInit {
 
     form: FormGroup;
 
-    constructor(private fb: FormBuilder, private appService: AppService) {
+    constructor(private fb: FormBuilder, private appService: AppService, private findrMethods: globalFindrMethods) {
         this.form = this.fb.group({
             password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
             confirm: ['', Validators.required]
         }, {
-            validator: mustMatch('password', 'confirm')
+            validator: this.findrMethods.mustMatch('password', 'confirm')
         });
     }
 

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {sha512} from 'js-sha512';
 import {AppService} from 'src/app/app.service';
-import {mustMatch} from '../../sharedmodule/global.findr.methods'
+import {globalFindrMethods} from '../../sharedmodule/global.findr.methods'
 import {Router} from "@angular/router";
 
 //TODO on submit, go to login page.
@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit {
     form: FormGroup;
     username: '';
     error = false;
-    constructor(private appService: AppService, private fb: FormBuilder, private router: Router) {
+    constructor(private appService: AppService, private fb: FormBuilder, private router: Router, private findrMethods: globalFindrMethods) {
         this.createForm();
     }
 
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
             confirmPassword: ['', Validators.required],
             email: ['', Validators.compose([Validators.required, Validators.email])],
         }, {
-            validator: mustMatch('password', 'confirmPassword')
+            validator: this.findrMethods.mustMatch('password', 'confirmPassword')
         });
     }
 

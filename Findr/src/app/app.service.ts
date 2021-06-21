@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {NavbarService} from "./User/navbar/navbar.service";
-import {sanitize} from "./sharedmodule/global.findr.methods";
+import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +13,7 @@ export class AppService {
     friendRequests = [];
     blockedUsers = [];
 
-    constructor(private http: HttpClient, private sanitiser: DomSanitizer, private navbarService: NavbarService) {
+    constructor(private http: HttpClient, private navbarService: NavbarService, private findrMethods: globalFindrMethods) {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
@@ -100,7 +99,7 @@ export class AppService {
             if (friendsFromServer.length > 0) {
                 friendsFromServer.forEach(element => {
                     if (element.Profile_picture) {
-                        element.Profile_picture = sanitize(decodeURIComponent(element.Profile_picture));
+                        element.Profile_picture = this.findrMethods.sanitize(decodeURIComponent(element.Profile_picture));
                     }
                     this.friends.push(element);
                 });
@@ -115,7 +114,7 @@ export class AppService {
             if (friendRequestsFromServer[0].length > 0) {
                 friendRequestsFromServer[0].forEach(element => {
                     if (element.Profile_picture) {
-                        element.Profile_picture = sanitize(decodeURIComponent(element.Profile_picture));
+                        element.Profile_picture = this.findrMethods.sanitize(decodeURIComponent(element.Profile_picture));
                     }
                     this.friendRequests.push(element);
                 });
@@ -130,7 +129,7 @@ export class AppService {
             if (blockedUsersFromServer[0].length > 0) {
                 blockedUsersFromServer[0].forEach(element => {
                     if (element.Profile_picture) {
-                        element.Profile_picture = sanitize(decodeURIComponent(element.Profile_picture));
+                        element.Profile_picture = this.findrMethods.sanitize(decodeURIComponent(element.Profile_picture));
                     }
                     this.blockedUsers.push(element);
                 });
