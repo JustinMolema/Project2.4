@@ -4,7 +4,6 @@ const cors = require('cors');
 const app = express();
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
-const http = require('http');
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
@@ -19,6 +18,7 @@ const connection = mysql.createConnection({
     database: 'Findr'
 });
 
+require('./routes/user/chat')();
 const games = require('./routes/admin/games')(express, authenticateToken, connection);
 const profile = require('./routes/user/profile')(express, authenticateToken, connection);
 const friends = require('./routes/user/friends')(express, authenticateToken, connection);
@@ -32,82 +32,6 @@ const adminaccount = require('./routes/admin/adminaccount')(express, generateAcc
 app.use(games, profile, friends, friendrequests, blockedusers, reportedusers, supporttickets, users, account, adminaccount);
 
 
-const chatport = '8081';
-app.set('port', chatport);
-var server = http.createServer(app);
-const io = require("socket.io")(server, {
-    cors: {
-        methods: ["GET", "POST"]
-    }
-});
-
-
-io.use((socket, next) => {
-    const username = socket.handshake.auth.username;
-
-    socket.username = username;
-    socket.sessionID = socket.handshake.auth.sessionID;
-    next();
-});
-
-
-io.on('connection', (socket) => {
-	console.log("aaa");
-    socket.emit("session", {
-        sessionID: socket.sessionID,
-    });
-
-    socket.join(socket.sessionID);
-
-    const users = [];
-    for (let [id, socket] of io.of("/").sockets) {
-        users.push({
-            userID: socket.sessionID,
-            username: socket.username,
-        });
-    }
-
-    socket.emit("users", users);
-
-    socket.onAny((event, ...args) => {
-        console.log("Event: " + event + " Args: " + args)
-    })
-
-    socket.broadcast.emit("user connected", {
-        userID: socket.sessionID,
-        username: socket.username,
-    });
-
-    socket.on('join', function (data) {
-        socket.join(data.room);
-    });
-
-    socket.on('leave', function (data) {
-        socket.leave(data.room);
-    });
-
-    socket.on('message', function (data) {
-        socket.to(data.room).emit('new message', {userID: data.userID, user: data.user, message: data.message});
-    });
-
-    socket.on("private message", (data) => {
-        socket.to(data.room).emit("private message", {
-            userID: socket.sessionID,
-            user: data.user,
-            message: data.message
-        });
-    });
-
-    socket.on("disconnect", () => {
-        socket.broadcast.emit("user disconnected", {
-            userID: socket.sessionID,
-            username: socket.username,
-        });
-    });
-});
-
-server.listen(chatport);
-
 const port = process.env.PORT || 8080;
 
 app.listen(8001, () => {
@@ -115,13 +39,11 @@ app.listen(8001, () => {
 });
 
 
-// check token
 app.post('/api/token/refresh', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const refreshToken = req.body.token;
 
     if (refreshToken == null) return res.sendStatus(401)
-    // if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) return res.sendStatus(403)
         const accessToken = generateAccessToken({name: user.name})
