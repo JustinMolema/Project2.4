@@ -70,6 +70,7 @@ export class AuthService {
     }
 
     retrieveStorageType(): void {
+        console.log(localStorage == this.storage);
         this.storage = localStorage.getItem('rememberme') === 'true' ? localStorage : sessionStorage;
     }
 

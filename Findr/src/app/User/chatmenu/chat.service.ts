@@ -172,11 +172,8 @@ export class ChatService {
     /****************************** PRIVATE CHAT********************************************/
 
     receivePrivateMessageListener(): void {
-        console.log("aaa");
         this.receivedPrivateMessage().subscribe(res => {
-            console.log("DDD");
             for (const message of this.privateMessages) {
-                console.log("PRIVATE MESSAGE");
                 if (message.userID === res.userID) {
                     message.messages.push({ userID: res.userID, datetime: Date.now(),
                         username: res.user, message: res.message, received: true});
@@ -190,10 +187,8 @@ export class ChatService {
     }
 
     receivedPrivateMessage(): Observable<any> {
-        console.log("BBB");
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('private message', (data) => {
-                console.log("CCC");
                 observer.next(data);
             });
             return () => {

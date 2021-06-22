@@ -5,12 +5,12 @@
     width: 100%;
 }
 
-.image{
-    background-image: url(https://www.rtlnieuws.nl/sites/default/files/styles/liggend_hoge_resolutie/public/content/images/2019/05/02/rocket-league-zephyr-crate.jpg?itok=b_af0AEk);
-    background-position: center center;
-    background-size: cover;
-    height: 100%;
+img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    cursor: pointer;
     width: 100%;
+    height: 100%;
     border: 2px solid cyan;
     border-radius:  0px;
     text-decoration: none;
@@ -25,20 +25,14 @@
 .box {
     height: 100%;
     width: 100%;
-    /*transform: scale(1) rotate(0deg);*/
     transition: 0.5s;
     margin-bottom: 15px;
 }
 
-.box:hover{
-    /*transform: scale(1.21) rotate(2deg);*/
-    /*opacity: 0.5;*/
-}
-
-.image:hover{
+img:hover{
     transition: 0.5s;
     transform: rotate(2deg) scale(1.04);
-
+    opacity: 0.75;
     border-radius: 25px;
 }
 
