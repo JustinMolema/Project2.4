@@ -16,6 +16,7 @@ import {GamesComponent} from './admin/games/games.component';
 import {UsersComponent} from './admin/users/users.component';
 import {AssignedticketsComponent} from './admin/assignedtickets/assignedtickets.component';
 import {NewgameComponent} from './admin/games/newgame/newgame.component';
+import {AuthService} from "./User/login/auth.service";
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
