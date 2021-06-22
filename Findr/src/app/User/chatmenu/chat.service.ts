@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {io} from 'socket.io-client';
 import {Observable} from 'rxjs';
 import {AppService} from '../../app.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -12,14 +11,15 @@ export class ChatService {
     private = false;
     privateMessages = [];
     receiverID;
-
+    private cdRef;
     public onlineFriends = [];
     friends = [];
 
-    constructor(private appService: AppService, private http: HttpClient) {
+    setRef(ref): void {
+        this.cdRef = ref;
     }
-
-    // TODO create json with array so all messages can be put and retrieved from certain users depending on the view.
+    constructor(private appService: AppService) {
+    }
 
     openSocket(): void {
         this.socket.auth = {username: 'Meloen', sessionID: Number(localStorage.getItem('userID'))};
@@ -178,7 +178,10 @@ export class ChatService {
                     message.messages.push({ userID: res.userID, datetime: Date.now(),
                         username: res.user, message: res.message, received: true});
                 }
+
             }
+            this.cdRef.detectChanges();
+
         });
     }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewChecked, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, AfterViewChecked, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {ChatService} from './chat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
@@ -12,28 +12,35 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     username: string;
     roomName: string;
     form: FormGroup;
-    messages = [{userID: "1234", datetime: Date.now(), username: 'Jos', message: 'asdasdfadsfsadfsdafsadfdsafasdfsadfdsafasdfsadfsadfasdfdsafasfasfasdfasfasfasdfasdfasfsdafasfdasdfasdfasdfasdad', received: true}];
+    messages = [];
     names = ["Anne Pier", "Robbin", "Harald", "Merel", "Justin"];
 
     @ViewChild('chat') private scrollContainer: ElementRef;
-    constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute) {
+
+    constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {
         this.createForm();
         this.username = this.names[this.getRandomInt(this.names.length)];
+
+        chat.setRef(cdRef);
         if (!chat.private) this.loadPublicChat();
+        else if (chat.private) this.loadPrivateChat();
     }
 
     ngOnInit(): void {
+    }
+
+    ngOnDestroy(): void {
+        this.chat.leaveGameRoom({user: this.username, room: this.roomName});
+        this.chat.clearChatListeners();
+    }
+
+    loadPrivateChat(): void {
         for (const message of this.chat.privateMessages) {
             if (message.userID === this.chat.receiverID) {
                 this.messages = message.messages;
                 break;
             }
         }
-    }
-
-    ngOnDestroy(): void {
-        this.chat.leaveGameRoom({user: this.username, room: this.roomName});
-        this.chat.clearChatListeners();
     }
 
     loadPublicChat(): void {
@@ -70,19 +77,37 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     addMessage(message: string, received: boolean): void {
-        this.messages.push({userID: localStorage.getItem("userID"), datetime: Date.now(), username: this.username, message, received});
+        this.messages.push({
+            userID: localStorage.getItem("userID"),
+            datetime: Date.now(),
+            username: this.username,
+            message,
+            received
+        });
         this.sendMessage(message);
         this.clearInputfield();
     }
 
     sendMessage(message: string): void {
         if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: this.chat.receiverID});
-        else this.chat.sendMessageToGameChat({userID: localStorage.getItem("userID"), user: this.username, message, room: this.roomName});
+        else this.chat.sendMessageToGameChat({
+            userID: localStorage.getItem("userID"),
+            user: this.username,
+            message,
+            room: this.roomName
+        });
     }
 
     receiveMessageListener(): void {
         this.chat.newMessageReceivedFromGameChat().subscribe(res => {
-            this.messages.push({userID: res.userID, datetime: Date.now(), username: res.user, message: res.message, received: true});
+            this.messages.push({
+                userID: res.userID,
+                datetime: Date.now(),
+                username: res.user,
+                message: res.message,
+                received: true
+            });
+            this.cdRef.detectChanges();
         });
     }
 
