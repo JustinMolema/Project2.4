@@ -1,7 +1,8 @@
-<div class="game" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" (click)="gameclick()" target="_blank">
+<div class="game" (click)="gameclick()" >
     <div class="box">
-        <div class="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500">
-        </div>
+<!--        <div class="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500">-->
+<!--        </div>-->
+        <img class="current-profile-pic" [src]="dbPicture" formControlName="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500" alt="This game picture">
 
         <div class="game-info">
             <div class="gamename">
@@ -9,8 +10,6 @@
                     {{game.Name}}
                 </b>
             </div>
-            5 Subscribers
-            <br>
             {{game.Category}}
         </div>
     </div>
