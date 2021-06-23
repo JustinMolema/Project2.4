@@ -21,7 +21,6 @@ module.exports = function(express, authenticateToken, connection) {
         })
     })
     
-    // delete game
     router.delete('/api/games/:name', (req, res) => {
         let name = req.params['name']
         connection.connect(function (req, err) {
