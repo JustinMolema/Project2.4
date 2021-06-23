@@ -13,6 +13,8 @@ export class ChatmessageComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.message.profilePicture);
+
     }
 
     sendFriendRequest(): void {

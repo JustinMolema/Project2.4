@@ -1,6 +1,9 @@
 <div class="message-container"
      [ngStyle]="(message.received) ? {'flex-direction': 'row'} : {'flex-direction': 'row-reverse'}">
-    <div class="pfp" [ngStyle]="(message.received) ? {'margin-right': '20px'} : {'margin-left': '20px'}"></div>
+    <div class="pfp" [ngStyle]="(message.received) ? {'margin-right': '20px'} : {'margin-left': '20px'}">
+<!--        <img [src]="this.message.profilePicture">-->
+<!--        <img class="current-profile-pic" [src]="this.message.profilePicture" alt="Your profile picture">-->
+    </div>
     <div class="message">
         <span *ngIf="message.received" [matMenuTriggerFor]="actions" class="username">{{message.username}}
                 <mat-icon>more_vert</mat-icon>

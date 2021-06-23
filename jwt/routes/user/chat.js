@@ -56,7 +56,7 @@ module.exports = function () {
 		});
 
 		socket.on('message', function (data) {
-			socket.to(data.room).emit('new message', { userID: data.userID, user: data.user, message: data.message });
+			socket.to(data.room).emit('new message', { userID: data.userID, user: data.user, message: data.message, /*profilePicture: data.profilePicture*/ });
 		});
 
 		socket.on("private message", (data) => {
@@ -64,7 +64,8 @@ module.exports = function () {
 			socket.to(data.room).emit("private message", {
 				userID: socket.sessionID,
 				user: data.user,
-				message: data.message
+				message: data.message,
+                // profilePicture: data.profilePicture
 			});
 		});
 

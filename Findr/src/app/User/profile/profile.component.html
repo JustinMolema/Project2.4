@@ -19,9 +19,9 @@
             <div class="setting-container">
                 <div class="fieldname">
                     <mat-form-field class="namechange" *ngIf="isEditEnable">
-                        <input matInput placeholder="Enter New Username" [(ngModel)]="user">
+                        <input matInput placeholder="Enter New Username" [(ngModel)]="username">
                     </mat-form-field>
-                    <span *ngIf="!isEditEnable">{{user}}</span>
+                    <span *ngIf="!isEditEnable">{{username}}</span>
                 </div>
                 <div class="actions">
                     <button *ngIf="!isEditEnable" (click)="onEdit()">Change Username</button>

@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
 
     // Variables to store user information in
     dbPicture: any;
-    user: any;
+    username: any;
     email: any;
     warningCount: any;
 
@@ -27,15 +27,14 @@ export class ProfileComponent implements OnInit {
 
     // Grab and store user information
     ngOnInit(): void {
-        this.appService.getProfile().subscribe(res => {
-            this.user = res[0].Username;
-            this.email = decodeURIComponent(res[0].Email);
-            this.warningCount = res[0].Warnings;
-            if (res[0].Profile_picture) {
-                this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
-                this.hasFileBeenSelected = true;
-            }
-        });
+        const user = this.appService.user;
+        this.username = user.Username;
+        this.email = decodeURIComponent(user.Email);
+        this.warningCount = user.Warnings;
+        if (user.Profile_picture) {
+            this.dbPicture = this.sanitize(decodeURIComponent(user.Profile_picture));
+            this.hasFileBeenSelected = true;
+        }
     }
 
     // To change input field to allow username change
@@ -48,7 +47,7 @@ export class ProfileComponent implements OnInit {
 
     // Send username update to the server
     submitNewUserName(): void {
-        this.appService.changeUsername(this.user).subscribe();
+        this.appService.changeUsername(this.username).subscribe();
     }
 
     // Prepare file for upload in server.

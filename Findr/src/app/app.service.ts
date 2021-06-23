@@ -8,7 +8,7 @@ import {NavbarService} from "./User/navbar/navbar.service";
     providedIn: 'root'
 })
 export class AppService {
-
+    user;
     friends = [];
     friendRequests = [];
     blockedUsers = [];
@@ -86,11 +86,24 @@ export class AppService {
         return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked/' + senderID);
     }
 
-
-    setFriendInfo(): void {
+    applicationInitialAPICalls(): void {
+        this.getProfileFromServer();
         this.getFriendsFromServer();
         this.getFriendRequestsFromServer();
         this.getBlockedUsersFromServer();
+    }
+
+    getProfileFromServer(): void {
+        this.getProfile().subscribe(res => {
+            this.user = res[0];
+            console.log(this.user);
+            // this.email = decodeURIComponent(res[0].Email);
+            // this.warningCount = res[0].Warnings;
+            // if (res[0].Profile_picture) {
+            //     this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
+            //     this.hasFileBeenSelected = true;
+            // }
+        });
     }
 
     getFriendsFromServer(): void {
