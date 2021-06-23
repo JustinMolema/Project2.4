@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {ChatService} from '../../chatmenu/chat.service';
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {AppService} from "../../../app.service";
 
 @Component({
     selector: 'app-game',
@@ -13,7 +14,7 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 export class GameComponent implements OnInit {
     @Input() game;
     dbPicture;
-    constructor(private router: Router, private dialog: MatDialog, private chat: ChatService, private sanitiser: DomSanitizer) {
+    constructor(private appService: AppService, private router: Router, private dialog: MatDialog, private chat: ChatService, private sanitiser: DomSanitizer) {
     }
 
     ngOnInit(): void {

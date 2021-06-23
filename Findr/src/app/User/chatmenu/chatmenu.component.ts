@@ -17,10 +17,11 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     messages = [];
 
     @ViewChild('chat') private scrollContainer: ElementRef;
-
-    constructor(private fb: FormBuilder, private appService: AppService, private chat: ChatService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef, private sanitiser: DomSanitizer) {
+    constructor(private fb: FormBuilder, private appService: AppService, private chat: ChatService,
+                private route: ActivatedRoute, private cdRef: ChangeDetectorRef, private sanitiser: DomSanitizer) {
         this.createForm();
-        this.username = this.appService.user.Username;
+        this.appService.canLoad().subscribe(res => console.log(res));
+        this.username = 'P'; // this.appService.user.Username;
 
         chat.setRef(cdRef);
         if (!chat.private) this.loadPublicChat();
@@ -82,7 +83,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
             userID: localStorage.getItem("userID"),
             datetime: Date.now(),
             username: this.username,
-            profilePicture: encodeURIComponent(this.appService.user.Profile_picture),
+            profilePicture: this.sanitize(decodeURIComponent(this.appService.user.Profile_picture)),
             message,
             received
         });
@@ -95,7 +96,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
         else this.chat.sendMessageToGameChat({
             userID: localStorage.getItem("userID"),
             user: this.username,
-            // profilePicture: encodeURIComponent(this.appService.user.Profile_picture),
+            profilePicture: this.appService.user.Profile_picture,
             message,
             room: this.roomName
         });
@@ -103,18 +104,20 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     receiveMessageListener(): void {
         this.chat.newMessageReceivedFromGameChat().subscribe(res => {
-            console.log(res.user);
             this.messages.push({
                 userID: res.userID,
                 datetime: Date.now(),
                 username: res.user,
                 message: res.message,
-                // profilePicture: this.appService.sanitize(decodeURIComponent(res.profilePicture)),
+                profilePicture: this.sanitize(decodeURIComponent(res.profilePicture)),
                 received: true
             });
-            console.log(res);
             this.cdRef.detectChanges();
         });
+    }
+
+    sanitize(url: string): SafeResourceUrl {
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
     clearInputfield(): void {

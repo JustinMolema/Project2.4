@@ -6,6 +6,8 @@
 }
 
 .pfp {
+    object-fit: cover;
+    object-position: 50% 50%;
     height: 5vw;
     width: 5vw;
     min-height: 50px;
@@ -13,9 +15,8 @@
     max-height: 100px;
     max-width: 100px;
     background-size: cover;
-    border-color: rgb(255, 255, 255);
     border-radius: 50px;
-    border-width: 0.1px;
+    border-width: 0;
     border-style: solid;
 }
 

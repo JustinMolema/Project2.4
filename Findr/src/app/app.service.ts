@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {NavbarService} from "./User/navbar/navbar.service";
 
@@ -9,10 +9,12 @@ import {NavbarService} from "./User/navbar/navbar.service";
 })
 export class AppService {
     user;
+    picture;
     friends = [];
     friendRequests = [];
     blockedUsers = [];
 
+    APILoaded = new Subject<any>();
     constructor(private http: HttpClient, private sanitiser: DomSanitizer, private navbarService: NavbarService) {
     }
 
@@ -86,17 +88,23 @@ export class AppService {
         return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked/' + senderID);
     }
 
+    canLoad(): Observable<any> {
+        return this.APILoaded.asObservable();
+    }
+
     applicationInitialAPICalls(): void {
         this.getProfileFromServer();
         this.getFriendsFromServer();
         this.getFriendRequestsFromServer();
         this.getBlockedUsersFromServer();
+        console.log("TRUE");
     }
 
     getProfileFromServer(): void {
         this.getProfile().subscribe(res => {
             this.user = res[0];
-            console.log(this.user);
+            this.APILoaded.next(true);
+
             // this.email = decodeURIComponent(res[0].Email);
             // this.warningCount = res[0].Warnings;
             // if (res[0].Profile_picture) {
