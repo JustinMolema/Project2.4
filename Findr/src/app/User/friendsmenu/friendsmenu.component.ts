@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-
 import {AppService} from 'src/app/app.service';
-import {TopbarService} from '../topbar/topbar.service';
 
 @Component({
     selector: 'app-friendsmenu',
@@ -9,8 +7,6 @@ import {TopbarService} from '../topbar/topbar.service';
     styleUrls: ['./friendsmenu.component.css']
 })
 export class FriendsmenuComponent implements OnInit {
-
-
 
     constructor(public appService: AppService) {
     }
@@ -36,7 +32,7 @@ export class FriendsmenuComponent implements OnInit {
     sendFriendRequest(): void {
         const id = prompt("Please enter the ID you want to add");
         if (id) {
-            this.appService.sendFriendRequest(id).subscribe(res => {
+            this.appService.sendFriendRequest(id).subscribe(() => {
                 this.appService.setFriendInfo();
             });
         }

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewChecked, ViewChild, ElementRef, OnDestroy, ChangeDetectorRef} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ChatService} from './chat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';

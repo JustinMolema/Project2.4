@@ -9,7 +9,8 @@
         <div class="inputs">
 
             <img src="../../assets/SVG/Logo-white.svg" width="175" height="175" alt="Logo"/>
-            <h3 *ngIf="error" style="color: red; display: flex; text-align: center;">Incorrect username or password.</h3>
+            <h3 *ngIf="error" style="color: red; display: flex; text-align: center;">Incorrect username or
+                password.</h3>
 
             <form [formGroup]="form">
                 <input name="username" class="inputfields" formControlName="username" placeholder="Username" autofocus>

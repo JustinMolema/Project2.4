@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {NavbarService} from "./User/navbar/navbar.service";
 import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 
 @Injectable({
@@ -13,7 +12,7 @@ export class AppService {
     friendRequests = [];
     blockedUsers = [];
 
-    constructor(private http: HttpClient, private navbarService: NavbarService, private findrMethods: globalFindrMethods) {
+    constructor(private http: HttpClient, private findrMethods: globalFindrMethods) {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {

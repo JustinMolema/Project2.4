@@ -1,9 +1,8 @@
-import {AfterViewInit, ApplicationRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ApplicationRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from './User/login/auth.service';
 import {ChatService} from './User/chatmenu/chat.service';
 import {AppService} from './app.service';
-import {PromiseType} from "protractor/built/plugins";
 
 @Component({
     selector: 'app-root',

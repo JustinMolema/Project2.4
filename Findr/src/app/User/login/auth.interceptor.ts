@@ -11,7 +11,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         const idToken = this.authService.getJWTToken();
-        if (!idToken) { return next.handle(request); }
+        if (!idToken) {
+            return next.handle(request);
+        }
         const cloned = this.requestCloneWithHeader(request, idToken);
 
         return next.handle(cloned);

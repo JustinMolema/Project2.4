@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
     form: FormGroup;
     username: '';
     error = false;
+
     constructor(private appService: AppService, private fb: FormBuilder, private router: Router, private findrMethods: globalFindrMethods) {
         this.createForm();
     }

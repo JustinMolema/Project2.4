@@ -3,7 +3,7 @@ import {DialogComponent} from '../../../sharedmodule/dialog/dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {ChatService} from '../../chatmenu/chat.service';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {globalFindrMethods} from "../../../sharedmodule/global.findr.methods";
 
 @Component({
     selector: 'app-game',
@@ -13,16 +13,16 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 export class GameComponent implements OnInit {
     @Input() game;
     dbPicture;
-    constructor(private router: Router, private dialog: MatDialog, private chat: ChatService, private sanitiser: DomSanitizer) {
+    constructor(private router: Router, private dialog: MatDialog, private chat: ChatService, private findrMethods: globalFindrMethods) {
     }
 
     ngOnInit(): void {
-        this.dbPicture = this.sanitize(decodeURIComponent(this.game.Image));
+        this.dbPicture = this.findrMethods.sanitize(decodeURIComponent(this.game.Image));
     }
 
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-    }
+    // sanitize(url: string): SafeResourceUrl {
+    //     return this.sanitiser.bypassSecurityTrustResourceUrl(url);
+    // }
 
     gameclick(): void{
         this.chat.private = false;

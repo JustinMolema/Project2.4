@@ -1,5 +1,5 @@
 import {FormGroup} from "@angular/forms";
-import {SafeResourceUrl, DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {Injectable} from "@angular/core";
 
 @Injectable()
@@ -8,7 +8,7 @@ export class globalFindrMethods {
     constructor(private sanitizer: DomSanitizer) {
     }
 
-   mustMatch(controlName: string, matchingControlName: string): any {
+    mustMatch(controlName: string, matchingControlName: string): any {
         return (formGroup: FormGroup) => {
             const control = formGroup.controls[controlName];
             const matchingControl = formGroup.controls[matchingControlName];
