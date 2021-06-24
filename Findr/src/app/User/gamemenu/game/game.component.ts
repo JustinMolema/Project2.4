@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DialogComponent} from '../../../sharedmodule/dialog/dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {ChatService} from '../../chatmenu/chat.service';
 import {globalFindrMethods} from "../../../sharedmodule/global.findr.methods";
+
 
 @Component({
     selector: 'app-game',

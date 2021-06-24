@@ -2,6 +2,8 @@ import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnDestroy, O
 import {ChatService} from './chat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {AppService} from "../../app.service";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-chatmenu',
@@ -13,13 +15,13 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     roomName: string;
     form: FormGroup;
     messages = [];
-    names = ["Anne Pier", "Robbin", "Harald", "Merel", "Justin"];
 
     @ViewChild('chat') private scrollContainer: ElementRef;
-
-    constructor(private fb: FormBuilder, private chat: ChatService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {
+    constructor(private fb: FormBuilder, private appService: AppService, private chat: ChatService,
+                private route: ActivatedRoute, private cdRef: ChangeDetectorRef, private sanitiser: DomSanitizer) {
         this.createForm();
-        this.username = this.names[this.getRandomInt(this.names.length)];
+        this.appService.canLoad().subscribe(res => console.log(res));
+        this.username = 'P'; // this.appService.user.Username;
 
         chat.setRef(cdRef);
         if (!chat.private) this.loadPublicChat();
@@ -81,6 +83,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
             userID: localStorage.getItem("userID"),
             datetime: Date.now(),
             username: this.username,
+            profilePicture: this.sanitize(decodeURIComponent(this.appService.user.Profile_picture)),
             message,
             received
         });
@@ -93,6 +96,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
         else this.chat.sendMessageToGameChat({
             userID: localStorage.getItem("userID"),
             user: this.username,
+            profilePicture: this.appService.user.Profile_picture,
             message,
             room: this.roomName
         });
@@ -105,10 +109,15 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
                 datetime: Date.now(),
                 username: res.user,
                 message: res.message,
+                profilePicture: this.sanitize(decodeURIComponent(res.profilePicture)),
                 received: true
             });
             this.cdRef.detectChanges();
         });
+    }
+
+    sanitize(url: string): SafeResourceUrl {
+        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
     clearInputfield(): void {

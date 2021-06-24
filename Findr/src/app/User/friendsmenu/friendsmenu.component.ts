@@ -7,16 +7,14 @@ import {AppService} from 'src/app/app.service';
     styleUrls: ['./friendsmenu.component.css']
 })
 export class FriendsmenuComponent implements OnInit {
-
     constructor(public appService: AppService) {
+
     }
 
     ngOnInit(): void {
-        this.appService.setFriendInfo();
     }
 
     @Input() refreshFriendInfo(event): void {
-        this.appService.setFriendInfo();
     }
 
     showFriendTab(blockView: any, friendView: any): void {
@@ -32,8 +30,8 @@ export class FriendsmenuComponent implements OnInit {
     sendFriendRequest(): void {
         const id = prompt("Please enter the ID you want to add");
         if (id) {
-            this.appService.sendFriendRequest(id).subscribe(() => {
-                this.appService.setFriendInfo();
+            this.appService.sendFriendRequest(id).subscribe(res => {
+                this.appService.applicationInitialAPICalls();
             });
         }
     }

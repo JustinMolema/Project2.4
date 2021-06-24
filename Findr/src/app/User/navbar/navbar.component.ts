@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
         this.topbar = topbarService;
     }
 
-    ngOnInit(): void {
-        //this.appService.setFriendInfo();
-    }
+  ngOnInit(): void {
+      this.appService.applicationInitialAPICalls();
+  }
 }

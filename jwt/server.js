@@ -14,6 +14,7 @@ app.use(cors({
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+	limit: '100mb',
     password: '',
     database: 'Findr'
 });

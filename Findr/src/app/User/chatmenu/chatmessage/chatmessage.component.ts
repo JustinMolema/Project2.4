@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FriendactionsService} from '../../services/friendactions.service';
+import {AppService} from "../../../app.service";
 
 @Component({
     selector: 'app-chatmessage',
@@ -8,11 +9,12 @@ import {FriendactionsService} from '../../services/friendactions.service';
 })
 export class ChatmessageComponent implements OnInit {
     @Input() message;
-
-    constructor(private friendActionService: FriendactionsService) {
+    dbPicture;
+    constructor(private friendActionService: FriendactionsService, public appService: AppService) {
     }
 
     ngOnInit(): void {
+        this.dbPicture = this.message.profilePicture;
     }
 
     sendFriendRequest(): void {
