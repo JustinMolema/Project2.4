@@ -3,7 +3,7 @@ import {ChatService} from './chat.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {AppService} from "../../app.service";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {globalFindrMethods} from "../../sharedmodule/global.findr.methods";
 
 @Component({
     selector: 'app-chatmenu',
@@ -18,7 +18,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     @ViewChild('chat') private scrollContainer: ElementRef;
     constructor(private fb: FormBuilder, private appService: AppService, private chat: ChatService,
-                private route: ActivatedRoute, private cdRef: ChangeDetectorRef, private sanitiser: DomSanitizer) {
+                private route: ActivatedRoute, private cdRef: ChangeDetectorRef, private findrMethods: globalFindrMethods) {
         this.createForm();
         this.appService.canLoad().subscribe(res => console.log(res));
         this.username = 'P'; // this.appService.user.Username;
@@ -83,7 +83,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
             userID: localStorage.getItem("userID"),
             datetime: Date.now(),
             username: this.username,
-            profilePicture: this.sanitize(decodeURIComponent(this.appService.user.Profile_picture)),
+            profilePicture: this.findrMethods.sanitize(decodeURIComponent(this.appService.user.Profile_picture)),
             message,
             received
         });
@@ -109,15 +109,11 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
                 datetime: Date.now(),
                 username: res.user,
                 message: res.message,
-                profilePicture: this.sanitize(decodeURIComponent(res.profilePicture)),
+                profilePicture: this.findrMethods.sanitize(decodeURIComponent(res.profilePicture)),
                 received: true
             });
             this.cdRef.detectChanges();
         });
-    }
-
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
     }
 
     clearInputfield(): void {
