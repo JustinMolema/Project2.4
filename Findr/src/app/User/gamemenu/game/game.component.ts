@@ -18,6 +18,7 @@ export class GameComponent implements OnInit {
 
     ngOnInit(): void {
         this.dbPicture = this.findrMethods.sanitize(decodeURIComponent(this.game.Image));
+        console.log(this.dbPicture)
     }
 
     // sanitize(url: string): SafeResourceUrl {
