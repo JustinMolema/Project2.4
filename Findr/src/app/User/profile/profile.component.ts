@@ -43,7 +43,9 @@ export class ProfileComponent implements OnInit {
 
     // Send username update to the server
     submitNewUserName(): void {
-        this.appService.changeUsername(this.username).subscribe();
+        this.appService.changeUsername(this.username).subscribe(() => {
+            this.appService.getProfileFromServer()
+        });
     }
 
     // Prepare file for upload in server.
@@ -52,11 +54,13 @@ export class ProfileComponent implements OnInit {
 
         this.reader.readAsDataURL(file);
 
-        // this.hasFileBeenSelected = true;
-
         this.reader.onload = () => {
             this.dbPicture = this.findrMethods.sanitize(this.reader.result.toString());
-            this.appService.changeProfilePicture(this.reader.result).subscribe();
+            this.appService.changeProfilePicture(this.reader.result).subscribe(() => {
+                this.appService.getProfileFromServer()
+            })
         };
     }
+
+
 }
