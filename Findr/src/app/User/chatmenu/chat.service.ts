@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {io} from 'socket.io-client';
 import {Observable} from 'rxjs';
 import {AppService} from '../../app.service';
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,7 @@ export class ChatService {
     setRef(ref): void {
         this.cdRef = ref;
     }
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private sanitizer: DomSanitizer) {
     }
 
     openSocket(): void {
@@ -161,6 +162,7 @@ export class ChatService {
     newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('new message', (data) => {
+                console.log("MAS");
                 observer.next(data);
             });
             return () => {
@@ -176,13 +178,20 @@ export class ChatService {
             for (const message of this.privateMessages) {
                 if (message.userID === res.userID) {
                     message.messages.push({ userID: res.userID, datetime: Date.now(),
-                        username: res.user, message: res.message, received: true});
+                        username: res.user,
+                        message: res.message,
+                        profilePicture: this.sanitize(decodeURIComponent(res.profilePicture)),
+                        received: true});
                 }
 
             }
             this.cdRef.detectChanges();
 
         });
+    }
+
+    sanitize(url: string): SafeResourceUrl {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
 
     sendPrivateMessage(data): void {

@@ -109,7 +109,10 @@ button {
 }
 
 img {
+    object-fit: cover;
+    object-position: 50% 50%;
     width: 10px;
+    height: 10px;
     border-radius: 50%;
 }
 
@@ -194,7 +197,7 @@ img {
     height: 55px;
     margin-left: 8px;
     margin-right: 10px;
-    background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
+    background: url("../../../../assets/SVG/show_more.svg");
     background-size: contain;
     color: rgba(0, 0, 0, 0);
 }
@@ -253,7 +256,7 @@ img {
         height: 55px;
         margin-left: 8px;
         margin-right: 10px;
-        background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
+        background: url("../../../../assets/SVG/show_more.svg");
         background-size: contain;
         color: rgba(0, 0, 0, 0);
         align-items: center;

@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {NavbarService} from "./User/navbar/navbar.service";
+import {AdmindataService} from "./admin/admindata.service";
 
 @Injectable({
     providedIn: 'root'
@@ -11,11 +12,12 @@ export class AppService {
     user;
     picture;
     friends = [];
+    games = [];
     friendRequests = [];
     blockedUsers = [];
 
     APILoaded = new Subject<any>();
-    constructor(private http: HttpClient, private sanitiser: DomSanitizer, private navbarService: NavbarService) {
+    constructor(private http: HttpClient, private sanitiser: DomSanitizer, private adminData: AdmindataService, private navbarService: NavbarService) {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
@@ -97,66 +99,64 @@ export class AppService {
         this.getFriendsFromServer();
         this.getFriendRequestsFromServer();
         this.getBlockedUsersFromServer();
-        console.log("TRUE");
+        this.getGamesFromServer();
     }
 
+    getGamesFromServer(): void {
+        this.games = [];
+
+        this.adminData.getGames().subscribe(res => {
+            if (res.length > 0) {
+                res.forEach(element => {
+                    element.Image = this.sanitize(decodeURIComponent(element.Image));
+                    this.games.push(element);
+                });
+            }
+        });
+
+    }
     getProfileFromServer(): void {
         this.getProfile().subscribe(res => {
             this.user = res[0];
             this.APILoaded.next(true);
-
-            // this.email = decodeURIComponent(res[0].Email);
-            // this.warningCount = res[0].Warnings;
-            // if (res[0].Profile_picture) {
-            //     this.dbPicture = this.sanitize(decodeURIComponent(res[0].Profile_picture));
-            //     this.hasFileBeenSelected = true;
-            // }
+            console.log("1");
         });
     }
 
     getFriendsFromServer(): void {
         this.friends = [];
         this.getFriends().subscribe(friendsFromServer => {
-            if (friendsFromServer.length > 0) {
-                friendsFromServer.forEach(element => {
-                    if (element.Profile_picture) {
-                        element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
-                    }
-                    this.friends.push(element);
-                });
-            }
-            // this.navbarService.callComponentMethod();
+            this.setFriendInfo(friendsFromServer, this.friends);
+            console.log("2");
         });
     }
 
     getFriendRequestsFromServer(): void {
         this.friendRequests = [];
         this.getFriendRequests().subscribe(friendRequestsFromServer => {
-            if (friendRequestsFromServer[0].length > 0) {
-                friendRequestsFromServer[0].forEach(element => {
-                    if (element.Profile_picture) {
-                        element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
-                    }
-                    this.friendRequests.push(element);
-                });
-            }
+            this.setFriendInfo(friendRequestsFromServer[0], this.friendRequests);
+
+            console.log("3");
         });
     }
 
     getBlockedUsersFromServer(): void {
-
         this.blockedUsers = [];
         this.getBlockedUsers().subscribe(blockedUsersFromServer => {
-            if (blockedUsersFromServer[0].length > 0) {
-                blockedUsersFromServer[0].forEach(element => {
-                    if (element.Profile_picture) {
-                        element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
-                    }
-                    this.blockedUsers.push(element);
-                });
-            }
-
+            this.setFriendInfo(blockedUsersFromServer[0], this.blockedUsers);
         });
+    }
+
+    setFriendInfo(from, to): void {
+        if (from.length > 0) {
+            from.forEach(element => {
+                if (element.Profile_picture) {
+                    console.log(this.sanitize(decodeURIComponent(element.Profile_picture)));
+                    element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
+                }
+                to.push(element);
+            });
+        }
     }
 
     sanitize(url: string): SafeResourceUrl {

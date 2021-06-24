@@ -17,15 +17,12 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     messages = [];
 
     @ViewChild('chat') private scrollContainer: ElementRef;
+
     constructor(private fb: FormBuilder, private appService: AppService, private chat: ChatService,
                 private route: ActivatedRoute, private cdRef: ChangeDetectorRef, private sanitiser: DomSanitizer) {
         this.createForm();
-        this.appService.canLoad().subscribe(res => console.log(res));
-        this.username = 'P'; // this.appService.user.Username;
-
-        chat.setRef(cdRef);
-        if (!chat.private) this.loadPublicChat();
-        else if (chat.private) this.loadPrivateChat();
+        if (this.appService.user) this.initializeChat();
+        else this.appService.canLoad().subscribe(res => this.initializeChat());
     }
 
     ngOnInit(): void {
@@ -34,6 +31,14 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngOnDestroy(): void {
         this.chat.leaveGameRoom({user: this.username, room: this.roomName});
         this.chat.clearChatListeners();
+    }
+
+    initializeChat(): void {
+        this.username = this.appService.user.Username;
+
+        this.chat.setRef(this.cdRef);
+        if (!this.chat.private) this.loadPublicChat();
+        else if (this.chat.private) this.loadPrivateChat();
     }
 
     loadPrivateChat(): void {
@@ -92,7 +97,12 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     sendMessage(message: string): void {
-        if (this.chat.private) this.chat.sendPrivateMessage({user: this.username, message, room: this.chat.receiverID});
+        if (this.chat.private) this.chat.sendPrivateMessage({
+            user: this.username,
+            message,
+            profilePicture: this.appService.user.Profile_picture,
+            room: this.chat.receiverID
+        });
         else this.chat.sendMessageToGameChat({
             userID: localStorage.getItem("userID"),
             user: this.username,

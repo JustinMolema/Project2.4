@@ -10,7 +10,9 @@ server.listen(chatport);
 const io = require("socket.io")(server, {
     cors: {
         methods: ["GET", "POST"]
-    }
+    },
+    pingTimeout: 200000,
+    maxHttpBufferSize: 1e8,
 });
 
 module.exports = function () {
@@ -60,7 +62,6 @@ module.exports = function () {
 		});
 
 		socket.on("private message", (data) => {
-			console.log(data);
 			socket.to(data.room).emit("private message", {
 				userID: socket.sessionID,
 				user: data.user,

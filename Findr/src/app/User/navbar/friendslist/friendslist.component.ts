@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AppService} from '../../../app.service';
 import {TopbarService} from '../../topbar/topbar.service';
 import {NavbarService} from "../navbar.service";
+import {ChatService} from "../../chatmenu/chat.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-friendslist',
@@ -9,13 +11,13 @@ import {NavbarService} from "../navbar.service";
     styleUrls: ['./friendslist.component.css']
 })
 export class FriendslistComponent implements OnInit {
-
     collapsed = true;
     showMoreText = 'Show More ⬎';
     sliceAmount = 5;
     topbar: TopbarService;
 
-    constructor(private topbarService: TopbarService, public appService: AppService, private navbarService: NavbarService) {
+    constructor(private topbarService: TopbarService, public appService: AppService,
+                private navbarService: NavbarService, private chat: ChatService, private router: Router) {
         this.topbar = topbarService;
     }
 
@@ -37,5 +39,11 @@ export class FriendslistComponent implements OnInit {
         if (this.collapsed){
 
         }
+    }
+
+    startChat(friendID): void {
+        this.chat.private = true;
+        this.chat.receiverID = friendID;
+        this.router.navigate(['chats/']);
     }
 }
