@@ -14,7 +14,9 @@ export class FriendsmenuComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    // this refreshes the info when it gets changed
     @Input() refreshFriendInfo(event): void {
+        this.appService.applicationInitialAPICalls();
     }
 
     showFriendTab(blockView: any, friendView: any): void {
