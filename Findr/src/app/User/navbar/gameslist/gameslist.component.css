@@ -17,30 +17,26 @@ button {
     font-size: 16px;
     border: none;
     display: flex;
-    outline: none;
     align-items: center;
     color: rgb(255, 255, 255);
 }
 
 button:hover {
-    background: #5e8fcf62;
+    background-color: #5e8fcf62;
     animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
 button:focus {
-    background: rgb(59, 80, 116);
+    background-color: rgb(59, 80, 116);
 }
 
 button:active {
-    background: rgba(84, 127, 184, 0.38);
+    background-color: rgba(84, 127, 184, 0.38);
 }
 
 .gametitle {
     text-align: left;
     margin-left: 10px;
-}
-
-.games-list-button {
 }
 
 .games-list-button-collapsed {
@@ -49,28 +45,25 @@ button:active {
 }
 
 .see-more-button {
-    border-radius: 10px;
-}
-
-.see-more-button {
-    width: 270px;
-    height: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    border-radius: 10px;
     color: cyan;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    display: flex;
 }
 
 img {
     height: 30px;
     width: 30px;
     border-radius: 50%;
+}
+
+.gametitle-collapsed {
+    display: none;
+}
+
+.see-more-button-collapsed {
+    height: 20px;
+    margin-bottom: 60px;
+    background: url("../../../../assets/SVG/show_more.svg");
+    background-size: cover;
+    color: rgba(0, 0, 0, 0);
 }
 
 @keyframes nvb-button-Animation {
@@ -85,76 +78,20 @@ img {
     }
 }
 
-.gametitle-collapsed {
-    display: none;
-}
-
-.see-more-button-collapsed {
-    cursor: pointer;
-    height: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    font-weight: 100;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
-    padding-left: 30px;
-
-    width: 55px;
-    height: 55px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 60px;
-    background: url("../../../../assets/SVG/show_more.svg");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-}
-
-.see-more-button-collapsed:hover {
-    background-color: #5e8fcf62;
-    animation: nvb-button-Animation 2s ease-in-out infinite backwards;
-}
-
-.see-more-button-collapsed:focus {
-    background-color: rgb(59, 80, 116);
-}
-
-.see-more-button-collapsed:active {
-    filter: brightness(150%)
-}
-
 @media (max-width: 1000px) {
     .games-list-button {
         height: 50px;
         justify-content: center;
     }
 
-    .navbaricondiv {
-        width: 0;
-        height: 0;
-    }
-
     .gametitle {
-        width: 0;
-        height: 0;
-        color: rgba(0, 0, 0, 0);
         display: none;
     }
 
     .see-more-button {
-        width: 55px;
-        height: 55px;
-        margin-left: 8px;
-        margin-right: 10px;
+        height: 20px;
         background: url("../../../../assets/SVG/show_more.svg");
-        background-size: contain;
+        background-size: cover;
         color: rgba(0, 0, 0, 0);
-        align-items: center;
-        margin-bottom: 60px;
     }
 }

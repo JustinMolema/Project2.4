@@ -1,7 +1,6 @@
 <hr class="game-line">
 <div class="title"> Games</div>
 <hr class="game-line">
-
 <button *ngFor="let game of appService.games.slice(0, sliceAmount);" (click)="gameclick(game.Name)"
         [ngClass]="(topbar.collapseNavbar == false) ? 'games-list-button' : 'games-list-button-collapsed'">
     <div>
@@ -14,4 +13,3 @@
 <button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
         (click)="toggleList()"> {{ showMoreText }}</button>
 <hr class="game-line">
-
