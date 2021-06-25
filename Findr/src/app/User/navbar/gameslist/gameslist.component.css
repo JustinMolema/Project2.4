@@ -1,53 +1,51 @@
-.games-list {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-}
-
 .game-line {
     border: 1px solid #131c28;
 }
 
-.games-list-button {
+.title {
     padding-left: 10px;
-    cursor: pointer;
-    width: 270px;
-    height: 30px;
-    background: rgba(0, 0, 0, 0);
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 10px;
-    color: rgb(255, 255, 255);
-    font-family: "Archivo";
-    font-weight: 100;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
 }
 
-.games-list-button:hover {
-    background-color: #5e8fcf62;
+button {
+    width: 95%;
+    height: 40px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+    margin-left: 3%;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
+    display: flex;
+    outline: none;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+
+button:hover {
+    background: #5e8fcf62;
     animation: nvb-button-Animation 2s ease-in-out infinite backwards;
 }
 
-.games-list-button:focus {
-    background-color: rgb(59, 80, 116);
-    border: none;
-    outline: none;
+button:focus {
+    background: rgb(59, 80, 116);
 }
 
-.games-list-button:active {
-    border: none;
-    outline: none;
-    filter: brightness(150%)
+button:active {
+    background: rgba(84, 127, 184, 0.38);
 }
 
-.game-title {
-    padding-left: 10px;
+.gametitle {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.games-list-button {
+}
+
+.games-list-button-collapsed {
+    height: 50px;
+    justify-content: center;
 }
 
 .see-more-button {
@@ -55,59 +53,24 @@
 }
 
 .see-more-button {
-    cursor: pointer;
     width: 270px;
     height: 30px;
-    background: rgba(0, 0, 0, 0);
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 5px;
     border-radius: 10px;
     color: cyan;
-    font-weight: 100;
     font-size: 16px;
     border: none;
     outline: none;
     display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
-    padding-left: 30px;
 }
 
-.see-more-button:hover {
-    background-color: #5e8fcf62;
-    animation: nvb-button-Animation 2s ease-in-out infinite backwards;
-}
-
-.see-more-button:focus {
-    background-color: rgb(59, 80, 116);
-    border: none;
-    outline: none;
-}
-
-.see-more-button:active {
-    border: none;
-    outline: none;
-    filter: brightness(150%)
-}
-
-.navbaricon {
-    position: relative;
+img {
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    margin-right: 30px;
-}
-
-.gametitle {
-    flex: 0.8;
-    display: flex;
-}
-
-.navbaricondiv {
-    flex: 0.2;
 }
 
 @keyframes nvb-button-Animation {
@@ -122,93 +85,7 @@
     }
 }
 
-@media (max-width: 1000px) {
-    /* .games-list {
-    } */
-    .games-list-button {
-        width: 55px;
-        height: 55px;
-        margin-left: 10px;
-        margin-right: 10px;
-        /*background: url("https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg");*/
-        background-size: contain;
-        color: rgba(0, 0, 0, 0);
-    }
-
-    /*.navbaricon {*/
-    /*    width: 0;*/
-    /*    height: 0;*/
-    /*}*/
-
-    .navbaricondiv {
-        width: 0;
-        height: 0;
-    }
-
-    .gametitle {
-        width: 0;
-        height: 0;
-        color: rgba(0, 0, 0, 0);
-        display: none;
-    }
-
-    .see-more-button {
-        width: 55px;
-        height: 55px;
-        margin-left: 8px;
-        margin-right: 10px;
-        background: url("../../../../assets/SVG/show_more.svg");
-        background-size: contain;
-        color: rgba(0, 0, 0, 0);
-        align-items: center;
-        margin-bottom: 60px;
-    }
-}
-
-/* For the collapsed version */
-.games-list-button-collapsed {
-    padding-left: 10px;
-    cursor: pointer;
-    height: 30px;
-    border-radius: 10px;
-    font-weight: 100;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    display: flex;
-    flex-direction: row;
-    text-align: center;
-    align-items: center;
-
-    width: 55px;
-    height: 55px;
-    margin-left: 10px;
-    margin-right: 10px;
-    background: url("https://www.gamereactor.nl/media/29/fortnitecodeshows_2482963.jpg");
-    background-size: contain;
-    color: rgba(0, 0, 0, 0);
-}
-
-.navbaricon-collapsed {
-    position: relative;
-    border-radius: 50%;
-    margin-right: 30px;
-    width: 0;
-    height: 0;
-}
-
-.navbaricondiv-collapsed {
-    flex: 0.2;
-    width: 0;
-    height: 0;
-}
-
 .gametitle-collapsed {
-    flex: 0.8;
-    display: flex;
-    width: 0;
-    height: 0;
-    color: rgba(0, 0, 0, 0);
     display: none;
 }
 
@@ -233,7 +110,7 @@
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 60px;
-    background: url("https://cdn.discordapp.com/attachments/838036012969754674/842692661282603038/512142.png");
+    background: url("../../../../assets/SVG/show_more.svg");
     background-size: contain;
     color: rgba(0, 0, 0, 0);
 }
@@ -245,12 +122,39 @@
 
 .see-more-button-collapsed:focus {
     background-color: rgb(59, 80, 116);
-    border: none;
-    outline: none;
 }
 
 .see-more-button-collapsed:active {
-    border: none;
-    outline: none;
     filter: brightness(150%)
+}
+
+@media (max-width: 1000px) {
+    .games-list-button {
+        height: 50px;
+        justify-content: center;
+    }
+
+    .navbaricondiv {
+        width: 0;
+        height: 0;
+    }
+
+    .gametitle {
+        width: 0;
+        height: 0;
+        color: rgba(0, 0, 0, 0);
+        display: none;
+    }
+
+    .see-more-button {
+        width: 55px;
+        height: 55px;
+        margin-left: 8px;
+        margin-right: 10px;
+        background: url("../../../../assets/SVG/show_more.svg");
+        background-size: contain;
+        color: rgba(0, 0, 0, 0);
+        align-items: center;
+        margin-bottom: 60px;
+    }
 }

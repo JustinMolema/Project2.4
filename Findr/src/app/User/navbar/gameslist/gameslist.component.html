@@ -1,18 +1,17 @@
-<div>
-  <hr class="game-line">
-  <div class="game-title"> Games</div>
-  <hr class="game-line">
-  <!-- <div class = "games-list" *ngFor="(collapsed == false) ? (let game of games | slice:0:10) : (let game of games | slice:0:10)">  -->
-  <div class="games-list" *ngFor="let game of appService.games.slice(0, sliceAmount);" (click)="gameclick(game.Name)" >
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'games-list-button' : 'games-list-button-collapsed'">
-      <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondiv-collapsed'">
-        <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbaricon-collapsed'" [src]="game.Image">
-      </div>
-      <div [ngClass]="(topbar.collapseNavbar == false) ? 'gametitle' : 'gametitle-collapsed'">
-        {{ game.Name }}
-      </div>
-    </button>
-  </div>
-  <button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'" (click)="toggleList()"> {{ showMoreText }}</button>
-  <hr class="game-line">
-</div>
+<hr class="game-line">
+<div class="title"> Games</div>
+<hr class="game-line">
+
+<button *ngFor="let game of appService.games.slice(0, sliceAmount);" (click)="gameclick(game.Name)"
+        [ngClass]="(topbar.collapseNavbar == false) ? 'games-list-button' : 'games-list-button-collapsed'">
+    <div>
+        <img class="navbaricon" [src]="game.Image">
+    </div>
+    <div [ngClass]="(topbar.collapseNavbar == false) ? 'gametitle' : 'gametitle-collapsed'">
+        <span>{{ game.Name }}</span>
+    </div>
+</button>
+<button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
+        (click)="toggleList()"> {{ showMoreText }}</button>
+<hr class="game-line">
+
