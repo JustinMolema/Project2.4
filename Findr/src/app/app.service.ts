@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
-import {NavbarService} from "./User/navbar/navbar.service";
 import {AdmindataService} from "./admin/admindata.service";
+import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,8 @@ export class AppService {
     blockedUsers = [];
 
     APILoaded = new Subject<any>();
-    constructor(private http: HttpClient, private sanitiser: DomSanitizer, private adminData: AdmindataService, private navbarService: NavbarService) {
+    constructor(private http: HttpClient, private sanitiser: DomSanitizer,
+                private adminData: AdmindataService, private findrMethods: globalFindrMethods) {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
@@ -108,7 +109,7 @@ export class AppService {
         this.adminData.getGames().subscribe(res => {
             if (res.length > 0) {
                 res.forEach(element => {
-                    element.Image = this.sanitize(decodeURIComponent(element.Image));
+                    element.Image = this.findrMethods.sanitize(decodeURIComponent(element.Image));
                     this.games.push(element);
                 });
             }
@@ -135,7 +136,6 @@ export class AppService {
         this.friendRequests = [];
         this.getFriendRequests().subscribe(friendRequestsFromServer => {
             this.setFriendInfo(friendRequestsFromServer[0], this.friendRequests);
-
             console.log("3");
         });
     }
@@ -151,16 +151,10 @@ export class AppService {
         if (from.length > 0) {
             from.forEach(element => {
                 if (element.Profile_picture) {
-                    console.log(this.sanitize(decodeURIComponent(element.Profile_picture)));
-                    element.Profile_picture = this.sanitize(decodeURIComponent(element.Profile_picture));
+                    element.Profile_picture = this.findrMethods.sanitize(decodeURIComponent(element.Profile_picture));
                 }
                 to.push(element);
             });
         }
     }
-
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-    }
-
 }

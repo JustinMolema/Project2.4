@@ -41,5 +41,4 @@ export class GameslistComponent implements OnInit {
         this.chat.private = false;
         this.router.navigate(["chats/" + gameName]);
     }
-
 }

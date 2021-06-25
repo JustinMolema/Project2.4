@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from '../../../app.service';
 import {TopbarService} from '../../topbar/topbar.service';
-import {NavbarService} from "../navbar.service";
 import {ChatService} from "../../chatmenu/chat.service";
 import {Router} from "@angular/router";
 
@@ -16,8 +15,7 @@ export class FriendslistComponent implements OnInit {
     sliceAmount = 5;
     topbar: TopbarService;
 
-    constructor(private topbarService: TopbarService, public appService: AppService,
-                private navbarService: NavbarService, private chat: ChatService, private router: Router) {
+    constructor(private topbarService: TopbarService, public appService: AppService, private chat: ChatService, private router: Router) {
         this.topbar = topbarService;
     }
 
@@ -36,7 +34,7 @@ export class FriendslistComponent implements OnInit {
 
         this.collapsed = !this.collapsed;
 
-        if (this.collapsed){
+        if (this.collapsed) {
 
         }
     }

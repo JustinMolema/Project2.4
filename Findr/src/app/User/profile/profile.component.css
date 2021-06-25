@@ -36,7 +36,8 @@ img {
 ::ng-deep.mat-form-field-ripple {
     background-color: #2a415f !important;;
 }
-::ng-deep .mat-form-field-label{
+
+::ng-deep .mat-form-field-label {
     color: whitesmoke !important;
 }
 

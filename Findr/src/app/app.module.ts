@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {HttpClient, HttpClientModule, HttpHandler, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './User/login/auth.interceptor';
 import {ReactiveFormsModule} from '@angular/forms';
 
@@ -14,7 +14,6 @@ import {SignupModule} from './User/signup/signup.module';
 import {PasswordforgottenModule} from './User/passwordforgotten/passwordforgotten.module';
 import {GamemenuModule} from './User/gamemenu/gamemenu.module';
 import {NavbarModule} from './User/navbar/navbar.module';
-import {Routes, RouterModule} from '@angular/router';
 import {TopbarModule} from './User/topbar/topbar.module';
 import {ChatmenuModule} from './User/chatmenu/chatmenu.module';
 import {FriendsmenuModule} from './User/friendsmenu/friendsmenu.module';
@@ -32,11 +31,11 @@ import {AssignedticketsModule} from './admin/assignedtickets/assignedtickets.mod
 import {TabledataModule} from './admin/tabledata/tabledata.module';
 import {AdmintopbarModule} from "./admin/admintopbar/admintopbar.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
+import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 
 @NgModule({
     declarations: [AppComponent],
@@ -77,13 +76,17 @@ import {MatButtonModule} from '@angular/material/button';
         AdmintopbarModule,
         BrowserAnimationsModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: environment.production,
-          // Register the ServiceWorker as soon as the app is stable
-          // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the app is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
         }),
     ],
-    providers: [DatePipe, HttpClient, [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}]],
+    providers: [DatePipe, HttpClient, globalFindrMethods, [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }]],
     bootstrap: [AppComponent],
 })
 export class AppModule {

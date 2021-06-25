@@ -42,7 +42,7 @@ module.exports = function (express, authenticateToken, connection) {
 				console.log(err);
 				return res.send(err);
 			}
-			res.sendStatus(200);
+			res.send({status: 200});
 		});
 	})
 

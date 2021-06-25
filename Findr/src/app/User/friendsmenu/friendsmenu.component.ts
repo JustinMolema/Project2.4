@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-
 import {AppService} from 'src/app/app.service';
-import {TopbarService} from '../topbar/topbar.service';
 
 @Component({
     selector: 'app-friendsmenu',
@@ -9,13 +7,16 @@ import {TopbarService} from '../topbar/topbar.service';
     styleUrls: ['./friendsmenu.component.css']
 })
 export class FriendsmenuComponent implements OnInit {
-    constructor(private topbarService: TopbarService, public appService: AppService) {
+    constructor(public appService: AppService) {
+
     }
 
     ngOnInit(): void {
     }
 
+    // this refreshes the info when it gets changed
     @Input() refreshFriendInfo(event): void {
+        this.appService.applicationInitialAPICalls();
     }
 
     showFriendTab(blockView: any, friendView: any): void {

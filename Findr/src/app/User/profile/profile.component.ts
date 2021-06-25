@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from 'src/app/app.service';
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {globalFindrMethods} from "../../sharedmodule/global.findr.methods";
 
 @Component({
     selector: 'app-profile',
@@ -9,20 +9,15 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 })
 export class ProfileComponent implements OnInit {
 
-    // Username input field
-    isEditEnable = false;
-
-    // Profile picture
-    hasFileBeenSelected = false;
+    usernameIsEditable = false;
     reader = new FileReader();
 
-    // Variables to store user information in
     dbPicture: any;
     username: any;
     email: any;
     warningCount: any;
 
-    constructor(private appService: AppService, private sanitiser: DomSanitizer) {
+    constructor(private appService: AppService, private findrMethods: globalFindrMethods) {
     }
 
     // Grab and store user information
@@ -34,22 +29,23 @@ export class ProfileComponent implements OnInit {
         this.email = decodeURIComponent(user.Email);
         this.warningCount = user.Warnings;
         if (user.Profile_picture) {
-            this.dbPicture = this.sanitize(decodeURIComponent(user.Profile_picture));
-            this.hasFileBeenSelected = true;
+            this.dbPicture = this.findrMethods.sanitize(decodeURIComponent(user.Profile_picture));
         }
     }
 
     // To change input field to allow username change
     onEdit(): void {
-        if (this.isEditEnable) {
+        if (this.usernameIsEditable) {
             this.submitNewUserName();
         }
-        this.isEditEnable = !this.isEditEnable;
+        this.usernameIsEditable = !this.usernameIsEditable;
     }
 
     // Send username update to the server
     submitNewUserName(): void {
-        this.appService.changeUsername(this.username).subscribe();
+        this.appService.changeUsername(this.username).subscribe(() => {
+            this.appService.getProfileFromServer()
+        });
     }
 
     // Prepare file for upload in server.
@@ -58,16 +54,13 @@ export class ProfileComponent implements OnInit {
 
         this.reader.readAsDataURL(file);
 
-        this.hasFileBeenSelected = true;
-
         this.reader.onload = () => {
-            this.dbPicture = this.sanitize(this.reader.result.toString());
-            this.appService.changeProfilePicture(this.reader.result).subscribe();
+            this.dbPicture = this.findrMethods.sanitize(this.reader.result.toString());
+            this.appService.changeProfilePicture(this.reader.result).subscribe(() => {
+                this.appService.getProfileFromServer()
+            })
         };
     }
 
-    // Allow retrieved URL to be displayed on page
-    sanitize(url: string): SafeResourceUrl {
-        return this.sanitiser.bypassSecurityTrustResourceUrl(url);
-    }
+
 }

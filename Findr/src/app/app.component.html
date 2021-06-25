@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200&display=swap" rel="stylesheet">
-<app-navbar *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin')" ></app-navbar>
+<app-navbar
+    *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin')"></app-navbar>
 <app-admin-bar *ngIf="router.url.startsWith('/admin/')"></app-admin-bar>
 
 <router-outlet></router-outlet>
-<app-topbar *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin')"></app-topbar>
+<app-topbar
+    *ngIf="router.url != '/login' && router.url !='/signup' && router.url != '/forgot-password' && !router.url.startsWith('/admin')"></app-topbar>
 
 <!-- <footer class="footer">
   <p>© 2021 Justin & Merel & verder niemand anders IT Productions</p>
