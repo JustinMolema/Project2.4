@@ -1,16 +1,15 @@
-<hr class="friends-list-line">
-<div class="friendslist-title">
+<hr class="line">
+<div class="title">
     Recent Friends
 </div>
-<hr class="friends-list-line">
+<hr class="line">
 
-<button [ngClass]="(topbar.collapseNavbar == false) ? 'friends-list-button' : 'friends-list-button-collapsed'"
+<button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'"
         *ngFor="let friend of appService.friends.slice(0, sliceAmount)" (click)="startChat(friend.User_ID)">
-    <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondiv-collapsed'">
-        <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbaricon-collapsed' "
-             [src]=friend.Profile_picture>
+    <div>
+        <img class="navbaricon" [src]="friend.Profile_picture">
     </div>
-    <div [ngClass]="(topbar.collapseNavbar == false) ? 'friendname' : 'friends-title-collapsed'">
+    <div [ngClass]="(topbar.collapseNavbar == false) ? 'itemtitle' : 'itemtitle-collapsed'">
         {{friend.Username}}
     </div>
 </button>

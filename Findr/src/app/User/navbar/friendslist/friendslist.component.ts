@@ -20,7 +20,6 @@ export class FriendslistComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
     }
 
     toggleList(): void {
@@ -33,10 +32,6 @@ export class FriendslistComponent implements OnInit {
         }
 
         this.collapsed = !this.collapsed;
-
-        if (this.collapsed) {
-
-        }
     }
 
     startChat(friendID): void {

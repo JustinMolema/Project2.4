@@ -1,0 +1,99 @@
+.line {
+    border: 1px solid #131c28;
+}
+
+.title {
+    padding-left: 10px;
+}
+
+
+button {
+    width: 95%;
+    height: 40px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+    margin-left: 3%;
+    border-radius: 10px;
+    font-size: 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+
+button:hover {
+    background-color: #5e8fcf62;
+    animation: nvb-button-Animation 2s ease-in-out infinite backwards;
+}
+
+button:focus {
+    background-color: rgb(59, 80, 116);
+}
+
+button:active {
+    background-color: rgba(84, 127, 184, 0.38);
+}
+
+
+.item-collapsed {
+    height: 50px;
+    justify-content: center;
+}
+
+.see-more-button {
+    color: cyan;
+}
+
+img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.itemtitle {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.itemtitle-collapsed {
+    display: none;
+}
+
+.see-more-button-collapsed {
+    height: 20px;
+    margin-bottom: 60px;
+    background: url("../../../assets/SVG/show_more.svg");
+    background-size: cover;
+    color: rgba(0, 0, 0, 0);
+}
+
+@keyframes nvb-button-Animation {
+    0% {
+        filter: brightness(100%)
+    }
+    70% {
+        filter: brightness(120%)
+    }
+    100% {
+        filter: brightness(100%);
+    }
+}
+
+@media (max-width: 1000px) {
+    .item {
+        height: 50px;
+        justify-content: center;
+    }
+
+    .itemtitle {
+        display: none;
+    }
+
+    .see-more-button {
+        height: 20px;
+        background: url("../../../assets/SVG/show_more.svg");
+        background-size: cover;
+        color: rgba(0, 0, 0, 0);
+    }
+}
