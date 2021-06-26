@@ -16,7 +16,9 @@ export class AppService {
     friendRequests = [];
     blockedUsers = [];
 
+    canLoadListener;
     APILoaded = new Subject<any>();
+
     constructor(private http: HttpClient, private sanitiser: DomSanitizer,
                 private adminData: AdmindataService, private findrMethods: globalFindrMethods) {
     }
@@ -53,42 +55,42 @@ export class AppService {
     }
 
     getFriends(): Observable<any> {
-        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friends');
+        return this.http.get('http://localhost:8001/api/user/' + this.user.Username + '/friends');
     }
 
     getFriendRequests(): Observable<any> {
-        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests');
+        return this.http.get('http://localhost:8001/api/user/' + this.user.Username + '/friend-requests');
     }
 
     getBlockedUsers(): Observable<any> {
-        return this.http.get('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked');
+        return this.http.get('http://localhost:8001/api/user/' + this.user.Username + '/blocked');
     }
 
     sendFriendRequest(receiver: string): Observable<any> {
         const params: HttpParams = new HttpParams();
-        return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + receiver, params);
+        return this.http.post('http://localhost:8001/api/user/' + this.user.Username + '/friend-requests/' + receiver, params);
     }
 
     acceptFriendRequest(senderID: string): Observable<any> {
         const params: HttpParams = new HttpParams();
-        return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + senderID, params);
+        return this.http.put('http://localhost:8001/api/user/' + this.user.Username + '/friend-requests/' + senderID, params);
     }
 
     deleteFriendRequest(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friend-requests/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username + '/friend-requests/' + senderID);
     }
 
     deleteFriend(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/friends/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username  + '/friends/' + senderID);
     }
 
     blockFriend(senderID: string): Observable<any> {
         const params: HttpParams = new HttpParams();
-        return this.http.post('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked/' + senderID, params);
+        return this.http.post('http://localhost:8001/api/user/' + this.user.Username  + '/blocked/' + senderID, params);
     }
 
     unblockUser(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/blocked/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username  + '/blocked/' + senderID);
     }
 
     canLoad(): Observable<any> {
@@ -97,10 +99,13 @@ export class AppService {
 
     applicationInitialAPICalls(): void {
         this.getProfileFromServer();
-        this.getFriendsFromServer();
-        this.getFriendRequestsFromServer();
-        this.getBlockedUsersFromServer();
-        this.getGamesFromServer();
+        this.canLoadListener = this.canLoad().subscribe(res => {
+            this.getFriendsFromServer();
+            this.getFriendRequestsFromServer();
+            this.getBlockedUsersFromServer();
+            this.getGamesFromServer();
+            this.canLoadListener.unsubscribe();
+        });
     }
 
     getGamesFromServer(): void {
@@ -116,11 +121,11 @@ export class AppService {
         });
 
     }
+
     getProfileFromServer(): void {
         this.getProfile().subscribe(res => {
             this.user = res[0];
             this.APILoaded.next(true);
-            console.log("1");
         });
     }
 
@@ -128,7 +133,6 @@ export class AppService {
         this.friends = [];
         this.getFriends().subscribe(friendsFromServer => {
             this.setFriendInfo(friendsFromServer, this.friends);
-            console.log("2");
         });
     }
 
@@ -136,7 +140,6 @@ export class AppService {
         this.friendRequests = [];
         this.getFriendRequests().subscribe(friendRequestsFromServer => {
             this.setFriendInfo(friendRequestsFromServer[0], this.friendRequests);
-            console.log("3");
         });
     }
 

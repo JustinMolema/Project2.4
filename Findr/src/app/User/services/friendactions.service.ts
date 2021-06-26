@@ -16,7 +16,6 @@ export class FriendactionsService {
     }
 
     reportUser(message: any): Observable<any> {
-        console.log(message);
         const params: HttpParams = new HttpParams()
             .set('userID', message.userID)
             .set('username', "admin")

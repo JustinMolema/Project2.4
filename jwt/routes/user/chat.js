@@ -27,7 +27,6 @@ module.exports = function () {
 		socket.emit("session", {
 			sessionID: socket.sessionID,
 		});
-		console.log(socket.sessionID)
 		socket.join(socket.sessionID);
 
 		const users = [];

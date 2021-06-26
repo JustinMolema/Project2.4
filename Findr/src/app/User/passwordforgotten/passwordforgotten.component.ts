@@ -30,9 +30,7 @@ export class PasswordforgottenComponent implements OnInit {
         const hash = sha512.create();
         hash.update(val.password);
         const encryptedpassword = hash.hex();
-        this.appService.changePassword(encryptedpassword).subscribe(res => {
-            console.log("Password changed");
-        });
+        this.appService.changePassword(encryptedpassword).subscribe();
     }
 
 }

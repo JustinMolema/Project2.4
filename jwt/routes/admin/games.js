@@ -2,7 +2,6 @@ module.exports = function(express, authenticateToken, connection) {
     var router = express.Router();
  
     router.get('/api/games', authenticateToken, (req, res) => {
-        console.log("PP");
         connection.query('SELECT * FROM games', function (err, result, fields) {
             if (err) console.log(err);
             for (let item of result) {

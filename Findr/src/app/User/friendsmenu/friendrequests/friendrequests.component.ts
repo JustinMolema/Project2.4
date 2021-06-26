@@ -22,21 +22,21 @@ export class FriendrequestsComponent implements OnInit {
     }
 
     addFriend(): void {
-        this.appService.acceptFriendRequest(this.friendID).subscribe(res => {
+        this.appService.acceptFriendRequest(this.friend).subscribe(res => {
             this.refresh.emit('add');
         });
 
     }
 
     deleteRequest(): void {
-        this.appService.deleteFriendRequest(this.friendID).subscribe(res => {
+        this.appService.deleteFriendRequest(this.friend).subscribe(res => {
             this.refresh.emit('delete');
         });
 
     }
 
     blockUser(): void {
-        this.appService.blockFriend(this.friendID).subscribe(res => {
+        this.appService.blockFriend(this.friend).subscribe(res => {
             this.refresh.emit('bloqq');
         });
     }

@@ -28,15 +28,11 @@ export class ChatService {
         this.socket.connect();
         this.createSession();
         this.getAllOnlineFriends();
-        this.friendLoggedIn().subscribe(res => {
-            console.log(res);
-        });
+        this.friendLoggedIn().subscribe();
         this.receivePrivateMessageListener();
         this.connect();
         this.disconnect();
-        this.friendLoggedOut().subscribe(res => {
-            console.log(res);
-        });
+        this.friendLoggedOut().subscribe();
     }
 
     createSession(): void {
@@ -162,7 +158,6 @@ export class ChatService {
     newMessageReceivedFromGameChat(): Observable<any> {
         return new Observable<{ user: string, message: string }>(observer => {
             this.socket.on('new message', (data) => {
-                console.log("MAS");
                 observer.next(data);
             });
             return () => {

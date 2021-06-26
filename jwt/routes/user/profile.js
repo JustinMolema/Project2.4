@@ -36,10 +36,8 @@ module.exports = function (express, authenticateToken, connection) {
 	router.put('/api/user/:userID/picture', authenticateToken, (req, res) => {
 		const user_id = req.params.userID;
 		const new_profile_pic = req.body.newPic;
-		console.log(ns.sizeof(new_profile_pic));
 		connection.query('UPDATE users SET Profile_picture = ? WHERE users.User_ID = ?', [new_profile_pic, user_id], function (err, result, fields) {
 			if (err){ 
-				console.log(err);
 				return res.send(err);
 			}
 			res.send({status: 200});

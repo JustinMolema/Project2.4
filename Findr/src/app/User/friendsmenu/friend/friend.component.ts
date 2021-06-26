@@ -75,13 +75,13 @@ export class FriendComponent implements OnInit, AfterViewInit {
     }
 
     deleteFriend(): void {
-        this.appService.deleteFriend(this.friendID).subscribe(res => {
+        this.appService.deleteFriend(this.friend).subscribe(res => {
             this.refresh.emit('hoi');
         });
     }
 
     blockFriend(): void {
-        this.appService.blockFriend(this.friendID).subscribe(res => {
+        this.appService.blockFriend(this.friend).subscribe(res => {
             this.refresh.emit('hoi');
         });
     }

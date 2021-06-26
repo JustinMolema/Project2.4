@@ -30,7 +30,7 @@ export class FriendsmenuComponent implements OnInit {
     }
 
     sendFriendRequest(): void {
-        const id = prompt("Please enter the ID you want to add");
+        const id = prompt("Please enter the Username you want to add");
         if (id) {
             this.appService.sendFriendRequest(id).subscribe(res => {
                 this.appService.applicationInitialAPICalls();

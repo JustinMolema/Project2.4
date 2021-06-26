@@ -18,7 +18,6 @@ export class TicketComponent extends AdminRow implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.item);
     }
 
     setUndoTimer(): void {

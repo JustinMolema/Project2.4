@@ -37,7 +37,6 @@ export class GameslistComponent implements OnInit {
     }
 
     gameclick(gameName): void {
-        console.log(this.appService.games);
         this.chat.private = false;
         this.router.navigate(["chats/" + gameName]);
     }

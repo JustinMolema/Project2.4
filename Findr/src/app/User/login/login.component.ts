@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
         const hash = sha512.create();
         hash.update(val.password);
         const encryptedpassword = hash.hex();
-        console.log(val.rememberme);
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
                 localStorage.setItem('userID', res.userID);

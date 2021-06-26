@@ -23,8 +23,6 @@ export class GamesComponent extends Admindata implements OnInit {
 
     getData(): void {
         this.admindataService.getGames().subscribe(response => {
-            console.log(typeof response);
-
             this.fillData(response);
             this.allowViewToLoad(["Name", "Category", "Description"]);
         });

@@ -24,7 +24,7 @@ export class GameComponent extends AdminRow implements OnInit {
 
     setUndoTimer(): void {
         this.undoTimer = setTimeout(() => {
-            this.admindataService.deleteGame(this.item.Name).subscribe(res => console.log(res));
+            this.admindataService.deleteGame(this.item.Name).subscribe();
         }, 4000);
     }
 

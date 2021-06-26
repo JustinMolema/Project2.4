@@ -7,8 +7,8 @@ module.exports = function (express, authenticateToken, connection) {
 		try {
 			const friends = await User.query()
 				.select('User_ID', 'Username', "Profile_picture")
-				.from('user_friends_with_user')
-				.innerJoin('users AS user', 'user.User_ID', 'user_friends_with_user.UserTwo')
+				.from('friends')
+				.innerJoin('users AS user', 'user.Username', 'friends.UserTwo')
 				.where('UserOne', '=', user_id)
 			if (friends.length > 0) {
 				friends.forEach(element => {
@@ -29,7 +29,7 @@ module.exports = function (express, authenticateToken, connection) {
 		let user_id = req.params['userID']
 		let friend_id = req.params['friendID']
 		res.header("Access-Control-Allow-Origin", "*");
-		connection.query('SELECT User_ID, Username, Profile_picture FROM user_friends_with_user WHERE UserTwo = ' + friend_id + " AND UserOne = " + user_id, await function (err, result, fields) {
+		connection.query('SELECT User_ID, Username, Profile_picture FROM friends WHERE UserTwo = ? AND UserOne = ?', [friend_id, user_id], await function (err, result, fields) {
 			if (err) return res.sendStatus(400);
 			if (result.length > 0) {
 				if (result[0].Profile_picture) {
@@ -43,11 +43,11 @@ module.exports = function (express, authenticateToken, connection) {
 	router.delete('/api/user/:userID/friends/:friendID', authenticateToken, async (req, res) => {
 		let UserOne = req.params['userID']
 		const UserTwo = req.params['friendID']
-		connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserOne + ' AND UserTwo = ' + UserTwo, function (err, result, fields) {
+		connection.query('DELETE FROM friends WHERE UserOne = ? AND UserTwo = ?', [UserOne, UserTwo], function (err, result, fields) {
 			if (err) return res.send(err)
 		})
 
-		connection.query('DELETE FROM user_friends_with_user WHERE UserOne = ' + UserTwo + ' AND UserTwo = ' + UserOne, function (err, result, fields) {
+		connection.query('DELETE FROM friends WHERE UserOne = ? AND UserTwo = ?', [UserTwo, UserOne], function (err, result, fields) {
 			if (err) return res.send(err);
 		})
 		res.json({ status: 200 })
