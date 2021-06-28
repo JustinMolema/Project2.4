@@ -17,6 +17,7 @@ import {UsersComponent} from './admin/users/users.component';
 import {AssignedticketsComponent} from './admin/assignedtickets/assignedtickets.component';
 import {NewgameComponent} from './admin/games/newgame/newgame.component';
 import {AuthService} from "./User/login/auth.service";
+import {TicketComponent} from './User/ticket/ticket.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
     {path: 'admin/users', component: UsersComponent},
     {path: 'admin/mytickets', component: AssignedticketsComponent},
     {path: 'admin/games/new', component: NewgameComponent},
+    {path: 'ticket', component: TicketComponent},
     {path: 'index', component: LoginComponent},
     {path: '**', redirectTo: '/login'}
 ];

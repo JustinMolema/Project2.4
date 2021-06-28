@@ -16,5 +16,15 @@ module.exports = function (express, authenticateToken, connection) {
 		})
 	})
 
+	router.post('/api/support/tickets', authenticateToken, (req, res) => {
+		const category = req.body.category;
+		const description = req.body.description;
+
+		connection.query('INSERT INTO support_tickets (Date, Category, Description) VALUES (?,?,?)', [new Date(new Date().toUTCString()), category, description], function(err, result, fields) {
+			if(err) res.sendStatus(418);
+			res.sendStatus(200);
+		})
+	})
+
 	return router;
 }

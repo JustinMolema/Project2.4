@@ -13,7 +13,6 @@ app.post('/token', (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 
 	const refreshToken = req.body.token;
-	console.log(refreshToken);
 	if (refreshToken == null) return res.sendStatus(401)
 	if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
 	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {

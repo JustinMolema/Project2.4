@@ -160,4 +160,11 @@ export class AppService {
             });
         }
     }
+
+    createSupportTicket(category: string, description: string): Observable<any> {
+        const params: HttpParams = new HttpParams()
+            .set('category', category)
+            .set('description', description);
+        return this.http.post('http://localhost:8001/api/support/tickets', params);
+    }
 }

@@ -5,7 +5,7 @@ import {AppService} from 'src/app/app.service';
 import {globalFindrMethods} from '../../sharedmodule/global.findr.methods'
 import {Router} from "@angular/router";
 
-//TODO on submit, go to login page.
+// TODO on submit, go to login page.
 
 @Component({
     selector: 'app-signup',
