@@ -9,13 +9,14 @@ module.exports = function (express, generateAccessToken, connection) {
 		const username = req.body.username;
 		const pw = req.body.password;
 		connection.connect(function (req, err) {
-			connection.query('SELECT User_ID, password FROM users WHERE username = ?', [username], function (err, result, fields) {
+			connection.query('SELECT User_ID, password, Banned FROM users WHERE username = ?', [username], function (err, result, fields) {
 				if (err) {
 					return res.send({status: "error"});
 				}
 	
 				if (result.length === 0) return res.send({status: "error"});
-
+				const banned = JSON.parse(JSON.stringify(result[0].Banned));
+				if (banned === 1) return res.send({status: "banned"});
 				const dbPassword = JSON.parse(JSON.stringify(result[0].password));
 				const User_ID = JSON.parse(JSON.stringify(result[0].User_ID));
 

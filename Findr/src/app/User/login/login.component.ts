@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
     stars = [];
     error = false;
 
-
     vh = window.screen.height / 2;
     vw = window.screen.width;
 
@@ -55,6 +54,7 @@ export class LoginComponent implements OnInit {
         const encryptedpassword = hash.hex();
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
+                console.log(res);
                 localStorage.setItem('userID', res.userID);
                 localStorage.setItem('rememberme', val.rememberme);
                 this.setJWT(val.rememberme, res);
@@ -64,6 +64,9 @@ export class LoginComponent implements OnInit {
                 this.authService.setRefreshInterval();
             } else if (res.status === "error") {
                 this.error = true;
+            }
+            else if (res.status === "banned") {
+                alert("You have been BANNED!");
             }
         });
     }
