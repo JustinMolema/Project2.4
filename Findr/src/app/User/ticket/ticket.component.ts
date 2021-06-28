@@ -18,7 +18,7 @@ export class TicketComponent implements OnInit {
     createForm(): void {
         this.form = this.fb.group({
             description: ['', Validators.required],
-            // category: ['', Validators.required],
+            category: ['', Validators.required],
         });
     }
 
@@ -27,8 +27,7 @@ export class TicketComponent implements OnInit {
 
     sendSupportTicket(): void{
         const val = this.form.value;
-        console.log(val);
-        // this.appService.createSupportTicket(val.category, val.description).subscribe();
+        this.appService.createSupportTicket(val.category, val.description).subscribe();
     }
 
 

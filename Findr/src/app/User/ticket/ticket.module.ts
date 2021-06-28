@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TicketComponent } from './ticket.component';
 import {ReactiveFormsModule} from "@angular/forms";
 
-
-
 @NgModule({
   declarations: [
     TicketComponent
