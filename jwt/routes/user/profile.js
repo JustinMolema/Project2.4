@@ -18,21 +18,6 @@ module.exports = function (express, authenticateToken, connection) {
 		});
 	});
 
-	const ns = {};
-	ns.sizeof = function(v) {
-	let f = ns.sizeof, //this needs to match the name of the function itself, since arguments.callee.name is defunct
-		o = {
-		"undefined": () => 0,
-		"boolean": () => 4,
-		"number": () => 8,
-		"string": i => 2 * i.length,
-		"object": i => !i ? 0 : Object
-			.keys(i)
-			.reduce((t, k) => f(k) + f(i[k]) + t, 0)
-		};
-	return o[typeof v](v);
-	};
-
 	router.put('/api/user/:userID/picture', authenticateToken, (req, res) => {
 		const user_id = req.params.userID;
 		const new_profile_pic = req.body.newPic;
@@ -54,7 +39,6 @@ module.exports = function (express, authenticateToken, connection) {
 		});
 	})
 
-	// change password
 	router.put('/api/user/:userID/password', authenticateToken, (req, res) => {
 		let user_id = req.params.userID;
 		const new_pass = req.body.newPass;
