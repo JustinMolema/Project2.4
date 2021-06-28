@@ -1,0 +1,87 @@
+ticket-tab {
+    width: 100%;
+    padding-top: 3%;
+    padding-left: 7%;
+    padding-right: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    width: 100%;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 50px;
+    width: 100%;
+}
+
+.textareafield {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.fieldnamecontainer {
+    display: flex;
+    flex: 0.2;
+}
+
+.inputfieldcontainer {
+    margin-left: 10px;
+    font-size: 15px;
+    background: rgb(53, 63, 119);
+    color: white;
+    border: 2px solid black;
+    height: 40px;
+    flex: 0.8;
+}
+
+.inputfield {
+    background: red;
+    color: white;
+    width: 100%;
+    background: rgba(53, 63, 119, 0);
+    border: 0px;
+    height: 100%;
+}
+
+textarea {
+    padding-left: 5px;
+}
+
+.category {
+    width: 100%;
+    background: rgba(53, 63, 119);
+    border: 0px;
+    color: white;
+    height: 100%;
+}
+
+.addgame {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+    background: rgb(100, 116, 206);
+    border-radius: 5px;
+    color: white;
+    border: 0px solid black;
+    margin-top: 50px;
+    height: 40px;
+    width: 125px;
+}
+
+.addgame:hover, .uploadimage:hover, .cancel:hover {
+    opacity: 0.7;
+}
+
+.addgame:active, .uploadimage:active, .cancel:active {
+    opacity: 0.9;
+}

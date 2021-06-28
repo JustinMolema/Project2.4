@@ -36,6 +36,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
+import {TicketModule} from "./User/ticket/ticket.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -75,6 +76,7 @@ import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
         TabledataModule,
         AdmintopbarModule,
         BrowserAnimationsModule,
+        TicketModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             // Register the ServiceWorker as soon as the app is stable

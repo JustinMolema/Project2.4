@@ -1,0 +1,30 @@
+<div class="content">
+    <div class="ticket-tab">
+        <form [formGroup]="form">
+            <div class="field">
+                <div class="fieldnamecontainer">
+                    <span>Category:</span>
+                </div>
+                <div class="inputfieldcontainer">
+                    <select required class="category" formControlName="category">
+                        <option value="New game">New game</option>
+                        <option value="Bug report">Bug report</option>
+                        <option value="Feature request">Feature request</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="textareafield">
+                <div class="fieldnamecontainer">
+                    <span>Description:</span>
+                </div>
+                <textarea class="inputfieldcontainer" type="text" placeholder="Description"
+                          formControlName="description"></textarea>
+            </div>
+            <!--            <button (click)="sendSupportTicket()"></button>-->
+            <div style="width: 100%; display: flex; justify-content: flex-end;">
+                <button [disabled]="form.pristine || form.invalid" (click)="sendSupportTicket()" class="addgame">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
