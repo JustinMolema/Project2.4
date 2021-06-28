@@ -34,7 +34,6 @@ module.exports = function (express, generateAccessToken, connection) {
 							status: 200
 						})
 					} else {
-						console.log("WRONG");
 						return res.send({status: "error"});
 					}
 				})
@@ -52,12 +51,10 @@ module.exports = function (express, generateAccessToken, connection) {
 		const saltRounds = 10;
 		bcrypt.genSalt(saltRounds, function (err, salt) {
 			bcrypt.hash(password, salt, function (err, hash) {
-				console.log(hash);
 				connection.connect(function (req, err) {
 					connection.query('INSERT INTO admins (username, password, email) VALUES (?, ?, ?)', [username, hash, email], function (err, result, fields) {
-	
+
 						if (err) {
-							console.log(err)
 							return res.send(err);
 						} else {
 							res.json({status: 200});

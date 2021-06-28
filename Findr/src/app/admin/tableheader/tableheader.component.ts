@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { logWarnings } from 'protractor/built/driverProviders';
+import {installTempPackage} from '@angular/cli/utilities/install-package';
 
 @Component({
     selector: 'app-tableheader',
