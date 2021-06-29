@@ -1,4 +1,4 @@
-import {AfterViewInit, ApplicationRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, ApplicationRef, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {AppService} from 'src/app/app.service';
@@ -15,9 +15,11 @@ export class FriendComponent implements OnInit, AfterViewInit {
     @Input() pic;
 
     stable;
+    i = 0;
     status = 'Offline';
 
-    constructor(private router: Router, private chat: ChatService, private appService: AppService, private app: ApplicationRef) {
+    constructor(private router: Router, private chat: ChatService, private appService: AppService,
+                private app: ApplicationRef, private cdRef: ChangeDetectorRef) {
     }
 
     @Output()
@@ -37,7 +39,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
             if (isStable) {
                 setTimeout(() => {
                     this.setStatusListeners();
-                }, 500);
+                }, 1000);
                 this.stable.unsubscribe();
             }
         });
@@ -49,6 +51,8 @@ export class FriendComponent implements OnInit, AfterViewInit {
         for (const friend of this.chat.onlineFriends) {
             if (friend.userID === this.friendID) {
                 this.status = 'Online';
+                this.cdRef.detectChanges();
+
                 break;
             }
         }

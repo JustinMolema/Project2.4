@@ -42,6 +42,7 @@ module.exports = function () {
 		socket.onAny((event, ...args) => {
 			console.log("Event: " + event + " Args: " + args)
 		})
+		console.log("CONNECT");
 
 		socket.broadcast.emit("user connected", {
 			userID: socket.sessionID,

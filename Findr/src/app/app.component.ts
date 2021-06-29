@@ -39,9 +39,6 @@ export class AppComponent implements OnInit, OnDestroy {
                     this.chat.getAllFriends();
                     this.chat.openSocket();
                 }
-                //
-
-
                 this.stable.unsubscribe();
             }
         });

@@ -97,6 +97,12 @@ export class AppService {
         return this.APILoaded.asObservable();
     }
 
+    isFriend(user): boolean {
+        for (const friend of this.friends) {
+            if (friend.User_ID === user.userID) return true;
+        }
+        return false;
+    }
     applicationInitialAPICalls(): void {
         this.getProfileFromServer();
         this.canLoadListener = this.canLoad().subscribe(res => {

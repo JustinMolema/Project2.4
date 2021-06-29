@@ -15,6 +15,6 @@
 </button>
 
 <div>
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
+    <button *ngIf="appService.friends.length > 5" [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
             (click)="toggleList()">{{ showMoreText }}</button>
 </div>

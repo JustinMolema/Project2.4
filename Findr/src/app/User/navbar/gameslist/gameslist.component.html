@@ -10,6 +10,6 @@
         <span>{{ game.Name }}</span>
     </div>
 </button>
-<button [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
+<button *ngIf="appService.games.length > 5" [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
         (click)="toggleList()"> {{ showMoreText }}</button>
 <hr class="line">

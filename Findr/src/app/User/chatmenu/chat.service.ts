@@ -23,7 +23,7 @@ export class ChatService {
     }
 
     openSocket(): void {
-        this.socket.auth = {username: 'Meloen', sessionID: Number(localStorage.getItem('userID'))};
+        this.socket.auth = {username: "User", sessionID: Number(localStorage.getItem('userID'))};
 
         this.socket.connect();
         this.createSession();
@@ -111,6 +111,7 @@ export class ChatService {
                 }
                 return a.username > b.username ? 1 : 0;
             });
+            console.log("ALLFRIENDS");
         });
     }
 
@@ -124,7 +125,9 @@ export class ChatService {
         return new Observable<any>(observer => {
             this.socket.on('user connected', (user) => {
                 this.initReactiveProperties(user);
-                this.onlineFriends.push(user);
+                if (!this.onlineFriends.includes(user) && this.appService.isFriend(user)) {
+                    this.onlineFriends.push(user);
+                }
                 observer.next(user);
             });
         });
