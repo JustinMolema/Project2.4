@@ -20,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.reroute();
         this.stabilizeListener();
-        this.appService.setChat(this.chat);
     }
 
     ngOnDestroy(): void {

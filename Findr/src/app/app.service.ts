@@ -4,7 +4,6 @@ import {Observable, Subject} from 'rxjs';
 import {AdmindataService} from "./admin/admindata.service";
 import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 import {SafeResourceUrl} from '@angular/platform-browser';
-import {ChatService} from './User/chatmenu/chat.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,14 +23,8 @@ export class AppService {
     canLoadListener;
     APILoaded = new Subject<any>();
 
-    chat: ChatService;
-
     constructor(private http: HttpClient, private adminData: AdmindataService,
                 private findrMethods: globalFindrMethods) {
-    }
-
-    setChat(chat: ChatService): void {
-        this.chat = chat;
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
@@ -105,16 +98,16 @@ export class AppService {
     }
 
     deleteFriend(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username  + '/friends/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username + '/friends/' + senderID);
     }
 
     blockFriend(senderID: string): Observable<any> {
         const params: HttpParams = new HttpParams();
-        return this.http.post('http://localhost:8001/api/user/' + this.user.Username  + '/blocked/' + senderID, params);
+        return this.http.post('http://localhost:8001/api/user/' + this.user.Username + '/blocked/' + senderID, params);
     }
 
     unblockUser(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username  + '/blocked/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username + '/blocked/' + senderID);
     }
 
     canLoad(): Observable<any> {
@@ -167,7 +160,6 @@ export class AppService {
                 });
             }
         });
-
     }
 
     getProfileFromServer(): void {
