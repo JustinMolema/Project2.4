@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         const encryptedpassword = hash.hex();
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
-                console.log(res);
+                // console.log(res);
                 localStorage.setItem('userID', res.userID);
                 localStorage.setItem('rememberme', val.rememberme);
                 this.setJWT(val.rememberme, res);

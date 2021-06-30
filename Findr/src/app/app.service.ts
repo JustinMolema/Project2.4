@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {AdmindataService} from "./admin/admindata.service";
 import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
+import {SafeResourceUrl} from "@angular/platform-browser";
 
 @Injectable({
     providedIn: 'root'
@@ -49,6 +50,7 @@ export class AppService {
     getFavoriteGames(): Observable<any> {
         return this.http.get('http://localhost:8001/api/games/favorite/' + localStorage.getItem('userID'));
     }
+
     setFavorite(game: string): Observable<any> {
         const params: HttpParams = new HttpParams().set("id", localStorage.getItem('userID')).set("game", game);
         return this.http.post('http://localhost:8001/api/games/favorite', params);
@@ -95,16 +97,16 @@ export class AppService {
     }
 
     deleteFriend(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username  + '/friends/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username + '/friends/' + senderID);
     }
 
     blockFriend(senderID: string): Observable<any> {
         const params: HttpParams = new HttpParams();
-        return this.http.post('http://localhost:8001/api/user/' + this.user.Username  + '/blocked/' + senderID, params);
+        return this.http.post('http://localhost:8001/api/user/' + this.user.Username + '/blocked/' + senderID, params);
     }
 
     unblockUser(senderID: string): Observable<any> {
-        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username  + '/blocked/' + senderID);
+        return this.http.delete('http://localhost:8001/api/user/' + this.user.Username + '/blocked/' + senderID);
     }
 
     canLoad(): Observable<any> {
@@ -117,6 +119,7 @@ export class AppService {
         }
         return false;
     }
+
     applicationInitialAPICalls(): void {
         this.getProfileFromServer();
         this.canLoadListener = this.canLoad().subscribe(res => {
@@ -139,7 +142,6 @@ export class AppService {
                 });
             }
         });
-
     }
 
     getProfileFromServer(): void {
