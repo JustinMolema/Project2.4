@@ -154,7 +154,6 @@ export class AppService {
                 res.forEach(element => {
                     element.Image = this.findrMethods.sanitize(decodeURIComponent(element.Image));
                     this.games.push(element);
-
                     if (this.favoriteGames.has(element.Name))
                         this.favoriteGames.get(element.Name).image = element.Image;
                 });
