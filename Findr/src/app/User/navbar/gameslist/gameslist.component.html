@@ -1,15 +1,16 @@
 <hr class="line">
-<div class="title"> Games</div>
+<div class="title">Favorite Games</div>
 <hr class="line">
-<button *ngFor="let game of appService.games.slice(0, sliceAmount);" (click)="gameclick(game.Name)"
+<button *ngFor="let game of appService.favoriteGames | keyvalue: keepOriginalOrder" (click)="gameclick(game.value.name)"
         [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'">
     <div>
-        <img class="navbaricon" [src]="game.Image">
+        <img *ngIf="game.value.image" class="navbaricon" [src]="game.value.image">
     </div>
     <div [ngClass]="(topbar.collapseNavbar == false) ? 'itemtitle' : 'itemtitle-collapsed'">
-        <span>{{ game.Name }}</span>
+        <span>{{ game.value.name }}</span>
     </div>
 </button>
-<button *ngIf="appService.games.length > 5" [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
+
+<button *ngIf="appService.favoriteGames.size > 5" [ngClass]="(topbar.collapseNavbar == false) ? 'see-more-button' : 'see-more-button-collapsed'"
         (click)="toggleList()"> {{ showMoreText }}</button>
 <hr class="line">

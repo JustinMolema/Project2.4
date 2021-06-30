@@ -1,5 +1,4 @@
 .game {
-    cursor: pointer;
     text-decoration: none;
     height: 100%;
     width: 100%;
@@ -18,7 +17,47 @@ img {
 }
 
 .game-info{
-    margin-top: 10px;
+    display: flex;
+    padding-top: 10px;
+}
+
+.info {
+    width: 80%;
+}
+
+.favorite {
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.not-favorite-icon {
+    cursor: pointer;
+    background-image: url("src/assets/SVG/star.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    fill: white;
+    height: 27px;
+    width: 27px;
+}
+
+.not-favorite-icon:hover {
+    background-image: url("src/assets/SVG/favorite.svg");
+}
+
+.favorite-icon {
+    cursor: pointer;
+    background-image: url("src/assets/SVG/favorite.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    fill: white;
+    height: 27px;
+    width: 27px;
+}
+
+.favorite-icon:hover {
+    background-image: url("src/assets/SVG/star.svg");
+
 }
 
 .box {

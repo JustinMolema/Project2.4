@@ -13,6 +13,10 @@ export class AppService {
     picture;
     friends = [];
     games = [];
+    favoriteGames = new Map<string, {
+        name: string;
+        image: SafeResourceUrl
+    }>();
     friendRequests = [];
     blockedUsers = [];
 
@@ -42,6 +46,18 @@ export class AppService {
         const params: HttpParams = new HttpParams()
             .set('newName', newName);
         return this.http.put('http://localhost:8001/api/user/' + localStorage.getItem('userID') + '/username', params);
+    }
+
+    getFavoriteGames(): Observable<any> {
+        return this.http.get('http://localhost:8001/api/games/favorite/' + localStorage.getItem('userID'));
+    }
+    setFavorite(game: string): Observable<any> {
+        const params: HttpParams = new HttpParams().set("id", localStorage.getItem('userID')).set("game", game);
+        return this.http.post('http://localhost:8001/api/games/favorite', params);
+    }
+
+    deleteFavorite(game: string): Observable<any> {
+        return this.http.delete('http://localhost:8001/api/games/favorite/' + localStorage.getItem('userID') + '/' + game);
     }
 
     changeProfilePicture(newPic): Observable<any> {

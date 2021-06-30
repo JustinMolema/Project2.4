@@ -1,16 +1,25 @@
-<div class="game" (click)="gameclick()" >
+<div class="game">
     <div class="box">
-<!--        <div class="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500">-->
-<!--        </div>-->
-        <img class="current-profile-pic" [src]="dbPicture" formControlName="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500" alt="This game picture">
+        <!--        <div class="image" matTooltip={{game.Description}} [matTooltipShowDelay]="500">-->
+        <!--        </div>-->
+        <img (click)="gameclick()" class="current-profile-pic" [src]="dbPicture" formControlName="image" matTooltip={{game.Description}}
+             [matTooltipShowDelay]="500" alt="This game picture">
 
         <div class="game-info">
-            <div class="gamename">
-                <b class="gamename" matTooltip={{game.Name}} [matTooltipShowDelay]="500" matTooltipClass="custom-tooltip">
-                    {{game.Name}}
-                </b>
+            <div class="info">
+                <div class="gamename">
+                    <b class="gamename" matTooltip={{game.Name}} [matTooltipShowDelay]="500"
+                       matTooltipClass="custom-tooltip">
+                        {{game.Name}}
+                    </b>
+                </div>
+                {{game.Category}}
             </div>
-            {{game.Category}}
+            <div class="favorite">
+                <div [ngClass]="favorite ? 'favorite-icon' : 'not-favorite-icon'" (click)="setFavorite()">
+                </div>
+            </div>
         </div>
+
     </div>
 </div>

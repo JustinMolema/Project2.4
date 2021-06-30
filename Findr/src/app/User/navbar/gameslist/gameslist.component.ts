@@ -16,6 +16,7 @@ export class GameslistComponent implements OnInit {
     sliceAmount = 5;
     topbar: TopbarService;
     dbPicture;
+    public keepOriginalOrder = (a, b) => a.key;
 
     constructor(private topbarService: TopbarService, private chat: ChatService, private router: Router, public appService: AppService) {
         this.topbar = topbarService;
