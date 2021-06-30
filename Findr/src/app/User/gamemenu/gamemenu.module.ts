@@ -3,8 +3,6 @@ import {CommonModule} from '@angular/common';
 import {GamemenuComponent} from './gamemenu.component';
 import {GameComponent} from './game/game.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatButtonModule} from '@angular/material/button';
-import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -14,7 +12,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         MatTooltipModule,
-        ReactiveFormsModule,
     ], exports: [
         GamemenuComponent,
         GameComponent,
