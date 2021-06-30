@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {AdmindataService} from "./admin/admindata.service";
 import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
 
@@ -23,8 +22,7 @@ export class AppService {
     canLoadListener;
     APILoaded = new Subject<any>();
 
-    constructor(private http: HttpClient, private sanitiser: DomSanitizer,
-                private adminData: AdmindataService, private findrMethods: globalFindrMethods) {
+    constructor(private http: HttpClient, private adminData: AdmindataService, private findrMethods: globalFindrMethods) {
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
