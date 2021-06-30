@@ -68,7 +68,6 @@ export class ChatService {
                     }
                 });
             });
-            console.log(this.onlineFriends);
         });
     }
 
