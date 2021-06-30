@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     ngOnInit(): void {
         var user = this.appService.user;
         if (!user) {
-            this.appService.getProfile().subscribe(() =>{
+            this.appService.getProfile().subscribe(() => {
                 user = this.appService.user;
                 this.setDetails(user)
             })
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
         this.setDetails(user)
     }
 
-    setDetails(user): void{
+    setDetails(user): void {
         this.username = user.Username;
         this.email = decodeURIComponent(user.Email);
         this.warningCount = user.Warnings;

@@ -12,7 +12,7 @@ import {globalFindrMethods} from '../../sharedmodule/global.findr.methods';
 export class GamemenuComponent implements OnInit {
     games = [];
 
-    constructor(private appService: AppService) {
+    constructor(public appService: AppService) {
     }
 
     ngOnInit(): void {
