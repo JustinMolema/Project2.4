@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql');
+const fs = require('fs');
 
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: true, limit: '50mb'}));
@@ -19,8 +20,16 @@ const connection = mysql.createConnection({
     database: 'Findr'
 });
 
+let pic;
+try {
+	pic = fs.readFileSync('default-user.jpg', 'base64')
+	pic = encodeURIComponent("data:image/jpg;base64,"+pic)
+} catch (err) {
+	pic = null;
+}
+
 require('./routes/user/chat')();
-const games = require('./routes/admin/games')(express, authenticateToken, connection);
+const games = require('./routes/games')(express, authenticateToken, connection);
 const profile = require('./routes/user/profile')(express, authenticateToken, connection);
 const friends = require('./routes/user/friends')(express, authenticateToken, connection);
 const friendrequests = require('./routes/user/friendrequests')(express, authenticateToken, connection);
@@ -28,7 +37,7 @@ const blockedusers = require('./routes/user/blockedusers')(express, authenticate
 const reportedusers = require('./routes/admin/reportedusers')(express, authenticateToken, connection);
 const supporttickets = require('./routes/admin/supporttickets')(express, authenticateToken, connection);
 const users = require('./routes/admin/users')(express, authenticateToken, connection);
-const account = require('./routes/user/account')(express, generateAccessToken, connection);
+const account = require('./routes/user/account')(express, generateAccessToken, connection, pic);
 const adminaccount = require('./routes/admin/adminaccount')(express, generateAccessToken, connection);
 app.use(games, profile, friends, friendrequests, blockedusers, reportedusers, supporttickets, users, account, adminaccount);
 

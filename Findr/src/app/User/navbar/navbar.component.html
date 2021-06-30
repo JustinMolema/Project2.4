@@ -1,39 +1,35 @@
-<div [ngClass]="(topbar.collapseNavbar == false) ? 'navbar' : 'navbarcollapsed'">
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'"
+<div class="navbar" [ngClass]="(topbar.collapseNavbar == false) ? '' : 'navbarcollapsed'">
+    <button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'"
             routerLink="profile">
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
-            <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
-                 src="../../../assets/SVG/Profile_settings.svg">
+        <div>
+            <img src="../../../assets/SVG/Profile_settings.svg">
         </div>
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+        <div [ngClass]="(topbar.collapseNavbar == false) ? 'itemtitle' : 'itemtitle-collapsed'">
             Profile
         </div>
     </button>
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'"
+    <button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'"
             routerLink="friends">
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
-            <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
-                 src="../../../assets/SVG/Friends.svg">
+        <div>
+            <img src="../../../assets/SVG/Friends.svg">
         </div>
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+        <div [ngClass]="(topbar.collapseNavbar == false) ? 'itemtitle' : 'itemtitle-collapsed'">
             Friends
         </div>
     </button>
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'" routerLink="games">
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
-            <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
-                 src="../../../assets/SVG/games.svg">
+    <button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'" routerLink="games">
+        <div >
+            <img src="../../../assets/SVG/games.svg">
         </div>
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+        <div [ngClass]="(topbar.collapseNavbar == false) ? 'itemtitle' : 'itemtitle-collapsed'">
             Games
         </div>
     </button>
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'navbarbutton' : 'navbarbuttoncollapsed'" routerLink="ticket">
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricondiv' : 'navbaricondivcollapsed'">
-            <img [ngClass]="(topbar.collapseNavbar == false) ? 'navbaricon' : 'navbariconcollapsed'"
-                 src="../../../assets/SVG/report.svg">
+    <button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'" routerLink="ticket">
+        <div>
+            <img src="../../../assets/SVG/report.svg">
         </div>
-        <div [ngClass]="(topbar.collapseNavbar == false) ? 'navbartext' : 'navbartextcollapsed'">
+        <div [ngClass]="(topbar.collapseNavbar == false) ? 'itemtitle' : 'itemtitle-collapsed'">
             Support Tickets
         </div>
     </button>

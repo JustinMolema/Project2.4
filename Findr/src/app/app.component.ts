@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.reroute();
         this.stabilizeListener();
+        this.appService.setChat(this.chat);
     }
 
     ngOnDestroy(): void {
@@ -36,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
             if (isStable) {
                 this.authService.setRefreshInterval();
                 if (this.authService.userIsLoggedIn()) {
-                    this.chat.getAllFriends();
                     this.chat.openSocket();
                 }
                 this.stable.unsubscribe();

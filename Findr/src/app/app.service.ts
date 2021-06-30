@@ -3,6 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {AdmindataService} from "./admin/admindata.service";
 import {globalFindrMethods} from "./sharedmodule/global.findr.methods";
+import {SafeResourceUrl} from '@angular/platform-browser';
+import {ChatService} from './User/chatmenu/chat.service';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +24,14 @@ export class AppService {
     canLoadListener;
     APILoaded = new Subject<any>();
 
-    constructor(private http: HttpClient, private adminData: AdmindataService, private findrMethods: globalFindrMethods) {
+    chat: ChatService;
+
+    constructor(private http: HttpClient, private adminData: AdmindataService,
+                private findrMethods: globalFindrMethods) {
+    }
+
+    setChat(chat: ChatService): void {
+        this.chat = chat;
     }
 
     signUp(username: string, password: string, email: string): Observable<any> {
@@ -49,6 +58,7 @@ export class AppService {
     getFavoriteGames(): Observable<any> {
         return this.http.get('http://localhost:8001/api/games/favorite/' + localStorage.getItem('userID'));
     }
+
     setFavorite(game: string): Observable<any> {
         const params: HttpParams = new HttpParams().set("id", localStorage.getItem('userID')).set("game", game);
         return this.http.post('http://localhost:8001/api/games/favorite', params);
@@ -117,14 +127,29 @@ export class AppService {
         }
         return false;
     }
+
     applicationInitialAPICalls(): void {
         this.getProfileFromServer();
+        this.getFavoriteGamesFromServer();
         this.canLoadListener = this.canLoad().subscribe(res => {
             this.getFriendsFromServer();
             this.getFriendRequestsFromServer();
             this.getBlockedUsersFromServer();
-            this.getGamesFromServer();
             this.canLoadListener.unsubscribe();
+        });
+    }
+
+    getFavoriteGamesFromServer(): void {
+        this.favoriteGames.clear();
+
+        this.getFavoriteGames().subscribe(res => {
+            if (res.length > 0) {
+                res.forEach(element => {
+                    this.favoriteGames.set(element.Game, {image: "", name: element.Game});
+
+                });
+            }
+            this.getGamesFromServer();
         });
     }
 
@@ -136,6 +161,9 @@ export class AppService {
                 res.forEach(element => {
                     element.Image = this.findrMethods.sanitize(decodeURIComponent(element.Image));
                     this.games.push(element);
+
+                    if (this.favoriteGames.has(element.Name))
+                        this.favoriteGames.get(element.Name).image = element.Image;
                 });
             }
         });

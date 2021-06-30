@@ -17,8 +17,6 @@ const io = require("socket.io")(server, {
 
 module.exports = function () {
 	io.use((socket, next) => {
-		const username = socket.handshake.auth.username;
-		socket.username = username;
 		socket.sessionID = socket.handshake.auth.sessionID;
 		next();
 	});
@@ -31,10 +29,7 @@ module.exports = function () {
 
 		const users = [];
 		for (let [id, socket] of io.of("/").sockets) {
-			users.push({
-				userID: socket.sessionID,
-				username: socket.username,
-			});
+			users.push(socket.sessionID);
 		}
 
 		socket.emit("users", users);
@@ -42,7 +37,6 @@ module.exports = function () {
 		socket.onAny((event, ...args) => {
 			console.log("Event: " + event + " Args: " + args)
 		})
-		console.log("CONNECT");
 
 		socket.broadcast.emit("user connected", {
 			userID: socket.sessionID,

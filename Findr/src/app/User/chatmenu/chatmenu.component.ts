@@ -30,7 +30,6 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     ngOnDestroy(): void {
         this.chat.leaveGameRoom({user: this.username, room: this.roomName});
-        this.chat.clearChatListeners();
     }
 
     initializeChat(): void {

@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-module.exports = function (express, generateAccessToken, connection) {
+module.exports = function (express, generateAccessToken, connection, pic) {
 	var router = express.Router();
 
 	router.post('/api/user/login', (req, res) => {
@@ -50,16 +49,10 @@ module.exports = function (express, generateAccessToken, connection) {
 	router.post('/api/user/signup', async (req, res) => {
 		res.header("Access-Control-Allow-Origin", "*");
 	
-		var pic;
 		const username = encodeURIComponent(req.body.username);
 		const password = encodeURIComponent(req.body.password);
 		const email = encodeURIComponent(req.body.email);
-		try {
-			pic = fs.readFileSync('default-user.jpg', 'base64')
-			pic = encodeURIComponent("data:image/jpg;base64,"+pic)
-		} catch (err) {
-			pic = null;
-		}
+		
 	
 		const saltRounds = 10;
 		bcrypt.genSalt(saltRounds, function (err, salt) {

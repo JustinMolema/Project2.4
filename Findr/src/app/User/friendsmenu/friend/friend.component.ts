@@ -49,7 +49,7 @@ export class FriendComponent implements OnInit, AfterViewInit {
     setStatusListeners(): void {
         this.status = 'Offline';
         for (const friend of this.chat.onlineFriends) {
-            if (friend.userID === this.friendID) {
+            if (friend === this.friendID) {
                 this.status = 'Online';
                 this.cdRef.detectChanges();
 

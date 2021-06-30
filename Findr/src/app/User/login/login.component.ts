@@ -54,12 +54,10 @@ export class LoginComponent implements OnInit {
         const encryptedpassword = hash.hex();
         this.authService.login(val.username, encryptedpassword).subscribe(res => {
             if (res.status === 200) {
-                console.log(res);
                 localStorage.setItem('userID', res.userID);
                 localStorage.setItem('rememberme', val.rememberme);
                 this.setJWT(val.rememberme, res);
                 this.router.navigate(['/games']);
-                this.chat.getAllFriends();
                 this.chat.openSocket();
                 this.authService.setRefreshInterval();
             } else if (res.status === "error") {

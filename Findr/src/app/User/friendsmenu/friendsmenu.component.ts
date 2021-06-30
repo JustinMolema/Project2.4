@@ -8,13 +8,11 @@ import {AppService} from 'src/app/app.service';
 })
 export class FriendsmenuComponent implements OnInit {
     constructor(public appService: AppService) {
-
     }
 
     ngOnInit(): void {
     }
 
-    // this refreshes the info when it gets changed
     @Input() refreshFriendInfo(event): void {
         this.appService.applicationInitialAPICalls();
     }

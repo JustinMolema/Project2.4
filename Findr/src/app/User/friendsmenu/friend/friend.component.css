@@ -73,7 +73,7 @@ button:active {
     .chat {
         width: 40px;
         height: 40px;
-        background: url("../../../../assets/SVG/chat.svg");
+        background: url("src/assets/SVG/chat.svg");
         background-size: contain;
         font-size: 0;
     }
@@ -81,7 +81,7 @@ button:active {
     .delete {
         width: 40px;
         height: 40px;
-        background: url("../../../../assets/SVG/temp.svg");
+        background: url("../../../../assets/SVG/removefriend.svg");
         background-size: contain;
         font-size: 0;
     }

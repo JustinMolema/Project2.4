@@ -20,6 +20,7 @@ module.exports = function (express, authenticateToken, connection) {
 	})
 
 	router.post('/api/user/:userID/blocked/:blockeduser', authenticateToken, async (req, res) => {
+		console.log("AA");
 		let UserOne = req.params['userID']
 		const UserTwo = req.params['blockeduser'];
 		connection.query('INSERT INTO blocked_users (user_blocker, user_blockee) VALUES (?, ?);', [UserOne, UserTwo], function (err, result, fields) {

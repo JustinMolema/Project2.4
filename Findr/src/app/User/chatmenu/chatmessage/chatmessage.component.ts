@@ -18,7 +18,7 @@ export class ChatmessageComponent implements OnInit {
     }
 
     sendFriendRequest(): void {
-        this.friendActionService.sendFriendRequest(this.message.userID).subscribe();
+        this.friendActionService.sendFriendRequest(this.message.username).subscribe();
     }
 
     reportUser(): void {
@@ -26,6 +26,6 @@ export class ChatmessageComponent implements OnInit {
     }
 
     blockUser(): void {
-        this.friendActionService.blockUser(this.message.userID).subscribe();
+        this.appService.blockFriend(this.message.username).subscribe();
     }
 }

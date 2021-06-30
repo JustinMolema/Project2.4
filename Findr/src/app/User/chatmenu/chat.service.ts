@@ -19,26 +19,18 @@ export class ChatService {
     setRef(ref): void {
         this.cdRef = ref;
     }
+
     constructor(private appService: AppService, private sanitizer: DomSanitizer) {
     }
 
     openSocket(): void {
-        this.socket.auth = {username: "User", sessionID: Number(localStorage.getItem('userID'))};
+        this.socket.auth = {sessionID: Number(localStorage.getItem('userID'))};
 
         this.socket.connect();
-        this.createSession();
-        this.getAllOnlineFriends();
+        this.getAllFriends();
         this.friendLoggedIn().subscribe();
         this.receivePrivateMessageListener();
-        this.connect();
-        this.disconnect();
         this.friendLoggedOut().subscribe();
-    }
-
-    createSession(): void {
-        this.socket.on('session', ({sessionID}) => {
-            this.socket.auth = {sessionID};
-        });
     }
 
     closeSocket(): void {
@@ -62,69 +54,27 @@ export class ChatService {
                     this.privateMessages.push({userID: element.User_ID, messages: []});
                 });
             }
+            this.getAllOnlineFriends();
 
-        });
-    }
-
-    clearChatListeners(): void {
-        // this.socket.off('private message');
-        // this.socket.off('new message');
-        // this.socket.off('user connected');
-        // this.socket.off('user disconnected');
-    }
-
-    connect(): void {
-        this.socket.on('connect', () => {
-            this.onlineFriends.forEach((user) => {
-                if (user.self) {
-                    user.connected = true;
-                }
-            });
-        });
-    }
-
-    disconnect(): void {
-        this.socket.on('disconnect', () => {
-            this.onlineFriends.forEach((user) => {
-                if (user.self) {
-                    user.connected = false;
-                }
-            });
         });
     }
 
     getAllOnlineFriends(): void {
         this.socket.on('users', (users) => {
-            users.forEach((user) => {
-                user.self = user.userID === this.socket.id;
-                this.initReactiveProperties(user);
+            users.forEach(element => {
+                this.friends.forEach(friend => {
+                    if (friend.User_ID === element) {
+                        this.onlineFriends.push(element);
+                    }
+                });
             });
-            this.onlineFriends = users.sort((a, b) => {
-                if (a.self) {
-                    return -1;
-                }
-                if (b.self) {
-                    return 1;
-                }
-                if (a.username < b.username) {
-                    return -1;
-                }
-                return a.username > b.username ? 1 : 0;
-            });
-            console.log("ALLFRIENDS");
+            console.log(this.onlineFriends);
         });
-    }
-
-    initReactiveProperties(user): void {
-        user.connected = true;
-        user.messages = [];
-        user.hasNewMessages = false;
     }
 
     friendLoggedIn(): Observable<any> {
         return new Observable<any>(observer => {
             this.socket.on('user connected', (user) => {
-                this.initReactiveProperties(user);
                 if (!this.onlineFriends.includes(user) && this.appService.isFriend(user)) {
                     this.onlineFriends.push(user);
                 }
@@ -173,6 +123,8 @@ export class ChatService {
 
     receivePrivateMessageListener(): void {
         this.receivedPrivateMessage().subscribe(res => {
+            console.log(this.privateMessages);
+            console.log(res.userID);
             for (const message of this.privateMessages) {
                 if (message.userID === res.userID) {
                     message.messages.push({ userID: res.userID, datetime: Date.now(),
@@ -181,10 +133,9 @@ export class ChatService {
                         profilePicture: this.sanitize(decodeURIComponent(res.profilePicture)),
                         received: true});
                 }
-
             }
-            this.cdRef.detectChanges();
-
+            if (this.cdRef)
+                this.cdRef.detectChanges();
         });
     }
 

@@ -21,7 +21,7 @@ export class GameComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.appService.favoriteGames.has(this.game.Name)) this.favorite = true;
-        this.dbPicture = this.findrMethods.sanitize(decodeURIComponent(this.game.Image));
+        this.dbPicture = this.game.Image;
     }
 
     setFavorite(): void {

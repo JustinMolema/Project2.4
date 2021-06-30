@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AppService} from 'src/app/app.service';
+import {ChatService} from '../../chatmenu/chat.service';
 
 @Component({
     selector: 'app-friendrequests',
@@ -15,7 +16,7 @@ export class FriendrequestsComponent implements OnInit {
     @Output()
     refresh: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(private appService: AppService) {
+    constructor(private appService: AppService, private chat: ChatService) {
     }
 
     ngOnInit(): void {
@@ -23,6 +24,8 @@ export class FriendrequestsComponent implements OnInit {
 
     addFriend(): void {
         this.appService.acceptFriendRequest(this.friend).subscribe(res => {
+            this.chat.onlineFriends.push(this.friendID);
+            this.chat.privateMessages.push({userID: this.friendID, messages: []});
             this.refresh.emit('add');
         });
 
