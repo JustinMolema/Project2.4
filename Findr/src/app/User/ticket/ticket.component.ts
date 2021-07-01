@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from '../../app.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class TicketComponent implements OnInit {
     form: FormGroup;
 
-    constructor(private fb: FormBuilder, private appService: AppService) {
+    constructor(private router: Router, private fb: FormBuilder, private appService: AppService) {
         this.createForm();
     }
 
@@ -28,6 +29,7 @@ export class TicketComponent implements OnInit {
     sendSupportTicket(): void{
         const val = this.form.value;
         this.appService.createSupportTicket(val.category, val.description).subscribe();
+        this.router.navigate(['games']);
     }
 
 
