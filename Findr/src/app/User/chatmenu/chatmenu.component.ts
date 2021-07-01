@@ -15,7 +15,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     roomName: string;
     form: FormGroup;
     messages = [];
-
+    headerText;
     @ViewChild('chat') private scrollContainer: ElementRef;
 
     constructor(private fb: FormBuilder, private appService: AppService, private chat: ChatService,
@@ -44,6 +44,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
         for (const message of this.chat.privateMessages) {
             if (message.userID === this.chat.receiverID) {
                 this.messages = message.messages;
+                this.headerText = "You are talking to " + message.username;
                 break;
             }
         }
@@ -78,6 +79,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
     joinRoom(): void {
         this.route.params.subscribe(params => {
             this.roomName = params.room;
+            this.headerText = "You are talking in " + this.roomName;
             this.chat.joinGameRoom({user: this.username, room: this.roomName});
         });
     }

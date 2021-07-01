@@ -25,7 +25,7 @@ export class FriendrequestsComponent implements OnInit {
     addFriend(): void {
         this.appService.acceptFriendRequest(this.friend).subscribe(res => {
             this.chat.onlineFriends.push(this.friendID);
-            this.chat.privateMessages.push({userID: this.friendID, messages: []});
+            this.chat.privateMessages.push({userID: this.friendID, username: this.friend, messages: []});
             this.refresh.emit('add');
         });
 

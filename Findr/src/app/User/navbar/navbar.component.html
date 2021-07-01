@@ -8,8 +8,7 @@
             Profile
         </div>
     </button>
-    <button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'"
-            routerLink="friends">
+    <button [ngClass]="(topbar.collapseNavbar == false) ? 'item' : 'item-collapsed'" routerLink="friends" (click)="getFriendInfo()">
         <div>
             <img src="../../../assets/SVG/Friends.svg">
         </div>

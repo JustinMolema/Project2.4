@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FriendactionsService} from '../../services/friendactions.service';
 import {AppService} from "../../../app.service";
+import {ChatService} from '../chat.service';
 
 @Component({
     selector: 'app-chatmessage',
@@ -10,11 +11,17 @@ import {AppService} from "../../../app.service";
 export class ChatmessageComponent implements OnInit {
     @Input() message;
     dbPicture;
-    constructor(private friendActionService: FriendactionsService, public appService: AppService) {
+    constructor(private friendActionService: FriendactionsService, public appService: AppService, public chat: ChatService) {
     }
 
     ngOnInit(): void {
         this.dbPicture = this.message.profilePicture;
+    }
+
+    deleteFriend(): void {
+        this.appService.deleteFriend(this.message.username).subscribe();
+        this.appService.friends.splice(this.appService.friends.findIndex(item => item.Username === this.message.username), 1);
+
     }
 
     sendFriendRequest(): void {
@@ -26,6 +33,6 @@ export class ChatmessageComponent implements OnInit {
     }
 
     blockUser(): void {
-        this.appService.blockFriend(this.message.username).subscribe();
+        this.appService.blockFriend(this.message.username).subscribe(() => this.appService.getBlockedUsersFromServer());
     }
 }

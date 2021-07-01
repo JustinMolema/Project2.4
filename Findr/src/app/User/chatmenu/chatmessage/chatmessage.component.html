@@ -5,11 +5,15 @@
         <img class="pfp" [src]="this.dbPicture" alt="Your profile picture">
     </div>
     <div class="message">
-        <span *ngIf="message.received" [matMenuTriggerFor]="actions" class="username">{{message.username}}
+        <span *ngIf="message.received && !chat.private" [matMenuTriggerFor]="actions" class="username">{{message.username}}
                 <mat-icon>more_vert</mat-icon>
         </span>
 
         <span *ngIf="!message.received" [matMenuTriggerFor]="actionsself" class="username">{{message.username}}
+            <mat-icon>more_vert</mat-icon>
+        </span>
+
+        <span *ngIf="message.received && chat.private" [matMenuTriggerFor]="actionsprivate" class="username">{{message.username}}
             <mat-icon>more_vert</mat-icon>
         </span>
 
@@ -25,6 +29,10 @@
 
             <mat-menu #actionsself="matMenu">
                 <button mat-menu-item routerLink="/profile">Go to profile</button>
+            </mat-menu>
+
+            <mat-menu #actionsprivate="matMenu">
+                <button mat-menu-item (click)="deleteFriend()" routerLink="/friends">Remove friend</button>
             </mat-menu>
 
         </div>
