@@ -28,7 +28,6 @@ export class FriendrequestsComponent implements OnInit {
             this.chat.privateMessages.push({userID: this.friendID, username: this.friend, messages: []});
             this.refresh.emit('add');
         });
-
     }
 
     deleteRequest(): void {

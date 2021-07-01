@@ -51,7 +51,7 @@ export class ChatService {
             if (friendsFromServer.length > 0){
                 friendsFromServer.forEach(element => {
                     this.friends.push(element);
-                    this.privateMessages.push({userID: element.User_ID, messages: []});
+                    this.privateMessages.push({userID: element.User_ID, username: element.Username, messages: []});
                 });
             }
             this.getAllOnlineFriends();

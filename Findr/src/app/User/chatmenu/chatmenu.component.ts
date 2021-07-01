@@ -44,6 +44,7 @@ export class ChatmenuComponent implements OnInit, AfterViewChecked, OnDestroy {
         for (const message of this.chat.privateMessages) {
             if (message.userID === this.chat.receiverID) {
                 this.messages = message.messages;
+                console.log(this.chat.privateMessages);
                 this.headerText = "You are talking to " + message.username;
                 break;
             }
